@@ -1,6 +1,7 @@
 -- Setup nvim-cmp.
 local cmp = require('cmp')
 local luasnip = require('luasnip')
+-- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 
 cmp.setup({
@@ -17,7 +18,10 @@ cmp.setup({
     ['<C-f>']     = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-y>']     = cmp.config.disable, -- Specify `cmp.config.disable` to remove the default mapping.
-    ['<CR>']      = cmp.mapping.confirm({ select = true }),
+    -- ['<CR>']      = cmp.event.on( 
+    --   'confirm_done',
+    --   cmp_autopairs.on_confirm_done()
+    -- ),
     ['<C-e>']     = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
@@ -29,6 +33,8 @@ cmp.setup({
     { name = 'nvim_lua' },
     { name = 'luasnip' },
     { name = 'buffer', keyword_length = 5 },
+    { name = 'orgmode' },
+    { name = 'cmp_git' },
   })
 })
 

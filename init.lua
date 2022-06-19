@@ -17,12 +17,12 @@ end
 
 
 -- Set colorscheme
-vim.cmd([[
-  try
-    colorscheme everforest
-    catch
-  endtry
-]])
+-- vim.cmd([[
+--   try
+--     colorscheme everforest
+--     catch
+--   endtry
+-- ]])
 
 -- Configure NeoVim
 require('configuration').setup()

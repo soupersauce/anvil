@@ -11,12 +11,20 @@ end
 -- Add plugins
 local on_startup = function(use)
 
+  use { "nvim-lua/plenary.nvim" }
+
   -- Set packer to manage itself
   use { 'wbthomason/packer.nvim' }
 
   -- Color schemes
   use { 'sainnhe/everforest' }
   use { 'sainnhe/gruvbox-material' }
+  use { "projekt0n/github-nvim-theme",
+    config = function() require('github-theme').setup {
+        theme_style = "dimmed",
+    }
+    end
+  }
 
   -- Ask for the right file to open when file matching name is not found
   use { 'EinfachToll/DidYouMean' }
@@ -30,26 +38,32 @@ local on_startup = function(use)
     end
   }
 
-  -- Comment/Uncomment blocks of code using gc
-  use {
-    'b3nj5m1n/kommentary',
-    config = function()
-      require('kommentary.config').configure_language("default", {
-          prefer_single_line_comments = true,
-      })
-    end
-  }
+  use {"numToStr/Comment.nvim",
+      module = "Comment",
+      config = function()
+         require("Comment").setup() end
+   }
+
+  -- -- Comment/Uncomment blocks of code using gc
+  -- use {
+  --   'b3nj5m1n/kommentary',
+  --   config = function()
+  --     require('kommentary.config').configure_language("default", {
+  --         prefer_single_line_comments = true,
+  --     })
+  --   end
+  -- }
 
   -- Quick fuzzy selection for files and more, see plugin settings.
-  use {
-    'nvim-telescope/telescope.nvim',
-    config = function() require('plugins.telescope') end,
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-live-grep-args.nvim',
-      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    },
-  }
+  -- use {
+  --   'nvim-telescope/telescope.nvim',
+  --   config = function() require('plugins.telescope') end,
+  --   requires = {
+  --     'nvim-lua/plenary.nvim',
+  --     'nvim-telescope/telescope-live-grep-args.nvim',
+  --     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  --   },
+  -- }
 
   -- Git integration
   use {
@@ -66,11 +80,11 @@ local on_startup = function(use)
   }
 
   -- REPL integration
-  use {
-    'rhysd/reply.vim',
-    cmd = {'Repl', 'ReplAuto', 'ReplSend'},
-    config = function() require('plugins.reply') end
-  }
+  -- use {
+  --   'rhysd/reply.vim',
+  --   cmd = {'Repl', 'ReplAuto', 'ReplSend'},
+  --   config = function() require('plugins.reply') end
+  -- }
 
   -- TreeSitter integration
   use {
@@ -92,15 +106,67 @@ local on_startup = function(use)
   --   },
   -- }
 
-  -- LSP intigration
+  -- LSP integration
   use {
     'neovim/nvim-lspconfig',
     config = function() require('plugins.lspconfig') end,
-    run = {
-      'command -v solargraph >/dev/null || gem install solargraph',
-      'command -v gopls >/dev/null || go install golang.org/x/tools/gopls@latest',
-      'command -v typescript-language-server >/dev/null || npm install -g typescript-language-server',
+    -- run = {
+    --   'command -v solargraph >/dev/null || gem install solargraph',
+    --   'command -v gopls >/dev/null || go install golang.org/x/tools/gopls@latest',
+    --   'command -v typescript-language-server >/dev/null || npm install -g typescript-language-server',
+    -- }
+  }
+
+  use {
+     "SmiteshP/nvim-navic",
+      requires = "nvim-lspconfig",
+      config = function()
+         require("nvim-navic").setup({}) end
+  }
+
+  use { "mfussenegger/nvim-lint",
+    setup = function() require('lint').linters_by_ft = {
+      yaml = {'yamllint'},
+      ansible = {'ansible_lint'},
+      html = {'tidy'},
+      lua = {'luacheck'},
+      python = {'pylint'},
     }
+		end
+  }
+
+  use { "gennaro-tedesco/nvim-peekup" }
+
+  use { "kyazdani42/nvim-web-devicons" }
+
+  use { 'ibhagwan/fzf-lua',
+    requires = { 'kyazdani42/nvim-web-devicons' }
+  }
+
+  use { 'yamatsum/nvim-nonicons',
+    requires = { 'kyazdani42/nvim-web-devicons' }
+  }
+
+  use { "frabjous/knap" }
+
+  use { "xiyaowong/nvim-cursorword" }
+
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    tag = '*',
+  }
+
+  use {
+    "junnplus/nvim-lsp-setup",
+    requires = {
+        'neovim/nvim-lspconfig',
+        'williamboman/nvim-lsp-installer',
+    }
+  }
+
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
   -- Copilot integration
@@ -118,8 +184,8 @@ local on_startup = function(use)
   -- Use LuaSnip as snippet provider
   use {
     'L3MON4D3/LuaSnip',
+    requires = 'rafamadriz/friendly-snippets',
     config = function() require('plugins.luasnip') end,
-    requires = 'rafamadriz/friendly-snippets'
   }
 
   -- Snippet and completion integration
@@ -127,11 +193,114 @@ local on_startup = function(use)
     'hrsh7th/nvim-cmp',
     config = function() require('plugins.cmp') end,
     requires = {
+      'uga-rosa/cmp-dictionary',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-buffer',
+      'quangnguyen30192/cmp-nvim-tags',
       'saadparwaiz1/cmp_luasnip',
+      'f3fora/cmp-spell',
+      'nvim-orgmode/orgmode',
+      'ray-x/cmp-treesitter',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'windwp/nvim-autopairs',
     }
+  }
+
+  use {
+    "amrbashir/nvim-docs-view",
+    opt = true,
+    cmd = { "DocsViewToggle" },
+    config = function()
+        require("docs-view").setup = {
+        position = "right",
+        width = 60,
+    }
+    end
+  }
+
+  use { "nkakouros-original/numbers.nvim" }
+
+  use { "rafamadriz/friendly-snippets "  }
+
+  use { "luukvbaal/nnn.nvim" }
+
+  -- use {
+  --   "windwp/nvim-autopairs",
+  --   config = function() require("nvim-autopairs").setup {} end
+  -- }
+
+  use {
+    'declancm/cinnamon.nvim',
+    config = function() require('cinnamon').setup {
+    extra_keymaps = true,
+    extended_keymaps = true,
+    } end
+  }
+
+  use { "sindrets/diffview.nvim",
+    requires = 'nvim-lua/plenary.nvim',
+  }
+
+  use { "mizlan/iswap.nvim" }
+
+  use { "tpope/vim-unimpaired" }
+
+  use { "tpope/vim-repeat" }
+
+  use { "tpope/vim-surround" }
+
+  use { "tpope/vim-fugitive" }
+
+  use { "tpope/vim-eunuch" }
+
+  use { "tpope/vim-vinegar" }
+
+  use { "nvim-orgmode/orgmode",
+        require = { 'cmp', 'treesitter' },
+    config = function() require('orgmode').setup{} end
+  }
+
+  use { "dhruvasagar/vim-table-mode" }
+
+  use {"michaelb/sniprun", run = "bash ./install.sh"}
+
+  use { "lukas-reineke/headlines.nvim",
+        config = function() require('headlines').setup() end
+      }
+
+  use { "akinsho/org-bullets.nvim",
+        config = function() require('org-bullets').setup() end
+      }
+
+  use { "sqwishy/vim-sqf-syntax" }
+
+
+  use { "akinsho/bufferline.nvim",
+      tag = "v2.*",
+      opt = true,
+      config = function()
+         require "plugins.bufferline"
+      end,
+   }
+
+  use { "lukas-reineke/indent-blankline.nvim",
+     opt = true,
+     config = function() require("plugins.blankline") end
+  }
+
+  use { "kyazdani42/nvim-tree.lua",
+     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+     config = function() require "plugins.nvimtree" end
+  }
+
+-- Keymap hints
+-- Load after rest of gui
+  use {
+      "folke/which-key.nvim",
+      config = function()
+        require("plugins.whichkey").configure()
+      end
   }
 end
 

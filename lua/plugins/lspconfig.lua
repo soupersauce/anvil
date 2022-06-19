@@ -20,12 +20,12 @@ local on_attach = function()
   set_keymap('<Leader>]', '<cmd>lua vim.diagnostic.goto_next()<CR>')
   set_keymap('<Leader>[', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 
-  set_keymap('<Leader>lr', telescope_builtin.lsp_references)
-  set_keymap('<Leader>ls', telescope_builtin.lsp_document_symbols)
-  set_keymap('<Leader>lw', telescope_builtin.lsp_workspace_symbols)
-  set_keymap('<Leader>li', telescope_builtin.lsp_implementations)
-  set_keymap('<Leader>ld', telescope_builtin.lsp_definitions)
-  set_keymap('<Leader>ltd', telescope_builtin.lsp_type_definitions)
+--  set_keymap('<Leader>lr', telescope_builtin.lsp_references)
+--  set_keymap('<Leader>ls', telescope_builtin.lsp_document_symbols)
+--  set_keymap('<Leader>lw', telescope_builtin.lsp_workspace_symbols)
+--  set_keymap('<Leader>li', telescope_builtin.lsp_implementations)
+--  set_keymap('<Leader>ld', telescope_builtin.lsp_definitions)
+--  set_keymap('<Leader>ltd', telescope_builtin.lsp_type_definitions)
 end
 
 -- Configure LS for JavaScript
