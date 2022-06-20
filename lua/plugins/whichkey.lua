@@ -5,40 +5,39 @@ if not present then
 end
 
 
-local options = {
+wk.setup({
 
-   popup_mappings = {
-      scroll_down = "<c-d>", -- binding to scroll down inside the popup
-      scroll_up = "<c-u>", -- binding to scroll up inside the popup
-   },
+--   popup_mappings = {
+--      scroll_down = "<c-d>", -- binding to scroll down inside the popup
+--      scroll_up = "<c-u>", -- binding to scroll up inside the popup
+--   },
+--
+--   window = {
+--      border = "none", -- none/single/double/shadow
+--   },
+--
+--   layout = {
+--      spacing = 6, -- spacing between columns
+--   },
+--
+--   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
+--
+--   triggers_blacklist = {
+--      -- list of mode / prefixes that should never be hooked by WhichKey
+--      i = { "j", "k" },
+--      v = { "j", "k" },
+--   },
+})
 
-   window = {
-      border = "none", -- none/single/double/shadow
-   },
+-- options = require("core.utils").load_override(options, "folke/which-key.nvim")
 
-   layout = {
-      spacing = 6, -- spacing between columns
-   },
+--local utils = require "core.utils"
 
-   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
+----local mappings = utils.load_config().mappings
+--local mapping_groups = { groups = vim.deepcopy(mappings.groups) }
 
-   triggers_blacklist = {
-      -- list of mode / prefixes that should never be hooked by WhichKey
-      i = { "j", "k" },
-      v = { "j", "k" },
-   },
-}
+--mappings.disabled = nil
+--mappings.groups = nil
 
-options = require("core.utils").load_override(options, "folke/which-key.nvim")
+--utils.load_mappings(mapping_groups)
 
-local utils = require "core.utils"
-
-local mappings = utils.load_config().mappings
-local mapping_groups = { groups = vim.deepcopy(mappings.groups) }
-
-mappings.disabled = nil
-mappings.groups = nil
-
-utils.load_mappings(mapping_groups)
-
-wk.setup(options)

@@ -5,12 +5,10 @@ if not present then
 end
 
 
-vim.cmd [[
 
 
-local options = {
-   options = {
-      offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+bufferline.setup({
+       { filetype = "NvimTree", text = "", padding = 1 },
       buffer_close_icon = "",
       show_close_icon = false,
       left_trunc_marker = " ",
@@ -33,10 +31,8 @@ local options = {
             }
          end,
       },
-   },
-}
+   })
 
 -- check for any override
-options = require("core.utils").load_override(options, "akinsho/bufferline.nvim")
+-- options = require("core.utils").load_override(options, "akinsho/bufferline.nvim")
 
-bufferline.setup(options)

@@ -2,17 +2,17 @@
 A work in progress highly adaptable neovim distribution.
 
 ## Preview:
-![anvil preview](/images/anvil.png?raw=true "anvil preview")
+![anvil preview](images/anvil.png?raw=true "anvil preview")
 
 ### Completions
 
-![anvil completions preview](/images/anvil-completions.png?raw=true "anvil completions preview")
+![anvil completions preview](images/anvil-completions.png?raw=true "anvil completions preview")
 
 ### StatusLine
 
 Awesome statusline implemented in lua, without any plugin dependencies.
 
-![check it out!](/lua/configuration/statusline.lua "link to anvil statusline code")
+![check it out!](lua/configuration/statusline.lua "link to anvil statusline code")
 
 ## Directory Structure:
 ```

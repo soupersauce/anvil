@@ -16,12 +16,14 @@ local on_startup = function(use)
   -- Set packer to manage itself
   use { 'wbthomason/packer.nvim' }
 
+  use { "lewis6991/impatient.nvim" }
+
   -- Color schemes
   use { 'sainnhe/everforest' }
   use { 'sainnhe/gruvbox-material' }
   use { "projekt0n/github-nvim-theme",
     config = function() require('github-theme').setup {
-        theme_style = "dimmed",
+      theme_style = "dimmed",
     }
     end
   }
@@ -39,31 +41,9 @@ local on_startup = function(use)
   }
 
   use {"numToStr/Comment.nvim",
-      module = "Comment",
       config = function()
          require("Comment").setup() end
    }
-
-  -- -- Comment/Uncomment blocks of code using gc
-  -- use {
-  --   'b3nj5m1n/kommentary',
-  --   config = function()
-  --     require('kommentary.config').configure_language("default", {
-  --         prefer_single_line_comments = true,
-  --     })
-  --   end
-  -- }
-
-  -- Quick fuzzy selection for files and more, see plugin settings.
-  -- use {
-  --   'nvim-telescope/telescope.nvim',
-  --   config = function() require('plugins.telescope') end,
-  --   requires = {
-  --     'nvim-lua/plenary.nvim',
-  --     'nvim-telescope/telescope-live-grep-args.nvim',
-  --     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  --   },
-  -- }
 
   -- Git integration
   use {
@@ -91,15 +71,20 @@ local on_startup = function(use)
     'nvim-treesitter/nvim-treesitter',
     config = function() require('plugins.treesitter') end,
     run = ':TSUpdate',
-    requires = 'p00f/nvim-ts-rainbow'
+    requires = 'nvim-ts-rainbow',
   }
+
+  use {
+    'p00f/nvim-ts-rainbow',
+    requires = 'nvim-treesitter',
+  }
+
 
   -- DAP integration
   -- use {
   --   'mfussenegger/nvim-dap',
   --   config = function() end,
   --   requires = {
-  --     { 'nvim-telescope/telescope-dap.nvim' },
   --     { 'theHamsta/nvim-dap-virtual-text' },
   --     { 'rcarriga/nvim-dap-ui' },
   --     { 'leoluz/nvim-dap-go', config = function() require('dap-go').setup() end  },
@@ -125,12 +110,13 @@ local on_startup = function(use)
   }
 
   use { "mfussenegger/nvim-lint",
+    module = 'lint',
     setup = function() require('lint').linters_by_ft = {
-      yaml = {'yamllint'},
-      ansible = {'ansible_lint'},
-      html = {'tidy'},
-      lua = {'luacheck'},
-      python = {'pylint'},
+        yaml = {'yamllint'},
+        ansible = {'ansible_lint'},
+        html = {'tidy'},
+        lua = {'luacheck'},
+        python = {'pylint'},
     }
 		end
   }
@@ -147,14 +133,12 @@ local on_startup = function(use)
     requires = { 'kyazdani42/nvim-web-devicons' }
   }
 
-  use { "frabjous/knap" }
+  use {
+    "frabjous/knap",
+    config = function() require("plugins.knap") end,
+  }
 
   use { "xiyaowong/nvim-cursorword" }
-
-  use {
-    "lukas-reineke/indent-blankline.nvim",
-    tag = '*',
-  }
 
   use {
     "junnplus/nvim-lsp-setup",
@@ -166,7 +150,7 @@ local on_startup = function(use)
 
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    requires = { 'kyazdani42/nvim-web-devicons', }
   }
 
   -- Copilot integration
@@ -209,7 +193,6 @@ local on_startup = function(use)
 
   use {
     "amrbashir/nvim-docs-view",
-    opt = true,
     cmd = { "DocsViewToggle" },
     config = function()
         require("docs-view").setup = {
@@ -220,8 +203,6 @@ local on_startup = function(use)
   }
 
   use { "nkakouros-original/numbers.nvim" }
-
-  use { "rafamadriz/friendly-snippets "  }
 
   use { "luukvbaal/nnn.nvim" }
 
@@ -242,7 +223,9 @@ local on_startup = function(use)
     requires = 'nvim-lua/plenary.nvim',
   }
 
-  use { "mizlan/iswap.nvim" }
+  use { "mizlan/iswap.nvim",
+  requires = 'nvim-treesitter',
+}
 
   use { "tpope/vim-unimpaired" }
 
@@ -278,14 +261,12 @@ local on_startup = function(use)
 
   use { "akinsho/bufferline.nvim",
       tag = "v2.*",
-      opt = true,
       config = function()
          require "plugins.bufferline"
       end,
    }
 
   use { "lukas-reineke/indent-blankline.nvim",
-     opt = true,
      config = function() require("plugins.blankline") end
   }
 
@@ -299,7 +280,7 @@ local on_startup = function(use)
   use {
       "folke/which-key.nvim",
       config = function()
-        require("plugins.whichkey").configure()
+        require("plugins.whichkey")
       end
   }
 end

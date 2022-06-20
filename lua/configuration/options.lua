@@ -5,7 +5,7 @@ local defined_options  = {
   -- Prefer dark background
   background     = "dark",
   -- Set fish as default shell
-  shell          = "fish",
+  shell          = "zsh",
   -- Dissable modelines
   modeline       = false,
   -- Restrict existing tab to width of 4 spaces
@@ -23,7 +23,7 @@ local defined_options  = {
   -- Enable mouse interaction
   mouse          = "nvi",
   -- Use English dictionary
-  spelllang      = "en_gb",
+  spelllang      = "en_us",
   -- Hide buffers with unsaved changes without being prompted
   hidden         = true,
   -- Auto-complete on tab, while in command mode
@@ -76,6 +76,9 @@ local defined_options  = {
   sidescrolloff  = 5,
   -- Keep folds open by default, they can easily be closed using "zM"
   foldenable     = false,
+  -- Direction window splits open
+  splitbelow = true
+  splitright = true
 }
 
 -- Enable true colors if supported
@@ -89,7 +92,7 @@ if (fn.has("persistent_undo")) then
     defined_options.undofile    = true
 end
 
--- Dissable some features when running as Root
+-- Disable some features when running as Root
 if (fn.exists("$SUDO_USER") ~= 0) then
     defined_options.swapfile    = false
     defined_options.backup      = false

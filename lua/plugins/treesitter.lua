@@ -1,5 +1,6 @@
 -- nvim-treesitter configuration
 local config = require('nvim-treesitter.configs')
+require('orgmode').setup_ts_grammar()
 
 vim.o.foldmethod  = 'expr'
 vim.o.foldexpr    = 'nvim_treesitter#foldexpr()'
@@ -27,10 +28,9 @@ config.setup({
   },
   rainbow = {
     enable = true,
-    extended_mode = false, -- Also highlight non-bracket delimiters like html tags
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags
     max_file_lines = 3000, -- Do not enable for files with more than 3000 lines
-    colors = {'#d2b48c', '#cd853f', '#ffa500', '#ffd700'}, -- table of hex strings
-    termcolors = {'White', 'LightYellow', 'Yellow'}
+    -- colors = {'#d2b48c', '#cd853f', '#ffa500', '#ffd700'}, -- table of hex strings
   },
   context_commentstring = {
     enable = true,
@@ -41,4 +41,3 @@ config.setup({
   },
   sync_install = false,
 })
-

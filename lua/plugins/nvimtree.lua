@@ -5,10 +5,8 @@ if not present then
 end
 
 
-local options = {
-   filters = {
+nvimtree.setup({
       dotfiles = false,
-   },
    disable_netrw = true,
    hijack_netrw = true,
    open_on_setup = false,
@@ -61,10 +59,7 @@ local options = {
             },
          },
       },
-   },
-}
+})
 
 -- check for any override
-options = require("core.utils").load_override(options, "kyazdani42/nvim-tree.lua")
 
-nvimtree.setup(options)

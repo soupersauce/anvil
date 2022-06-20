@@ -2,7 +2,7 @@
 
 local fn = vim.fn
 
--- Only load plugins when not runing as root
+-- Only load plugins when not running as root
 if (fn.exists('$SUDO_USER') == 0) then
   local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   local run_sync = false
