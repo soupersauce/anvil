@@ -202,7 +202,15 @@ local on_startup = function(use)
     end
   }
 
-  use { "nkakouros-original/numbers.nvim" }
+  use { 
+    "nkakouros-original/numbers.nvim",
+    config = function() require('numbers').setup {
+      excluded_filetypes = {
+        'alpha',
+      }
+    }
+end
+  }
 
   use { "luukvbaal/nnn.nvim" }
 

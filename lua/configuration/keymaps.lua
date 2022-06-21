@@ -2,10 +2,12 @@ local set_keymap = vim.keymap.set
 
 return {
   setup = function()
-    -- Set Space as the leader key
+    -- Set leader key
     vim.g.mapleader = '\\'
 
     -- Use CTRL + j/k for fast scroll
+    -- TODO: We might remap these to window navigation 
+        -- Dont have a problem with <C-f>,<C-b> for navgation
     set_keymap('n', '<C-k>', '<C-u>', { noremap = true })
     set_keymap('n', '<C-j>', '<C-d>', { noremap = true })
 
@@ -41,9 +43,9 @@ return {
     -- Yank current line to system clipboard
     set_keymap('n', ',y', '+yy', { noremap = true })
     -- Close current window
-    set_keymap('n', ',c', ':q<CR>', { noremap = true })
+    -- set_keymap('n', ',c', ':q<CR>', { noremap = true })
     -- Write changes made to open files
-    set_keymap('n', ',w', ':w<CR>', { noremap = true })
+    -- set_keymap('n', ',w', ':w<CR>', { noremap = true })
     set_keymap('n', '<leader>w', ':wa<CR>', { noremap = true })
 
     -- Use alt modifier for scrolling buffer
@@ -62,11 +64,15 @@ return {
       return vim.fn.pumvisible() == 1 and "<Esc>i<Right>" or "<Right><Esc>"
     end, { noremap = true, expr = true })
 
+    -- Keep visual selected after indent
+    set_keymap('n', '<', '<gv', { noremap = true })
+    set_keymap('n', '>', '>gv', { noremap = true })
+
     -- Use <C-w> to move between terminal buffer and other buffers
-    set_keymap('t', '<C-w>', '<C-\\><C-n><C-w>', { noremap = true })
+    -- set_keymap('t', '<C-w>', '<C-\\><C-n><C-w>', { noremap = true })
 
     -- Use <Leader><Esc> to exit insert mode in terminal buffers
-    set_keymap('t', '<Leader><C-[>', '<C-\\><C-n>', { noremap = true, silent = true })
+    -- set_keymap('t', '<Leader><C-[>', '<C-\\><C-n>', { noremap = true, silent = true })
   
 	  -- -- For knap
 	  -- F5 processes the document once, and refreshes the view
@@ -88,6 +94,41 @@ return {
 	  set_keymap('i','<F8>', function() require("knap").forward_jump() end)
 	  set_keymap('v','<F8>', function() require("knap").forward_jump() end)
 	  set_keymap('n','<F8>', function() require("knap").forward_jump() end)
+
+  -- -- For fzf-lua
+	  set_keymap('v','<leader>zb', function() require("fzf-lua").buffers() end)
+	  set_keymap('n','<leader>zb', function() require("fzf-lua").buffers() end)
+
+	  set_keymap('v','<leader>zf', function() require("fzf-lua").git_files() end)
+	  set_keymap('n','<leader>zf', function() require("fzf-lua").git_files() end)
+
+	  set_keymap('v','<leader>zg', function() require("fzf-lua").grep() end)
+	  set_keymap('n','<leader>zg', function() require("fzf-lua").grep() end)
+
+	  set_keymap('v','<leader>zt', function() require("fzf-lua").tags() end)
+	  set_keymap('n','<leader>zt', function() require("fzf-lua").tags() end)
+
+	  set_keymap('v','<leader>zc', function() require("fzf-lua").git_commits() end)
+	  set_keymap('n','<leader>zc', function() require("fzf-lua").git_commits() end)
+
+	  set_keymap('v','<leader>zm', function() require("fzf-lua").man_pages() end)
+	  set_keymap('n','<leader>zm', function() require("fzf-lua").man_pages() end)
+
+	  set_keymap('v','<leader>zr', function() require("fzf-lua").lsp_references() end)
+	  set_keymap('n','<leader>zr', function() require("fzf-lua").lsp_references() end)
+
+	  set_keymap('v','<leader>zs', function() require("fzf-lua").lsp_definitions() end)
+	  set_keymap('n','<leader>zs', function() require("fzf-lua").lsp_definitions() end)
+
+	  set_keymap('v','<leader>zh', function() require("fzf-lua").help_tags() end)
+	  set_keymap('n','<leader>zh', function() require("fzf-lua").help_tags() end)
+
+	  set_keymap('v','<leader>zv', function() require("fzf-lua").command_history() end)
+	  set_keymap('n','<leader>zv', function() require("fzf-lua").command_history() end)
+
+  --
+  -- Final end
+  --
   end
 }
 
