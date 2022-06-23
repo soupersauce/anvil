@@ -122,6 +122,9 @@ local defined_options  = {
   foldenable          = true,
   foldlevel          = 99,
   foldlevelstart     = 99,
+  foldmethod  = 'expr',
+  foldexpr    = 'nvim_treesitter#foldexpr()',
+
 
   -- Direction window splits open
   splitbelow = true,

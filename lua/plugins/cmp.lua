@@ -135,10 +135,10 @@ cmp.setup {
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'nvim-autopairs.completion.cmp' },
     { name = 'nvim_lua' },
-    { name = 'treesitter' },
     { name = 'luasnip' },
+    { name = 'treesitter' },
+    { name = 'nvim-autopairs.completion.cmp' },
     { name = 'buffer', keyword_length = 5 },
     { name = 'cmdline' },
     { name = 'path' },

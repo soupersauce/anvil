@@ -1,5 +1,10 @@
-local npairs = require('nvim-autopairs')
+local pairs_ok, npairs = pcall('require','nvim-autopairs')
+local cmp_ok, cmp = pcall('require','cmp')
 local Rule = require('nvim-autopairs.rule')
+
+if not (pairs_ok and cmp_ok) then
+  return
+end
 
 npairs.setup({
   fast_wrap = {},
@@ -44,3 +49,6 @@ npairs.add_rules({
     end)
     :use_key('['),
 })
+
+local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+cmp.event:on("confirm_done", cmp.autopairs.on_confirm_done())

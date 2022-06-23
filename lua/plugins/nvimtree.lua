@@ -62,6 +62,3 @@ nvimtree.setup({
          },
       },
 })
-
--- check for any override
-

@@ -32,7 +32,7 @@ local on_startup = function(use)
   use { "nvim-lua/plenary.nvim" }
 
   -- Set packer to manage itself
-  use('wbthomason/packer.nvim')
+  use {'wbthomason/packer.nvim'}
 
   use { "lewis6991/impatient.nvim" }
 
@@ -47,10 +47,10 @@ local on_startup = function(use)
   use { 'marko-cerovac/material.nvim' }
   use { 'dilangmb/nightbuddy' }
   use { 'edeneast/nightfox.nvim' }
-  use {
-    'klooj/noogies',
-    requires = 'tjdevries/colorbuddy.nvim',
-  }
+  -- use {
+  --   'klooj/noogies',
+  --   requires = 'tjdevries/colorbuddy.nvim',
+  -- }
   use { 'navarasu/onedark.nvim' }
   use { 'rafamadriz/neon' }
   use { 'yagua/nebulous.nvim' }
@@ -59,16 +59,19 @@ local on_startup = function(use)
   use {
     'adisen99/codeschool.nvim',
     requires = 'rktjmp/lush.nvim',
+    config = function ()
+      require('lush')(require('codeschool').setup())
+    end
   }
   use { 'sainnhe/edge' }
   use { 'sainnhe/sonokai' }
   use { 'sainnhe/everforest' }
   use { 'sainnhe/gruvbox-material' }
   use { "projekt0n/github-nvim-theme",
-    config = function() require('github-theme').setup {
-      theme_style = "dimmed",
-    }
-    end
+    -- config = function() require('github-theme').setup {
+    --   theme_style = "dimmed",
+    -- }
+    -- end
   }
   use { "onsails/lspkind.nvim" }
 
@@ -90,25 +93,25 @@ local on_startup = function(use)
    }
 
   -- Git integration
-  use({
+  use {
     'lewis6991/gitsigns.nvim',
     config = function() require('plugins.gitsigns') end
-  })
-  use({
-    'TimUntersberger/neogit',
-    config = function() require('plugins.neogit') end,
-    cmd = 'Neogit',
-    requires = {
-      'sindrets/diffview.nvim',
-      config = function() require('plugins.diffview') end,
-      requires = 'nvim-lua/plenary.nvim'
-    }
-  })
+  }
+  -- use {
+  --   'TimUntersberger/neogit',
+  --   config = function() require('plugins.neogit') end,
+  --   cmd = 'Neogit',
+  --   requires = {
+  --     'sindrets/diffview.nvim',
+  --     config = function() require('plugins.diffview') end,
+  --     requires = 'nvim-lua/plenary.nvim'
+  --   }
+  -- }
 
   use {"p00f/clangd_extensions.nvim",
-      config = function()
-         require("clangd_extensions").setup() end
-   }
+    config = function()
+      require("clangd_extensions").setup() end
+  }
 
   -- REPL integration
   -- use {
@@ -117,18 +120,21 @@ local on_startup = function(use)
   --   config = function() require('plugins.reply') end
   -- }
 
-  -- TreeSitter integration
+  -- -- TreeSitter integration
   use{
     'nvim-treesitter/nvim-treesitter',
     config = function() require('plugins.treesitter') end,
     run = ':TSUpdate',
-    requires = 'nvim-ts-rainbow',
+    requires = {
+      'p00f/nvim-ts-rainbow',
+      'andymass/vim-matchup',
+    }
   }
 
   use {"folke/lua-dev.nvim",
       config = function()
          require("lua-dev").setup() end
-   }
+  }
 
   use {
     'nvim-treesitter/nvim-treesitter-context',
@@ -240,6 +246,7 @@ local on_startup = function(use)
     requires = 'rafamadriz/friendly-snippets',
     config = function() require('plugins.luasnip') end,
   }
+use {'rafamadriz/friendly-snippets',}
 
   -- Snippet and completion integration
   use {
@@ -260,7 +267,7 @@ local on_startup = function(use)
       'hrsh7th/cmp-nvim-lsp-signature-help',
       'windwp/nvim-autopairs',
       'delphinus/cmp-ctags',
-    }
+    },
   }
 
   use {
@@ -273,10 +280,10 @@ local on_startup = function(use)
     "nkakouros-original/numbers.nvim",
     config = function() require('numbers').setup {
       excluded_filetypes = {
-        'alpha', 'NvimTree',
+        'alpha', 'NvimTree', 'help',
       }
     }
-end
+    end
   }
 
   use { "luukvbaal/nnn.nvim" }
@@ -327,7 +334,7 @@ end
 
   use { "lukas-reineke/headlines.nvim",
         config = function() require('headlines').setup() end
-      }
+  }
 
   use { "akinsho/org-bullets.nvim",
         config = function() require('org-bullets').setup{} end
@@ -341,7 +348,7 @@ end
       config = function()
          require "plugins.bufferline"
       end,
-   }
+  }
 
   use { "lukas-reineke/indent-blankline.nvim",
      config = function() require("plugins.blankline") end

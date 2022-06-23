@@ -2,20 +2,18 @@
 local config = require('nvim-treesitter.configs')
 require('orgmode').setup_ts_grammar()
 
-vim.o.foldmethod  = 'expr'
-vim.o.foldexpr    = 'nvim_treesitter#foldexpr()'
-
 config.setup({
   ensure_installed = {
-    'css', 'dockerfile', 'elixir', 'erlang', 'fish', 'html', 'http', 'javascript',
-    'json', 'lua', 'python', 'regex', 'ruby', 'rust', 'scss', 'svelte',
-    'typescript', 'vue', 'yaml', 'markdown', 'bash', 'c', 'cmake', 'comment',
-    'cpp', 'dart', 'go', 'jsdoc', 'json5', 'jsonc', 'llvm', 'make', 'ninja',
-    'prisma', 'proto', 'pug', 'swift', 'todotxt', 'toml', 'tsx', 'org',
+    'css', 'dockerfile', 'html', 'http', 'javascript',
+    'json', 'lua', 'python', 'regex', 'ruby', 'rust',
+    'yaml', 'markdown', 'bash', 'c', 'cmake', 'comment',
+    'cpp', 'go', 'jsdoc', 'json5', 'jsonc', 'llvm', 'make', 'ninja',
+    'todotxt', 'toml', 'org',
   },
   highlight = {
+    enable = true,
     additional_vim_regex_highlighting = {'org'},
-    enable = false,
+    use_languagetree = true,
   },
   incremental_selection = {
     enable = true,
@@ -40,11 +38,17 @@ config.setup({
   indent = {
     enable = true,
   },
-  -- matchup = {
-  --   enable = true,
-  -- },
-  -- autopairs = {
-  --   enable = true,
-  -- },
+  matchup = {
+    enable = true,
+  },
+  autopairs = {
+    enable = true,
+  },
+  pairs = {
+    enable = true,
+  },
   sync_install = false,
 })
+-- require "nvim-treesitter.highlight"
+-- local hlmap = vim.treesitter.highlighter.hl_map
+-- hlmap["punctuation.bracket"] = nil
