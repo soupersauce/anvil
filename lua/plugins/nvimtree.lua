@@ -6,9 +6,11 @@ end
 
 
 nvimtree.setup({
-      dotfiles = false,
-   disable_netrw = true,
-   hijack_netrw = true,
+  filters = {
+   dotfiles = false,
+   },
+   disable_netrw = false,
+   hijack_netrw = false,
    open_on_setup = false,
    ignore_ft_on_setup = { "alpha" },
    hijack_cursor = true,
@@ -24,7 +26,7 @@ nvimtree.setup({
       hide_root_folder = true,
    },
    git = {
-      enable = false,
+      enable = true,
       ignore = true,
    },
    actions = {
@@ -33,7 +35,7 @@ nvimtree.setup({
       },
    },
    renderer = {
-      highlight_git = false,
+      highlight_git = true,
       highlight_opened_files = "none",
 
       indent_markers = {
@@ -41,22 +43,22 @@ nvimtree.setup({
       },
 
       icons = {
-         show = {
-            file = true,
-            folder = true,
-            folder_arrow = true,
-            git = false,
-         },
+        show = {
+           file = true,
+           folder = true,
+           folder_arrow = true,
+           git = true,
+        },
 
-            git = {
-               unstaged = "✗",
-               staged = "✓",
-               unmerged = "",
-               renamed = "➜",
-               untracked = "★",
-               deleted = "",
-               ignored = "◌",
-            },
+        -- git= {
+        --    unstaged = "✗",
+        --    staged = "✓",
+        --    unmerged = "",
+        --    renamed = "➜",
+        --    untracked = "★",
+        --    deleted = "",
+        --    ignored = "◌",
+        -- },
          },
       },
 })

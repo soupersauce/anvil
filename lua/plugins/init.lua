@@ -4,7 +4,7 @@
 
 -- Use a protected call to avoid errors on first use
 local status_ok, packer = pcall(require, 'packer')
-if not status_ok then
+  if not status_ok then
   return
 end
 
@@ -19,6 +19,31 @@ local on_startup = function(use)
   use { "lewis6991/impatient.nvim" }
 
   -- Color schemes
+  use { 'christianchiarulli/nvcode-color-schemes.vim' }
+  use { 'glepnir/zephyr-nvim' }
+  use { 'th3whit3wolf/onebuddy' }
+  use { 'th3whit3wolf/one-nvim' }
+  use { 'ray-x/aurora' }
+  use { 'tanvirtin/nvim-monokai' }
+  use { 'nekonako/xresources-nvim' }
+  use { 'marko-cerovac/material.nvim' }
+  use { 'dilangmb/nightbuddy' }
+  use { 'edeneast/nightfox.nvim' }
+  use {
+    'klooj/noogies',
+    requires = 'tjdevries/colorbuddy.nvim',
+  }
+  use { 'navarasu/onedark.nvim' }
+  use { 'rafamadriz/neon' }
+  use { 'yagua/nebulous.nvim' }
+  use { 'shatur/neovim-ayu' }
+  use { 'elianiva/icy.nvim' }
+  use {
+    'adisen99/codeschool.nvim',
+    requires = 'rktjmp/lush.nvim',
+  }
+  use { 'sainnhe/edge' }
+  use { 'sainnhe/sonokai' }
   use { 'sainnhe/everforest' }
   use { 'sainnhe/gruvbox-material' }
   use { "projekt0n/github-nvim-theme",
@@ -27,6 +52,7 @@ local on_startup = function(use)
     }
     end
   }
+  use { "onsails/lspkind.nvim" }
 
   -- Ask for the right file to open when file matching name is not found
   use { 'EinfachToll/DidYouMean' }
@@ -59,6 +85,11 @@ local on_startup = function(use)
     -- requires = {'tpope/vim-fugitive', 'rbong/vim-flog'}
   }
 
+  use {"p00f/clangd_extensions.nvim",
+      config = function()
+         require("clangd_extensions").setup() end
+   }
+
   -- REPL integration
   -- use {
   --   'rhysd/reply.vim',
@@ -79,17 +110,46 @@ local on_startup = function(use)
     requires = 'nvim-treesitter',
   }
 
+  use {"folke/lua-dev.nvim",
+      config = function()
+         require("lua-dev").setup() end
+   }
+
+  use {
+    'nvim-treesitter/nvim-treesitter-context',
+    requires = 'nvim-treesitter',
+    config = function() require('treesitter-context').setup {} end
+  }
+
+  use {
+    'folke/twilight.nvim',
+    requires = 'nvim-treesitter',
+    config = function() require('twilight').setup {} end
+  }
 
   -- DAP integration
-  -- use {
-  --   'mfussenegger/nvim-dap',
-  --   config = function() end,
-  --   requires = {
-  --     { 'theHamsta/nvim-dap-virtual-text' },
-  --     { 'rcarriga/nvim-dap-ui' },
-  --     { 'leoluz/nvim-dap-go', config = function() require('dap-go').setup() end  },
-  --   },
-  -- }
+  use {
+    'mfussenegger/nvim-dap',
+    config = function() end,
+    requires = {
+      { 'theHamsta/nvim-dap-virtual-text' },
+      { 'rcarriga/nvim-dap-ui' },
+      { 'leoluz/nvim-dap-go', config = function() require('dap-go').setup() end  },
+    },
+  }
+
+
+  use {"andymass/vim-matchup", }
+
+  use {"lewis6991/spellsitter.nvim",
+      config = function()
+         require("spellsitter").setup() end
+   }
+
+  use {"ziontee113/syntax-tree-surfer",
+      config = function()
+         require("syntax-tree-surfer").setup() end
+   }
 
   -- LSP integration
   use {
@@ -106,19 +166,23 @@ local on_startup = function(use)
      "SmiteshP/nvim-navic",
       requires = "nvim-lspconfig",
       config = function()
-         require("nvim-navic").setup({}) end
+         require("nvim-navic").setup {} end
   }
 
-  use { "mfussenegger/nvim-lint",
-    module = 'lint',
-    setup = function() require('lint').linters_by_ft = {
-        yaml = {'yamllint'},
-        ansible = {'ansible_lint'},
-        html = {'tidy'},
-        lua = {'luacheck'},
-        python = {'pylint'},
-    }
-		end
+  -- use { "mfussenegger/nvim-lint",
+  --   module = 'lint',
+  --   setup = function() require('lint').linters_by_ft = {
+  --       yaml = {'yamllint'},
+  --       ansible = {'ansible_lint'},
+  --       html = {'tidy'},
+  --       lua = {'luacheck'},
+  --       python = {'pylint'},
+  --   }
+		--end
+  -- }
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function() require('plugins.null-ls') end,
   }
 
   use { "gennaro-tedesco/nvim-peekup" }
@@ -141,29 +205,24 @@ local on_startup = function(use)
   use { "xiyaowong/nvim-cursorword" }
 
   use {
+    "simrat39/rust-tools.nvim",
+    ft = { "rust", },
+    config = function() require("rust-tools").setup({}) end,
+  }
+
+  use {
     "junnplus/nvim-lsp-setup",
     requires = {
         'neovim/nvim-lspconfig',
         'williamboman/nvim-lsp-installer',
-    }
+    },
+    config = function() require('plugins.lsp-setup') end,
   }
 
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', }
   }
-
-  -- Copilot integration
-  -- use {
-  --   'zbirenbaum/copilot.lua',
-  --   config = function()
-  --     vim.defer_fn(function() require("copilot").setup() end, 100)
-  --   end,
-  --   requires = {
-  --     'zbirenbaum/copilot-cmp',
-  --     after = { "copilot.lua", "nvim-cmp" }
-  --   },
-  -- }
 
   -- Use LuaSnip as snippet provider
   use {
@@ -181,6 +240,8 @@ local on_startup = function(use)
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-cmdline',
+      'andersevenrud/cmp-tmux',
       'quangnguyen30192/cmp-nvim-tags',
       'saadparwaiz1/cmp_luasnip',
       'f3fora/cmp-spell',
@@ -188,25 +249,21 @@ local on_startup = function(use)
       'ray-x/cmp-treesitter',
       'hrsh7th/cmp-nvim-lsp-signature-help',
       'windwp/nvim-autopairs',
+      'delphinus/cmp-ctags',
     }
   }
 
   use {
     "amrbashir/nvim-docs-view",
-    cmd = { "DocsViewToggle" },
     config = function()
-        require("docs-view").setup = {
-        position = "right",
-        width = 60,
-    }
-    end
+        require("docs-view").setup {} end
   }
 
-  use { 
+  use {
     "nkakouros-original/numbers.nvim",
     config = function() require('numbers').setup {
       excluded_filetypes = {
-        'alpha',
+        'alpha', 'NvimTree',
       }
     }
 end
@@ -214,17 +271,18 @@ end
 
   use { "luukvbaal/nnn.nvim" }
 
-  -- use {
-  --   "windwp/nvim-autopairs",
-  --   config = function() require("nvim-autopairs").setup {} end
-  -- }
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("plugins.autopairs") end,
+  }
 
   use {
     'declancm/cinnamon.nvim',
     config = function() require('cinnamon').setup {
-    extra_keymaps = true,
-    extended_keymaps = true,
-    } end
+      extra_keymaps = true,
+      extended_keymaps = true,
+      delay = 1,
+  } end
   }
 
   use { "sindrets/diffview.nvim",
@@ -232,8 +290,8 @@ end
   }
 
   use { "mizlan/iswap.nvim",
-  requires = 'nvim-treesitter',
-}
+    requires = 'nvim-treesitter',
+  }
 
   use { "tpope/vim-unimpaired" }
 
@@ -247,8 +305,9 @@ end
 
   use { "tpope/vim-vinegar" }
 
-  use { "nvim-orgmode/orgmode",
-        require = { 'cmp', 'treesitter' },
+  use {
+    "nvim-orgmode/orgmode",
+    require = { 'cmp', 'treesitter' },
     config = function() require('orgmode').setup{} end
   }
 
@@ -261,7 +320,7 @@ end
       }
 
   use { "akinsho/org-bullets.nvim",
-        config = function() require('org-bullets').setup() end
+        config = function() require('org-bullets').setup{} end
       }
 
   use { "sqwishy/vim-sqf-syntax" }

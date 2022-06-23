@@ -8,14 +8,14 @@ vim.o.foldexpr    = 'nvim_treesitter#foldexpr()'
 config.setup({
   ensure_installed = {
     'css', 'dockerfile', 'elixir', 'erlang', 'fish', 'html', 'http', 'javascript',
-    'json', 'lua', 'php', 'python', 'regex', 'ruby', 'rust', 'scss', 'svelte',
+    'json', 'lua', 'python', 'regex', 'ruby', 'rust', 'scss', 'svelte',
     'typescript', 'vue', 'yaml', 'markdown', 'bash', 'c', 'cmake', 'comment',
     'cpp', 'dart', 'go', 'jsdoc', 'json5', 'jsonc', 'llvm', 'make', 'ninja',
     'prisma', 'proto', 'pug', 'swift', 'todotxt', 'toml', 'tsx', 'org',
   },
   highlight = {
     additional_vim_regex_highlighting = {'org'},
-    enable = true,
+    enable = false,
   },
   incremental_selection = {
     enable = true,
@@ -39,5 +39,11 @@ config.setup({
   indent = {
     enable = true,
   },
+  -- matchup = {
+  --   enable = true,
+  -- },
+  -- autopairs = {
+  --   enable = true,
+  -- },
   sync_install = false,
 })

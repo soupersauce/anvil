@@ -16,6 +16,7 @@ local defined_options  = {
 
   -- Use 4 spaces for tabs
   shiftwidth     = 2,
+
   -- Always expand tabs to spaces
   expandtab      = true,
 
@@ -24,7 +25,7 @@ local defined_options  = {
 
   -- Start with relative line numbers 'nkakouros-original/numbers.nvim" should hand from there
   -- Should be commented out if number is used
-  relativenumber= true,
+  relativenumber = true,
 
   -- Set minimum width for line numbers
   numberwidth = 2,
@@ -51,10 +52,10 @@ local defined_options  = {
   wildignorecase = true,
 
   -- Donot use popup menu for completions in command mode
-  wildoptions    = "tagfile",
+  wildoptions    = "pum",
 
   -- Auto select the first entry but don"t insert
-  completeopt    ="noinsert,menuone,preview",
+  completeopt    ="noinsert,menu,menuone,preview,noselect",
 
   -- Stop popup menu messages
   shortmess      = "filnxtToOFc",
@@ -75,13 +76,13 @@ local defined_options  = {
   showmode       = false,
 
   -- Show sign column inside the number column
-  signcolumn     = "auto",
+  signcolumn     = "yes",
 
   -- Minimum number of lines to keep before scrolling
   scrolloff      = 6,
 
   -- Max number of items visible in popup menu
-  pumheight      = 12,
+  pumheight      = 15,
 
   -- Trigger CursorHold event if nothing is typed for the duration
   updatetime     = 1000,
@@ -116,8 +117,11 @@ local defined_options  = {
   -- Minimum number of columns to keep towards the right of the cursor
   sidescrolloff  = 5,
 
-  -- Keep folds open by default, they can easily be closed using "zM"
-  foldenable     = false,
+  -- Folds
+  -- Opens all folds by default, folding still enabled
+  foldenable          = true,
+  foldlevel          = 99,
+  foldlevelstart     = 99,
 
   -- Direction window splits open
   splitbelow = true,
@@ -142,6 +146,7 @@ if (fn.exists("$SUDO_USER") ~= 0) then
     defined_options.writebackup = false
     defined_options.undofile    = false
     defined_options.viminfo     = nil
+    defined_options.foldenable  = false
 end
 
 -- Use ripgrep as the grep program, if available
@@ -149,22 +154,14 @@ if (fn.executable("rg") == 1) then
     defined_options.grepprg     = "rg --vimgrep --no-heading --smart-case"
 end
 
-local Options = {
-  defined = defined_options,
-  setup = function()
-    for option, value in pairs(defined_options) do
-      global_options[option] = value
-    end
+for option, value in pairs(defined_options) do
+  global_options[option] = value
+end
 
-    -- Enable filetype detection and use plugins and indentation
-    vim.cmd("filetype plugin indent on")
+-- Enable filetype detection and use plugins and indentation
+vim.cmd("filetype plugin indent on")
 
-    -- Enable highlighting embedded lua code
-    vim.g.vimsyn_embed      = "l"
-    -- Use Python 3 for plugins
-    vim.g.python3_host_prog = "python3"
-  end
-}
-
-
-return Options
+-- Enable highlighting embedded lua code
+vim.g.vimsyn_embed      = "l"
+-- Use Python 3 for plugins
+vim.g.python3_host_prog = "python3"
