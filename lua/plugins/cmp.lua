@@ -134,9 +134,8 @@ cmp.setup {
 
   }),
   sources = cmp.config.sources({
-    -- { name = "copilot" },
-    { name = 'nvim-autopairs.completion.cmp' },
     { name = 'nvim_lsp' },
+    { name = 'nvim-autopairs.completion.cmp' },
     { name = 'nvim_lua' },
     { name = 'treesitter' },
     { name = 'luasnip' },

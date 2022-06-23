@@ -8,7 +8,6 @@ vim.g.mapleader = '\\'
     -- Dont have a problem with <C-f>,<C-b> for navgation
 set_keymap('n', '<C-k>', '<C-u>', { noremap = true })
 set_keymap('n', '<C-j>', '<C-d>', { noremap = true })
-
 -- Trim trailing whitespace
 set_keymap('n', ',s', ":%s/\\s\\+$//e<CR>")
 -- Delete current buffer, (keep window splits)
@@ -126,8 +125,3 @@ set_keymap('n','<leader>zv', function() require("fzf-lua").command_history() end
 
 -- For nvim-tree
 set_keymap('n', '<C-n>', '<cmd>NvimTreeToggle<CR>', { noremap = true })
-
---
--- Final end
---
-

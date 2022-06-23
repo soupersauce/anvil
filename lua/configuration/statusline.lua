@@ -11,15 +11,22 @@ local get_diagnostics = vim.diagnostic.get
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local hl_by_name = vim.api.nvim_get_hl_by_name
+local highlight = function(group_name, group)
+  if group == nil or group_name == nil then
+    return
+  end
+
+  pcall(create_highlight, 0, group_name, group or 'StatusLineNC')
+end
 
 
 -- retrieve color value of [kind] from highlight group
 ---@param hl_name name of highlight group
 ---@param kind type of value to extract (either `background` or `foreground`)
-local get_color = function(hl_name, kind)
+local get_color = function(hl_name, kind, default)
   local rgb = hl_by_name(hl_name, true)[kind]
   local cterm = hl_by_name(hl_name, false)[kind]
-  local hex = (rgb and bit.tohex(rgb, 6) or 'ffffff')
+  local hex = (rgb and bit.tohex(rgb, 6) or default:sub(2))
   return { gui = string.format('#%s', hex), cterm = cterm }
 end
 
@@ -28,8 +35,8 @@ local palette = {}
 
 -- define highlight groups and build palette from active colorscheme colors
 M.build_palette = function()
-  local bg      = get_color('StatusLine', 'background')
-  local nc      = get_color('StatusLineNC', 'foreground')
+  local bg      = get_color('StatusLine', 'background', '#ffffff')
+  local nc      = get_color('StatusLineNC', 'foreground', '#666666')
   local colors  = {'Red', 'Orange', 'Yellow', 'Green', 'Aqua', 'Blue', 'Purple', 'Normal'}
 
   palette.Disabled = { ctermfg = nc.cterm, ctermbg = bg.cterm, fg = nc.gui, bg = bg.gui }
@@ -40,24 +47,23 @@ M.build_palette = function()
 
   for _, color in ipairs(colors) do
     local group_name = 'StatusLine' .. color
-    local found, fg = pcall(get_color, color, 'foreground')
+    local found, fg = pcall(get_color, color, 'foreground', nc.gui)
     if found then
       local group = setmetatable(
         { ctermfg = fg.cterm, ctermbg = bg.cterm, fg = fg.gui, bg = bg.gui },
         { __tostring = function() return group_name end }
       )
       palette[color] = group
-      create_highlight(0, group_name, group)
-      -- create_highlight(group_name, group)
+      highlight(group_name, group)
     end
   end
 
   -- statusline highlight for inactive buffers
-  create_highlight(0, tostring(palette.Disabled), palette.Disabled)
+  highlight(tostring(palette.Disabled), palette.Disabled)
   -- default highlight for the statusline
-  create_highlight(0, 'StatusLine', palette.Normal)
+  highlight('StatusLine', palette.Normal)
   -- configure highlight for wild menu (command mode completions)
-  create_highlight(0, 'WildMenu', palette.Aqua)
+  highlight('WildMenu', palette.Aqua)
 
   return palette
 end
@@ -285,39 +291,36 @@ StatusLine = setmetatable(M, {
 })
 
 -- Enable StatusLine
--- Calling setup will create required highlight group and add the auto commands
+-- this will create required highlight group and add the auto commands
 -- for switching between statusline active and inactive variants
-M.setup = function()
-  StatusLine:build_palette()
+StatusLine:build_palette()
 
-  local statusline = augroup("StatusLine", { clear = true })
-  -- Rebuild statusline pallet on colorscheme change event
-  autocmd("ColorScheme", {
-    desc = "rebuild statusline color pallet and highlight groups",
-    callback = StatusLine.build_palette,
+local statusline = augroup("StatusLine", { clear = true })
+-- Rebuild statusline pallet on colorscheme change event
+autocmd("ColorScheme", {
+  desc = "rebuild statusline color pallet and highlight groups",
+  callback = StatusLine.build_palette,
+  group = statusline
+})
+
+-- Setup autocmds to switch between active and inactive variants when
+-- not using a global status line
+if vim.o.laststatus ~= 3 then
+  -- Set statusline to active variant for focused buffer
+  autocmd({ "WinEnter", "BufEnter" }, {
+    desc = "show active statusline with details",
+    callback = function() vim.wo.statusline = "%!v:lua.StatusLine('active')" end,
     group = statusline
   })
-
-  -- Setup autocmds to switch between active and inactive variants when
-  -- not using a global status line
-  if vim.o.laststatus ~= 3 then
-    -- Set statusline to active variant for focused buffer
-    autocmd({ "WinEnter", "BufEnter" }, {
-      desc = "show active statusline with details",
-      callback = function() vim.wo.statusline = "%!v:lua.StatusLine('active')" end,
-      group = statusline
-    })
-    -- Set statusline to inactive variant for buffers without focus
-    autocmd({ "WinLeave", "BufLeave" }, {
-      desc = "show muted statusline without additional details",
-      callback = function() vim.wo.statusline = "%!v:lua.StatusLine('inactive')" end,
-      group = statusline
-    })
-  else
-    -- Use active varient for global statusline
-    vim.o.statusline = "%!v:lua.StatusLine('active')"
-  end
+  -- Set statusline to inactive variant for buffers without focus
+  autocmd({ "WinLeave", "BufLeave" }, {
+    desc = "show muted statusline without additional details",
+    callback = function() vim.wo.statusline = "%!v:lua.StatusLine('inactive')" end,
+    group = statusline
+  })
+else
+  -- Use active varient for global statusline
+  vim.o.statusline = "%!v:lua.StatusLine('active')"
 end
 
-return StatusLine
 

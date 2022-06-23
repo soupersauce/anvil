@@ -31,6 +31,7 @@ config.setup({
     extended_mode = true, -- Also highlight non-bracket delimiters like html tags
     max_file_lines = 3000, -- Do not enable for files with more than 3000 lines
     -- colors = {'#d2b48c', '#cd853f', '#ffa500', '#ffd700'}, -- table of hex strings
+    -- termcolors = {'White', 'LightYellow', 'Yellow', 'Red'}
   },
   context_commentstring = {
     enable = true,

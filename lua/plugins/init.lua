@@ -2,9 +2,27 @@
 -- Configure plugins, plugin specific functions and autocommands are to be
 -- written in the corresponding files (makes debuging and trying out plugins easier)
 
+local fn = vim.fn
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local run_sync = false
+
+-- Install packer for package management, if missing
+if (fn.empty(fn.glob(install_path)) > 0) then
+  run_sync = fn.system({
+    'git',
+    'clone',
+    '--depth',
+    '1',
+    'https://github.com/wbthomason/packer.nvim',
+    install_path
+  })
+  vim.cmd('packadd packer.nvim')
+end
+
 -- Use a protected call to avoid errors on first use
 local status_ok, packer = pcall(require, 'packer')
-  if not status_ok then
+if not status_ok then
+  vim.notify('Packer not found, Plugins will not be available!')
   return
 end
 
@@ -14,7 +32,7 @@ local on_startup = function(use)
   use { "nvim-lua/plenary.nvim" }
 
   -- Set packer to manage itself
-  use { 'wbthomason/packer.nvim' }
+  use('wbthomason/packer.nvim')
 
   use { "lewis6991/impatient.nvim" }
 
@@ -55,16 +73,16 @@ local on_startup = function(use)
   use { "onsails/lspkind.nvim" }
 
   -- Ask for the right file to open when file matching name is not found
-  use { 'EinfachToll/DidYouMean' }
+  use('EinfachToll/DidYouMean')
 
   -- Visualise and control undo history in tree form.
-  use {
+  use({
     'mbbill/undotree',
     cmd = {'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow'},
     config = function()
-      vim.keymap.set('n', ',r', ':UndotreeToggle<CR>', { noremap = true })
-    end
-  }
+        vim.keymap.set('n', ',r', ':UndotreeToggle<CR>', { noremap = true })
+      end
+  })
 
   use {"numToStr/Comment.nvim",
       config = function()
@@ -72,18 +90,20 @@ local on_startup = function(use)
    }
 
   -- Git integration
-  use {
+  use({
     'lewis6991/gitsigns.nvim',
-    config = function()
-      require('plugins.gitsigns')
-
-      -- Create User command for opening gitui in neovim, if installed
-      if (vim.fn.executable('gitui') == 1) then
-          vim.api.nvim_create_user_command('GitUI', 'edit term://gitui', {})
-      end
-    end,
-    -- requires = {'tpope/vim-fugitive', 'rbong/vim-flog'}
-  }
+    config = function() require('plugins.gitsigns') end
+  })
+  use({
+    'TimUntersberger/neogit',
+    config = function() require('plugins.neogit') end,
+    cmd = 'Neogit',
+    requires = {
+      'sindrets/diffview.nvim',
+      config = function() require('plugins.diffview') end,
+      requires = 'nvim-lua/plenary.nvim'
+    }
+  })
 
   use {"p00f/clangd_extensions.nvim",
       config = function()
@@ -98,16 +118,11 @@ local on_startup = function(use)
   -- }
 
   -- TreeSitter integration
-  use {
+  use{
     'nvim-treesitter/nvim-treesitter',
     config = function() require('plugins.treesitter') end,
     run = ':TSUpdate',
     requires = 'nvim-ts-rainbow',
-  }
-
-  use {
-    'p00f/nvim-ts-rainbow',
-    requires = 'nvim-treesitter',
   }
 
   use {"folke/lua-dev.nvim",
@@ -155,11 +170,6 @@ local on_startup = function(use)
   use {
     'neovim/nvim-lspconfig',
     config = function() require('plugins.lspconfig') end,
-    -- run = {
-    --   'command -v solargraph >/dev/null || gem install solargraph',
-    --   'command -v gopls >/dev/null || go install golang.org/x/tools/gopls@latest',
-    --   'command -v typescript-language-server >/dev/null || npm install -g typescript-language-server',
-    -- }
   }
 
   use {
@@ -352,24 +362,19 @@ end
   }
 end
 
-return {
-  setup = function(run_sync)
-    local config = packer.startup({
-      on_startup,
-      config = {
-        display = {
-          open_fn = function()
-            return require('packer.util').float({ border = 'single' })
-          end
-        }
-      }
-    })
+packer.startup({
+  on_startup,
+  config = {
+    display = {
+      open_fn = function()
+        return require('packer.util').float({ border = 'single' })
+      end
+    }
+  }
+})
 
-    if run_sync then
-      packer.sync()
-    end
-
-    return config
-  end
-}
+if run_sync then
+  packer.sync()
+  vim.notify('Please restart Neovim now for stabilty')
+end
 
