@@ -3,3 +3,4 @@ plugin/*
 autoload/
 undodir/
 tags
+cmptraceback

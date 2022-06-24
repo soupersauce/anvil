@@ -108,6 +108,7 @@ local on_startup = function(use)
     config = function() require('plugins.treesitter') end,
     run = ':TSUpdate',
     requires = {
+      'joosepalviste/nvim-ts-context-commentstring',
       'p00f/nvim-ts-rainbow',
       'andymass/vim-matchup',
     }
@@ -283,12 +284,7 @@ local on_startup = function(use)
   -- For commenting
   use {
     "numToStr/Comment.nvim",
-    config = function()
-       require("Comment").setup(
-      {
-          ignore = '^$'
-      }
-    ) end
+    config = function() require("plugins.comment") end
   }
 
   use { "sqwishy/vim-sqf-syntax" }
