@@ -112,6 +112,7 @@ local on_startup = function(use)
       'joosepalviste/nvim-ts-context-commentstring',
       'p00f/nvim-ts-rainbow',
       'andymass/vim-matchup',
+      'nvim-treesitter/playground',
     }
   }
   use { "andymass/vim-matchup", }

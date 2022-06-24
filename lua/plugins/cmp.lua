@@ -141,7 +141,7 @@ cmp.setup {
     { name = 'orgmode' },
     { name = 'luasnip' },
     { name = 'treesitter' },
-    { name = 'nvim-autopairs.completion.cmp' },
+    { name = 'cmp_autopairs' },
     { name = 'buffer', keyword_length = 5 },
     { name = 'cmdline' },
     { name = 'path' },

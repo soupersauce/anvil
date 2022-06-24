@@ -15,6 +15,9 @@ config.setup({
     additional_vim_regex_highlighting = { 'org' },
     use_languagetree = true,
   },
+  playground = {
+    enable = true,
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
