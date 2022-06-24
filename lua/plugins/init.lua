@@ -34,7 +34,7 @@ local on_startup = function(use)
   -- Skyrim script extender
   use { "nvim-lua/plenary.nvim" }
   -- Packer manages itself
-  use {'wbthomason/packer.nvim'}
+  use { 'wbthomason/packer.nvim' }
   -- TODO:CONFIGURE:
   -- Ask for the right file to open when file matching name is not found
   use('EinfachToll/DidYouMean')
@@ -58,7 +58,7 @@ local on_startup = function(use)
   use {
     'adisen99/codeschool.nvim',
     requires = 'rktjmp/lush.nvim',
-    config = function ()
+    config = function()
       require('lush')(require('codeschool').setup())
     end
   }
@@ -90,9 +90,10 @@ local on_startup = function(use)
   --   }
   -- }
 
-  use {"p00f/clangd_extensions.nvim",
+  use { "p00f/clangd_extensions.nvim",
     config = function()
-      require("clangd_extensions").setup() end
+      require("clangd_extensions").setup()
+    end
   }
 
   -- REPL integration
@@ -103,7 +104,7 @@ local on_startup = function(use)
   -- }
 
   -- TREESITTER: integration
-  use{
+  use {
     'nvim-treesitter/nvim-treesitter',
     config = function() require('plugins.treesitter') end,
     run = ':TSUpdate',
@@ -113,19 +114,21 @@ local on_startup = function(use)
       'andymass/vim-matchup',
     }
   }
-  use {"andymass/vim-matchup", }
+  use { "andymass/vim-matchup", }
 
   -- TODO:CONFIGURE:
-  use {"lewis6991/spellsitter.nvim",
-      config = function()
-         require("spellsitter").setup() end
-   }
+  use { "lewis6991/spellsitter.nvim",
+    config = function()
+      require("spellsitter").setup()
+    end
+  }
 
   -- TODO:CONFIGURE:
-  use {"ziontee113/syntax-tree-surfer",
-      config = function()
-         require("syntax-tree-surfer").setup() end
-   }
+  use { "ziontee113/syntax-tree-surfer",
+    config = function()
+      require("syntax-tree-surfer").setup()
+    end
+  }
 
   use {
     'nvim-treesitter/nvim-treesitter-context',
@@ -148,7 +151,7 @@ local on_startup = function(use)
   use {
     "nvim-orgmode/orgmode",
     require = { 'cmp', 'treesitter' },
-    config = function() require('orgmode').setup{} end
+    config = function() require('orgmode').setup {} end
   }
 
   -- LSP: integration
@@ -162,8 +165,8 @@ local on_startup = function(use)
   use {
     "junnplus/nvim-lsp-setup",
     requires = {
-        'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer',
+      'neovim/nvim-lspconfig',
+      'williamboman/nvim-lsp-installer',
     },
     config = function() require('plugins.lsp-setup') end,
   }
@@ -172,23 +175,25 @@ local on_startup = function(use)
   use {
     "amrbashir/nvim-docs-view",
     config = function()
-        require("docs-view").setup {} end
+      require("docs-view").setup {}
+    end
   }
 
   -- Navic: show current code context in statusbar
   -- TODO:CONFIGURE:
   use {
-     "SmiteshP/nvim-navic",
-      requires = "nvim-lspconfig",
-      config = function()
-         require("nvim-navic").setup {} end
+    "SmiteshP/nvim-navic",
+    requires = "nvim-lspconfig",
+    config = function()
+      require("nvim-navic").setup {}
+    end
   }
 
   -- LSP setup for neovim lua development
   -- TODO: Set up autocommands to load automatically when working within vim runtime
-  use {"folke/lua-dev.nvim",
-      -- config = function()
-      --    require("lua-dev").setup() end
+  use { "folke/lua-dev.nvim",
+    -- config = function()
+    --    require("lua-dev").setup() end
   }
 
   -- TODO:CONFIGURE:
@@ -214,7 +219,7 @@ local on_startup = function(use)
   --       lua = {'luacheck'},
   --       python = {'pylint'},
   --   }
-		--end
+  --end
   -- }
 
   -- DEBUGGING: Configuration
@@ -226,7 +231,7 @@ local on_startup = function(use)
     requires = {
       { 'theHamsta/nvim-dap-virtual-text' },
       { 'rcarriga/nvim-dap-ui' },
-      { 'leoluz/nvim-dap-go', config = function() require('dap-go').setup() end  },
+      { 'leoluz/nvim-dap-go', config = function() require('dap-go').setup() end },
       -- { 'pocco81/dap-buddy.nvim', config = function() require('plugins.dap') end }
     },
   }
@@ -251,7 +256,7 @@ local on_startup = function(use)
     config = function() require('plugins.luasnip') end,
   }
 
-  use {'rafamadriz/friendly-snippets',}
+  use { 'rafamadriz/friendly-snippets', }
 
   use {
     "windwp/nvim-autopairs",
@@ -324,19 +329,20 @@ local on_startup = function(use)
   use {
     'declancm/cinnamon.nvim',
     config = function() require('cinnamon').setup {
-      extra_keymaps = true,
-      extended_keymaps = true,
-      delay = 1,
-    } end
+        extra_keymaps = true,
+        extended_keymaps = true,
+        delay = 1,
+      }
+    end
   }
 
   use {
     "nkakouros-original/numbers.nvim",
     config = function() require('numbers').setup {
-      excluded_filetypes = {
-        'alpha', 'NvimTree', 'help',
+        excluded_filetypes = {
+          'alpha', 'NvimTree', 'help',
+        }
       }
-    }
     end
   }
 
@@ -344,30 +350,30 @@ local on_startup = function(use)
   use { "dhruvasagar/vim-table-mode" }
 
   -- TODO:CONFIGURE:
-  use {"michaelb/sniprun", run = "bash ./install.sh"}
+  use { "michaelb/sniprun", run = "bash ./install.sh" }
 
   -- UI:
   -- TODO:CONFIGURE:
   use { "lukas-reineke/headlines.nvim",
-        config = function() require('headlines').setup() end
+    config = function() require('headlines').setup() end
   }
 
   use { "akinsho/org-bullets.nvim",
-        config = function() require('org-bullets').setup{} end
-      }
+    config = function() require('org-bullets').setup {} end
+  }
 
   -- Visualise and control undo history in tree form.
   use({
     'jiaoshijie/undotree',
-    cmd = {'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow'},
+    cmd = { 'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow' },
     config = function()
-        vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true })
-      end
+      vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true })
+    end
   })
 
   use {
     'j-hui/fidget.nvim',
-    config = function() require('fidget').setup{} end
+    config = function() require('fidget').setup {} end
   }
 
   -- TODO:CONFIGURE:
@@ -380,21 +386,21 @@ local on_startup = function(use)
 
   -- TODO:CONFIGURE:
   use { "akinsho/bufferline.nvim",
-      tag = "v2.*",
-      config = function()
-         require "plugins.bufferline"
-      end,
+    tag = "v2.*",
+    config = function()
+      require "plugins.bufferline"
+    end,
   }
 
   -- TODO:CONFIGURE:
   use { "lukas-reineke/indent-blankline.nvim",
-     config = function() require("plugins.blankline") end
+    config = function() require("plugins.blankline") end
   }
 
   -- TODO:CONFIGURE:
   use { "kyazdani42/nvim-tree.lua",
-     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-     config = function() require "plugins.nvimtree" end
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    config = function() require "plugins.nvimtree" end
   }
 
   -- Keymap hints
@@ -404,10 +410,10 @@ local on_startup = function(use)
 
   -- TODO:CONFIGURE:
   use {
-      "folke/which-key.nvim",
-      config = function()
-        require("plugins.whichkey")
-      end
+    "folke/which-key.nvim",
+    config = function()
+      require("plugins.whichkey")
+    end
   }
 end
 
