@@ -28,15 +28,18 @@ end
 
 -- Add plugins
 local on_startup = function(use)
-
-  use { "nvim-lua/plenary.nvim" }
-
-  -- Set packer to manage itself
-  use {'wbthomason/packer.nvim'}
-
+  -- UTILS:
+  -- loads stuff fast
   use { "lewis6991/impatient.nvim" }
+  -- Skyrim script extender
+  use { "nvim-lua/plenary.nvim" }
+  -- Packer manages itself
+  use {'wbthomason/packer.nvim'}
+  -- TODO:CONFIGURE:
+  -- Ask for the right file to open when file matching name is not found
+  use('EinfachToll/DidYouMean')
 
-  -- Color schemes
+  -- COLORSCHEMES:
   use { 'christianchiarulli/nvcode-color-schemes.vim' }
   use { 'glepnir/zephyr-nvim' }
   use { 'th3whit3wolf/onebuddy' }
@@ -47,10 +50,6 @@ local on_startup = function(use)
   use { 'marko-cerovac/material.nvim' }
   use { 'dilangmb/nightbuddy' }
   use { 'edeneast/nightfox.nvim' }
-  -- use {
-  --   'klooj/noogies',
-  --   requires = 'tjdevries/colorbuddy.nvim',
-  -- }
   use { 'navarasu/onedark.nvim' }
   use { 'rafamadriz/neon' }
   use { 'yagua/nebulous.nvim' }
@@ -73,30 +72,13 @@ local on_startup = function(use)
     -- }
     -- end
   }
-  use { "onsails/lspkind.nvim" }
-
-  -- Ask for the right file to open when file matching name is not found
-  use('EinfachToll/DidYouMean')
-
-  -- Visualise and control undo history in tree form.
-  use({
-    'mbbill/undotree',
-    cmd = {'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow'},
-    config = function()
-        vim.keymap.set('n', ',r', ':UndotreeToggle<CR>', { noremap = true })
-      end
-  })
-
-  use {"numToStr/Comment.nvim",
-      config = function()
-         require("Comment").setup() end
-   }
 
   -- Git integration
   use {
     'lewis6991/gitsigns.nvim',
     config = function() require('plugins.gitsigns') end
   }
+  --  TODO: Explore and see if we will use
   -- use {
   --   'TimUntersberger/neogit',
   --   config = function() require('plugins.neogit') end,
@@ -120,7 +102,7 @@ local on_startup = function(use)
   --   config = function() require('plugins.reply') end
   -- }
 
-  -- -- TreeSitter integration
+  -- TREESITTER: integration
   use{
     'nvim-treesitter/nvim-treesitter',
     config = function() require('plugins.treesitter') end,
@@ -130,11 +112,19 @@ local on_startup = function(use)
       'andymass/vim-matchup',
     }
   }
+  use {"andymass/vim-matchup", }
 
-  use {"folke/lua-dev.nvim",
+  -- TODO:CONFIGURE:
+  use {"lewis6991/spellsitter.nvim",
       config = function()
-         require("lua-dev").setup() end
-  }
+         require("spellsitter").setup() end
+   }
+
+  -- TODO:CONFIGURE:
+  use {"ziontee113/syntax-tree-surfer",
+      config = function()
+         require("syntax-tree-surfer").setup() end
+   }
 
   use {
     'nvim-treesitter/nvim-treesitter-context',
@@ -148,41 +138,70 @@ local on_startup = function(use)
     config = function() require('twilight').setup {} end
   }
 
-  -- DAP integration
-  use {
-    'mfussenegger/nvim-dap',
-    config = function() end,
-    requires = {
-      { 'theHamsta/nvim-dap-virtual-text' },
-      { 'rcarriga/nvim-dap-ui' },
-      { 'leoluz/nvim-dap-go', config = function() require('dap-go').setup() end  },
-    },
+  -- TODO:CONFIGURE:
+  use { "mizlan/iswap.nvim",
+    requires = 'nvim-treesitter',
   }
 
+  -- TODO:CONFIGURE:
+  use {
+    "nvim-orgmode/orgmode",
+    require = { 'cmp', 'treesitter' },
+    config = function() require('orgmode').setup{} end
+  }
 
-  use {"andymass/vim-matchup", }
-
-  use {"lewis6991/spellsitter.nvim",
-      config = function()
-         require("spellsitter").setup() end
-   }
-
-  use {"ziontee113/syntax-tree-surfer",
-      config = function()
-         require("syntax-tree-surfer").setup() end
-   }
-
-  -- LSP integration
+  -- LSP: integration
+  -- TODO:CONFIGURE:
   use {
     'neovim/nvim-lspconfig',
     config = function() require('plugins.lspconfig') end,
   }
 
+  -- TODO:CONFIGURE:
+  use {
+    "junnplus/nvim-lsp-setup",
+    requires = {
+        'neovim/nvim-lspconfig',
+        'williamboman/nvim-lsp-installer',
+    },
+    config = function() require('plugins.lsp-setup') end,
+  }
+
+  -- TODO:CONFIGURE:
+  use {
+    "amrbashir/nvim-docs-view",
+    config = function()
+        require("docs-view").setup {} end
+  }
+
+  -- Navic: show current code context in statusbar
+  -- TODO:CONFIGURE:
   use {
      "SmiteshP/nvim-navic",
       requires = "nvim-lspconfig",
       config = function()
          require("nvim-navic").setup {} end
+  }
+
+  -- LSP setup for neovim lua development
+  -- TODO: Set up autocommands to load automatically when working within vim runtime
+  use {"folke/lua-dev.nvim",
+      -- config = function()
+      --    require("lua-dev").setup() end
+  }
+
+  -- TODO:CONFIGURE:
+  use {
+    "simrat39/rust-tools.nvim",
+    ft = { "rust", },
+    config = function() require("rust-tools").setup({}) end,
+  }
+
+  -- Integrates linters/diagnostics/formatting into LSP
+  -- TODO:CONFIGURE:
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function() require('plugins.null-ls') end,
   }
 
   -- use { "mfussenegger/nvim-lint",
@@ -196,59 +215,49 @@ local on_startup = function(use)
   --   }
 		--end
   -- }
+
+  -- DEBUGGING: Configuration
+  -- DAP
+  -- TODO:CONFIGURE:
+  -- TODO:Figure out how to install shit
   use {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function() require('plugins.null-ls') end,
+    'mfussenegger/nvim-dap',
+    requires = {
+      { 'theHamsta/nvim-dap-virtual-text' },
+      { 'rcarriga/nvim-dap-ui' },
+      { 'leoluz/nvim-dap-go', config = function() require('dap-go').setup() end  },
+      -- { 'pocco81/dap-buddy.nvim', config = function() require('plugins.dap') end }
+    },
   }
 
-  use { "gennaro-tedesco/nvim-peekup" }
-
+  -- ICONS:
   use { "kyazdani42/nvim-web-devicons" }
 
-  use { 'ibhagwan/fzf-lua',
-    requires = { 'kyazdani42/nvim-web-devicons' }
-  }
-
+  -- TODO:CONFIGURE:
   use { 'yamatsum/nvim-nonicons',
     requires = { 'kyazdani42/nvim-web-devicons' }
   }
 
-  use {
-    "frabjous/knap",
-    config = function() require("plugins.knap") end,
-  }
+  -- TODO:CONFIGURE:
+  use { "onsails/lspkind.nvim" }
 
-  use { "xiyaowong/nvim-cursorword" }
-
-  use {
-    "simrat39/rust-tools.nvim",
-    ft = { "rust", },
-    config = function() require("rust-tools").setup({}) end,
-  }
-
-  use {
-    "junnplus/nvim-lsp-setup",
-    requires = {
-        'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer',
-    },
-    config = function() require('plugins.lsp-setup') end,
-  }
-
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', }
-  }
-
+  -- COMPLETION:
+  -- Snippet and completion integration
   -- Use LuaSnip as snippet provider
   use {
     'L3MON4D3/LuaSnip',
     requires = 'rafamadriz/friendly-snippets',
     config = function() require('plugins.luasnip') end,
   }
-use {'rafamadriz/friendly-snippets',}
 
-  -- Snippet and completion integration
+  use {'rafamadriz/friendly-snippets',}
+
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("plugins.autopairs") end,
+  }
+
+  -- TODO:CONFIGURE:
   use {
     'hrsh7th/nvim-cmp',
     config = function() require('plugins.cmp') end,
@@ -259,6 +268,7 @@ use {'rafamadriz/friendly-snippets',}
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-cmdline',
       'andersevenrud/cmp-tmux',
+      'rcarriga/cmp-dap',
       'quangnguyen30192/cmp-nvim-tags',
       'saadparwaiz1/cmp_luasnip',
       'f3fora/cmp-spell',
@@ -270,10 +280,58 @@ use {'rafamadriz/friendly-snippets',}
     },
   }
 
+  -- For commenting
   use {
-    "amrbashir/nvim-docs-view",
+    "numToStr/Comment.nvim",
     config = function()
-        require("docs-view").setup {} end
+       require("Comment").setup(
+      {
+          ignore = '^$'
+      }
+    ) end
+  }
+
+  use { "sqwishy/vim-sqf-syntax" }
+
+  -- TPOPE:
+  -- TODO:CONFIGURE:
+  use { "tpope/vim-unimpaired" }
+  -- TODO:CONFIGURE:
+  use { "tpope/vim-repeat" }
+  -- TODO:CONFIGURE:
+  use { "tpope/vim-surround" }
+  -- TODO:CONFIGURE:
+  use { "tpope/vim-fugitive" }
+  -- TODO:CONFIGURE:
+  use { "tpope/vim-eunuch" }
+  -- TODO:CONFIGURE:
+  use { "tpope/vim-vinegar" }
+
+  -- use { "luukvbaal/nnn.nvim" }
+
+  -- TODO:CONFIGURE:
+  use { 'ibhagwan/fzf-lua',
+    requires = { 'kyazdani42/nvim-web-devicons' }
+  }
+
+  -- TODO:CONFIGURE:
+  use { "sindrets/diffview.nvim",
+    requires = 'nvim-lua/plenary.nvim',
+  }
+
+  -- TODO:CONFIGURE:
+  use {
+    "frabjous/knap",
+    config = function() require("plugins.knap") end,
+  }
+
+  use {
+    'declancm/cinnamon.nvim',
+    config = function() require('cinnamon').setup {
+      extra_keymaps = true,
+      extended_keymaps = true,
+      delay = 1,
+    } end
   }
 
   use {
@@ -286,52 +344,14 @@ use {'rafamadriz/friendly-snippets',}
     end
   }
 
-  use { "luukvbaal/nnn.nvim" }
-
-  use {
-    "windwp/nvim-autopairs",
-    config = function() require("plugins.autopairs") end,
-  }
-
-  use {
-    'declancm/cinnamon.nvim',
-    config = function() require('cinnamon').setup {
-      extra_keymaps = true,
-      extended_keymaps = true,
-      delay = 1,
-  } end
-  }
-
-  use { "sindrets/diffview.nvim",
-    requires = 'nvim-lua/plenary.nvim',
-  }
-
-  use { "mizlan/iswap.nvim",
-    requires = 'nvim-treesitter',
-  }
-
-  use { "tpope/vim-unimpaired" }
-
-  use { "tpope/vim-repeat" }
-
-  use { "tpope/vim-surround" }
-
-  use { "tpope/vim-fugitive" }
-
-  use { "tpope/vim-eunuch" }
-
-  use { "tpope/vim-vinegar" }
-
-  use {
-    "nvim-orgmode/orgmode",
-    require = { 'cmp', 'treesitter' },
-    config = function() require('orgmode').setup{} end
-  }
-
+  -- TODO:CONFIGURE:
   use { "dhruvasagar/vim-table-mode" }
 
+  -- TODO:CONFIGURE:
   use {"michaelb/sniprun", run = "bash ./install.sh"}
 
+  -- UI:
+  -- TODO:CONFIGURE:
   use { "lukas-reineke/headlines.nvim",
         config = function() require('headlines').setup() end
   }
@@ -340,9 +360,24 @@ use {'rafamadriz/friendly-snippets',}
         config = function() require('org-bullets').setup{} end
       }
 
-  use { "sqwishy/vim-sqf-syntax" }
+  -- Visualise and control undo history in tree form.
+  use({
+    'jiaoshijie/undotree',
+    cmd = {'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow'},
+    config = function()
+        vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true })
+      end
+  })
 
+  -- TODO:CONFIGURE:
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', }
+  }
 
+  use { "xiyaowong/nvim-cursorword" }
+
+  -- TODO:CONFIGURE:
   use { "akinsho/bufferline.nvim",
       tag = "v2.*",
       config = function()
@@ -350,17 +385,23 @@ use {'rafamadriz/friendly-snippets',}
       end,
   }
 
+  -- TODO:CONFIGURE:
   use { "lukas-reineke/indent-blankline.nvim",
      config = function() require("plugins.blankline") end
   }
 
+  -- TODO:CONFIGURE:
   use { "kyazdani42/nvim-tree.lua",
      cmd = { "NvimTreeToggle", "NvimTreeFocus" },
      config = function() require "plugins.nvimtree" end
   }
 
--- Keymap hints
--- Load after rest of gui
+  -- Keymap hints
+  -- Load after rest of gui
+  -- TODO: May remove these completely in favor of just using which-key
+  use { "gennaro-tedesco/nvim-peekup" }
+
+  -- TODO:CONFIGURE:
   use {
       "folke/which-key.nvim",
       config = function()
@@ -384,4 +425,3 @@ if run_sync then
   packer.sync()
   vim.notify('Please restart Neovim now for stabilty')
 end
-

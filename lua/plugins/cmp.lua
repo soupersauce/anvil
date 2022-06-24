@@ -53,10 +53,10 @@ local kind_icons = {
 require("luasnip/loaders/from_vscode").lazy_load()
 
 cmp.setup {
-  cmp.event:on(
-        'confirm_done',
-        cmp_autopairs.on_confirm_done()
-      ),
+  -- cmp.event:on(
+  --       'confirm_done',
+  --       cmp_autopairs.on_confirm_done()
+  --     ),
 
   snippet = {
     expand = function(args)

@@ -1,8 +1,12 @@
-local pairs_ok, npairs = pcall('require','nvim-autopairs')
-local cmp_ok, cmp = pcall('require','cmp')
+local pairs_ok, npairs = pcall(require,'nvim-autopairs')
+local cmp_ok, cmp = pcall(require, 'cmp')
+
 local Rule = require('nvim-autopairs.rule')
 
 if not (pairs_ok and cmp_ok) then
+  print("pairs or cmp failed")
+  print(pairs_ok)
+  print(cmp_ok)
   return
 end
 
@@ -51,4 +55,4 @@ npairs.add_rules({
 })
 
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-cmp.event:on("confirm_done", cmp.autopairs.on_confirm_done())
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
