@@ -138,6 +138,7 @@ cmp.setup {
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
+    { name = 'orgmode' },
     { name = 'luasnip' },
     { name = 'treesitter' },
     { name = 'nvim-autopairs.completion.cmp' },
@@ -146,7 +147,6 @@ cmp.setup {
     { name = 'path' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'tmux' },
-    { name = 'orgmode' },
     { name = 'tags' },
     { name = 'ctags' },
     { name = 'dictionary', keyword_length = 2 },
