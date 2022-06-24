@@ -7,7 +7,7 @@ local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local run_sync = false
 
 -- Install packer for package management, if missing
-if (fn.empty(fn.glob(install_path)) > 0) then
+if (fn.empty(fn.glob(install_path, _, _)) > 0) then
   run_sync = fn.system({
     'git',
     'clone',
@@ -364,6 +364,11 @@ local on_startup = function(use)
         vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true })
       end
   })
+
+  use {
+    'j-hui/fidget.nvim',
+    config = function() require('fidget').setup{} end
+  }
 
   -- TODO:CONFIGURE:
   use {
