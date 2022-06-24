@@ -1,7 +1,7 @@
 local present, null_ls = pcall(require, "null-ls-nvim")
 
 if not present then
-   return
+  return
 end
 
 null_ls.setup({

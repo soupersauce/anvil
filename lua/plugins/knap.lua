@@ -15,4 +15,3 @@ local knapsettings = {
 
 -- options = load_override(options, "lukas-reineke/indent-blankline.nvim")
 vim.g.knap_settings = knapsettings
-

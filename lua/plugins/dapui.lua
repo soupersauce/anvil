@@ -9,7 +9,7 @@ dap.listeners.before.event_exited['dapui_config'] = dapui.close
 dapui.setup({
   icons = { expanded = '▼', collapsed = '▶' },
   mappings = {
-    expand = {'<CR>', '<2-LeftMouse>'},
+    expand = { '<CR>', '<2-LeftMouse>' },
     open = 'o',
     remove = 'd',
     edit = 'e',
@@ -31,7 +31,7 @@ dapui.setup({
       position = 'left', -- Can be 'left', 'right', 'top', 'bottom'
     },
     {
-      elements = {'repl', 'console'},
+      elements = { 'repl', 'console' },
       size = 10,
       position = 'bottom', -- Can be 'left', 'right', 'top', 'bottom'
     }
@@ -39,7 +39,7 @@ dapui.setup({
   floating = {
     border = 'single', -- Border style. Can be 'single', 'double' or 'rounded'
     mappings = {
-      close = {'q', '<Esc>'},
+      close = { 'q', '<Esc>' },
     },
   },
   windows = { indent = 1 },
@@ -47,4 +47,3 @@ dapui.setup({
     max_type_length = nil, -- Can be integer or nil.
   }
 })
-

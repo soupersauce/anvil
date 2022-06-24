@@ -21,7 +21,7 @@ autocmd("WinLeave", {
 local vertical_help = augroup("VerticalHelp", { clear = true })
 autocmd("FileType", {
   desc = "make help split vertical",
-  pattern="help",
+  pattern = "help",
   command = "wincmd L",
   group = vertical_help
 })
@@ -33,4 +33,3 @@ autocmd("TextYankPost", {
   callback = function() vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 50 }) end,
   group = vertical_help
 })
-

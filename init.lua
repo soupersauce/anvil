@@ -7,4 +7,3 @@ end
 --
 -- Configure NeoVim
 require('configuration')
-

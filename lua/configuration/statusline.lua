@@ -35,9 +35,9 @@ local palette = {}
 
 -- define highlight groups and build palette from active colorscheme colors
 M.build_palette = function()
-  local bg      = get_color('StatusLine', 'background', '#ffffff')
-  local nc      = get_color('StatusLineNC', 'foreground', '#666666')
-  local colors  = {'Red', 'Orange', 'Yellow', 'Green', 'Aqua', 'Blue', 'Purple', 'Normal'}
+  local bg     = get_color('StatusLine', 'background', '#ffffff')
+  local nc     = get_color('StatusLineNC', 'foreground', '#666666')
+  local colors = { 'Red', 'Orange', 'Yellow', 'Green', 'Aqua', 'Blue', 'Purple', 'Normal' }
 
   palette.Disabled = { ctermfg = nc.cterm, ctermbg = bg.cterm, fg = nc.gui, bg = bg.gui }
   palette.Disabled = setmetatable(
@@ -72,62 +72,62 @@ M.build_palette()
 
 -- Map accent color for statusline based on active mode
 local color_map = setmetatable({
-  ['n']    = palette.Green,   -- Normal
-  ['no']   = palette.Green,   -- Operator pending
-  ['v']    = palette.Purple,  -- Visual by character (v)
-  ['V']    = palette.Purple,  -- Visual by line (V)
-  ['\022'] = palette.Purple,  -- Visual block wise (CTRL-V)
-  ['s']    = palette.Purple,  -- Select by character (gh)
-  ['S']    = palette.Purple,  -- Select by line (gH)
-  ['\019'] = palette.Purple,  -- Select block wise (g CTRL-H)
-  ['i']    = palette.Blue,    -- Insert
-  ['ic']   = palette.Blue,    -- Insert completion (generic)
-  ['ix']   = palette.Blue,    -- Insert completion (CTRL-X)
-  ['R']    = palette.Orange,  -- Replace
-  ['Rc']   = palette.Orange,  -- Replace completion
-  ['Rv']   = palette.Orange,  -- Replace virtual
-  ['c']    = palette.Yellow,  -- Command-line
-  ['cv']   = palette.Yellow,  -- Execute (gQ)
-  ['ce']   = palette.Yellow,  -- Execute (Q)
-  ['r']    = palette.Yellow,  -- Prompt for enter
-  ['rm']   = palette.Yellow,  -- Read more (-- more -- prompt)
-  ['r?']   = palette.Yellow,  -- Prompt yes/no (confirmation prompt)
-  ['!']    = palette.Red,     -- Shell execution
-  ['t']    = palette.Red,     -- Terminal mode (insert)
-  ['nt']   = palette.Green,   -- Terminal mode (normal)
+  ['n']    = palette.Green, -- Normal
+  ['no']   = palette.Green, -- Operator pending
+  ['v']    = palette.Purple, -- Visual by character (v)
+  ['V']    = palette.Purple, -- Visual by line (V)
+  ['\022'] = palette.Purple, -- Visual block wise (CTRL-V)
+  ['s']    = palette.Purple, -- Select by character (gh)
+  ['S']    = palette.Purple, -- Select by line (gH)
+  ['\019'] = palette.Purple, -- Select block wise (g CTRL-H)
+  ['i']    = palette.Blue, -- Insert
+  ['ic']   = palette.Blue, -- Insert completion (generic)
+  ['ix']   = palette.Blue, -- Insert completion (CTRL-X)
+  ['R']    = palette.Orange, -- Replace
+  ['Rc']   = palette.Orange, -- Replace completion
+  ['Rv']   = palette.Orange, -- Replace virtual
+  ['c']    = palette.Yellow, -- Command-line
+  ['cv']   = palette.Yellow, -- Execute (gQ)
+  ['ce']   = palette.Yellow, -- Execute (Q)
+  ['r']    = palette.Yellow, -- Prompt for enter
+  ['rm']   = palette.Yellow, -- Read more (-- more -- prompt)
+  ['r?']   = palette.Yellow, -- Prompt yes/no (confirmation prompt)
+  ['!']    = palette.Red, -- Shell execution
+  ['t']    = palette.Red, -- Terminal mode (insert)
+  ['nt']   = palette.Green, -- Terminal mode (normal)
 }, {
-  __index  = function(_, idx)
-    return palette.Green      -- Catch any undefined modes
+  __index = function(_, idx)
+    return palette.Green -- Catch any undefined modes
   end
 })
 
 -- Map symbols/text to be used as an identifier for currently active mode
 M.mode_map = setmetatable({
-  ['n']    = 'N',             -- Normal
-  ['no']   = 'N-P',           -- Operator pending
-  ['v']    = 'V',             -- Visual by character
-  ['V']    = 'V-L',           -- Visual by line
-  ['\022'] = 'V-B',           -- Visual block wise, does not work cannot map symbol (^V)
-  ['s']    = 'S',             -- Select by character (gh)
-  ['S']    = 'S-L',           -- Select by line (gH)
-  ['\019'] = 'S-B',           -- Select block wise (g CTRL-H), does not work cannot map symbol (^S)
-  ['i']    = 'I',             -- Insert
-  ['ic']   = 'I~',            -- Insert completion (generic)
-  ['ix']   = 'I~',            -- Insert completion (CTRL-X)
-  ['R']    = 'R',             -- Replace
-  ['Rc']   = 'R~',            -- Replace completion
-  ['Rv']   = 'R-V',           -- Replace virtual
-  ['c']    = 'C',             -- Command-line
-  ['cv']   = 'C!',            -- Execute (gQ)
-  ['ce']   = 'C!',            -- Execute (Q)
-  ['r']    = 'P',             -- Prompt for enter
-  ['rm']   = 'P!',            -- Read more (-- more -- prompt)
-  ['r?']   = 'P?',            -- Prompt yes/no (confirmation prompt)
-  ['!']    = 'S',             -- Shell execution
-  ['t']    = 'I-T',           -- Terminal mode (insert)
-  ['nt']   = 'N-T',           -- Terminal mode (normal)
+  ['n']    = 'N', -- Normal
+  ['no']   = 'N-P', -- Operator pending
+  ['v']    = 'V', -- Visual by character
+  ['V']    = 'V-L', -- Visual by line
+  ['\022'] = 'V-B', -- Visual block wise, does not work cannot map symbol (^V)
+  ['s']    = 'S', -- Select by character (gh)
+  ['S']    = 'S-L', -- Select by line (gH)
+  ['\019'] = 'S-B', -- Select block wise (g CTRL-H), does not work cannot map symbol (^S)
+  ['i']    = 'I', -- Insert
+  ['ic']   = 'I~', -- Insert completion (generic)
+  ['ix']   = 'I~', -- Insert completion (CTRL-X)
+  ['R']    = 'R', -- Replace
+  ['Rc']   = 'R~', -- Replace completion
+  ['Rv']   = 'R-V', -- Replace virtual
+  ['c']    = 'C', -- Command-line
+  ['cv']   = 'C!', -- Execute (gQ)
+  ['ce']   = 'C!', -- Execute (Q)
+  ['r']    = 'P', -- Prompt for enter
+  ['rm']   = 'P!', -- Read more (-- more -- prompt)
+  ['r?']   = 'P?', -- Prompt yes/no (confirmation prompt)
+  ['!']    = 'S', -- Shell execution
+  ['t']    = 'I-T', -- Terminal mode (insert)
+  ['nt']   = 'N-T', -- Terminal mode (normal)
 }, {
-  __index  = function(_, mode)
+  __index = function(_, mode)
     -- Catch any undefined modes
     return string.format('? (%s)', mode)
   end,
@@ -190,8 +190,8 @@ M.get_file_type = function()
   local file_type = vim.bo.filetype:lower()
 
   return file_type == ''
-    and ' [no ft] '
-    or string.format(' %s ', file_type)
+      and ' [no ft] '
+      or string.format(' %s ', file_type)
 end
 
 -- File line ending format Unix / Windows
@@ -243,7 +243,7 @@ M.set_active = function(self)
     self:get_current_mode(),
     self:highlight(palette.Aqua),
     self:get_file_state(),
-    '%<',                                               -- Collapse point for smaller screen sizes
+    '%<', -- Collapse point for smaller screen sizes
     self:highlight(palette.Disabled),
     buffers.prev_bufs,
     accent_color,
@@ -258,7 +258,7 @@ M.set_active = function(self)
     format_diagnostics(' I:%s ', severity.INFO),
     self:highlight(palette.Blue),
     format_diagnostics(' H:%s ', severity.HINT),
-    '%=',                                               -- left / right separator
+    '%=', -- left / right separator
     self:highlight(palette.Normal),
     self:get_lsp_status(),
     self:get_file_encoding(),
@@ -266,9 +266,9 @@ M.set_active = function(self)
     accent_color,
     self:get_file_type(),
     self:highlight(palette.Aqua),
-    ' --%1p%%-- ',                                      -- Place in file as a percentage
+    ' --%1p%%-- ', -- Place in file as a percentage
     accent_color,
-    ' %l:%c ',                                          -- position of cursor
+    ' %l:%c ', -- position of cursor
   })
 end
 
@@ -277,9 +277,9 @@ M.set_inactive = function(self)
   return table.concat({
     self:highlight(palette.Disabled),
     self:get_file_state(),
-    '%=',                                               -- left / right separator
-    ' --%1p%%-- ',                                      -- Place in file as a percentage
-    ' %l:%c ',                                          -- position of cursor
+    '%=', -- left / right separator
+    ' --%1p%%-- ', -- Place in file as a percentage
+    ' %l:%c ', -- position of cursor
   })
 end
 
@@ -322,5 +322,3 @@ else
   -- Use active varient for global statusline
   vim.o.statusline = "%!v:lua.StatusLine('active')"
 end
-
-

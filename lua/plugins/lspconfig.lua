@@ -25,7 +25,7 @@ end
 lsp.tsserver.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  filetypes = {'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx'},
+  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
 });
 
 -- Configure LS for Ruby
@@ -35,7 +35,7 @@ lsp.solargraph.setup({ capabilities = capabilities, on_attach = on_attach });
 lsp.gopls.setup({ capabilities = capabilities, on_attach = on_attach });
 
 -- Configure LS for Vue
-lsp.vuels.setup({ capabilities = capabilities, on_attach = on_attach, filetypes = {'vue'} })
+lsp.vuels.setup({ capabilities = capabilities, on_attach = on_attach, filetypes = { 'vue' } })
 
 -- Add diagnostics to quick-fix list
 do
@@ -55,4 +55,3 @@ vim.diagnostic.config({
   update_in_insert = false,
   severity_sort = false,
 })
-

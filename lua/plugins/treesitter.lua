@@ -12,7 +12,7 @@ config.setup({
   },
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = {'org'},
+    additional_vim_regex_highlighting = { 'org' },
     use_languagetree = true,
   },
   incremental_selection = {

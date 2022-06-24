@@ -8,12 +8,12 @@ require('luasnip.loaders.from_vscode').lazy_load()
 
 -- Load custom snippets
 local snippet_dir = vim.fn.stdpath('config') .. '/snippets'
-require("luasnip.loaders.from_vscode").lazy_load({ paths = {snippet_dir} })
+require("luasnip.loaders.from_vscode").lazy_load({ paths = { snippet_dir } })
 
-luasnip.filetype_extend('javascriptreact', {'html', 'react'})
-luasnip.filetype_extend('typescriptreact', {'html', 'react-ts'})
-luasnip.filetype_extend('vue', {'html', 'javascript', 'pug'})
-luasnip.filetype_extend('ruby', {'rails'})
+luasnip.filetype_extend('javascriptreact', { 'html', 'react' })
+luasnip.filetype_extend('typescriptreact', { 'html', 'react-ts' })
+luasnip.filetype_extend('vue', { 'html', 'javascript', 'pug' })
+luasnip.filetype_extend('ruby', { 'rails' })
 
 -- Expand/Jump forward if a snippet is available
 set_keymap('i', '<Tab>',
@@ -28,12 +28,12 @@ set_keymap('i', '<Tab>',
 )
 
 -- Jump backward
-set_keymap({'i', 's'}, '<S-Tab>', function() luasnip.jump(-1) end, options)
+set_keymap({ 'i', 's' }, '<S-Tab>', function() luasnip.jump(-1) end, options)
 
 -- Change choices in choiceNodes
 set_keymap(
-   {'i', 's'},
-   '<A-Tab',
+  { 'i', 's' },
+  '<A-Tab',
   function()
     if luasnip.choice_active() then
       return '<Plug>luasnip-next-choice'
@@ -48,14 +48,13 @@ luasnip.config.setup({
   ext_opts = {
     [types.choiceNode] = {
       active = {
-        virt_text = {{'●', 'Statement'}},
+        virt_text = { { '●', 'Statement' } },
       },
     },
     [types.insertNode] = {
       active = {
-        virt_text = {{'●', 'Identifier'}},
+        virt_text = { { '●', 'Identifier' } },
       },
     },
   },
 })
-

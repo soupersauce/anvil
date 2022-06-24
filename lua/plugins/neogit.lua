@@ -13,14 +13,14 @@ neogit.setup {
   disable_builtin_notifications = true,
   use_magit_keybindings = false,
   commit_popup = {
-      kind = 'split',
+    kind = 'split',
   },
   -- Change the default way of opening neogit
   kind = 'replace',
   signs = {
-    section = {'▶', '▼'},
-    item = {'┗', '┣'},
-    hunk = {'┃', '━'},
+    section = { '▶', '▼' },
+    item = { '┗', '┣' },
+    hunk = { '┃', '━' },
   },
   integrations = {
     diffview = true
@@ -59,4 +59,3 @@ neogit.setup {
     }
   }
 }
-

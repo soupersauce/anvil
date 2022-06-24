@@ -39,7 +39,7 @@ lsp_setup.setup({
           -- Avoid LSP formatting conflicts.
           -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflict
           require('nvim-lsp-setup.utils').disable_formatting(client)
-      end,
+        end,
       }
     }),
     marksman = {},
@@ -54,4 +54,3 @@ lsp_setup.setup({
     yamlls = {},
   }
 })
-
