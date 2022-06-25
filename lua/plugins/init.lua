@@ -43,33 +43,32 @@ local on_startup = function(use)
   use('EinfachToll/DidYouMean')
 
   -- COLORSCHEMES:
-  use { 'christianchiarulli/nvcode-color-schemes.vim' }
-  use { 'glepnir/zephyr-nvim' }
-  use { 'th3whit3wolf/onebuddy' }
-  use { 'th3whit3wolf/one-nvim' }
-  use { 'ray-x/aurora' }
-  use { 'tanvirtin/nvim-monokai' }
-  use { 'nekonako/xresources-nvim' }
-  use { 'marko-cerovac/material.nvim' }
-  use { 'dilangmb/nightbuddy' }
-  use { 'edeneast/nightfox.nvim' }
-  use { 'navarasu/onedark.nvim' }
-  use { 'rafamadriz/neon' }
-  use { 'yagua/nebulous.nvim' }
-  use { 'shatur/neovim-ayu' }
-  use { 'elianiva/icy.nvim' }
   use {
+    'christianchiarulli/nvcode-color-schemes.vim', 
+    'glepnir/zephyr-nvim',
+    'th3whit3wolf/onebuddy',
+    'th3whit3wolf/one-nvim',
+    'ray-x/aurora',
+    'tanvirtin/nvim-monokai',
+    'nekonako/xresources-nvim',
+    'marko-cerovac/material.nvim',
+    'dilangmb/nightbuddy',
+    'edeneast/nightfox.nvim',
+    'navarasu/onedark.nvim',
+    'rafamadriz/neon',
+    'yagua/nebulous.nvim',
+    'shatur/neovim-ayu',
+    'elianiva/icy.nvim',
+    {
     'adisen99/codeschool.nvim',
-    requires = 'rktjmp/lush.nvim',
-    config = function()
-      require('lush')(require('codeschool').setup())
-    end
-  }
-  use { 'sainnhe/edge' }
-  use { 'sainnhe/sonokai' }
-  use { 'sainnhe/everforest' }
-  use { 'sainnhe/gruvbox-material' }
-  use { "projekt0n/github-nvim-theme",
+      requires = 'rktjmp/lush.nvim',
+      config = function() require('lush')(require('codeschool').setup()) end,
+    },
+    'sainnhe/edge',
+    'sainnhe/sonokai',
+    'sainnhe/everforest',
+    'sainnhe/gruvbox-material',
+    'projekt0n/github-nvim-theme',
     -- config = function() require('github-theme').setup {
     --   theme_style = "dimmed",
     -- }
@@ -405,6 +404,10 @@ local on_startup = function(use)
   use { "kyazdani42/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     config = function() require "plugins.nvimtree" end
+  }
+  use {
+    "norcalli/nvim-colorizer.lua",
+    config = function() require('colorizer').setup() end,
   }
 
   -- Keymap hints
