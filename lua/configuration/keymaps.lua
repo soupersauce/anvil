@@ -1,7 +1,7 @@
 local set_keymap = vim.keymap.set
 
 -- Set leader key
-vim.g.mapleader = '\\'
+vim.g.mapleader = ' '
 
 -- Use CTRL + j/k for fast scroll
 -- TODO: We might remap these to window navigation
@@ -125,4 +125,3 @@ set_keymap('n', '<leader>zv', function() require("fzf-lua").command_history() en
 
 -- For nvim-tree
 set_keymap('n', '<C-n>', '<cmd>NvimTreeToggle<CR>', { noremap = true })
-set_keymap('n', '<leader>f', 'vim.lsp.buf.format()', { noremap = true })
