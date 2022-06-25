@@ -348,9 +348,6 @@ local on_startup = function(use)
 
   -- Keymap hints
   -- Load after rest of gui
-  -- TODO: May remove these completely in favor of just using which-key
-  use { "gennaro-tedesco/nvim-peekup" }
-
   -- TODO:CONFIGURE:
   use {
     "folke/which-key.nvim",
