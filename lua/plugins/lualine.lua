@@ -19,7 +19,7 @@ end
 
 local custom_fname = require('lualine.components.filename'):extend()
 local highlight = require 'lualine.highlight'
-local default_status_colors = {  modified = '#C70039' }
+local default_status_colors = { modified = '#C70039' }
 
 function custom_fname:init(options)
   custom_fname.super.init(self, options)

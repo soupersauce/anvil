@@ -311,6 +311,12 @@ local on_startup = function(use)
 
   -- use { "luukvbaal/nnn.nvim" }
 
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', },
+    config = function() require('plugins.lualine') end,
+  }
+
   -- TODO:CONFIGURE:
   use { 'ibhagwan/fzf-lua',
     requires = { 'kyazdani42/nvim-web-devicons' }
@@ -364,24 +370,17 @@ local on_startup = function(use)
   }
 
   -- Visualise and control undo history in tree form.
-  use({
+  use {
     'jiaoshijie/undotree',
     cmd = { 'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow' },
     config = function()
       vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true })
     end
-  })
+  }
 
   use {
     'j-hui/fidget.nvim',
     config = function() require('fidget').setup {} end
-  }
-
-  -- TODO:CONFIGURE:
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', },
-    config = function() require('plugins.lualine') end,
   }
 
   use { "xiyaowong/nvim-cursorword" }
