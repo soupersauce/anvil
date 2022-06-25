@@ -44,7 +44,7 @@ local on_startup = function(use)
 
   -- COLORSCHEMES:
   use {
-    'christianchiarulli/nvcode-color-schemes.vim', 
+    'christianchiarulli/nvcode-color-schemes.vim',
     'glepnir/zephyr-nvim',
     'th3whit3wolf/onebuddy',
     'th3whit3wolf/one-nvim',
@@ -59,16 +59,16 @@ local on_startup = function(use)
     'yagua/nebulous.nvim',
     'shatur/neovim-ayu',
     'elianiva/icy.nvim',
-    {
-    'adisen99/codeschool.nvim',
-      requires = 'rktjmp/lush.nvim',
-      config = function() require('lush')(require('codeschool').setup()) end,
-    },
     'sainnhe/edge',
     'sainnhe/sonokai',
     'sainnhe/everforest',
     'sainnhe/gruvbox-material',
     'projekt0n/github-nvim-theme',
+    {
+    'adisen99/codeschool.nvim',
+      requires = 'rktjmp/lush.nvim',
+      config = function() require('lush')(require('codeschool').setup()) end,
+    },
     -- config = function() require('github-theme').setup {
     --   theme_style = "dimmed",
     -- }
