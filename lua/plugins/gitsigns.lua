@@ -6,11 +6,11 @@ local on_attach = function()
     vim.keymap.set('n', lhs, rhs, { noremap = true })
   end
 
-  set_keymap(',gs', gitsigns.stage_hunk)
-  set_keymap(',gu', gitsigns.undo_stage_hunk)
+  set_keymap('<leader>gs', gitsigns.stage_hunk)
+  set_keymap('<leader>gu', gitsigns.undo_stage_hunk)
   set_keymap('[g', gitsigns.prev_hunk)
   set_keymap(']g', gitsigns.next_hunk)
-  set_keymap(',g', gitsigns.preview_hunk)
+  set_keymap('<leader>g', gitsigns.preview_hunk)
 end
 
 gitsigns.setup({
