@@ -380,7 +380,8 @@ local on_startup = function(use)
   -- TODO:CONFIGURE:
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', }
+    requires = { 'kyazdani42/nvim-web-devicons', },
+    config = function() require('plugins.lualine') end,
   }
 
   use { "xiyaowong/nvim-cursorword" }
