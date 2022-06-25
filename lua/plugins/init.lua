@@ -1,6 +1,6 @@
 -- PLUGIN SETTINGS
 -- Configure plugins, plugin specific functions and autocommands are to be
--- written in the corresponding files (makes debuging and trying out plugins easier)
+-- written in the corresponding files (makes debugging and trying out plugins easier)
 
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
