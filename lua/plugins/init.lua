@@ -92,11 +92,6 @@ local on_startup = function(use)
   --   }
   -- }
 
-  use { "p00f/clangd_extensions.nvim",
-    config = function()
-      require("clangd_extensions").setup()
-    end
-  }
 
   -- REPL integration
   -- use {
@@ -108,46 +103,23 @@ local on_startup = function(use)
   -- TREESITTER: integration
   use {
     'nvim-treesitter/nvim-treesitter',
-    config = function() require('plugins.treesitter') end,
     run = ':TSUpdate',
-    requires = {
-      'joosepalviste/nvim-ts-context-commentstring',
-      'p00f/nvim-ts-rainbow',
-      'andymass/vim-matchup',
-      'nvim-treesitter/playground',
-    }
-  }
-  use { "andymass/vim-matchup", }
-
-  -- TODO:CONFIGURE:
-  use { "lewis6991/spellsitter.nvim",
-    config = function()
-      require("spellsitter").setup()
-    end
-  }
-
-  -- TODO:CONFIGURE:
-  use { "ziontee113/syntax-tree-surfer",
-    config = function()
-      require("syntax-tree-surfer").setup()
-    end
-  }
-
-  use {
-    'nvim-treesitter/nvim-treesitter-context',
-    requires = 'nvim-treesitter',
-    config = function() require('treesitter-context').setup {} end
-  }
-
-  use {
-    'folke/twilight.nvim',
-    requires = 'nvim-treesitter',
-    config = function() require('twilight').setup {} end
-  }
-
-  -- TODO:CONFIGURE:
-  use { "mizlan/iswap.nvim",
-    requires = 'nvim-treesitter',
+    requires =
+      {
+        {'nvim-treesitter/nvim-treesitter-context', config = function() require('treesitter-context').setup {} end },
+        'joosepalviste/nvim-ts-context-commentstring',
+        'p00f/nvim-ts-rainbow',
+        'andymass/vim-matchup',
+        'nvim-treesitter/playground',
+    -- TODO:CONFIGURE:
+        { "lewis6991/spellsitter.nvim", config = function() require("spellsitter").setup() end },
+    -- TODO:CONFIGURE:
+        { "ziontee113/syntax-tree-surfer", config = function() require("syntax-tree-surfer").setup() end },
+    -- TODO: CONFIGURE:
+        { 'folke/twilight.nvim', requires = 'nvim-treesitter', config = function() require('twilight').setup {} end }
+    -- TODO:CONFIGURE: use { "mizlan/iswap.nvim", }
+    },
+    config = function() require('plugins.treesitter') end,
   }
 
   -- TODO:CONFIGURE:
@@ -160,50 +132,26 @@ local on_startup = function(use)
   -- LSP: integration
   -- TODO:CONFIGURE:
   use {
-    'neovim/nvim-lspconfig',
-    config = function() require('plugins.lspconfig') end,
-  }
-
-  -- TODO:CONFIGURE:
-  use {
     "junnplus/nvim-lsp-setup",
     requires = {
-      'neovim/nvim-lspconfig',
       'williamboman/nvim-lsp-installer',
+      'neovim/nvim-lspconfig',
+      -- TODO:CONFIGURE: config = function() require('plugins.lspconfig') end,
+      {
+        "simrat39/rust-tools.nvim",
+        ft = { "rust", },
+        config = function() require("rust-tools").setup({}) end,
+      },
+      "folke/lua-dev.nvim",
+      -- Navic: show current code context in statusbar
+      -- TODO:CONFIGURE:
+      {"SmiteshP/nvim-navic", config = function() require("nvim-navic").setup {} end,},
+      -- TODO:CONFIGURE:
+      {"amrbashir/nvim-docs-view", config = function() require("docs-view").setup {} end},
+      -- TODO: Look at clangd extensions
+      { "p00f/clangd_extensions.nvim", config = function() require("clangd_extensions").setup() end }
     },
-    config = function() require('plugins.lsp-setup') end,
-  }
-
-  -- TODO:CONFIGURE:
-  use {
-    "amrbashir/nvim-docs-view",
-    config = function()
-      require("docs-view").setup {}
-    end
-  }
-
-  -- Navic: show current code context in statusbar
-  -- TODO:CONFIGURE:
-  use {
-    "SmiteshP/nvim-navic",
-    requires = "nvim-lspconfig",
-    config = function()
-      require("nvim-navic").setup {}
-    end
-  }
-
-  -- LSP setup for neovim lua development
-  -- TODO: Set up autocommands to load automatically when working within vim runtime
-  use { "folke/lua-dev.nvim",
-    -- config = function()
-    --    require("lua-dev").setup() end
-  }
-
-  -- TODO:CONFIGURE:
-  use {
-    "simrat39/rust-tools.nvim",
-    ft = { "rust", },
-    config = function() require("rust-tools").setup({}) end,
+    config = function() require('plugins.lsp') end,
   }
 
   -- Integrates linters/diagnostics/formatting into LSP
