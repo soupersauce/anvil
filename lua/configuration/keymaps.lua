@@ -73,55 +73,27 @@ set_keymap('v', '>', '>gv', { noremap = true })
 
 -- -- For knap
 -- F5 processes the document once, and refreshes the view
-set_keymap('i', '<F5>', function() require("knap").process_once() end)
-set_keymap('v', '<F5>', function() require("knap").process_once() end)
-set_keymap('n', '<F5>', function() require("knap").process_once() end)
-
+set_keymap({'n','v','i'}, '<F5>', function() require("knap").process_once() end)
 -- F6 closes the viewer application, and allows settings to be reset
-set_keymap('i', '<F6>', function() require("knap").close_viewer() end)
-set_keymap('v', '<F6>', function() require("knap").close_viewer() end)
-set_keymap('n', '<F6>', function() require("knap").close_viewer() end)
-
+set_keymap({'n','v','i'}, '<F6>', function() require("knap").close_viewer() end)
 -- F7 toggles the auto-processing on and off
-set_keymap('i', '<F7>', function() require("knap").toggle_autopreviewing() end)
-set_keymap('v', '<F7>', function() require("knap").toggle_autopreviewing() end)
-set_keymap('n', '<F7>', function() require("knap").toggle_autopreviewing() end)
-
+set_keymap({'n','v','i'}, '<F7>', function() require("knap").toggle_autopreviewing() end)
 -- F8 invokes a SyncTeX forward search, or similar, where appropriate
-set_keymap('i', '<F8>', function() require("knap").forward_jump() end)
-set_keymap('v', '<F8>', function() require("knap").forward_jump() end)
-set_keymap('n', '<F8>', function() require("knap").forward_jump() end)
+set_keymap({'n','v','i'}, '<F8>', function() require("knap").forward_jump() end)
 
 -- -- For fzf-lua
-set_keymap('v', '<leader>zb', function() require("fzf-lua").buffers() end)
-set_keymap('n', '<leader>zb', function() require("fzf-lua").buffers() end)
-
-set_keymap('v', '<leader>zf', function() require("fzf-lua").git_files() end)
-set_keymap('n', '<leader>zf', function() require("fzf-lua").git_files() end)
-
-set_keymap('v', '<leader>zg', function() require("fzf-lua").live_grep() end)
-set_keymap('n', '<leader>zg', function() require("fzf-lua").live_grep() end)
-
-set_keymap('v', '<leader>zt', function() require("fzf-lua").tags() end)
-set_keymap('n', '<leader>zt', function() require("fzf-lua").tags() end)
-
-set_keymap('v', '<leader>zc', function() require("fzf-lua").git_commits() end)
-set_keymap('n', '<leader>zc', function() require("fzf-lua").git_commits() end)
-
-set_keymap('v', '<leader>zm', function() require("fzf-lua").man_pages() end)
-set_keymap('n', '<leader>zm', function() require("fzf-lua").man_pages() end)
-
-set_keymap('v', '<leader>zr', function() require("fzf-lua").lsp_references() end)
-set_keymap('n', '<leader>zr', function() require("fzf-lua").lsp_references() end)
-
-set_keymap('v', '<leader>zs', function() require("fzf-lua").lsp_definitions() end)
-set_keymap('n', '<leader>zs', function() require("fzf-lua").lsp_definitions() end)
-
-set_keymap('v', '<leader>zh', function() require("fzf-lua").help_tags() end)
-set_keymap('n', '<leader>zh', function() require("fzf-lua").help_tags() end)
-
-set_keymap('v', '<leader>zv', function() require("fzf-lua").command_history() end)
-set_keymap('n', '<leader>zv', function() require("fzf-lua").command_history() end)
+set_keymap({'v', 'n' }, '<leader>zb', function() require("fzf-lua").buffers() end)
+set_keymap({'v', 'n' }, '<leader>zf', function() require("fzf-lua").git_files() end)
+set_keymap({'v', 'n' }, '<leader>zg', function() require("fzf-lua").live_grep() end)
+set_keymap({'v', 'n' }, '<leader>zt', function() require("fzf-lua").tags() end)
+set_keymap({'v', 'n' }, '<leader>zc', function() require("fzf-lua").git_commits() end)
+set_keymap({'v', 'n' }, '<leader>zm', function() require("fzf-lua").man_pages() end)
+set_keymap({'v', 'n' }, '<leader>zr', function() require("fzf-lua").lsp_references() end)
+set_keymap({'v', 'n' }, '<leader>zs', function() require("fzf-lua").lsp_definitions() end)
+set_keymap({'v', 'n' }, '<leader>zh', function() require("fzf-lua").help_tags() end)
+set_keymap({'v', 'n' }, '<leader>zv', function() require("fzf-lua").command_history() end)
 
 -- For nvim-tree
 set_keymap('n', '<C-n>', '<cmd>NvimTreeToggle<CR>', { noremap = true })
+
+set_keymap('n', '<leader>ws', '<cmd>w<CR><cmd>source %<CR>', { noremap = true })
