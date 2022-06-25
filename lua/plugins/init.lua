@@ -161,20 +161,8 @@ local on_startup = function(use)
     config = function() require('plugins.null-ls') end,
   }
 
-  -- use { "mfussenegger/nvim-lint",
-  --   module = 'lint',
-  --   setup = function() require('lint').linters_by_ft = {
-  --       yaml = {'yamllint'},
-  --       ansible = {'ansible_lint'},
-  --       html = {'tidy'},
-  --       lua = {'luacheck'},
-  --       python = {'pylint'},
-  --   }
-  --end
-  -- }
-
   -- DEBUGGING: Configuration
-  -- DAP
+  -- DAP:
   -- TODO:CONFIGURE:
   -- TODO:Figure out how to install shit
   use {
