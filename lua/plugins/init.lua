@@ -30,7 +30,10 @@ end
 local on_startup = function(use)
   -- UTILS:
   -- loads stuff fast
-  use { "lewis6991/impatient.nvim" }
+  use {
+    "lewis6991/impatient.nvim",
+    config = function() require('impatient') end,
+  }
   -- Skyrim script extender
   use { "nvim-lua/plenary.nvim" }
   -- Packer manages itself
