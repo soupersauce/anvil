@@ -125,7 +125,7 @@ local on_startup = function(use)
   -- TODO:CONFIGURE:
   use {
     "nvim-orgmode/orgmode",
-    require = { 'cmp', 'treesitter' },
+    wants = { 'cmp', 'treesitter' },
     config = function() require('orgmode').setup {} end
   }
 
@@ -136,29 +136,17 @@ local on_startup = function(use)
     requires = {
       'williamboman/nvim-lsp-installer',
       'neovim/nvim-lspconfig',
-      -- TODO:CONFIGURE: config = function() require('plugins.lspconfig') end,
+      'folke/lua-dev.nvim',
+      'SmiteshP/nvim-navic',
+      'amrbashir/nvim-docs-view',
+      'p00f/clangd_extensions.nvim',
+      'jose-elias-alvarez/null-ls.nvim',
       {
         "simrat39/rust-tools.nvim",
         ft = { "rust", },
-        config = function() require("rust-tools").setup({}) end,
       },
-      "folke/lua-dev.nvim",
-      -- Navic: show current code context in statusbar
-      -- TODO:CONFIGURE:
-      {"SmiteshP/nvim-navic", config = function() require("nvim-navic").setup {} end,},
-      -- TODO:CONFIGURE:
-      {"amrbashir/nvim-docs-view", config = function() require("docs-view").setup {} end},
-      -- TODO: Look at clangd extensions
-      { "p00f/clangd_extensions.nvim", config = function() require("clangd_extensions").setup() end }
     },
     config = function() require('plugins.lsp') end,
-  }
-
-  -- Integrates linters/diagnostics/formatting into LSP
-  -- TODO:CONFIGURE:
-  use {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function() require('plugins.null-ls') end,
   }
 
   -- DEBUGGING: Configuration
