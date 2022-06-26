@@ -266,7 +266,7 @@ local on_startup = function(use)
     "nkakouros-original/numbers.nvim",
     config = function() require('numbers').setup {
         excluded_filetypes = {
-          'alpha', 'NvimTree', 'help',
+          'alpha', 'NvimTree', 'help', 'undotree',
         }
       }
     end
@@ -291,10 +291,9 @@ local on_startup = function(use)
   -- Visualise and control undo history in tree form.
   use {
     'jiaoshijie/undotree',
-    cmd = { 'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow' },
+    --TODO: Find better way to lazy load cmd = { 'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow' },
     config = function()
-      vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true })
-    end
+      vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true }) end,
   }
 
   use {
