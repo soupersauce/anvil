@@ -3,12 +3,15 @@ local lspsetup_ok, lsp_setup = pcall(require, 'nvim-lsp-setup')
 if not lspsetup_ok then
   return
 end
-require("nvim-navic").setup {}
+local navic_ok, navic = pcall(require, "nvim-navic")
 require("clangd_extensions")
 
 -- TODO: We may need to do this to modify nvim-lsp-setup functions
 -- to use formatting fuctions that aren't deprecated.
 -- local lspsetup_utils = require('nvim-lsp-setup.utils')
+if navic_ok then
+navic.setup {}
+end
 
 lsp_setup.setup({
   -- nvim-lsp-installer
