@@ -81,16 +81,16 @@ local on_startup = function(use)
     config = function() require('plugins.gitsigns') end
   }
   --  TODO: Explore and see if we will use
-  -- use {
-  --   'TimUntersberger/neogit',
-  --   config = function() require('plugins.neogit') end,
-  --   cmd = 'Neogit',
-  --   requires = {
-  --     'sindrets/diffview.nvim',
-  --     config = function() require('plugins.diffview') end,
-  --     requires = 'nvim-lua/plenary.nvim'
-  --   }
-  -- }
+  use {
+    'TimUntersberger/neogit',
+    config = function() require('plugins.neogit') end,
+    cmd = 'Neogit',
+    requires = {
+      'sindrets/diffview.nvim',
+      config = function() require('plugins.diffview') end,
+      requires = 'nvim-lua/plenary.nvim'
+    }
+  }
 
 
   -- REPL integration
