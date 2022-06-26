@@ -10,7 +10,7 @@ require("clangd_extensions")
 -- to use formatting fuctions that aren't deprecated.
 -- local lspsetup_utils = require('nvim-lsp-setup.utils')
 if navic_ok then
-navic.setup {}
+  navic.setup {}
 end
 
 lsp_setup.setup({
@@ -42,30 +42,85 @@ lsp_setup.setup({
   -- gr = 'lua require"telescope.builtin".lsp_references()',
   mappings = {},
   -- Global on_attach
-  on_attach = function(client, bufnr)
-    navic.attach(client, bufnr)
-  end,
+  -- on_attach = function(client, bufnr)
+  --   navic.attach(client, bufnr)
+  -- end,
   -- Global capabilities
   capabilities = vim.lsp.protocol.make_client_capabilities(),
   -- Configuration of LSP servers  -- capabilities = vim.lsp.protocol.make_client_capabilities(),
   servers = {
-  -- AWK
-    awk_ls = {},
-  -- Ansible
-    ansiblels = {},
-  -- Bash
-    bashls = {},
-  -- C/C++
-    clangd = require('nvim-lsp-setup.clangd_extensions').setup({}),
-  -- cmake
-    cmake = {},
-  -- css
-    cssls = {},
-    diagnosticls = {},
-    stylelint_lsp = {},
-  -- Docker
-    dockerls = {},
-  -- Golang
+    -- AWK
+    awk_ls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- Ansible
+    ansiblels = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- Bash
+    bashls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- C/C++
+    clangd = {
+      require('nvim-lsp-setup.clangd_extensions').setup({}),
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- cmake
+    cmake = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- css
+    cssls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    diagnosticls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    stylelint_lsp = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- Docker
+    dockerls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- Golang
     gopls = {
       settings = {
         golsp = {
@@ -76,37 +131,100 @@ lsp_setup.setup({
             gc_details = true,
           },
         }
-      }
+      },
+      on_attach = function(client, bufnr)
+        navic.attach(client, bufnr)
+      end,
     },
-  -- HTML
-    html = {},
-  -- JSON
-    jsonls = {},
-  -- Latex
-    ltex = {},
-    texlab = {},
-  -- lua
+    -- HTML
+    html = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- JSON
+    jsonls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- Latex
+    ltex = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+        end,
+      },
+    },
+    texlab = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- lua
     sumneko_lua = require('lua-dev').setup({
       lspconfig = {
-        on_attach = function(client)
+        on_attach = function(client, bufnr)
           -- Avoid LSP formatting conflicts.
           -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflict
           require('nvim-lsp-setup.utils').disable_formatting(client)
+          navic.attach(client, bufnr)
         end,
       }
     }),
-  -- Markdown
-    marksman = {},
-  -- Powershell
-    powershell_es = {},
-  -- puppet
-    puppet = {},
-  -- prose
-    grammarly = {},
-  -- python
-    pylsp = {},
-    jedi_language_server = {},
-  -- Rust
+    -- Markdown
+    marksman = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- Powershell
+    powershell_es = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- puppet
+    puppet = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- prose
+    grammarly = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- python
+    pylsp = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    jedi_language_server = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- Rust
     rust_analyzer = {
       settings = {
         ['rust-analyzer'] = {
@@ -118,23 +236,80 @@ lsp_setup.setup({
           },
         },
       },
+      on_attach = function(client, bufnr)
+        navic.attach(client, bufnr)
+      end,
     },
-    slint_lsp = {},
-  -- salt
-    salt_ls = {},
-  -- SQL
-    sqls = {},
-  -- TOML
-    taplo = {},
-  -- terrafrom
-    terraformls = {},
-    tflint = {},
-  -- vimL
-    vimls = {},
-  -- XML
-    lemminx = {},
-  -- YAML
-    yamlls = {},
+    slint_lsp = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- salt
+    salt_ls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- SQL
+    sqls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- TOML
+    taplo = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- terrafrom
+    terraformls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    tflint = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- vimL
+    vimls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- XML
+    lemminx = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
+    -- YAML
+    yamlls = {
+      lspconfig = {
+        on_attach = function(client, bufnr)
+          navic.attach(client, bufnr)
+        end,
+      },
+    },
   }
 })
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
