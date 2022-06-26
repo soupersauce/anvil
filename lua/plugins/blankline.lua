@@ -17,6 +17,7 @@ local options = {
     "TelescopePrompt",
     "TelescopeResults",
     "lsp-installer",
+    "undotree",
     "",
   },
   buftype_exclude = { "terminal" },
