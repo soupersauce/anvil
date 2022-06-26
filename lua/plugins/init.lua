@@ -7,7 +7,7 @@ local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local run_sync = false
 
 -- Install packer for package management, if missing
-if (fn.empty(fn.glob(install_path, _, _)) > 0) then
+if (fn.empty(fn.glob(install_path)) > 0) then
   run_sync = fn.system({
     'git',
     'clone',
@@ -80,7 +80,7 @@ local on_startup = function(use)
     'lewis6991/gitsigns.nvim',
     config = function() require('plugins.gitsigns') end
   }
-  --  TODO: Explore and see if we will use
+
   use {
     'TimUntersberger/neogit',
     config = function() require('plugins.neogit') end,
@@ -91,7 +91,6 @@ local on_startup = function(use)
       requires = 'nvim-lua/plenary.nvim'
     }
   }
-
 
   -- REPL integration
   -- use {
@@ -237,12 +236,6 @@ local on_startup = function(use)
 
   -- use { "luukvbaal/nnn.nvim" }
 
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', },
-    config = function() require('plugins.lualine') end,
-  }
-
   -- TODO:CONFIGURE:
   use { 'ibhagwan/fzf-lua',
     requires = { 'kyazdani42/nvim-web-devicons' }
@@ -332,6 +325,12 @@ local on_startup = function(use)
   use {
     "norcalli/nvim-colorizer.lua",
     config = function() require('colorizer').setup() end,
+  }
+
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', },
+    config = function() require('plugins.lualine') end,
   }
 
   -- Keymap hints
