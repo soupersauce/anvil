@@ -17,7 +17,7 @@ wk.setup({
   },
 
   layout = {
-    spacing = 6, -- spacing between columns
+    spacing = 1, -- spacing between columns
   },
 
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
