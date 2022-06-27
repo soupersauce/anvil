@@ -121,8 +121,21 @@ local on_startup = function(use)
   -- TODO:CONFIGURE:
   use {
     "nvim-orgmode/orgmode",
+    requires = {
+      {
+        "ranjithshegde/orgWiki.nvim",
+        config = function() require('orgWiki').setup {
+          wiki_path = { '~/Documents/org/wiki' },
+          diary_path = { '~/Documents/org/diary' },
+        }
+        end,
+      }
+    },
     wants = { 'cmp', 'treesitter' },
-    config = function() require('orgmode').setup {} end
+    config = function() require('orgmode').setup {
+      org_agenda_files = {'~/Documents/org/*'},
+      org_default_notes_file = {'~/Documents/org/refile.org'},
+    } end
   }
 
   -- LSP: integration
@@ -279,7 +292,9 @@ local on_startup = function(use)
   -- UI:
   -- TODO:CONFIGURE:
   use { "lukas-reineke/headlines.nvim",
-    config = function() require('headlines').setup() end
+    config = function() require('headlines').setup {
+      org = {},
+    } end
   }
 
   use { "akinsho/org-bullets.nvim",
