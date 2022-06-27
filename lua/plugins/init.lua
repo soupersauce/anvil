@@ -140,6 +140,7 @@ local on_startup = function(use)
       'amrbashir/nvim-docs-view',
       'p00f/clangd_extensions.nvim',
       'jose-elias-alvarez/null-ls.nvim',
+      'ray-x/lsp_signature.nvim',
       {
         "simrat39/rust-tools.nvim",
         ft = { "rust", },
