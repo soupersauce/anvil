@@ -38,7 +38,6 @@ local on_startup = function(use)
   use { "nvim-lua/plenary.nvim" }
   -- Packer manages itself
   use { 'wbthomason/packer.nvim' }
-  -- TODO:CONFIGURE:
   -- Ask for the right file to open when file matching name is not found
   use('EinfachToll/DidYouMean')
 
