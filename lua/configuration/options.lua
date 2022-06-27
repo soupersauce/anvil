@@ -56,7 +56,7 @@ local defined_options = {
   wildoptions = "pum",
 
   -- Auto select the first entry but don"t insert
-  completeopt = "noinsert,menu,menuone,preview,noselect",
+  completeopt = "noinsert,menuone,preview",
 
   -- Stop popup menu messages
   shortmess = "filnxtToOFc",
@@ -89,13 +89,12 @@ local defined_options = {
   updatetime = 1000,
 
   -- Settings for better diffs
-  diffopt = "filler,vertical,hiddenoff,foldcolumn:0,algorithm:patience",
-
+  diffopt        = 'filler,vertical,hiddenoff,foldcolumn:0,algorithm:patience',
   -- Show whitespace characters
   list = true,
 
   -- Only show tabs and trailing spaces
-  listchars = "tab:▶-,trail:●,extends:◣,precedes:◢",
+  listchars      = 'tab:▶-,trail:●,extends:◣,precedes:◢',
 
   -- Default search is not case sensitive
   ignorecase = true,
@@ -133,7 +132,7 @@ local defined_options = {
 } --defining close for options
 
 -- Enable true colors if supported
-if (fn.has("termguicolors")) then
+if (fn.has('termguicolors')) then
   defined_options.termguicolors = true
 end
 
@@ -163,9 +162,12 @@ for option, value in pairs(defined_options) do
 end
 
 -- Enable filetype detection and use plugins and indentation
-vim.cmd("filetype plugin indent on")
+vim.cmd('filetype plugin indent on')
 
 -- Enable highlighting embedded lua code
-vim.g.vimsyn_embed      = "l"
+vim.g.vimsyn_embed      = 'l'
 -- Use Python 3 for plugins
-vim.g.python3_host_prog = "python3"
+vim.g.python3_host_prog = 'python3'
+
+-- Set Space as the leader key
+vim.g.mapleader = ' '

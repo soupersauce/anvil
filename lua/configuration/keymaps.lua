@@ -57,6 +57,15 @@ set_keymap('n', 'k', 'gk', { noremap = true })
 set_keymap('n', 'J', 'mzJ`z', { noremap = true })
 
 -- Close popup menu and compensate cursor shifting one place left
+-- Use Shift + J/K to moves selected lines up/down in visual mode
+set_keymap('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true })
+set_keymap('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true })
+
+-- Keep current search result centered on the screen
+set_keymap('n', 'n', 'nzz', { noremap = true })
+set_keymap('n', 'N', 'Nzz', { noremap = true })
+
+-- Keep current cursor position while entering and exiting insert mode
 set_keymap('i', '<Esc>', function()
   return vim.fn.pumvisible() == 1 and "<Esc>i<Right>" or "<Right><Esc>"
 end, { noremap = true, expr = true })
