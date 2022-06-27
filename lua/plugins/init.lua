@@ -200,6 +200,7 @@ local on_startup = function(use)
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-cmdline',
+      'petertriho/cmp-git',
       'andersevenrud/cmp-tmux',
       'rcarriga/cmp-dap',
       'quangnguyen30192/cmp-nvim-tags',
@@ -210,6 +211,8 @@ local on_startup = function(use)
       'hrsh7th/cmp-nvim-lsp-signature-help',
       'windwp/nvim-autopairs',
       'delphinus/cmp-ctags',
+      'onsails/lspkind.nvim',
+      'tamago324/cmp-zsh',
     },
   }
 

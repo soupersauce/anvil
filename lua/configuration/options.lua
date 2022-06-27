@@ -40,6 +40,7 @@ local defined_options = {
   mouse = "a",
 
   -- Use English dictionary
+  spell = true,
   spelllang = "en_us",
 
   -- Hide buffers with unsaved changes without being prompted

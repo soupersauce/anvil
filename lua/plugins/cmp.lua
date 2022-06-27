@@ -9,8 +9,8 @@ if not snip_status_ok then
   return
 end
 
-local pairs_status_ok, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
-if not pairs_status_ok then
+local pairs_ok, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
+if not pairs_ok then
   return
 end
 -- local lspkind = require('lspkind')
@@ -50,7 +50,7 @@ local kind_icons = {
   TypeParameter = "",
 },
 
-    require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup {
   -- cmp.event:on(
@@ -67,22 +67,13 @@ cmp.setup {
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      -- mode = 'symbol_text',
-      vim_item.menu = ({
-        buffer = "[Buffer]",
-        nvim_lsp = "[LSP]",
-        luasnip = "[Snip]",
-        nvim_lua = "[Lua]",
-        latex_symbols = "[LaTeX]",
-        path = "[Path]",
-        treesitter = "[TS]",
-        cmdline = "[:<cmd>]",
-        orgmode = "[Org]",
-      })[entry.source.name]
-      return vim_item
+      local kind = require('lspkind').cmp_format({ mode = "symbol_text", maxwidth = 50})(entry, vim_item)
+      local strings = vim.split(kind.kind, "%s", { trimempty = true })
+      kind.kind = " " .. strings[1] .. " "
+      kind.menu = "   [" .. strings[2] .. "]   "
+
+      return kind
     end,
-    maxwidth = 50,
   },
 
   cmp.setup.cmdline('/', {
@@ -98,6 +89,9 @@ cmp.setup {
     autocomplete = {
       types.cmp.TriggerEvent.TextChanged,
     },
+    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+    col_offset = -3,
+    side_padding = 0,
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-d>']     = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
@@ -138,12 +132,14 @@ cmp.setup {
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
+    { name = 'cmp-zsh' },
     { name = 'orgmode' },
     { name = 'luasnip' },
     { name = 'treesitter' },
     { name = 'cmp_autopairs' },
     { name = 'buffer', keyword_length = 5 },
     { name = 'cmdline' },
+    { name = 'cmp_git' },
     { name = 'path' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'tmux' },
@@ -168,8 +164,26 @@ cmp.setup {
       { name = 'cmdline' }
     })
   }),
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  }
+
+  cmp.setup.filetype('gitcommit', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }
+    }, {
+      { name = 'buffer' }
+    })
+  }),
+  -- window = {
+  --   completion = cmp.config.window.bordered(),
+  --   documentation = cmp.config.window.bordered(),
+  -- }
 }
+
+require("cmp_dictionary").setup({
+  dic = {
+    ["*"] = { "/usr/share/dict/words" },
+    spelllang = {
+      en = "/usr/share/dict/american-english-large",
+    },
+  }
+})
