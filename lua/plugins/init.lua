@@ -105,11 +105,11 @@ local on_startup = function(use)
     run = ':TSUpdate',
     requires =
       {
-        {'nvim-treesitter/nvim-treesitter-context', config = function() require('treesitter-context').setup {} end },
         'joosepalviste/nvim-ts-context-commentstring',
         'p00f/nvim-ts-rainbow',
         'andymass/vim-matchup',
         'nvim-treesitter/playground',
+        {'nvim-treesitter/nvim-treesitter-context', config = function() require('treesitter-context').setup {} end },
     -- TODO:CONFIGURE:
         { "lewis6991/spellsitter.nvim", config = function() require("spellsitter").setup() end },
     -- TODO:CONFIGURE:
@@ -182,8 +182,6 @@ local on_startup = function(use)
     requires = 'rafamadriz/friendly-snippets',
     config = function() require('plugins.luasnip') end,
   }
-
-  use { 'rafamadriz/friendly-snippets', }
 
   use {
     "windwp/nvim-autopairs",
