@@ -64,7 +64,7 @@ local on_startup = function(use)
     'sainnhe/gruvbox-material',
     'projekt0n/github-nvim-theme',
     {
-    'adisen99/codeschool.nvim',
+      'adisen99/codeschool.nvim',
       requires = 'rktjmp/lush.nvim',
       config = function() require('lush')(require('codeschool').setup()) end,
     },
@@ -103,19 +103,17 @@ local on_startup = function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     requires =
-      {
-        'joosepalviste/nvim-ts-context-commentstring',
-        'p00f/nvim-ts-rainbow',
-        'andymass/vim-matchup',
-        'nvim-treesitter/playground',
-        {'nvim-treesitter/nvim-treesitter-context', config = function() require('treesitter-context').setup {} end },
-    -- TODO:CONFIGURE:
-        { "lewis6991/spellsitter.nvim", config = function() require("spellsitter").setup() end },
-    -- TODO:CONFIGURE:
-        { "ziontee113/syntax-tree-surfer", config = function() require("syntax-tree-surfer").setup() end },
-    -- TODO: CONFIGURE:
-        { 'folke/twilight.nvim', requires = 'nvim-treesitter', config = function() require('twilight').setup {} end }
-    -- TODO:CONFIGURE: use { "mizlan/iswap.nvim", }
+    {
+      'joosepalviste/nvim-ts-context-commentstring',
+      'p00f/nvim-ts-rainbow',
+      'andymass/vim-matchup',
+      'nvim-treesitter/playground',
+      'nvim-treesitter/nvim-treesitter-context',
+      'lewis6991/spellsitter.nvim',
+      -- TODO:CONFIGURE:
+      'ziontee113/syntax-tree-surfer',
+      'folke/twilight.nvim',
+      'mizlan/iswap.nvim',
     },
     config = function() require('plugins.treesitter') end,
   }
@@ -155,9 +153,10 @@ local on_startup = function(use)
   use {
     'mfussenegger/nvim-dap',
     requires = {
-      { 'theHamsta/nvim-dap-virtual-text' },
-      { 'rcarriga/nvim-dap-ui' },
-      { 'leoluz/nvim-dap-go', config = function() require('dap-go').setup() end },
+      'theHamsta/nvim-dap-virtual-text',
+      'rcarriga/nvim-dap-ui',
+      'leoluz/nvim-dap-go',
+      'mfussenegger/nvim-dap-python',
       -- { 'pocco81/dap-buddy.nvim', config = function() require('plugins.dap') end }
     },
   }
@@ -165,12 +164,10 @@ local on_startup = function(use)
   -- ICONS:
   use { "kyazdani42/nvim-web-devicons" }
 
-  -- TODO:CONFIGURE:
   use { 'yamatsum/nvim-nonicons',
     requires = { 'kyazdani42/nvim-web-devicons' }
   }
 
-  -- TODO:CONFIGURE:
   use { "onsails/lspkind.nvim" }
 
   -- COMPLETION:
@@ -294,7 +291,8 @@ local on_startup = function(use)
     'jiaoshijie/undotree',
     --TODO: Find better way to lazy load cmd = { 'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow' },
     config = function()
-      vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true }) end,
+      vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true })
+    end,
   }
 
   use {
