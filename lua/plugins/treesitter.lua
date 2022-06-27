@@ -6,7 +6,7 @@ config.setup({
   ensure_installed = {
     'css', 'dockerfile', 'html', 'http', 'javascript',
     'json', 'lua', 'python', 'regex', 'ruby', 'rust',
-    'yaml', 'markdown', 'bash', 'c', 'cmake', 'comment',
+    'yaml', 'markdown', 'markdown_inline', 'bash', 'c', 'cmake', 'comment',
     'cpp', 'go', 'jsdoc', 'json5', 'jsonc', 'llvm', 'make', 'ninja',
     'todotxt', 'toml', 'org',
   },
