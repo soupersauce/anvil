@@ -50,7 +50,7 @@ local kind_icons = {
   TypeParameter = "",
 },
 
-require("luasnip.loaders.from_vscode").lazy_load()
+    require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup {
   -- cmp.event:on(
@@ -67,7 +67,7 @@ cmp.setup {
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      local kind = require('lspkind').cmp_format({ mode = "symbol_text", maxwidth = 50})(entry, vim_item)
+      local kind = require('lspkind').cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
       local strings = vim.split(kind.kind, "%s", { trimempty = true })
       kind.kind = " " .. strings[1] .. " "
       kind.menu = "   [" .. strings[2] .. "]   "
@@ -101,7 +101,10 @@ cmp.setup {
     ['<C-k>']     = cmp.mapping(cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
       { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<CR>']      = cmp.mapping.confirm({ select = true }),
+    ['<CR>']      = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    }),
     ['<C-e']      = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
