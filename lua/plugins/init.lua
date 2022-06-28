@@ -121,21 +121,21 @@ local on_startup = function(use)
   -- TODO:CONFIGURE:
   use {
     "nvim-orgmode/orgmode",
-    requires = {
-      {
-        "ranjithshegde/orgWiki.nvim",
-        config = function() require('orgWiki').setup {
-          wiki_path = { '~/Documents/org/wiki' },
-          diary_path = { '~/Documents/org/diary' },
-        }
-        end,
-      }
-    },
     wants = { 'cmp', 'treesitter' },
     config = function() require('orgmode').setup {
-      org_agenda_files = {'~/Documents/org/*'},
-      org_default_notes_file = {'~/Documents/org/refile.org'},
+      org_agenda_files = '~/Documents/org/*',
+      org_default_notes_file = '~/Documents/org/refile.org',
     } end
+  }
+
+
+  use {
+    "ranjithshegde/orgWiki.nvim",
+    config = function() require('orgWiki').setup {
+      wiki_path = { "~/Documents/org/wiki/" },
+      diary_path = "~/Documents/org/diary/",
+    } end,
+    after = 'orgmode',
   }
 
   -- LSP: integration
