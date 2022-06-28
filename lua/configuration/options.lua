@@ -77,7 +77,7 @@ local defined_options = {
   showmode = false,
 
   -- Show sign column inside the number column
-  signcolumn = "yes",
+  signcolumn = "yes:2",
 
   -- Minimum number of lines to keep before scrolling
   scrolloff = 6,
