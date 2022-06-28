@@ -283,7 +283,6 @@ local on_startup = function(use)
     end
   }
 
-  -- TODO:CONFIGURE:
   use { "dhruvasagar/vim-table-mode" }
 
   -- TODO:CONFIGURE:
@@ -304,8 +303,8 @@ local on_startup = function(use)
   -- Visualise and control undo history in tree form.
   use {
     'jiaoshijie/undotree',
-    --TODO: Find better way to lazy load cmd = { 'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow' },
-    config = function()
+    cmd = { 'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow' },
+    setup = function()
       vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true })
     end,
   }
@@ -317,7 +316,6 @@ local on_startup = function(use)
 
   use { "xiyaowong/nvim-cursorword" }
 
-  -- TODO:CONFIGURE:
   use { "akinsho/bufferline.nvim",
     tag = "v2.*",
     config = function()
