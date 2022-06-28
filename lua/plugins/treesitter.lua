@@ -1,6 +1,10 @@
 -- nvim-treesitter configuration
 local config = require('nvim-treesitter.configs')
 require('orgmode').setup_ts_grammar()
+require('treesitter-context').setup {}
+require("spellsitter").setup()
+require("syntax-tree-surfer").setup()
+require('twilight').setup {}
 
 config.setup({
   ensure_installed = {
