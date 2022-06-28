@@ -277,7 +277,7 @@ local on_startup = function(use)
     "nkakouros-original/numbers.nvim",
     config = function() require('numbers').setup {
         excluded_filetypes = {
-          'alpha', 'NvimTree', 'help', 'undotree',
+          'alpha', 'NvimTree', 'help', 'undotree', 'NeogitStatus', 'NeogitCommitMessage', 'NeogitPopup',
         }
       }
     end
