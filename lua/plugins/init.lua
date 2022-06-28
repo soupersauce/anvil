@@ -245,6 +245,13 @@ local on_startup = function(use)
   -- TODO:CONFIGURE:
   use { "tpope/vim-vinegar" }
 
+  -- TODO:CONFIGURE:
+  use {
+    "noahfrederick/vim-skeleton",
+    config =
+    vim.cmd[[let g:skeleton_template_dir = "~/.config/nvim/templates"]]
+  }
+
   -- use { "luukvbaal/nnn.nvim" }
 
   -- TODO:CONFIGURE:
