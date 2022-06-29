@@ -6,9 +6,9 @@ end
 
 
 local knapsettings = {
-  htmltohtmlviewerlaunch = "luakit -u \'%outputfile%\'",
-  markdowntohtmlviewerlaunch = "luakit \'%outputfile%\'",
-  mdoutputext = "pdf",
+  htmltohtmlviewerlaunch = "qutebrowser  \'%outputfile%\'",
+  markdowntohtmlviewerlaunch = "qutebrowser \'%outputfile%\'",
+  mdoutputext = "html",
 }
 
 

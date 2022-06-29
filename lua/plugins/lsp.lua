@@ -2,7 +2,6 @@ local null_ok, null_ls = pcall(require, "null-ls-nvim")
 local lspsetup_ok, lsp_setup = pcall(require, 'nvim-lsp-setup')
 local navic_ok, navic = pcall(require, "nvim-navic")
 local lspsig_ok, lspsignature = pcall(require, "lsp_signature")
-local fzf_ok, fzf = pcall(require, "fzf-lua")
 require("clangd_extensions")
 
 if not lspsetup_ok then
@@ -209,7 +208,7 @@ lsp_setup.setup({
         on_attach = function(client, bufnr)
           -- Avoid LSP formatting conflicts.
           -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflict
-          require('nvim-lsp-setup.utils').disable_formatting(client)
+          -- require('nvim-lsp-setup.utils').disable_formatting(client)
           navic.attach(client, bufnr)
         end,
         capabilities = capabilities,
