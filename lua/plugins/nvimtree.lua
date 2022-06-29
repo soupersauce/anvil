@@ -1,4 +1,8 @@
+local icons_ok, eicons = pcall(require, 'icons')
 local present, nvimtree = pcall(require, "nvim-tree")
+if not icons_ok then
+  eicons = {}
+end
 
 if not present then
   return
@@ -49,16 +53,7 @@ nvimtree.setup({
         folder_arrow = true,
         git = true,
       },
-
-      -- git= {
-      --    unstaged = "✗",
-      --    staged = "✓",
-      --    unmerged = "",
-      --    renamed = "➜",
-      --    untracked = "★",
-      --    deleted = "",
-      --    ignored = "◌",
-      -- },
+      glyphs = eicons.glyphs
     },
   },
 })
