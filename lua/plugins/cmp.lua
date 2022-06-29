@@ -1,3 +1,4 @@
+local icons = require("icons")
 -- Setup nvim-cmp.
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
@@ -13,7 +14,6 @@ local pairs_ok, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
 if not pairs_ok then
   return
 end
--- local lspkind = require('lspkind')
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -22,7 +22,7 @@ end
 
 local types = require('cmp.types')
 
-local kind_icons = {
+local box_icons = {
   Text = "",
   Method = "",
   Function = "",
@@ -64,18 +64,6 @@ cmp.setup {
     end,
   },
 
-  formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      local kind = require('lspkind').cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-      local strings = vim.split(kind.kind, "%s", { trimempty = true })
-      kind.kind = " " .. strings[1] .. " "
-      kind.menu = "   [" .. strings[2] .. "]   "
-
-      return kind
-    end,
-  },
-
   cmp.setup.cmdline('/', {
     view = {
       entries = { name = 'custom', }
@@ -102,7 +90,7 @@ cmp.setup {
       { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<CR>']      = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
+      behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     }),
     ['<C-e']      = cmp.mapping({
@@ -138,7 +126,7 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'nvim_lua' },
     { name = 'cmp-zsh' },
-    { name = 'treesitter' },
+    -- { name = 'treesitter' },
     { name = 'cmp_autopairs' },
     { name = 'path' },
     { name = 'cmdline' },
@@ -151,6 +139,25 @@ cmp.setup {
     { name = 'dictionary', keyword_length = 2 },
     { name = 'spell' },
   }),
+
+  formatting = {
+    format = function(entry, vim_item)
+      vim_item.kind = string.format('%s %s',  icons.kind_icons[vim_item.kind], vim_item.kind)
+      vim_item.menu = ({
+        nvim_lsp = '[lsp]',
+        luasnip = '[snip]',
+        buffer = '[buf]',
+        path = '[path]',
+        nvim_lua = '[nvim_api]',
+        orgmode = '[org]',
+        cmdline = '[:cmd]',
+        cmp_git = '[git]',
+        dictionary = '[dict]',
+        spell = '[spell]',
+      })[entry.source.name]
+      return vim_item
+    end,
+  },
 
   cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
