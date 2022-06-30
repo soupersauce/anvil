@@ -275,7 +275,7 @@ local on_startup = function(use)
     config = function() require('cinnamon').setup {
         extra_keymaps = true,
         extended_keymaps = true,
-        delay = 1,
+        delay = 0,
       }
     end
   }
