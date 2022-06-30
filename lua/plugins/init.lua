@@ -124,18 +124,20 @@ local on_startup = function(use)
     "nvim-orgmode/orgmode",
     wants = { 'cmp', 'treesitter' },
     config = function() require('orgmode').setup {
-      org_agenda_files = '~/Documents/org/*',
-      org_default_notes_file = '~/Documents/org/refile.org',
-    } end
+        org_agenda_files = '~/Documents/org/*',
+        org_default_notes_file = '~/Documents/org/refile.org',
+      }
+    end
   }
 
 
   use {
     "ranjithshegde/orgWiki.nvim",
     config = function() require('orgWiki').setup {
-      wiki_path = { "~/Documents/org/wiki/" },
-      diary_path = "~/Documents/org/diary/",
-    } end,
+        wiki_path = { "~/Documents/org/wiki/" },
+        diary_path = "~/Documents/org/diary/",
+      }
+    end,
     after = 'orgmode',
   }
 
@@ -250,7 +252,7 @@ local on_startup = function(use)
   use {
     "noahfrederick/vim-skeleton",
     config =
-    vim.cmd[[let g:skeleton_template_dir = "~/.config/nvim/templates"]]
+    vim.cmd [[let g:skeleton_template_dir = "~/.config/nvim/templates"]]
   }
 
   -- use { "luukvbaal/nnn.nvim" }
@@ -300,8 +302,9 @@ local on_startup = function(use)
   -- TODO:CONFIGURE:
   use { "lukas-reineke/headlines.nvim",
     config = function() require('headlines').setup {
-      org = {},
-    } end
+        org = {},
+      }
+    end
   }
 
   use { "akinsho/org-bullets.nvim",
