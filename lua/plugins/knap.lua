@@ -46,21 +46,21 @@ end
 
 -- HTML: view config
 if fn.executable('qutebrowser') then
-		 knapsettings["mdtohtmlviewerlaunch"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; qutebrowser --target window %outputfile% \":spawn --userscript knap-userscript.lua $ID\""
-     knapsettings["mdtohtmlviewerrefresh"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; echo ':run-with-count '$(</tmp/knap-$ID-qute-tabindex)' reload -f' > \"$(</tmp/knap-$ID-qute-fifo)\""
-     knapsettings["htmltohtml"] = "none"
-     knapsettings["htmltohtmlviewerlaunch"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; qutebrowser --target window %outputfile% \":spawn --userscript knap-userscript.lua $ID\""
-     knapsettings["htmltohtmlviewerrefresh"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; echo ':run-with-count '$(</tmp/knap-$ID-qute-tabindex)' reload -f' > \"$(</tmp/knap-$ID-qute-fifo)\""
+  knapsettings["mdtohtmlviewerlaunch"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; qutebrowser --target window %outputfile% \":spawn --userscript knap-userscript.lua $ID\""
+  knapsettings["mdtohtmlviewerrefresh"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; echo ':run-with-count '$(</tmp/knap-$ID-qute-tabindex)' reload -f' > \"$(</tmp/knap-$ID-qute-fifo)\""
+  knapsettings["htmltohtml"] = "none"
+  knapsettings["htmltohtmlviewerlaunch"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; qutebrowser --target window %outputfile% \":spawn --userscript knap-userscript.lua $ID\""
+  knapsettings["htmltohtmlviewerrefresh"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; echo ':run-with-count '$(</tmp/knap-$ID-qute-tabindex)' reload -f' > \"$(</tmp/knap-$ID-qute-fifo)\""
 else
   print("No configured browser available; using defaults which may not work")
 end
 
 -- ORG: config
-  knapsettings["orgoutputext"] = "html"
-  knapsettings["orgtopdf"] = "pandoc %srcfile% -o %outputfile%"
-  knapsettings["orgtohtml"] = "pandoc %srcfile% -o %outputfile%"
-  knapsettings["orgtohtmlviewerlaunch"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; qutebrowser --target window %outputfile% \":spawn --userscript knap-userscript.lua $ID\""
-  knapsettings["orgtohtmlviewerrefresh"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; echo ':run-with-count '$(</tmp/knap-$ID-qute-tabindex)' reload -f' > \"$(</tmp/knap-$ID-qute-fifo)\""
+knapsettings["orgoutputext"] = "html"
+knapsettings["orgtopdf"] = "pandoc %srcfile% -o %outputfile%"
+knapsettings["orgtohtml"] = "pandoc %srcfile% -o %outputfile%"
+knapsettings["orgtohtmlviewerlaunch"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; qutebrowser --target window %outputfile% \":spawn --userscript knap-userscript.lua $ID\""
+knapsettings["orgtohtmlviewerrefresh"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; echo ':run-with-count '$(</tmp/knap-$ID-qute-tabindex)' reload -f' > \"$(</tmp/knap-$ID-qute-fifo)\""
 
 -- options = load_override(options, "lukas-reineke/indent-blankline.nvim")
 vim.g.knap_settings = knapsettings
