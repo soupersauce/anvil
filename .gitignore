@@ -4,3 +4,10 @@ autoload/
 undodir/
 tags
 cmptraceback
+README.aux
+README.html*
+README.log
+README.out
+README.pdf
+README.tex*
+README.toc
