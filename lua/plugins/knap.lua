@@ -7,7 +7,7 @@ end
 
 local knapsettings = {}
 
--- PDF view config
+-- PDF: view config
 if (fn.executable('siyoek') == 1) then
     knapsettings["textopdfviewerlaunch"] = "sioyek --inverse-search 'nvim --headless-es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,0)\"' --reuse-instance %outputfile%"
     knapsettings["textopdfviewerrefresh"] = "none"
@@ -32,6 +32,7 @@ else
   print("No configured pdf reader available; using defaults which may not work")
 end
 
+-- HTML: view config
 if fn.executable('qutebrowser') then
 		 knapsettings["mdtohtmlviewerlaunch"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; qutebrowser --target window %outputfile% \":spawn --userscript knap-userscript.lua $ID\""
      knapsettings["mdtohtmlviewerrefresh"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; echo ':run-with-count '$(</tmp/knap-$ID-qute-tabindex)' reload -f' > \"$(</tmp/knap-$ID-qute-fifo)\""
@@ -41,6 +42,13 @@ if fn.executable('qutebrowser') then
 else
   print("No configured browser available; using defaults which may not work")
 end
+
+-- ORG: config
+  -- knapsettings["orgoutputext"] = "pdf"
+  -- knapsettings["orgtopdf"] = "org"
+  -- knapsettings["orgtohtml"] = "org"
+  -- knapsettings["orgtopdfviewerlaunch"] = "org"
+  -- knapsettings["orgtohtml"] = "org"
 
 -- options = load_override(options, "lukas-reineke/indent-blankline.nvim")
 vim.g.knap_settings = knapsettings
