@@ -7,6 +7,7 @@ local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local run_sync = false
 
 -- Install packer for package management, if missing
+---@diagnostic disable-next-line: missing-parameter
 if (fn.empty(fn.glob(install_path)) > 0) then
   run_sync = fn.system({
     'git',
