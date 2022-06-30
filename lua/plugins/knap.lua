@@ -44,11 +44,14 @@ else
 end
 
 -- ORG: config
-  -- knapsettings["orgoutputext"] = "pdf"
-  -- knapsettings["orgtopdf"] = "org"
-  -- knapsettings["orgtohtml"] = "org"
-  -- knapsettings["orgtopdfviewerlaunch"] = "org"
-  -- knapsettings["orgtohtml"] = "org"
+  knapsettings["orgoutputext"] = "html"
+  knapsettings["orgtopdf"] = "pandoc %srcfile% -o %outputfile%"
+  knapsettings["orgtohtml"] = "pandoc %srcfile% -o %outputfile%"
+  knapsettings["orgtopdfviewerlaunch"] = "zathura --synctex-editor-command 'nvim --headless-es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%"
+  knapsettings["orgtohtmlviewerlaunch"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; qutebrowser --target window %outputfile% \":spawn --userscript knap-userscript.lua $ID\""
+  knapsettings["orgtopdfviewerrefresh"] = "none"
+  knapsettings["orgtohtmlviewerrefresh"] = "SRC=%srcfile%; ID=\"${SRC//[^A-Za-z0-9]/_-_-}\"; echo ':run-with-count '$(</tmp/knap-$ID-qute-tabindex)' reload -f' > \"$(</tmp/knap-$ID-qute-fifo)\""
+  knapsettings["orgtopdfforwardjump"] = "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%"
 
 -- options = load_override(options, "lukas-reineke/indent-blankline.nvim")
 vim.g.knap_settings = knapsettings
