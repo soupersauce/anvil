@@ -2,6 +2,7 @@ local null_ok, null_ls = pcall(require, "null-ls-nvim")
 local lspsetup_ok, lsp_setup = pcall(require, 'nvim-lsp-setup')
 local navic_ok, navic = pcall(require, "nvim-navic")
 local lspsig_ok, lspsignature = pcall(require, "lsp_signature")
+-- local cam_ok, ca_menu = pcall(require, "code_action_menu")
 require("clangd_extensions")
 
 if not lspsetup_ok then
@@ -36,15 +37,16 @@ local mappings = {
   [']d'] = 'lua vim.diagnostic.goto_next()',
   ['[d'] = 'lua vim.diagnostic.goto_prev()',
   ['<leader>rn'] = 'lua vim.lsp.buf.rename()',
-  ['<leader>ca'] = 'lua vim.lsp.buf.code_action()',
+  -- ['<leader>ca'] = 'lua vim.lsp.buf.code_action()',
   ['<leader>f'] = 'lua vim.lsp.buf.format()',
   ['<leader>e'] = 'lua vim.diagnostic.open_float()',
   -- Custom mappings, will overwrite the default mappings for the same key
   -- Example mappings for telescope pickers:
-  -- TODO: Integrate fzf
   gd = 'lua require("fzf-lua").lsp_definitions()',
   gi = 'lua require("fzf-lua").lsp_implementations()',
   gr = 'lua require("fzf-lua").lsp_references()',
+
+  ['<leader>ca'] = 'CodeActionMenu',
 
 }
 

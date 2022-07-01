@@ -158,6 +158,15 @@ local on_startup = function(use)
         "simrat39/rust-tools.nvim",
         ft = { "rust", },
       },
+      {
+        'kosayoda/nvim-lightbulb',
+        requires = 'antoinemadec/FixCursorHold.nvim',
+        config = function() require('nvim-lightbulb').setup {} end
+      },
+      {
+        'weilbith/nvim-code-action-menu',
+        cmd = 'CodeActionMenu'
+      },
     },
     config = function() require('plugins.lsp') end,
   }
