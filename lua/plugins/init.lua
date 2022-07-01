@@ -115,6 +115,10 @@ local on_startup = function(use)
       'ziontee113/syntax-tree-surfer',
       'folke/twilight.nvim',
       'mizlan/iswap.nvim',
+      {
+        'ThePrimeagen/refactoring',
+        config = function() require('refactoring').setup({}) end
+      }
     },
     config = function() require('plugins.treesitter') end,
   }
@@ -152,7 +156,12 @@ local on_startup = function(use)
       'SmiteshP/nvim-navic',
       'amrbashir/nvim-docs-view',
       'p00f/clangd_extensions.nvim',
-      'jose-elias-alvarez/null-ls.nvim',
+      {
+        'jose-elias-alvarez/null-ls.nvim',
+        requires = {
+          'ThePrimeagen/refactoring.nvim',
+        }
+      },
       'ray-x/lsp_signature.nvim',
       {
         "simrat39/rust-tools.nvim",
