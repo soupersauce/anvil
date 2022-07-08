@@ -160,9 +160,6 @@ for option, value in pairs(defined_options) do
 	global_options[option] = value
 end
 
--- Enable filetype detection and use plugins and indentation
-vim.cmd('filetype plugin indent on')
-
 -- Enable highlighting embedded lua code
 vim.g.vimsyn_embed = 'l'
 -- Use Python 3 for plugins
