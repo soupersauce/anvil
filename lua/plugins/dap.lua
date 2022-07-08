@@ -1,6 +1,6 @@
 local status_ok, dap = pcall(require, 'dap')
 if not status_ok then
-  return
+	return
 end
 
 -- dap-install configurations
@@ -14,9 +14,9 @@ end
 --   dap_install.config(debugger)
 -- end
 
-dap.defaults.fallback.terminal_win_cmd = "ToggleTerm"
-vim.fn.sign_define("DapBreakpoint", { text = "● ", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
-vim.fn.sign_define("DapBreakpointCondition", { text = "● ", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" })
-vim.fn.sign_define("DapLogPoint", { text = "● ", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
-vim.fn.sign_define("DapStopped", { text = "→ ", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" })
-vim.fn.sign_define("DapBreakpointReject", { text = "●", texthl = "DiagnosticSignHint", linehl = "", numhl = "" })
+dap.defaults.fallback.terminal_win_cmd = 'ToggleTerm'
+vim.fn.sign_define('DapBreakpoint', { text = '● ', texthl = 'DiagnosticSignError', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointCondition', { text = '● ', texthl = 'DiagnosticSignWarn', linehl = '', numhl = '' })
+vim.fn.sign_define('DapLogPoint', { text = '● ', texthl = 'DiagnosticSignInfo', linehl = '', numhl = '' })
+vim.fn.sign_define('DapStopped', { text = '→ ', texthl = 'DiagnosticSignWarn', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointReject', { text = '●', texthl = 'DiagnosticSignHint', linehl = '', numhl = '' })

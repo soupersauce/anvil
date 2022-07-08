@@ -125,7 +125,7 @@ local on_startup = function(use)
 			'folke/twilight.nvim',
 			'mizlan/iswap.nvim',
 			{
-				'ThePrimeagen/refactoring',
+				'ThePrimeagen/refactoring.nvim',
 				config = function()
 					require('refactoring').setup()
 				end,

@@ -14,7 +14,7 @@ end
 -- local lspsetup_utils = require('nvim-lsp-setup.utils')
 
 if navic_ok then
-	navic.setup({})
+	navic.setup {}
 end
 
 if lspsig_ok then
@@ -51,7 +51,7 @@ local mappings = {
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-lsp_setup.setup({
+lsp_setup.setup {
 	-- nvim-lsp-installer
 	-- https://github.com/williamboman/nvim-lsp-installer#configuration
 	installer = {
@@ -95,7 +95,7 @@ lsp_setup.setup({
 		},
 		-- C/C++
 		clangd = {
-			require('nvim-lsp-setup.clangd_extensions').setup({}),
+			require('nvim-lsp-setup.clangd_extensions').setup {},
 			lspconfig = {
 				on_attach = function(client, bufnr)
 					navic.attach(client, bufnr)
@@ -202,7 +202,7 @@ lsp_setup.setup({
 			},
 		},
 		-- lua
-		sumneko_lua = require('lua-dev').setup({
+		sumneko_lua = require('lua-dev').setup {
 			lspconfig = {
 				on_attach = function(client, bufnr)
 					-- Avoid LSP formatting conflicts.
@@ -213,7 +213,7 @@ lsp_setup.setup({
 				capabilities = capabilities,
 				telemetry = { enable = false },
 			},
-		}),
+		},
 		-- Markdown
 		marksman = {
 			lspconfig = {
@@ -364,25 +364,25 @@ lsp_setup.setup({
 			},
 		},
 	},
-})
+}
 
 do
 	local method = 'textDocument/publishDiagnostics'
 	local default_handler = vim.lsp.handlers[method]
 	vim.lsp.handlers[method] = function(err, method, result, client_id, bufnr, config)
 		default_handler(err, method, result, client_id, bufnr, config)
-		vim.diagnostic.setqflist({ open = false })
+		vim.diagnostic.setqflist { open = false }
 	end
 end
 
 -- Customize how diagnostics are displayed
-vim.diagnostic.config({
+vim.diagnostic.config {
 	virtual_text = true,
 	signs = { priority = 0 },
 	underline = { severity = vim.diagnostic.severity.ERROR },
 	update_in_insert = false,
 	severity_sort = false,
-})
+}
 
 if not null_ok then
 	print('Null not ok')
@@ -405,9 +405,9 @@ local null_sources = {
 	null_b.code_actions.refactoring,
 	null_b.code_actions.shellcheck,
 	null_b.code_actions.eslint_d,
-	null_b.code_actions.proselint.with({
+	null_b.code_actions.proselint.with {
 		extra_filetypes = { 'org', 'text' },
-	}),
+	},
 
 	-- Diagnostics/linters
 	null_b.diagnostics.eslint_d,
@@ -423,23 +423,23 @@ local null_sources = {
 	null_b.diagnostics.flake8,
 	null_b.diagnostics.mypy,
 	null_b.diagnostics.markdownlint,
-	null_b.diagnostics.proselint.with({
+	null_b.diagnostics.proselint.with {
 		extra_filetypes = { 'tex', 'org' },
-	}),
-	null_b.diagnostics.write_good.with({
+	},
+	null_b.diagnostics.write_good.with {
 		extra_filetypes = { 'tex', 'org' },
-	}),
-	null_b.diagnostics.shellcheck.with({
+	},
+	null_b.diagnostics.shellcheck.with {
 		diagnostics_format = diagnostics_code_template,
-	}),
-	null_b.diagnostics.sqlfluff.with({
+	},
+	null_b.diagnostics.sqlfluff.with {
 		extra_args = { '--dialect', 'postgres' },
-	}),
+	},
 	null_b.diagnostics.stylelint,
 	null_b.diagnostics.tidy,
-	null_b.diagnostics.vale.with({
+	null_b.diagnostics.vale.with {
 		extra_filetypes = { 'org', 'text' },
-	}),
+	},
 	null_b.diagnostics.yamllint,
 	null_b.diagnostics.zsh,
 
@@ -451,9 +451,9 @@ local null_sources = {
 	null_b.formatting.goimports,
 	null_b.formatting.reorder_python_imports,
 	null_b.formatting.latexindent,
-	null_b.formatting.stylua.with({
+	null_b.formatting.stylua.with {
 		-- condition = with_root_file("stylua.toml")
-	}),
+	},
 	null_b.formatting.prettier,
 	null_b.formatting.puppet_lint,
 	null_b.formatting.rustfmt,
@@ -464,34 +464,35 @@ local null_sources = {
 	null_b.formatting.terrafmt,
 	null_b.formatting.terraform_fmt,
 	null_b.formatting.tidy,
+	null_b.formatting.beautysh,
 
 	null_b.hover.dictionary,
 }
 
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
-null_ls.setup({
+null_ls.setup {
 	-- debug = true,
 	sources = null_sources,
 	on_attach = function(client, bufnr)
 		if client.supports_method('textDocument/formatting') then
-			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
 			vim.api.nvim_create_autocmd('BufWritePre', {
 				group = augroup,
 				buffer = bufnr,
 				callback = function()
-					vim.lsp.buf.format({
+					vim.lsp.buf.format {
 						bufnr = bufnr,
 						filter = function(client)
 							return client.name == 'null-ls'
 						end,
-					})
+					}
 				end,
 			})
 		end
 	end,
-})
-require('docs-view').setup({})
+}
+require('docs-view').setup {}
 
 local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
