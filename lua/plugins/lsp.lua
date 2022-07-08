@@ -418,7 +418,7 @@ local null_sources = {
 	null_b.diagnostics.curlylint,
 	null_b.diagnostics.gitlint,
 	null_b.diagnostics.golangci_lint,
-	null_b.diagnostics.luacheck,
+	-- null_b.diagnostics.luacheck,
 	null_b.diagnostics.pylint,
 	null_b.diagnostics.flake8,
 	null_b.diagnostics.mypy,
