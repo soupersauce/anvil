@@ -8,7 +8,7 @@ local defined_options = {
 	-- Set default shell
 	shell = 'zsh',
 
-	-- Dissable modelines
+	-- Disable modelines
 	modeline = false,
 
 	-- Restrict existing tab to width of 4 spaces
