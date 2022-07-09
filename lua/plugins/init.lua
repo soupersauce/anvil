@@ -323,22 +323,26 @@ local on_startup = function(use)
 		end,
 	}
 
-	use {
-		'nkakouros-original/numbers.nvim',
-		config = function()
-			require('numbers').setup {
-				excluded_filetypes = {
-					'alpha',
-					'NvimTree',
-					'help',
-					'undotree',
-					'NeogitStatus',
-					'NeogitCommitMessage',
-					'NeogitPopup',
-				},
-			}
-		end,
-	}
+	-- use {
+	-- 	'nkakouros-original/numbers.nvim',
+	-- 	config = function()
+	-- 		require('numbers').setup {
+	-- 			excluded_filetypes = {
+	-- 				'alpha',
+	-- 				'NvimTree',
+	-- 				'help',
+	-- 				'undotree',
+	-- 				'NeogitStatus',
+	-- 				'NeogitCommitMessage',
+	-- 				'NeogitPopup',
+	-- 			},
+	-- 		}
+	-- 	end,
+	-- }
+    use {
+    'sitiom/nvim-numbertoggle',
+    config = function() require('numbertoggle').setup {} end,
+  }
 
 	use { 'dhruvasagar/vim-table-mode' }
 
