@@ -65,6 +65,7 @@ local on_startup = function(use)
 		'sainnhe/sonokai',
 		'sainnhe/everforest',
 		'sainnhe/gruvbox-material',
+    'kaiuri/nvim-juliana',
 		'projekt0n/github-nvim-theme',
 		{
 			'adisen99/codeschool.nvim',
@@ -299,7 +300,11 @@ local on_startup = function(use)
 	-- use { "luukvbaal/nnn.nvim" }
 
 	-- TODO:CONFIGURE:
-	use { 'ibhagwan/fzf-lua', requires = { 'kyazdani42/nvim-web-devicons' } }
+	use {
+    'ibhagwan/fzf-lua',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = function() require('plugins.fzf') end,
+  }
 
 	-- TODO:CONFIGURE:
 	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
