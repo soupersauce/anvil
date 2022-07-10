@@ -1,11 +1,11 @@
 local fzf_ok, fzf = pcall(require, 'fzf-lua')
 
 if not fzf_ok then
-  print('No fzf')
-  return
+	print('No fzf')
+	return
 end
 
-local actions = require('fzf.actions')
+local actions = fzf.actions
 
 fzf.setup {
 	-- fzf_bin         = 'sk',            -- use skim instead of fzf?
@@ -205,11 +205,11 @@ fzf.setup {
 			cmd_untracked = 'git diff --color --no-index /dev/null',
 			-- uncomment if you wish to use git-delta as pager
 			-- can also be set under 'git.status.preview_pager'
-			-- pager        = "delta --width=$FZF_PREVIEW_COLUMNS",
+			pager = 'delta --width=$FZF_PREVIEW_COLUMNS',
 		},
 		man = {
 			-- NOTE: remove the `-c` flag when using man-db
-			cmd = 'man -c %s | col -bx',
+			cmd = 'man %s | col -bx',
 		},
 		builtin = {
 			syntax = true, -- preview syntax highlight?
@@ -222,14 +222,14 @@ fzf.setup {
 			extensions = {
 				-- neovim terminal only supports `viu` block output
 				['png'] = { 'viu', '-b' },
-				['jpg'] = { 'ueberzug' },
+				['jpg'] = { 'viu', '-b' },
 			},
 			-- if using `ueberzug` in the above extensions map
 			-- set the default image scaler, possible scalers:
 			--   false (none), "crop", "distort", "fit_contain",
 			--   "contain", "forced_cover", "cover"
 			-- https://github.com/seebye/ueberzug
-			ueberzug_scaler = 'cover',
+			-- ueberzug_scaler = 'cover',
 		},
 	},
 	-- provider setup
@@ -283,7 +283,7 @@ fzf.setup {
 			color_icons = true,
 			previewer = 'git_diff',
 			-- uncomment if you wish to use git-delta as pager
-			--preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS"
+			preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS',
 			actions = {
 				-- actions inherit from 'actions.files' and merge
 				['right'] = { actions.git_unstage, actions.resume },
@@ -295,7 +295,7 @@ fzf.setup {
 			cmd = "git log --color --pretty=format:'%C(yellow)%h%Creset %Cgreen(%><(12)%cr%><|(12))%Creset %s %C(blue)<%an>%Creset'",
 			preview = "git show --pretty='%Cred%H%n%Cblue%an <%ae>%n%C(yellow)%cD%n%Cgreen%s' --color {1}",
 			-- uncomment if you wish to use git-delta as pager
-			--preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS"
+			preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS',
 			actions = {
 				['default'] = actions.git_checkout,
 			},
@@ -310,7 +310,7 @@ fzf.setup {
 			cmd = "git log --color --pretty=format:'%C(yellow)%h%Creset %Cgreen(%><(12)%cr%><|(12))%Creset %s %C(blue)<%an>%Creset' <file>",
 			preview = 'git diff --color {1}~1 {1} -- <file>',
 			-- uncomment if you wish to use git-delta as pager
-			--preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS"
+			preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS',
 			actions = {
 				['default'] = actions.git_buf_edit,
 				['ctrl-s'] = actions.git_buf_split,
@@ -340,17 +340,17 @@ fzf.setup {
 			},
 		},
 		icons = {
-			['M'] = { icon = 'M', color = 'yellow' },
-			['D'] = { icon = 'D', color = 'red' },
-			['A'] = { icon = 'A', color = 'green' },
+			-- ['M'] = { icon = 'M', color = 'yellow' },
+			-- ['D'] = { icon = 'D', color = 'red' },
+			-- ['A'] = { icon = 'A', color = 'green' },
 			['R'] = { icon = 'R', color = 'yellow' },
 			['C'] = { icon = 'C', color = 'yellow' },
 			['T'] = { icon = 'T', color = 'magenta' },
 			['?'] = { icon = '?', color = 'magenta' },
 			-- override git icons?
-			-- ["M"]        = { icon = "★", color = "red" },
-			-- ["D"]        = { icon = "✗", color = "red" },
-			-- ["A"]        = { icon = "+", color = "green" },
+			['M'] = { icon = '★', color = 'yellow' },
+			['D'] = { icon = '✗', color = 'red' },
+			['A'] = { icon = '+', color = 'green' },
 		},
 	},
 	grep = {

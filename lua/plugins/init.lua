@@ -65,7 +65,7 @@ local on_startup = function(use)
 		'sainnhe/sonokai',
 		'sainnhe/everforest',
 		'sainnhe/gruvbox-material',
-    'kaiuri/nvim-juliana',
+		'kaiuri/nvim-juliana',
 		'projekt0n/github-nvim-theme',
 		{
 			'adisen99/codeschool.nvim',
@@ -283,7 +283,7 @@ local on_startup = function(use)
 	-- TODO:CONFIGURE:
 	use { 'tpope/vim-repeat' }
 	-- TODO:CONFIGURE:
-	use { 'tpope/vim-surround' }
+	-- use { 'tpope/vim-surround' }
 	-- TODO:CONFIGURE:
 	use { 'tpope/vim-fugitive' }
 	-- TODO:CONFIGURE:
@@ -301,10 +301,12 @@ local on_startup = function(use)
 
 	-- TODO:CONFIGURE:
 	use {
-    'ibhagwan/fzf-lua',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function() require('plugins.fzf') end,
-  }
+		'ibhagwan/fzf-lua',
+		requires = { 'kyazdani42/nvim-web-devicons' },
+		config = function()
+			require('plugins.fzf')
+		end,
+	}
 
 	-- TODO:CONFIGURE:
 	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
@@ -344,10 +346,12 @@ local on_startup = function(use)
 	-- 		}
 	-- 	end,
 	-- }
-    use {
-    'sitiom/nvim-numbertoggle',
-    config = function() require('numbertoggle').setup {} end,
-  }
+	use {
+		'sitiom/nvim-numbertoggle',
+		config = function()
+			require('numbertoggle').setup {}
+		end,
+	}
 
 	use { 'dhruvasagar/vim-table-mode' }
 
