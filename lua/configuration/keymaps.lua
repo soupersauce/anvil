@@ -128,8 +128,10 @@ set_keymap({ 'v', 'n' }, '<leader>zh', function()
 end, { desc = 'Fzf: help tags' })
 set_keymap({ 'v', 'n' }, '<leader>zv', function()
 	require('fzf-lua').command_history()
-end, { desc = 'Fzf: Command History' })
-
+end, { desc = 'Fzf: cmd history' })
+set_keymap({ 'v', 'n' }, '<C-p>', function()
+	require('fzf-lua').builtin()
+end, { desc = 'Fzf: default' })
 -- For nvim-tree
 set_keymap('n', '<C-n>', '<cmd>NvimTreeToggle<CR>', { noremap = true, desc = 'Toggle NvimTree' })
 
