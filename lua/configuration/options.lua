@@ -156,6 +156,11 @@ if fn.executable('rg') == 1 then
 	defined_options.grepprg = 'rg --vimgrep --no-heading --smart-case'
 end
 
+-- Set fish as default shell, if available
+if fn.executable('zsh') == 1 then
+	defined_options.shell = 'zsh'
+end
+
 for option, value in pairs(defined_options) do
 	global_options[option] = value
 end

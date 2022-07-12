@@ -103,13 +103,6 @@ local on_startup = function(use)
 		},
 	}
 
-	-- REPL integration
-	-- use {
-	--   'rhysd/reply.vim',
-	--   cmd = {'Repl', 'ReplAuto', 'ReplSend'},
-	--   config = function() require('plugins.reply') end
-	-- }
-
 	-- TREESITTER: integration
 	use {
 		'nvim-treesitter/nvim-treesitter',
