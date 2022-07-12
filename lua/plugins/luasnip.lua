@@ -1,7 +1,7 @@
 local set_keymap = vim.keymap.set
 local luasnip = require('luasnip')
 local types = require('luasnip.util.types')
-local options = { silent = false, noremap = true }
+local options = { silent = false, noremap = true, desc = 'luasnip' }
 
 -- Load snippets provided by extensions
 require('luasnip.loaders.from_vscode').lazy_load()
@@ -22,7 +22,7 @@ set_keymap('i', '<Tab>', function()
 	else
 		return '<Tab>'
 	end
-end, { expr = true, silent = true, noremap = true })
+end, { expr = true, silent = true, noremap = true, desc = 'luasnipexpand' })
 
 -- Jump backward
 set_keymap({ 'i', 's' }, '<S-Tab>', function()
@@ -30,13 +30,13 @@ set_keymap({ 'i', 's' }, '<S-Tab>', function()
 end, options)
 
 -- Change choices in choiceNodes
-set_keymap({ 'i', 's' }, '<A-Tab', function()
+set_keymap({ 'i', 's' }, '<A-Tab>', function()
 	if luasnip.choice_active() then
 		return '<Plug>luasnip-next-choice'
 	else
 		return '<A-Tab>'
 	end
-end, { expr = true, silent = true, noremap = true })
+end, { expr = true, silent = true, noremap = true, desc = 'luasnipnext' })
 
 luasnip.config.setup {
 	ext_opts = {

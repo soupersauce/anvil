@@ -351,7 +351,7 @@ local on_startup = function(use)
 	use {
 		'sitiom/nvim-numbertoggle',
 		config = function()
-			require('numbertoggle').setup {}
+			require('numbertoggle').setup()
 		end,
 	}
 
