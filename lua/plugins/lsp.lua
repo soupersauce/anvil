@@ -409,7 +409,7 @@ local null_b = null_ls.builtins
 
 local null_sources = {
 	-- Code actions
-	null_b.code_actions.refactoring,
+	-- null_b.code_actions.refactoring,
 	null_b.code_actions.shellcheck,
 	null_b.code_actions.eslint_d,
 	null_b.code_actions.proselint.with {
