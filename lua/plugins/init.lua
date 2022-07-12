@@ -381,10 +381,12 @@ local on_startup = function(use)
 	-- Visualise and control undo history in tree form.
 	use {
 		'jiaoshijie/undotree',
-		cmd = { 'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow' },
+		requires = 'nvim-lua/plenary.nvim',
 		setup = function()
-			vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true })
+			require('plugins.undotree')
 		end,
+		-- config = function() vim.keymap.set('n', '<leader>u', 'require('undotree').toggle()', { noremap = true }):UndotreeToggle<CR> end,
+		-- cmd = { 'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow' },
 	}
 
 	use {
