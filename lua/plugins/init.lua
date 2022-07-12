@@ -117,6 +117,13 @@ local on_startup = function(use)
 		requires = {
 			'joosepalviste/nvim-ts-context-commentstring',
 			'p00f/nvim-ts-rainbow',
+			{
+				'folke/todo-comments.nvim',
+				config = function()
+					require('todo-comments').setup()
+				end,
+			},
+			{ 'kevinhwang91/nvim-bqf', ft = 'qf' },
 			'andymass/vim-matchup',
 			'nvim-treesitter/playground',
 			'nvim-treesitter/nvim-treesitter-context',
@@ -158,7 +165,7 @@ local on_startup = function(use)
 			'SmiteshP/nvim-navic',
 			'amrbashir/nvim-docs-view',
 			'p00f/clangd_extensions.nvim',
-      'folke/trouble.nvim',
+			'folke/trouble.nvim',
 			{
 				'jose-elias-alvarez/null-ls.nvim',
 				requires = {
