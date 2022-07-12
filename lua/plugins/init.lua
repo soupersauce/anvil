@@ -428,6 +428,13 @@ local on_startup = function(use)
 	}
 
 	use {
+		'goolord/alpha-nvim',
+		config = function()
+			require('alpha').setup(require('alpha.themes.dashboard').config)
+		end,
+	}
+
+	use {
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons' },
 		config = function()
