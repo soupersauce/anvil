@@ -213,7 +213,7 @@ lsp_setup.setup {
 				on_attach = function(client, bufnr)
 					-- Avoid LSP formatting conflicts.
 					-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflict
-					require('nvim-lsp-setup.utils').disable_formatting(client)
+					-- require('nvim-lsp-setup.utils').disable_formatting(client)
 					navic.attach(client, bufnr)
 				end,
 				capabilities = capabilities,
