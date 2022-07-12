@@ -158,6 +158,7 @@ local on_startup = function(use)
 			'SmiteshP/nvim-navic',
 			'amrbashir/nvim-docs-view',
 			'p00f/clangd_extensions.nvim',
+      'folke/trouble.nvim',
 			{
 				'jose-elias-alvarez/null-ls.nvim',
 				requires = {

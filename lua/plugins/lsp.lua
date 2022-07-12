@@ -2,6 +2,7 @@ local null_ok, null_ls = pcall(require, 'null-ls')
 local lspsetup_ok, lsp_setup = pcall(require, 'nvim-lsp-setup')
 local navic_ok, navic = pcall(require, 'nvim-navic')
 local lspsig_ok, lspsignature = pcall(require, 'lsp_signature')
+local trouble_ok, trouble = pcall(require, 'trouble')
 -- local cam_ok, ca_menu = pcall(require, "code_action_menu")
 require('clangd_extensions')
 
@@ -19,6 +20,12 @@ end
 
 if lspsig_ok then
 	lspsignature.setup()
+end
+
+if trouble_ok then
+	trouble.setup()
+else
+	print('trouble with trouble')
 end
 
 local mappings = {
