@@ -40,7 +40,6 @@ local mappings = {
 	-- gr = 'lua vim.lsp.buf.references()',
 	['<Leader>s'] = 'lua vim.lsp.buf.document_symbol()',
 	['<Leader>w'] = 'lua vim.lsp.buf.workspace_symbol()',
-	['<Leader>'] = 'lua vim.diagnostic.goto_next()',
 	[']d'] = 'lua vim.diagnostic.goto_next()',
 	['[d'] = 'lua vim.diagnostic.goto_prev()',
 	['<leader>rn'] = 'lua vim.lsp.buf.rename()',

@@ -113,7 +113,9 @@ local on_startup = function(use)
 			{
 				'folke/todo-comments.nvim',
 				config = function()
-					require('todo-comments').setup()
+					require('todo-comments').setup {
+						highlight = { exclude = { 'vim' } },
+					}
 				end,
 			},
 			{ 'kevinhwang91/nvim-bqf', ft = 'qf' },
