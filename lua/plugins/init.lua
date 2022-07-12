@@ -172,9 +172,16 @@ local on_startup = function(use)
 			},
 			{
 				'kosayoda/nvim-lightbulb',
-				requires = 'antoinemadec/FixCursorHold.nvim',
+				requires = {
+					'antoinemadec/FixCursorHold.nvim',
+					config = function()
+						require('FixCursorHold').setup()
+					end,
+				},
 				config = function()
-					require('nvim-lightbulb').setup {}
+					require('nvim-lightbulb').setup {
+						autocmd = { enabled = true },
+					}
 				end,
 			},
 			{
