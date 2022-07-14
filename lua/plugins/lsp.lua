@@ -61,7 +61,7 @@ lsp_setup.setup {
 	-- nvim-lsp-installer
 	-- https://github.com/williamboman/nvim-lsp-installer#configuration
 	installer = {
-		automatic_installation = true,
+		automatic_installation = false,
 	},
 	-- Default mappings
 	default_mappings = false,
