@@ -375,7 +375,9 @@ local on_startup = function(use)
 	use {
 		'akinsho/org-bullets.nvim',
 		config = function()
-			require('org-bullets').setup {}
+			require('org-bullets').setup {
+				concealcursor = true,
+			}
 		end,
 	}
 
