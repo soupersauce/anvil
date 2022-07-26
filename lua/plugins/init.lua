@@ -156,7 +156,8 @@ local on_startup = function(use)
 	}
 
 	-- LSP: integration
-	-- TODO:CONFIGURE:
+	-- TODO: nvim-lsp-install going into maintenance mode,
+	-- see about converting to https://github.com/williamboman/mason.nvim
 	use {
 		'junnplus/nvim-lsp-setup',
 		requires = {
@@ -362,7 +363,6 @@ local on_startup = function(use)
 	use { 'michaelb/sniprun', run = 'bash ./install.sh' }
 
 	-- UI:
-	-- TODO:CONFIGURE:
 	use {
 		'lukas-reineke/headlines.nvim',
 		config = function()
