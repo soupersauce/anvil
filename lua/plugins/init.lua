@@ -67,14 +67,23 @@ local on_startup = function(use)
 		'sainnhe/sonokai',
 		'sainnhe/everforest',
 		'sainnhe/gruvbox-material',
+		{
+			'everblush/everblush.nvim',
+			as = 'everblush',
+			config = function()
+				require('everblush').setup {
+					nvim_tree = { contrast = true },
+				}
+			end,
+		},
 		'kaiuri/nvim-juliana',
 		'projekt0n/github-nvim-theme',
 		{
 			'adisen99/codeschool.nvim',
 			requires = 'rktjmp/lush.nvim',
-			config = function()
-				require('lush')(require('codeschool').setup())
-			end,
+			-- config = function()
+			-- require('lush')(require('codeschool').setup())
+			-- end,
 		},
 		-- config = function() require('github-theme').setup {
 		--   theme_style = "dimmed",
