@@ -44,6 +44,8 @@ local on_startup = function(use)
 	-- Ask for the right file to open when file matching name is not found
 	use('EinfachToll/DidYouMean')
 
+	use('stevearc/dressing.nvim')
+
 	-- COLORSCHEMES:
 	use {
 		'christianchiarulli/nvcode-color-schemes.vim',
@@ -384,7 +386,6 @@ local on_startup = function(use)
 	-- Visualise and control undo history in tree form.
 	use {
 		'jiaoshijie/undotree',
-		requires = 'nvim-lua/plenary.nvim',
 		setup = function()
 			require('plugins.undotree')
 		end,
