@@ -1,9 +1,34 @@
 local org_ok, org = pcall(require, 'orgmode')
 local wiki_ok, wiki = pcall(require, 'orgWiki')
+local bull_ok, bullets = pcall(require, 'org-bullets')
+local hl_ok, headlines = pcall(require, 'headlines')
 
 if not org_ok then
 	print('Org not ok')
 	return
+end
+
+vim.cmd([[highlight Headline1 guibg=#155e96]])
+vim.cmd([[highlight Headline2 guibg=#742f85]])
+vim.cmd([[highlight Headline3 guibg=#156868]])
+vim.cmd([[highlight Headline4 guibg=#317423]])
+vim.cmd([[highlight CodeBlock guibg=#1c1c1c]])
+vim.cmd([[highlight Dash guibg=#D19A66 gui=bold]])
+
+if hl_ok then
+	headlines.setup {
+		org = {
+			headline_highlights = { 'Headline1', 'Headline2', 'Headline3', 'Headline4' },
+			fat_headline_upper_string = '▃',
+			fat_headline_lower_string = 'ﮋ',
+		},
+	}
+end
+
+if bull_ok then
+	bullets.setup {
+		concealcursor = true,
+	}
 end
 
 -- Directories

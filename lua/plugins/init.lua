@@ -159,7 +159,11 @@ local on_startup = function(use)
 	-- TODO:CONFIGURE:
 	use {
 		'nvim-orgmode/orgmode',
-		requires = 'ranjithshegde/orgWiki.nvim',
+		requires = {
+			'ranjithshegde/orgWiki.nvim',
+			'lukas-reineke/headlines.nvim',
+			'akinsho/org-bullets.nvim',
+		},
 		wants = { 'cmp', 'treesitter' },
 		config = function()
 			require('plugins.org')
@@ -374,34 +378,6 @@ local on_startup = function(use)
 	use { 'michaelb/sniprun', run = 'bash ./install.sh' }
 
 	-- UI:
-	use {
-		'lukas-reineke/headlines.nvim',
-		config = function()
-			require('headlines').setup {
-				org = {},
-			}
-		end,
-	}
-
-	use {
-		'akinsho/org-bullets.nvim',
-		config = function()
-			require('org-bullets').setup {
-				concealcursor = true,
-			}
-		end,
-	}
-
-	-- Visualise and control undo history in tree form.
-	use {
-		'jiaoshijie/undotree',
-		setup = function()
-			require('plugins.undotree')
-		end,
-		-- config = function() vim.keymap.set('n', '<leader>u', 'require('undotree').toggle()', { noremap = true }):UndotreeToggle<CR> end,
-		-- cmd = { 'UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow' },
-	}
-
 	use {
 		'j-hui/fidget.nvim',
 		config = function()
