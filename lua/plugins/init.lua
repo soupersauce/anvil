@@ -37,8 +37,6 @@ local on_startup = function(use)
 			require('impatient')
 		end,
 	}
-	-- Skyrim script extender
-	use { 'nvim-lua/plenary.nvim' }
 	-- Packer manages itself
 	use { 'wbthomason/packer.nvim' }
 	-- Ask for the right file to open when file matching name is not found
