@@ -125,6 +125,9 @@ local defined_options = {
 	foldmethod = 'expr',
 	foldexpr = 'nvim_treesitter#foldexpr()',
 
+	conceallevel = 2,
+	concealcursor = 'nc',
+
 	-- Direction window splits open
 	splitbelow = true,
 	splitright = true,
@@ -156,7 +159,7 @@ if fn.executable('rg') == 1 then
 	defined_options.grepprg = 'rg --vimgrep --no-heading --smart-case'
 end
 
--- Set fish as default shell, if available
+-- Set zsh as default shell, if available
 if fn.executable('zsh') == 1 then
 	defined_options.shell = 'zsh'
 end
