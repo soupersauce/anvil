@@ -91,6 +91,14 @@ local on_startup = function(use)
 		-- end
 	}
 
+	use {
+		'akinsho/toggleterm.nvim',
+		tag = 'v2.*',
+		config = function()
+			require('toggleterm').setup()
+		end,
+	}
+
 	-- Git integration
 	use {
 		'lewis6991/gitsigns.nvim',
