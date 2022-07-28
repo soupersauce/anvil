@@ -39,6 +39,17 @@ local on_startup = function(use)
 	}
 	-- Packer manages itself
 	use { 'wbthomason/packer.nvim' }
+
+	-- Visualise and control undo history in tree form.
+	use {
+		'jiaoshijie/undotree',
+		requires = 'nvim-lua/plenary.nvim',
+		config = function()
+			require('undotree').setup()
+			-- vim.keymap.set('n', '<leader>u', 'require("undotree").toggle()', { noremap = true })
+		end,
+	}
+
 	-- Ask for the right file to open when file matching name is not found
 	use('EinfachToll/DidYouMean')
 
