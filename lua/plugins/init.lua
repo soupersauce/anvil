@@ -339,6 +339,13 @@ local on_startup = function(use)
 	}
 
 	use {
+		'ziontee113/color-picker.nvim',
+		config = function()
+			require('color-picker').setup {}
+		end,
+	}
+
+	use {
 		'declancm/cinnamon.nvim',
 		config = function()
 			require('cinnamon').setup {
