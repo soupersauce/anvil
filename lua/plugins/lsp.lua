@@ -58,10 +58,8 @@ local mappings = {
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 lsp_setup.setup {
-	-- nvim-lsp-installer
-	-- https://github.com/williamboman/nvim-lsp-installer#configuration
 	installer = {
-		automatic_installation = false,
+		automatic_installation = true,
 	},
 	-- Default mappings
 	default_mappings = false,
@@ -210,6 +208,13 @@ lsp_setup.setup {
 		-- lua
 		sumneko_lua = require('lua-dev').setup {
 			lspconfig = {
+				settings = {
+					Lua = {
+						format = {
+							enable = false,
+						},
+					},
+				},
 				on_attach = function(client, bufnr)
 					-- Avoid LSP formatting conflicts.
 					-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflict
@@ -274,14 +279,16 @@ lsp_setup.setup {
 			},
 		},
 		-- Rust
-		rust_analyzer = {
-			settings = {
-				['rust-analyzer'] = {
-					cargo = {
-						loadOutDirsFromCheck = true,
-					},
-					procMacro = {
-						enable = true,
+		rust_analyzer = require('nvim-lsp-setup.rust-tools').setup {
+			server = {
+				settings = {
+					['rust-analyzer'] = {
+						cargo = {
+							loadOutDirsFromCheck = true,
+						},
+						procMacro = {
+							enable = true,
+						},
 					},
 				},
 			},

@@ -193,12 +193,14 @@ local on_startup = function(use)
 	use {
 		'junnplus/nvim-lsp-setup',
 		requires = {
-			'williamboman/nvim-lsp-installer',
+			'williamboman/mason.nvim',
+			'williamboman/mason-lspconfig.nvim',
 			'neovim/nvim-lspconfig',
 			'folke/lua-dev.nvim',
 			'SmiteshP/nvim-navic',
 			'amrbashir/nvim-docs-view',
 			'p00f/clangd_extensions.nvim',
+			'simrat39/rust-tools.nvim',
 			'folke/trouble.nvim',
 			{
 				'jose-elias-alvarez/null-ls.nvim',
