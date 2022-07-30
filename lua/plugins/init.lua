@@ -320,13 +320,18 @@ local on_startup = function(use)
 	-- TODO:CONFIGURE:
 	use { 'tpope/vim-repeat' }
 	-- TODO:CONFIGURE:
-	-- use { 'tpope/vim-surround' }
-	-- TODO:CONFIGURE:
 	use { 'tpope/vim-fugitive' }
 	-- TODO:CONFIGURE:
 	use { 'tpope/vim-eunuch' }
 	-- TODO:CONFIGURE:
 	use { 'tpope/vim-vinegar' }
+
+	use {
+		'kylechui/nvim-surround',
+		config = function()
+			require('nvim-surround').setup()
+		end,
+	}
 
 	-- TODO:CONFIGURE:
 	use {
