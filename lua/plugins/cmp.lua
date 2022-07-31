@@ -185,10 +185,10 @@ cmp.setup {
 			{ name = 'buffer' },
 		}),
 	}),
-	-- window = {
-	--   completion = cmp.config.window.bordered(),
-	--   documentation = cmp.config.window.bordered(),
-	-- }
+	window = {
+		-- completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
 }
 
 require('cmp_dictionary').setup {
