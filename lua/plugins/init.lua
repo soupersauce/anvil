@@ -459,6 +459,20 @@ local on_startup = function(use)
 	}
 
 	use {
+		'rcarriga/nvim-notify',
+		config = function()
+			require('notify').setup()
+		end,
+	}
+
+	use {
+		'stevearc/dressing.nvim',
+		config = function()
+			require('plugins.dressing')
+		end,
+	}
+
+	use {
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons' },
 		config = function()
