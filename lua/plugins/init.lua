@@ -228,7 +228,10 @@ local on_startup = function(use)
 			},
 			{
 				'weilbith/nvim-code-action-menu',
-				cmd = 'CodeActionMenu',
+				-- cmd = 'CodeActionMenu',
+				config = function()
+					vim.g.code_action_menu_window_border = 'single'
+				end,
 			},
 		},
 		config = function()
