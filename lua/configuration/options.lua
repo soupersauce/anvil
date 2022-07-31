@@ -21,11 +21,11 @@ local defined_options = {
 	expandtab = true,
 
 	-- Absolute line numbers. Should be commented out if relativenumber is used
-	-- number = true
+	number = true,
 
 	-- Start with relative line numbers 'nkakouros-original/numbers.nvim" should hand from there
 	-- Should be commented out if number is used
-	relativenumber = true,
+	-- relativenumber = true,
 
 	-- Set minimum width for line numbers
 	numberwidth = 2,
