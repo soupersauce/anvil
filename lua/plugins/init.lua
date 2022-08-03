@@ -52,8 +52,6 @@ local on_startup = function(use)
 	-- Ask for the right file to open when file matching name is not found
 	use('EinfachToll/DidYouMean')
 
-	use('stevearc/dressing.nvim')
-
 	-- COLORSCHEMES:
 	use {
 		'christianchiarulli/nvcode-color-schemes.vim',
@@ -61,9 +59,7 @@ local on_startup = function(use)
 		'th3whit3wolf/onebuddy',
 		'th3whit3wolf/one-nvim',
 		'ray-x/aurora',
-		'tanvirtin/nvim-monokai',
 		'nekonako/xresources-nvim',
-		'marko-cerovac/material.nvim',
 		'dilangmb/nightbuddy',
 		'edeneast/nightfox.nvim',
 		'navarasu/onedark.nvim',
@@ -71,10 +67,6 @@ local on_startup = function(use)
 		'yagua/nebulous.nvim',
 		'shatur/neovim-ayu',
 		'elianiva/icy.nvim',
-		'sainnhe/edge',
-		'sainnhe/sonokai',
-		'sainnhe/everforest',
-		'sainnhe/gruvbox-material',
 		{
 			'everblush/everblush.nvim',
 			as = 'everblush',
@@ -187,8 +179,7 @@ local on_startup = function(use)
 	}
 
 	-- LSP: integration
-	-- TODO: nvim-lsp-install going into maintenance mode,
-	-- see about converting to https://github.com/williamboman/mason.nvim
+	-- TODO: Config Mason
 	use {
 		'junnplus/nvim-lsp-setup',
 		requires = {
@@ -465,12 +456,12 @@ local on_startup = function(use)
 		end,
 	}
 
-	use {
-		'stevearc/dressing.nvim',
-		config = function()
-			require('plugins.dressing')
-		end,
-	}
+	-- use {
+	-- 	'stevearc/dressing.nvim',
+	-- 	config = function()
+	-- 		require('plugins.dressing')
+	-- 	end,
+	-- }
 
 	use {
 		'nvim-lualine/lualine.nvim',
