@@ -47,9 +47,9 @@ local mappings = {
 	['<leader>e'] = 'lua vim.diagnostic.open_float()',
 	-- Custom mappings, will overwrite the default mappings for the same key
 	-- Example mappings for telescope pickers:
-	gd = 'lua require("fzf-lua").lsp_definitions()',
-	gi = 'lua require("fzf-lua").lsp_implementations()',
-	gr = 'lua require("fzf-lua").lsp_references()',
+	gd = 'lua require("telescope.builtin").lsp_definitions()',
+	gi = 'lua require("telescope.builtin").lsp_implementations()',
+	gr = 'lua require("telescope.builtin.")lsp_references()',
 
 	['<leader>ca'] = 'CodeActionMenu',
 }

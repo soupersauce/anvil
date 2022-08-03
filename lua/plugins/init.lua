@@ -343,6 +343,22 @@ local on_startup = function(use)
 			require('plugins.fzf')
 		end,
 	}
+	--
+	-- TODO:CONFIGURE:
+	use {
+		'nvim-telescope/telescope.nvim',
+		branch = '0.1.x',
+		requires = {
+			'kyazdani42/nvim-web-devicons',
+			{
+				'nvim-telescope/telescope-fzf-native.nvim',
+				run = 'make',
+			},
+		},
+		config = function()
+			require('plugins.telescope')
+		end,
+	}
 
 	-- TODO:CONFIGURE:
 	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }

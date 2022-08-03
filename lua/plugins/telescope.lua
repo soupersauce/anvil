@@ -21,15 +21,15 @@ local set_keymap = function(lhs, rhs)
 	map('n', lhs, rhs, { noremap = true })
 end
 
-set_keymap('<leader>o', telescope_builtin.find_files)
-set_keymap('<leader>b', telescope_builtin.buffers)
-set_keymap('<leader>p', telescope_builtin.commands)
-set_keymap('<leader>q', telescope_builtin.quickfix)
-set_keymap('<leader>g', telescope_builtin.git_status)
-set_keymap('<leader>l', telescope_builtin.loclist)
+set_keymap('<leader>ff', telescope_builtin.find_files)
+set_keymap('<leader>fb', telescope_builtin.buffers)
+set_keymap('<leader>fc', telescope_builtin.commands)
+set_keymap('<leader>fq', telescope_builtin.quickfix)
+set_keymap('<leader>fg', telescope_builtin.git_status)
+set_keymap('<leader>fl', telescope_builtin.loclist)
 set_keymap('<F1>', telescope_builtin.help_tags)
 
-set_keymap('<leader>f', telescope.extensions.live_grep_args.live_grep_args)
+-- set_keymap('<leader>f', telescope.extensions.live_grep_args.live_grep_args)
 
 -- local dap = telescope.extensions.dap
 -- set_keymap('<leader>do', dap.commands)
