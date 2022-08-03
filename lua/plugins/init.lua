@@ -350,6 +350,7 @@ local on_startup = function(use)
 	-- TODO:CONFIGURE:
 	use {
 		'frabjous/knap',
+		ft = { 'org', 'markdown', 'tex', 'html' },
 		config = function()
 			require('plugins.knap')
 		end,
