@@ -49,7 +49,7 @@ local mappings = {
 	-- Example mappings for telescope pickers:
 	gd = 'lua require("telescope.builtin").lsp_definitions()',
 	gi = 'lua require("telescope.builtin").lsp_implementations()',
-	gr = 'lua require("telescope.builtin.")lsp_references()',
+	gr = 'lua require("telescope.builtin").lsp_references()',
 
 	['<leader>ca'] = 'CodeActionMenu',
 }
