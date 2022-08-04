@@ -237,12 +237,43 @@ local on_startup = function(use)
 	-- TODO:Figure out how to install shit
 	use {
 		'mfussenegger/nvim-dap',
+		setup = function()
+			vim.keymap.set('n', '<F1>', function()
+				require('dap').step_back()
+			end, { noremap = true, desc = 'DAP Step Back' })
+			vim.keymap.set('n', '<F2>', function()
+				require('dap').step_into()
+			end, { noremap = true, desc = 'DAP Step Into' })
+			vim.keymap.set('n', '<F3>', function()
+				require('dap').step_over()
+			end, { noremap = true, desc = 'DAP Step Over' })
+			vim.keymap.set('n', '<F4>', function()
+				require('dap').step_out()
+			end, { noremap = true, desc = 'DAP Step Out' })
+			vim.keymap.set('n', '<F5>', function()
+				require('dap').continue()
+			end, { noremap = true, desc = 'DAP Continue' })
+
+			vim.keymap.set('n', '<leader>db', function()
+				require('dap').toggle_breakpoint()
+			end, { noremap = true, desc = 'DAP Toggle Breakpoint' })
+			vim.keymap.set('n', '<leader>Db', function()
+				require('dap').set_breakpoint(vim.fn.input('[DAP] Condition > '))
+			end, { noremap = true, desc = 'DAP Step Out' })
+			vim.keymap.set('n', '<leader>dr', function()
+				require('dap').repl.open()
+			end, { noremap = true, desc = 'DAP Continue' })
+		end,
 		requires = {
 			'theHamsta/nvim-dap-virtual-text',
 			'rcarriga/nvim-dap-ui',
 			'leoluz/nvim-dap-go',
 			'mfussenegger/nvim-dap-python',
-			-- { 'pocco81/dap-buddy.nvim', config = function() require('plugins.dap') end }
+			'jbyuki/one-small-step-for-vimkind',
+			'nvim-telescope/telescope-dap.nvim',
+			config = function()
+				require('plugins.dap')
+			end,
 		},
 	}
 
