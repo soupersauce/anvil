@@ -56,7 +56,10 @@ local on_startup = function(use)
 	use {
 		'christianchiarulli/nvcode-color-schemes.vim',
 		'glepnir/zephyr-nvim',
-		'th3whit3wolf/onebuddy',
+		{
+			'th3whit3wolf/onebuddy',
+			requires = 'tjdevries/colorbuddy.nvim',
+		},
 		'th3whit3wolf/one-nvim',
 		'ray-x/aurora',
 		'nekonako/xresources-nvim',
