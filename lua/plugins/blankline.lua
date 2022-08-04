@@ -9,7 +9,7 @@ vim.opt.listchars:append('space:⋅')
 vim.opt.listchars:append('eol:↴')
 
 local options = {
-	indentLine_enabled = 1,
+	indentLine_enabled = true,
 	char = '▏',
 	filetype_exclude = {
 		'help',

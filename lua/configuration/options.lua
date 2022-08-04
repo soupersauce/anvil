@@ -94,7 +94,7 @@ local defined_options = {
 	list = true,
 
 	-- Only show tabs and trailing spaces
-	listchars = 'tab:▶-,trail:●,extends:◣,precedes:◢',
+	listchars = 'tab:>-,trail:●,extends:◣,precedes:◢',
 
 	-- Default search is not case sensitive
 	ignorecase = true,

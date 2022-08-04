@@ -391,22 +391,6 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- use {
-	-- 	'nkakouros-original/numbers.nvim',
-	-- 	config = function()
-	-- 		require('numbers').setup {
-	-- 			excluded_filetypes = {
-	-- 				'alpha',
-	-- 				'NvimTree',
-	-- 				'help',
-	-- 				'undotree',
-	-- 				'NeogitStatus',
-	-- 				'NeogitCommitMessage',
-	-- 				'NeogitPopup',
-	-- 			},
-	-- 		}
-	-- 	end,
-	-- }
 	use {
 		'sitiom/nvim-numbertoggle',
 		config = function()
@@ -474,12 +458,12 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- use {
-	-- 	'stevearc/dressing.nvim',
-	-- 	config = function()
-	-- 		require('plugins.dressing')
-	-- 	end,
-	-- }
+	use {
+		'stevearc/dressing.nvim',
+		config = function()
+			require('plugins.dressing')
+		end,
+	}
 
 	use {
 		'nvim-lualine/lualine.nvim',

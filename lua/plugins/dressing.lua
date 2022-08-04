@@ -7,14 +7,14 @@ if not dressing_ok then
 end
 
 dressing.setup {
-	select = {
-		gets_config = function(opts)
-			if opts.kind == 'codeaction' then
-				return {
-					backend = 'fzf_lua',
-					fzf_lua = {},
-				}
-			end
-		end,
-	},
+	-- select = {
+	-- 	gets_config = function(opts)
+	-- 		if opts.kind == 'codeaction' then
+	-- 			return {
+	-- 				backend = 'fzf_lua',
+	-- 				fzf_lua = {},
+	-- 			}
+	-- 		end
+	-- 	end,
+	-- },
 }
