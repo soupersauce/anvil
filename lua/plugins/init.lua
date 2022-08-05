@@ -492,12 +492,12 @@ local on_startup = function(use)
 		end,
 	}
 
-	use {
-		'stevearc/dressing.nvim',
-		config = function()
-			require('plugins.dressing')
-		end,
-	}
+	-- use {
+	-- 	'stevearc/dressing.nvim',
+	-- 	config = function()
+	-- 		require('plugins.dressing')
+	-- 	end,
+	-- }
 
 	use {
 		'nvim-lualine/lualine.nvim',
