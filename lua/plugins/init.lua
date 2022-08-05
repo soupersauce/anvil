@@ -30,7 +30,7 @@ end
 -- Add plugins
 local on_startup = function(use)
 	-- UTILS:
-	-- loads stuff fast
+	-- loads stuff faster
 	use {
 		'lewis6991/impatient.nvim',
 		config = function()
