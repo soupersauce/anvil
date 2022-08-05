@@ -54,6 +54,16 @@ local mappings = {
 	['<leader>ca'] = 'CodeActionMenu',
 }
 
+local lsp_formatting = function(bufnr)
+	vim.lsp.buf.format {
+		filter = function(client)
+			return client.name == 'null-ls'
+		end,
+		bufnr = bufnr,
+	}
+end
+
+local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 lsp_setup.setup {
@@ -64,7 +74,18 @@ lsp_setup.setup {
 	default_mappings = false,
 	mappings = mappings,
 	-- Global on_attach
-	on_attach = function(client, bufnr) end,
+	on_attach = function(client, bufnr)
+		if client.supports_method('textDocument/formatting') then
+			vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+			vim.api.nvim_create_autocmd('BufWritePre', {
+				group = augroup,
+				buffer = bufnr,
+				callback = function()
+					lsp_formatting(bufnr)
+				end,
+			})
+		end
+	end,
 	-- Global capabilities
 	capabilities = vim.lsp.protocol.make_client_capabilities(),
 	-- Configuration of LSP servers  -- capabilities = vim.lsp.protocol.make_client_capabilities(),
@@ -482,28 +503,9 @@ local null_sources = {
 	null_b.hover.dictionary,
 }
 
-local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-
 null_ls.setup {
 	-- debug = true,
 	sources = null_sources,
-	on_attach = function(client, bufnr)
-		if client.supports_method('textDocument/formatting') then
-			vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-			vim.api.nvim_create_autocmd('BufWritePre', {
-				group = augroup,
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format {
-						bufnr = bufnr,
-						filter = function(client)
-							return client.name == 'null-ls'
-						end,
-					}
-				end,
-			})
-		end
-	end,
 }
 
 require('mason-tool-installer').setup {
