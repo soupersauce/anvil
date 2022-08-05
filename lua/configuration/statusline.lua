@@ -1,3 +1,4 @@
+local vim = require('vim')
 -- Statusline configuration
 -- inspiration: https://elianiva.my.id/post/neovim-lua-statusline
 

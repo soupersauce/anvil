@@ -30,7 +30,7 @@ end
 -- Add plugins
 local on_startup = function(use)
 	-- UTILS:
-	-- loads stuff fast
+	-- loads stuff faster
 	use {
 		'lewis6991/impatient.nvim',
 		config = function()
@@ -59,6 +59,9 @@ local on_startup = function(use)
 		{
 			'th3whit3wolf/onebuddy',
 			requires = 'tjdevries/colorbuddy.nvim',
+			config = function()
+				require('colorbuddy').colorscheme('onebuddy')
+			end,
 		},
 		'th3whit3wolf/one-nvim',
 		'ray-x/aurora',
@@ -73,11 +76,11 @@ local on_startup = function(use)
 		{
 			'everblush/everblush.nvim',
 			as = 'everblush',
-			config = function()
-				require('everblush').setup {
-					nvim_tree = { contrast = true },
-				}
-			end,
+			-- config = function()
+			-- 	require('everblush').setup {
+			-- 		nvim_tree = { contrast = true },
+			-- 	}
+			-- end,
 		},
 		'kaiuri/nvim-juliana',
 		'projekt0n/github-nvim-theme',

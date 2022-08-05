@@ -1,3 +1,4 @@
+local vim = require('vim')
 local null_ok, null_ls = pcall(require, 'null-ls')
 local lspsetup_ok, lsp_setup = pcall(require, 'nvim-lsp-setup')
 local navic_ok, navic = pcall(require, 'nvim-navic')

@@ -1,3 +1,4 @@
+local vim = require('vim')
 local lualine_ok, lualine = pcall(require, 'lualine')
 if not lualine_ok then
 	return
@@ -51,7 +52,7 @@ end
 lualine.setup {
 	options = {
 		icons_enabled = true,
-		theme = 'ayu_dark',
+		theme = 'auto',
 		component_separators = { left = '', right = '' },
 		section_separators = { left = '', right = '' },
 		disabled_filetypes = {},
