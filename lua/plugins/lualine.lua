@@ -1,4 +1,4 @@
-local vim = require('vim')
+local vim = vim
 local lualine_ok, lualine = pcall(require, 'lualine')
 if not lualine_ok then
 	return

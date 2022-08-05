@@ -1,4 +1,4 @@
-local vim = require('vim')
+local vim = vim
 local set_keymap = vim.keymap.set
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd

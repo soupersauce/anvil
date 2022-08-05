@@ -1,4 +1,4 @@
-local vim = require('vim')
+local vim = vim
 local icons = require('icons')
 -- Setup nvim-cmp.
 local cmp_status_ok, cmp = pcall(require, 'cmp')
