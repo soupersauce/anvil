@@ -1,3 +1,4 @@
+local vim = vim
 local pairs_ok, npairs = pcall(require, 'nvim-autopairs')
 local cmp_ok, cmp = pcall(require, 'cmp')
 
