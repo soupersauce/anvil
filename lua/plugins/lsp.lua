@@ -511,11 +511,12 @@ null_ls.setup {
 
 require('mason-tool-installer').setup {
 	ensure_installed = {
-		'black',
+		'blue',
 		'clang-format',
 		'codespell',
 		'curlylint',
 		'debugpy',
+		'debugpy-adapter',
 		'delve',
 		'diagnostic-languageserver',
 		'eslint_d',
@@ -543,6 +544,7 @@ require('mason-tool-installer').setup {
 		'stylua',
 		'taplo',
 		'terraform-ls',
+    'textlint',
 		'tflint',
 		'vale',
 		'write-good',
