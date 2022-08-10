@@ -187,7 +187,8 @@ local on_startup = function(use)
 	-- LSP: integration
 	-- TODO: Config Mason
 	use {
-		'junnplus/nvim-lsp-setup',
+		'junnplus/lsp-setup.nvim',
+    branch = 'rust-tools',
 		requires = {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',

@@ -300,7 +300,7 @@ lsp_setup.setup {
 			},
 		},
 		-- Rust
-		rust_analyzer = require('nvim-lsp-setup.rust-tools').setup {
+		rust_analyzer = require('lsp-setup.rust-tools').setup {
 			server = {
 				settings = {
 					['rust-analyzer'] = {
@@ -516,7 +516,7 @@ require('mason-tool-installer').setup {
 		'codespell',
 		'curlylint',
 		'debugpy',
-		'debugpy-adapter',
+		-- 'debugpy-adapter',
 		'delve',
 		'diagnostic-languageserver',
 		'eslint_d',
