@@ -392,7 +392,7 @@ local on_startup = function(use)
 				'nvim-telescope/telescope-fzf-native.nvim',
 				run = 'make',
 			},
-		},
+    },
 		config = function()
 			require('plugins.telescope')
 		end,
@@ -475,7 +475,7 @@ local on_startup = function(use)
 		end,
 	}
 	use {
-		'norcalli/nvim-colorizer.lua',
+		'nvchad/nvim-colorizer.lua',
 		config = function()
 			require('colorizer').setup()
 		end,
@@ -495,12 +495,12 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- use {
-	-- 	'stevearc/dressing.nvim',
-	-- 	config = function()
-	-- 		require('plugins.dressing')
-	-- 	end,
-	-- }
+	use {
+		'stevearc/dressing.nvim',
+		config = function()
+			require('plugins.dressing')
+		end,
+	}
 
 	use {
 		'nvim-lualine/lualine.nvim',
