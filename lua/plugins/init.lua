@@ -101,7 +101,9 @@ local on_startup = function(use)
 		'akinsho/toggleterm.nvim',
 		tag = 'v2.*',
 		config = function()
-			require('toggleterm').setup()
+			require('toggleterm').setup{
+        open_mapping = [[<c-\>]],
+      }
 		end,
 	}
 
