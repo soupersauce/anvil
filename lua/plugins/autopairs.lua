@@ -14,7 +14,7 @@ end
 npairs.setup {
 	fast_wrap = {},
 	check_ts = true,
-	disable_filetype = { 'alpha', 'vim', 'NvimTree' },
+	disable_filetype = { 'alpha', 'vim', 'NvimTree', 'TelescopePrompt' },
 	ts_config = {
 		lua = { 'string' },
 		javascript = { 'template_string' },
