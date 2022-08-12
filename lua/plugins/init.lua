@@ -2,6 +2,7 @@
 -- Configure plugins, plugin specific functions and autocommands are to be
 -- written in the corresponding files (makes debugging and trying out plugins easier)
 
+local vim = vim
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local run_sync = false
@@ -101,9 +102,9 @@ local on_startup = function(use)
 		'akinsho/toggleterm.nvim',
 		tag = 'v2.*',
 		config = function()
-			require('toggleterm').setup{
-        open_mapping = [[<c-\>]],
-      }
+			require('toggleterm').setup {
+				open_mapping = [[<c-\>]],
+			}
 		end,
 	}
 
@@ -190,7 +191,7 @@ local on_startup = function(use)
 	-- TODO: Config Mason
 	use {
 		'junnplus/lsp-setup.nvim',
-    branch = 'rust-tools',
+		branch = 'rust-tools',
 		requires = {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
@@ -395,7 +396,7 @@ local on_startup = function(use)
 				'nvim-telescope/telescope-fzf-native.nvim',
 				run = 'make',
 			},
-    },
+		},
 		config = function()
 			require('plugins.telescope')
 		end,
