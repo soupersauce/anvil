@@ -67,9 +67,9 @@ set_keymap('n', 'n', 'nzz', options)
 set_keymap('n', 'N', 'Nzz', options)
 
 -- Keep current cursor position while entering and exiting insert mode
-set_keymap('i', '<Esc>', function()
-	return vim.fn.pumvisible() == 1 and '<Esc>i<Right>' or '<Right><Esc>'
-end, { noremap = true, expr = true })
+-- set_keymap('i', '<Esc>', function()
+-- 	return vim.fn.pumvisible() == 1 and '<Esc>i<Right>' or '<Right><Esc>'
+-- end, { noremap = true, expr = true })
 
 -- Keep visual selected after indent
 set_keymap('v', '<', '<gv', { noremap = true })
