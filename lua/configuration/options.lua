@@ -122,8 +122,8 @@ local defined_options = {
 	foldenable = true,
 	foldlevel = 99,
 	foldlevelstart = 99,
-	foldmethod = 'expr',
-	foldexpr = 'nvim_treesitter#foldexpr()',
+  foldcolumn = '1',
+  fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
 
 	conceallevel = 2,
 	concealcursor = 'nc',
