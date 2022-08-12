@@ -1,3 +1,4 @@
+local vim = vim
 local set_keymap = vim.keymap.set
 local options = { noremap = true }
 
