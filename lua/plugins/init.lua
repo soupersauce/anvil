@@ -2,7 +2,6 @@
 -- Configure plugins, plugin specific functions and autocommands are to be
 -- written in the corresponding files (makes debugging and trying out plugins easier)
 
-local vim = vim
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local run_sync = false
@@ -31,8 +30,7 @@ end
 -- Add plugins
 local on_startup = function(use)
 	-- UTILS:
-	-- loads stuff faster
-	use {
+	use { -- impatient
 		'lewis6991/impatient.nvim',
 		config = function()
 			require('impatient')
@@ -41,8 +39,7 @@ local on_startup = function(use)
 	-- Packer manages itself
 	use { 'wbthomason/packer.nvim' }
 
-	-- Visualise and control undo history in tree form.
-	use {
+	use { -- Undotree
 		'jiaoshijie/undotree',
 		requires = 'nvim-lua/plenary.nvim',
 		config = function()
@@ -53,8 +50,7 @@ local on_startup = function(use)
 	-- Ask for the right file to open when file matching name is not found
 	use('EinfachToll/DidYouMean')
 
-	-- COLORSCHEMES:
-	use {
+	use {	-- COLORSCHEMES:
 		'christianchiarulli/nvcode-color-schemes.vim',
 		'glepnir/zephyr-nvim',
 		{
@@ -98,7 +94,7 @@ local on_startup = function(use)
 		-- end
 	}
 
-	use {
+	use { -- toggleterm
 		'akinsho/toggleterm.nvim',
 		tag = 'v2.*',
 		config = function()
@@ -109,14 +105,14 @@ local on_startup = function(use)
 	}
 
 	-- Git integration
-	use {
+	use { -- gitsigns
 		'lewis6991/gitsigns.nvim',
 		config = function()
 			require('plugins.gitsigns')
 		end,
 	}
 
-	use {
+	use { -- Neogit
 		'TimUntersberger/neogit',
 		config = function()
 			require('plugins.neogit')
@@ -131,8 +127,7 @@ local on_startup = function(use)
 		},
 	}
 
-	-- TREESITTER: integration
-	use {
+	use {	-- TREESITTER: integration
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
 		requires = {
@@ -173,8 +168,15 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- TODO:CONFIGURE:
-	use {
+	use { -- UFO
+		'kevinhwang91/nvim-ufo',
+		requires = 'kevinhwang91/promise-async',
+		config = function()
+			require('plugins.ufo')
+		end,
+	}
+
+	use { -- orgmode
 		'nvim-orgmode/orgmode',
 		requires = {
 			'ranjithshegde/orgWiki.nvim',
@@ -187,9 +189,7 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- LSP: integration
-	-- TODO: Config Mason
-	use {
+	use {	-- LSP: integration
 		'junnplus/lsp-setup.nvim',
 		branch = 'rust-tools',
 		requires = {
@@ -242,10 +242,7 @@ local on_startup = function(use)
 	}
 
 	-- DEBUGGING: Configuration
-	-- DAP:
-	-- TODO:CONFIGURE:
-	-- TODO:Figure out how to install shit
-	use {
+	use {	-- DAP:
 		'mfussenegger/nvim-dap',
 		setup = function()
 			vim.keymap.set('n', '<F1>', function()
@@ -295,9 +292,7 @@ local on_startup = function(use)
 	use { 'onsails/lspkind.nvim' }
 
 	-- COMPLETION:
-	-- Snippet and completion integration
-	-- Use LuaSnip as snippet provider
-	use {
+	use { -- LUASNIP
 		'L3MON4D3/LuaSnip',
 		requires = 'rafamadriz/friendly-snippets',
 		config = function()
@@ -305,15 +300,22 @@ local on_startup = function(use)
 		end,
 	}
 
-	use {
-		'windwp/nvim-autopairs',
+	-- use { -- autopairs
+	-- 	'windwp/nvim-autopairs',
+	-- 	config = function()
+	-- 		require('plugins.autopairs')
+	-- 	end,
+	-- }
+
+	use { -- Autopairs
+		'/home/souper/git/github.com/nvim-autopairs',
+		branch = 'fastwrap-fix',
 		config = function()
 			require('plugins.autopairs')
 		end,
 	}
 
-	-- TODO:CONFIGURE:
-	use {
+	use { -- CMP
 		'hrsh7th/nvim-cmp',
 		config = function()
 			require('plugins.cmp')
@@ -340,8 +342,7 @@ local on_startup = function(use)
 		},
 	}
 
-	-- For commenting
-	use {
+	use {-- Comment.nvim
 		'numToStr/Comment.nvim',
 		config = function()
 			require('plugins.comment')
@@ -350,35 +351,29 @@ local on_startup = function(use)
 
 	use { 'sqwishy/vim-sqf-syntax' }
 
-	-- TPOPE:
-	-- TODO:CONFIGURE:
-	use { 'tpope/vim-unimpaired' }
-	-- TODO:CONFIGURE:
-	use { 'tpope/vim-repeat' }
-	-- TODO:CONFIGURE:
-	use { 'tpope/vim-fugitive' }
-	-- TODO:CONFIGURE:
-	use { 'tpope/vim-eunuch' }
-	-- TODO:CONFIGURE:
-	use { 'tpope/vim-vinegar' }
+	use { -- TPOPE:
+		'tpope/vim-unimpaired',
+		'tpope/vim-repeat',
+		'tpope/vim-fugitive',
+		'tpope/vim-eunuch',
+		'tpope/vim-vinegar',
+	}
 
-	use {
+	use { -- nvim-surround
 		'kylechui/nvim-surround',
 		config = function()
 			require('nvim-surround').setup()
 		end,
 	}
 
-	-- TODO:CONFIGURE:
-	use {
+	use { -- vim-skeleton
 		'noahfrederick/vim-skeleton',
 		config = vim.cmd([[let g:skeleton_template_dir = "~/.config/nvim/templates"]]),
 	}
 
 	-- use { "luukvbaal/nnn.nvim" }
 
-	-- TODO:CONFIGURE:
-	use {
+	use { -- FZF-LUA
 		'ibhagwan/fzf-lua',
 		requires = { 'kyazdani42/nvim-web-devicons' },
 		config = function()
@@ -386,8 +381,7 @@ local on_startup = function(use)
 		end,
 	}
 	--
-	-- TODO:CONFIGURE:
-	use {
+	use { -- TELESCOPE
 		'nvim-telescope/telescope.nvim',
 		branch = '0.1.x',
 		requires = {
@@ -402,11 +396,9 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- TODO:CONFIGURE:
 	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
-	-- TODO:CONFIGURE:
-	use {
+	use { -- KNAP
 		'frabjous/knap',
 		ft = { 'org', 'markdown', 'tex', 'html' },
 		config = function()
@@ -414,14 +406,14 @@ local on_startup = function(use)
 		end,
 	}
 
-	use {
+	use { -- COLOR-PICKER
 		'ziontee113/color-picker.nvim',
 		config = function()
 			require('color-picker').setup {}
 		end,
 	}
 
-	use {
+	use { -- CINNAMON
 		'declancm/cinnamon.nvim',
 		config = function()
 			require('cinnamon').setup {
@@ -432,7 +424,7 @@ local on_startup = function(use)
 		end,
 	}
 
-	use {
+	use { -- NUMBERTOGGLE
 		'sitiom/nvim-numbertoggle',
 		config = function()
 			require('numbertoggle').setup()
@@ -441,11 +433,10 @@ local on_startup = function(use)
 
 	use { 'dhruvasagar/vim-table-mode' }
 
-	-- TODO:CONFIGURE:
 	use { 'michaelb/sniprun', run = 'bash ./install.sh' }
 
 	-- UI:
-	use {
+	use { -- FIDGET
 		'j-hui/fidget.nvim',
 		config = function()
 			require('fidget').setup {}
@@ -454,7 +445,7 @@ local on_startup = function(use)
 
 	use { 'xiyaowong/nvim-cursorword' }
 
-	use {
+	use { -- BUFFERLINE
 		'akinsho/bufferline.nvim',
 		tag = 'v2.*',
 		config = function()
@@ -462,51 +453,50 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- TODO:CONFIGURE:
-	use {
+	use { -- INDENT-BLANKLINE
 		'lukas-reineke/indent-blankline.nvim',
 		config = function()
 			require('plugins.blankline')
 		end,
 	}
 
-	-- TODO:CONFIGURE:
-	use {
+	use { -- nvim-tree
 		'kyazdani42/nvim-tree.lua',
 		cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
 		config = function()
 			require('plugins.nvimtree')
 		end,
 	}
-	use {
+
+	use { -- colorizer
 		'nvchad/nvim-colorizer.lua',
 		config = function()
 			require('colorizer').setup()
 		end,
 	}
 
-	use {
+	use { -- alpha
 		'goolord/alpha-nvim',
 		config = function()
 			require('alpha').setup(require('plugins.alpha').config)
 		end,
 	}
 
-	use {
+	use { -- nvim-notify
 		'rcarriga/nvim-notify',
 		config = function()
 			require('notify').setup()
 		end,
 	}
 
-	use {
+	use { -- dressing
 		'stevearc/dressing.nvim',
 		config = function()
 			require('plugins.dressing')
 		end,
 	}
 
-	use {
+	use { -- LUALINE
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons' },
 		config = function()
@@ -514,10 +504,7 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- Keymap hints
-	-- Load after rest of gui
-	-- TODO:CONFIGURE:
-	use {
+	use { -- WHICHKEY
 		'folke/which-key.nvim',
 		config = function()
 			require('plugins.whichkey')
