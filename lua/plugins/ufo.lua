@@ -44,6 +44,14 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 	return newVirtText
 end
 
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+	pattern = { 'org' },
+	callback = function()
+		ufo.detach()
+	end,
+}
+)
+
 ufo.setup {
 	provider_selector = function(bufnr, filetype, buftype)
 		return { 'treesitter', 'indent' }
