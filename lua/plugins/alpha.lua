@@ -168,7 +168,7 @@ local buttons = {
 		dashboard.button('e', '  New file', '<cmd>ene<CR>'),
 		dashboard.button('SPC f f', '  Find file', '<cmd>Telescope find_files<CR>'),
 		dashboard.button('SPC f g', '  Live grep', '<cmd>Telescope live_grep<CR>'),
-		dashboard.button('c', '  Configuration', '<cmd>cd ~/.config/nvim/ <CR>'),
+		dashboard.button('c', '  Configuration', '<cmd>cd ~/.config/nvim/ <CR><silent><cmd>!cd ~/.config/nvim/<CR>'),
 		dashboard.button('u', '  Update plugins', '<cmd>PackerSync<CR>'),
 		dashboard.button('q', '  Quit', '<cmd>qa<CR>'),
 	},
