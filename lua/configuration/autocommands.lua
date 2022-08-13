@@ -38,3 +38,10 @@ autocmd('TextYankPost', {
 	end,
 	group = highlight_yank,
 })
+
+autocmd('BufWritePost', {
+	pattern = '*/plugins/init.lua',
+	callback = function()
+    vim.cmd([[source <afile> | PackerCompile]])
+	end,
+})
