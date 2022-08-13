@@ -50,7 +50,7 @@ local on_startup = function(use)
 	-- Ask for the right file to open when file matching name is not found
 	use('EinfachToll/DidYouMean')
 
-	use {	-- COLORSCHEMES:
+	use { -- COLORSCHEMES:
 		'christianchiarulli/nvcode-color-schemes.vim',
 		'glepnir/zephyr-nvim',
 		{
@@ -127,7 +127,7 @@ local on_startup = function(use)
 		},
 	}
 
-	use {	-- TREESITTER: integration
+	use { -- TREESITTER: integration
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
 		requires = {
@@ -189,7 +189,7 @@ local on_startup = function(use)
 		end,
 	}
 
-	use {	-- LSP: integration
+	use { -- LSP: integration
 		'junnplus/lsp-setup.nvim',
 		branch = 'rust-tools',
 		requires = {
@@ -242,7 +242,7 @@ local on_startup = function(use)
 	}
 
 	-- DEBUGGING: Configuration
-	use {	-- DAP:
+	use { -- DAP:
 		'mfussenegger/nvim-dap',
 		setup = function()
 			vim.keymap.set('n', '<F1>', function()
@@ -278,10 +278,10 @@ local on_startup = function(use)
 			'mfussenegger/nvim-dap-python',
 			'jbyuki/one-small-step-for-vimkind',
 			'nvim-telescope/telescope-dap.nvim',
-			config = function()
-				require('plugins.dap')
-			end,
 		},
+		config = function()
+			require('plugins.dap')
+		end,
 	}
 
 	-- ICONS:
@@ -342,7 +342,7 @@ local on_startup = function(use)
 		},
 	}
 
-	use {-- Comment.nvim
+	use { -- Comment.nvim
 		'numToStr/Comment.nvim',
 		config = function()
 			require('plugins.comment')
