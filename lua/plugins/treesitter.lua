@@ -25,7 +25,7 @@ config.setup {
 	},
 	highlight = {
 		enable = true,
-		additional_vim_regex_highlighting = { 'org' },
+		additional_vim_regex_highlighting = { 'org', 'typescript' },
 		use_languagetree = true,
 	},
 	playground = {

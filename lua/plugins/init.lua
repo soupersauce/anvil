@@ -51,47 +51,33 @@ local on_startup = function(use)
 	use('EinfachToll/DidYouMean')
 
 	use { -- COLORSCHEMES:
-		'christianchiarulli/nvcode-color-schemes.vim',
-		'glepnir/zephyr-nvim',
-		{
+		'tjdevries/colorbuddy.nvim',
+		requires = {
+			'rktjmp/lush.nvim',
+			{ 'nvim-treesitter/nvim-treesitter', opt = true },
+			'christianchiarulli/nvcode-color-schemes.vim',
+			'glepnir/zephyr-nvim',
 			'th3whit3wolf/onebuddy',
-			requires = 'tjdevries/colorbuddy.nvim',
-			config = function()
-				require('colorbuddy').colorscheme('onebuddy')
-			end,
-		},
-		'th3whit3wolf/one-nvim',
-		'ray-x/aurora',
-		'nekonako/xresources-nvim',
-		'dilangmb/nightbuddy',
-		'edeneast/nightfox.nvim',
-		'navarasu/onedark.nvim',
-		'rafamadriz/neon',
-		'yagua/nebulous.nvim',
-		'shatur/neovim-ayu',
-		'elianiva/icy.nvim',
-		{
-			'everblush/everblush.nvim',
-			as = 'everblush',
-			-- config = function()
-			-- 	require('everblush').setup {
-			-- 		nvim_tree = { contrast = true },
-			-- 	}
-			-- end,
-		},
-		'kaiuri/nvim-juliana',
-		'projekt0n/github-nvim-theme',
-		{
+			'th3whit3wolf/one-nvim',
+			'ray-x/aurora',
+			'nekonako/xresources-nvim',
+			'edeneast/nightfox.nvim',
+			'navarasu/onedark.nvim',
+			'rafamadriz/neon',
+			'yagua/nebulous.nvim',
+			'shatur/neovim-ayu',
+			'elianiva/icy.nvim',
+			'kaiuri/nvim-juliana',
+			'projekt0n/github-nvim-theme',
 			'adisen99/codeschool.nvim',
-			requires = 'rktjmp/lush.nvim',
-			-- config = function()
-			-- require('lush')(require('codeschool').setup())
-			-- end,
+			{
+				'everblush/everblush.nvim',
+				as = 'everblush',
+			},
 		},
-		-- config = function() require('github-theme').setup {
-		--   theme_style = "dimmed",
-		-- }
-		-- end
+		config = function()
+    require('plugins.colorscheme').codeschool()
+		end,
 	}
 
 	use { -- toggleterm
