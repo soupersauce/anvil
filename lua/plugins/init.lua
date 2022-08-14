@@ -76,7 +76,7 @@ local on_startup = function(use)
 			},
 		},
 		config = function()
-    require('plugins.colorscheme').codeschool()
+    require('plugins.colorscheme').init()
 		end,
 	}
 

@@ -1,8 +1,11 @@
 local M = {}
 
+M.init = function()
+  M.everblush()
+end
+
 -- NVCode colorschemes
--- @param[opt] string style available options onedark|aurora|gruvbox|palenight|nord|snazzy|xoria|nvcode
---
+-- @param style string available options onedark|aurora|gruvbox|palenight|nord|snazzy|xoria|nvcode
 M.nvcode = function(style)
   vim.g.nvcode_termguicolors = 256
 	if style == 'onedark' then
@@ -25,12 +28,7 @@ M.nvcode = function(style)
 end
 
 M.zephyr = function()
-	print('Getting called')
-	local ok, zephyr = pcall(require, 'zephyr')
-	if not ok then
-		print('no zephyr')
-		return
-	end
+	local _, zephyr = pcall(require, 'zephyr')
 end
 
 M.onebuddy = function()
