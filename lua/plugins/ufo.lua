@@ -49,8 +49,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 	callback = function()
 		ufo.detach()
 	end,
-}
-)
+})
 
 ufo.setup {
 	provider_selector = function(bufnr, filetype, buftype)

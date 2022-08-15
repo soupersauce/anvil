@@ -32,18 +32,18 @@ else
 end
 
 local function show_documentation(bufnr)
-    local filetype = vim.bo.filetype
-    if vim.tbl_contains({ 'vim','help' }, filetype) then
-        vim.cmd('h '..vim.fn.expand('<cword>'))
-    elseif vim.tbl_contains({ 'man' }, filetype) then
-        vim.cmd('Man '..vim.fn.expand('<cword>'))
-    elseif vim.fn.expand('%:t') == 'Cargo.toml' then
-        require('crates').show_popup()
-    elseif vim.tbl_contains({ 'rust' }, filetype) then
-      rust.hover_actions.hover_actions { buffer = bufnr}
-    else
-        vim.lsp.buf.hover()
-    end
+	local filetype = vim.bo.filetype
+	if vim.tbl_contains({ 'vim', 'help' }, filetype) then
+		vim.cmd('h ' .. vim.fn.expand('<cword>'))
+	elseif vim.tbl_contains({ 'man' }, filetype) then
+		vim.cmd('Man ' .. vim.fn.expand('<cword>'))
+	elseif vim.fn.expand('%:t') == 'Cargo.toml' then
+		require('crates').show_popup()
+	elseif vim.tbl_contains({ 'rust' }, filetype) then
+		rust.hover_actions.hover_actions { buffer = bufnr }
+	else
+		vim.lsp.buf.hover()
+	end
 end
 
 local mappings = {
@@ -233,8 +233,8 @@ lsp_setup.setup {
 		ltex = {
 			lspconfig = {
 				on_attach = function(client, bufnr)
-          textra.setup{}
-        end,
+					textra.setup {}
+				end,
 				capabilities = capabilities,
 			},
 		},

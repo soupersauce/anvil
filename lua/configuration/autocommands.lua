@@ -42,7 +42,7 @@ autocmd('TextYankPost', {
 autocmd('BufWritePost', {
 	pattern = '*/plugins/*.lua',
 	callback = function()
-    vim.cmd([[source ~/.config/nvim/lua/plugins/init.lua | PackerCompile<CR>]])
-    print('Packer Recompiled')
+		vim.cmd([[source ~/.config/nvim/lua/plugins/init.lua | PackerCompile<CR>]])
+		print('Packer Recompiled')
 	end,
 })

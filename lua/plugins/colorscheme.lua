@@ -1,13 +1,13 @@
 local M = {}
 
 M.init = function()
-  M.everblush()
+	M.everblush()
 end
 
 -- NVCode colorschemes
 -- @param style string available options onedark|aurora|gruvbox|palenight|nord|snazzy|xoria|nvcode
 M.nvcode = function(style)
-  vim.g.nvcode_termguicolors = 256
+	vim.g.nvcode_termguicolors = 256
 	if style == 'onedark' then
 		vim.cmd([[colorscheme onedark]])
 	elseif style == 'aurora' then
@@ -36,7 +36,7 @@ M.onebuddy = function()
 end
 
 M.onenvim = function()
-		vim.cmd([[colorscheme one-nvim]])
+	vim.cmd([[colorscheme one-nvim]])
 end
 
 M.aurora = function()
@@ -45,7 +45,7 @@ M.aurora = function()
 end
 
 M.xresources = function()
-  require('xresources')
+	require('xresources')
 end
 
 M.nightfox = function(style)
@@ -67,10 +67,10 @@ M.nightfox = function(style)
 end
 
 M.onedark = function(style)
-  require('onedark').setup {
-    style = style
-}
-require('onedark').load()
+	require('onedark').setup {
+		style = style,
+	}
+	require('onedark').load()
 end
 
 M.neon = function(style)
@@ -113,7 +113,7 @@ M.everblush = function()
 end
 
 M.juliana = function()
-		vim.cmd([[colorscheme juliana]])
+	vim.cmd([[colorscheme juliana]])
 end
 
 M.github = function(style)

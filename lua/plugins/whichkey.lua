@@ -6,10 +6,10 @@ end
 
 wk.setup {
 
-	  popup_mappings = {
-	     scroll_down = "<c-d>", -- binding to scroll down inside the popup
-	     scroll_up = "<c-u>", -- binding to scroll up inside the popup
-	  },
+	popup_mappings = {
+		scroll_down = '<c-d>', -- binding to scroll down inside the popup
+		scroll_up = '<c-u>', -- binding to scroll up inside the popup
+	},
 	--
 	window = {
 		border = 'none', -- none/single/double/shadow

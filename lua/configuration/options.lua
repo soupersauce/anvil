@@ -123,8 +123,8 @@ local defined_options = {
 	foldenable = true,
 	foldlevel = 99,
 	foldlevelstart = 99,
-  foldcolumn = '1',
-  fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
+	foldcolumn = '1',
+	fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
 
 	conceallevel = 2,
 	concealcursor = 'nc',
