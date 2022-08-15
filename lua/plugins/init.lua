@@ -76,7 +76,7 @@ local on_startup = function(use)
 			},
 		},
 		config = function()
-    require('plugins.colorscheme').init()
+			require('plugins.colorscheme').init()
 		end,
 	}
 
@@ -177,7 +177,6 @@ local on_startup = function(use)
 
 	use { -- LSP: integration
 		'junnplus/lsp-setup.nvim',
-		branch = 'rust-tools',
 		requires = {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
@@ -188,7 +187,9 @@ local on_startup = function(use)
 			'amrbashir/nvim-docs-view',
 			'p00f/clangd_extensions.nvim',
 			'simrat39/rust-tools.nvim',
+			'Saecki/crates.nvim',
 			'folke/trouble.nvim',
+			'barreiroleo/ltex-extra.nvim',
 			{
 				'jose-elias-alvarez/null-ls.nvim',
 				requires = {

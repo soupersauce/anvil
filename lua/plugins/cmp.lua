@@ -50,8 +50,7 @@ local box_icons =
 		Event = '',
 		Operator = '',
 		TypeParameter = '',
-	},
-require('luasnip.loaders.from_vscode').lazy_load()
+	}, require('luasnip.loaders.from_vscode').lazy_load()
 
 cmp.setup {
 	-- cmp.event:on(
@@ -132,6 +131,7 @@ cmp.setup {
 		{ name = 'buffer', keyword_length = 5 },
 		{ name = 'cmdline' },
 		{ name = 'nvim_lua' },
+		{ name = 'crates' },
 		{ name = 'cmp-zsh' },
 		-- { name = 'treesitter' },
 		{ name = 'cmp_autopairs' },

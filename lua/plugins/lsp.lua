@@ -4,6 +4,9 @@ local lspsetup_ok, lsp_setup = pcall(require, 'nvim-lsp-setup')
 local navic_ok, navic = pcall(require, 'nvim-navic')
 local lspsig_ok, lspsignature = pcall(require, 'lsp_signature')
 local trouble_ok, trouble = pcall(require, 'trouble')
+local crates_ok, crates = pcall(require, 'crates')
+local rust_ok, rust = pcall(require, 'rust-tools')
+local textra_ok, textra = pcall(require, 'ltex_extra')
 require('clangd_extensions')
 
 if not lspsetup_ok then
@@ -28,6 +31,21 @@ else
 	print('trouble with trouble')
 end
 
+local function show_documentation(bufnr)
+    local filetype = vim.bo.filetype
+    if vim.tbl_contains({ 'vim','help' }, filetype) then
+        vim.cmd('h '..vim.fn.expand('<cword>'))
+    elseif vim.tbl_contains({ 'man' }, filetype) then
+        vim.cmd('Man '..vim.fn.expand('<cword>'))
+    elseif vim.fn.expand('%:t') == 'Cargo.toml' then
+        require('crates').show_popup()
+    elseif vim.tbl_contains({ 'rust' }, filetype) then
+      rust.hover_actions.hover_actions { buffer = bufnr}
+    else
+        vim.lsp.buf.hover()
+    end
+end
+
 local mappings = {
 
 	-- Add keybindings for LSP integration
@@ -35,7 +53,7 @@ local mappings = {
 	-- gd = 'lua vim.lsp.buf.definition()',
 	K = 'lua vim.lsp.buf.hover()',
 	-- gi = 'lua vim.lsp.buf.implementation()',
-	['<Leader>k'] = 'lua vim.lsp.buf.signature_help()',
+	['<Leader>k'] = 'lua show_documentation(bufnr)',
 	gt = 'lua vim.lsp.buf.type_definition()',
 	-- gr = 'lua vim.lsp.buf.references()',
 	['<Leader>s'] = 'lua vim.lsp.buf.document_symbol()',
@@ -214,7 +232,9 @@ lsp_setup.setup {
 		-- Latex
 		ltex = {
 			lspconfig = {
-				on_attach = function(client, bufnr) end,
+				on_attach = function(client, bufnr)
+          textra.setup{}
+        end,
 				capabilities = capabilities,
 			},
 		},
@@ -417,6 +437,14 @@ vim.diagnostic.config {
 	update_in_insert = false,
 	severity_sort = false,
 }
+if crates_ok then
+	crates.setup {
+		null_ls = {
+			enabled = true,
+			name = 'crates',
+		},
+	}
+end
 
 if not null_ok then
 	print('Null not ok')
@@ -544,7 +572,7 @@ require('mason-tool-installer').setup {
 		'stylua',
 		'taplo',
 		'terraform-ls',
-    'textlint',
+		'textlint',
 		'tflint',
 		'vale',
 		'write-good',
