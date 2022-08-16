@@ -129,7 +129,7 @@ local on_startup = function(use)
 						pcall(highlight_win, win, force)
 					end
 					require('todo-comments').setup {
-						highlight = { exclude = { 'vim', 'packer', 'NeogitStatus', 'NeogitPopup', 'nofile' } },
+						highlight = { exclude = { 'vim', 'packer', 'NeogitStatus', 'NeogitPopup', 'nofile', 'terminal' } },
 					}
 				end,
 			},
