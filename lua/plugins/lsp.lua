@@ -1,4 +1,5 @@
 local vim = vim
+local u = require('configuration.utils')
 local null_ok, null_ls = pcall(require, 'null-ls')
 local lspsetup_ok, lsp_setup = pcall(require, 'nvim-lsp-setup')
 local navic_ok, navic = pcall(require, 'nvim-navic')
@@ -8,6 +9,8 @@ local crates_ok, crates = pcall(require, 'crates')
 local rust_ok, rust = pcall(require, 'rust-tools')
 local textra_ok, textra = pcall(require, 'ltex_extra')
 require('clangd_extensions')
+
+local eslint_disabled_buffers = {}
 
 if not lspsetup_ok then
 	return
@@ -46,6 +49,23 @@ local function show_documentation(bufnr)
 	end
 end
 
+vim.lsp.handlers['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
+	local client = vim.lsp.get_client_by_id(ctx.client_id)
+	if not (client and client.name == 'eslint_d') then
+		goto done
+	end
+
+	for _, diagnostic in ipairs(result.diagnostics) do
+		if diagnostic.message:find('The file does not match your project config') then
+			local bufnr = vim.uri_to_bufnr(result.uri)
+			eslint_disabled_buffers[bufnr] = true
+		end
+	end
+
+	::done::
+	return vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, config)
+end
+
 local mappings = {
 
 	-- Add keybindings for LSP integration
@@ -74,16 +94,26 @@ local mappings = {
 }
 
 local lsp_formatting = function(bufnr)
+	local clients = vim.lsp.get_active_clients { bufnr = bufnr }
 	vim.lsp.buf.format {
-		filter = function(client)
-			return client.name == 'null-ls'
-		end,
 		bufnr = bufnr,
+		filter = function(client)
+			if client.name == 'eslint' then
+				return not eslint_disabled_buffers[bufnr]
+			end
+
+			if client.name == 'null-ls' then
+				return not u.table.some(clients, function(_, other_client)
+					return other_client.name == 'eslint' and not eslint_disabled_buffers[bufnr]
+				end)
+			end
+		end,
 	}
 end
 
-local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
 lsp_setup.setup {
 	installer = {
@@ -95,13 +125,14 @@ lsp_setup.setup {
 	-- Global on_attach
 	on_attach = function(client, bufnr)
 		if client.supports_method('textDocument/formatting') then
+			u.buf_command(bufnr, 'LspFormatting', function()
+				lsp_formatting(bufnr)
+			end)
 			vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
 			vim.api.nvim_create_autocmd('BufWritePre', {
 				group = augroup,
 				buffer = bufnr,
-				callback = function()
-					lsp_formatting(bufnr)
-				end,
+				command = 'LspFormatting',
 			})
 		end
 	end,
