@@ -283,7 +283,7 @@ lsp_setup.setup {
 				settings = {
 					Lua = {
 						format = {
-							enable = false,
+							enable = true,
 						},
 					},
 				},
@@ -421,15 +421,6 @@ lsp_setup.setup {
 				capabilities = capabilities,
 			},
 		},
-		-- vimL
-		vimls = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
 		-- XML
 		lemminx = {
 			lspconfig = {
@@ -550,7 +541,23 @@ local null_sources = {
 	},
 	null_b.formatting.prettier,
 	null_b.formatting.puppet_lint,
-	null_b.formatting.rustfmt,
+	null_b.formatting.rustfmt.with {
+		extra_args = function(params)
+			local Path = require('plenary.path')
+			local cargo_toml = Path:new(params.root .. '/' .. 'Cargo.toml')
+
+			if cargo_toml:exists() and cargo_toml:is_file() then
+				for _, line in ipairs(cargo_toml:readlines()) do
+					local edition = line:match([[^edition%s*=%s*%"(%d+)%"]])
+					if edition then
+						return { '--edition=' .. edition }
+					end
+				end
+			end
+			-- default edition when we don't find `Cargo.toml` or the `edition` in it.
+			return { '--edition=2021' }
+		end,
+	},
 	null_b.formatting.shellharden,
 	null_b.formatting.shfmt,
 	null_b.formatting.sqlfluff,
@@ -575,7 +582,6 @@ require('mason-tool-installer').setup {
 		'codespell',
 		'curlylint',
 		'debugpy',
-		-- 'debugpy-adapter',
 		'delve',
 		'diagnostic-languageserver',
 		'eslint_d',
