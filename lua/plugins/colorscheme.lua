@@ -1,7 +1,7 @@
 local M = {}
 
 M.init = function()
-	M.everblush()
+	M.codeschool()
 end
 
 -- NVCode colorschemes
