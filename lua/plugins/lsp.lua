@@ -522,10 +522,10 @@ local null_sources = {
 	},
 	null_b.diagnostics.stylelint,
 	null_b.diagnostics.tidy,
-	null_b.diagnostics.vale.with {
-		extra_filetypes = { 'org', 'text' },
-		extra_args = { '--config', vim.fn.expand('~/.vale.ini') },
-	},
+	-- null_b.diagnostics.vale.with {
+	-- 	extra_filetypes = { 'org', 'text' },
+	-- 	extra_args = { '--config', vim.fn.expand('~/.vale.ini') },
+	-- },
 	null_b.diagnostics.yamllint,
 	null_b.diagnostics.zsh,
 
