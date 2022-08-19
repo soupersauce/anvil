@@ -129,7 +129,9 @@ local on_startup = function(use)
 						pcall(highlight_win, win, force)
 					end
 					require('todo-comments').setup {
-						highlight = { exclude = { 'vim', 'packer', 'NeogitStatus', 'NeogitPopup', 'nofile', 'terminal' } },
+						highlight = {
+							exclude = { 'vim', 'packer', 'NeogitStatus', 'NeogitPopup', 'nofile', 'terminal' },
+						},
 					}
 				end,
 			},
@@ -459,6 +461,17 @@ local on_startup = function(use)
 		'nvchad/nvim-colorizer.lua',
 		config = function()
 			require('colorizer').setup()
+		end,
+	}
+
+	use {
+		'ethanholz/nvim-lastplace',
+		config = function()
+			require('nvim-lastplace').setup {
+				lastplace_ignore_buftype = { 'quickfix', 'nofile', 'help', 'Trouble', 'terminal', 'nvimtree' },
+				lastplace_ignore_filetype = { 'gitcommit', 'gitrebase', 'svn', 'hgcommit' },
+				lastplace_open_folds = true,
+			}
 		end,
 	}
 
