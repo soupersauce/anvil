@@ -55,10 +55,15 @@ local templates = {
 	},
 }
 
+local todo_keywords = {
+  'TODO', 'ONHOLD', '|', 'DELEGATED', 'DONE',
+}
+
 org.setup {
 	org_agenda_files = agendas,
 	org_default_notes_file = notes,
 	org_capture_templates = templates,
+  org_todo_keywords = todo_keywords,
 }
 
 if wiki_ok then
