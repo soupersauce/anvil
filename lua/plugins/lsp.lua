@@ -271,6 +271,7 @@ lsp_setup.setup {
 		},
 		texlab = {
 			lspconfig = {
+        filetypes = { 'tex', 'bib', 'plaintex', 'org', 'md'},
 				on_attach = function(client, bufnr)
 					navic.attach(client, bufnr)
 				end,
@@ -609,11 +610,13 @@ require('mason-tool-installer').setup {
 		'stylua',
 		'taplo',
 		'terraform-ls',
+    'texlab',
 		'textlint',
 		'tflint',
 		'vale',
 		'write-good',
 		'yamllint',
+		-- 'debugpy-adapter',
 		-- 'ansiblelint',
 		-- 'beautysh',
 		-- 'checkmake',
