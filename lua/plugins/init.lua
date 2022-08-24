@@ -432,7 +432,19 @@ local on_startup = function(use)
 		end,
 	}
 
-	use { 'xiyaowong/nvim-cursorword' }
+	use {
+		'RRethy/vim-illuminate',
+		config = function()
+			require('illuminate').configure {
+				providers = {
+					'lsp',
+					'treesitter',
+					'regex',
+				},
+				under_cursor = false,
+			}
+		end,
+	}
 
 	use { -- BUFFERLINE
 		'akinsho/bufferline.nvim',
