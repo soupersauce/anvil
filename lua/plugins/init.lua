@@ -491,6 +491,8 @@ local on_startup = function(use)
 
 	use { -- dressing
 		'stevearc/dressing.nvim',
+		disable = false,
+		requires = 'MunifTanjim/nui.nvim',
 		config = function()
 			require('plugins.dressing')
 		end,

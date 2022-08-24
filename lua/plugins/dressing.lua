@@ -8,6 +8,6 @@ end
 
 dressing.setup {
 	select = {
-		backend = { 'fzf_lua', 'telescope', 'fzf', 'builtin', 'nui' },
+		backend = { 'nui', 'fzf_lua', 'telescope', 'builtin', 'fzf' },
 	},
 }
