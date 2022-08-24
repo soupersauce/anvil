@@ -289,16 +289,8 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- use { -- autopairs
-	-- 	'windwp/nvim-autopairs',
-	-- 	config = function()
-	-- 		require('plugins.autopairs')
-	-- 	end,
-	-- }
-
-	use { -- Autopairs
-		'/home/souper/git/github.com/nvim-autopairs',
-		branch = 'fastwrap-fix',
+	use { -- autopairs
+		'windwp/nvim-autopairs',
 		config = function()
 			require('plugins.autopairs')
 		end,
