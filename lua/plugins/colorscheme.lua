@@ -1,7 +1,8 @@
+local vim = vim
 local M = {}
 
 M.init = function()
-	M.codeschool()
+	M.zephyr()
 end
 
 -- NVCode colorschemes
