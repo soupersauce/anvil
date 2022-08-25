@@ -32,7 +32,7 @@ if bull_ok then
 end
 
 -- Directories
-local agendas = '~/Documents/org/*'
+local agendas = '~/Documents/org/**/*'
 local notes = '~/Documents/org/refile.org'
 local wkpath = '~/Documents/org/wiki/'
 local diary = '~/Documents/org/diary/'
@@ -56,14 +56,18 @@ local templates = {
 }
 
 local todo_keywords = {
-  'TODO', 'ONHOLD', '|', 'DELEGATED', 'DONE',
+	'TODO',
+	'ONHOLD',
+	'|',
+	'DELEGATED',
+	'DONE',
 }
 
 org.setup {
 	org_agenda_files = agendas,
 	org_default_notes_file = notes,
 	org_capture_templates = templates,
-  org_todo_keywords = todo_keywords,
+	org_todo_keywords = todo_keywords,
 }
 
 if wiki_ok then
