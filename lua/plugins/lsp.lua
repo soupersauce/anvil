@@ -38,7 +38,7 @@ vim.keymap.set('n', 'K', function(bufnr)
 		elseif vim.fn.expand('%:t') == 'Cargo.toml' then
 			require('crates').show_popup()
 		elseif vim.tbl_contains({ 'rust' }, filetype) then
-			rust.hover_actions.hover_actions { buffer = bufnr }
+			require('rust-tools').hover_actions.hover_actions { buffer = bufnr }
 		else
 			vim.lsp.buf.hover()
 		end
@@ -61,7 +61,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = function(_, result, ctx, c
 	::done::
 	return vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, config)
 end
--- vim.keymap.set('n', 'K', show_documentation(bufnr), { noremap = true, desc = 'Show Documentation' })
+
 local mappings = {
 
 	-- Add keybindings for LSP integration
@@ -342,23 +342,23 @@ local null_sources = {
 	},
 	null_b.formatting.prettier,
 	null_b.formatting.puppet_lint,
-	null_b.formatting.rustfmt, --.with {
-	--[[ extra_args = function(params) ]]
-	--[[ 	local Path = require('plenary.path') ]]
-	--[[ 	local cargo_toml = Path:new(params.root .. '/' .. 'Cargo.toml') ]]
+	null_b.formatting.rustfmt.with {
+		extra_args = function(params)
+			local Path = require('plenary.path')
+			local cargo_toml = Path:new(params.root .. '/' .. 'Cargo.toml')
 
-	--[[ 	if cargo_toml:exists() and cargo_toml:is_file() then ]]
-	--[[ 		for _, line in ipairs(cargo_toml:readlines()) do ]]
-	--[[ 			local edition = line:match([[^edition%s*=%s*%"(%d+)%")]]
-	--[[ 			if edition then ]]
-	--[[ 				return { '--edition=' .. edition } ]]
-	--[[ 			end ]]
-	--[[ 		end ]]
-	--[[ 	end ]]
-	--[[ 	-- default edition when we don't find `Cargo.toml` or the `edition` in it. ]]
-	--[[ 	return { '--edition=2021' } ]]
-	--[[ end, ]]
-	--},
+			if cargo_toml:exists() and cargo_toml:is_file() then
+				for _, line in ipairs(cargo_toml:readlines()) do
+					local edition = line:match([[^edition%s*=%s*%"(%d+)%"]])
+					if edition then
+						return { '--edition=' .. edition }
+					end
+				end
+			end
+			-- default edition when we don't find `Cargo.toml` or the `edition` in it.
+			return { '--edition=2021' }
+		end,
+	},
 	null_b.formatting.shellharden,
 	null_b.formatting.shfmt,
 	null_b.formatting.sqlfluff,
