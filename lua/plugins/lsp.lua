@@ -182,7 +182,7 @@ lsp_setup.setup {
 		},
 		texlab = { -- Latex
 			lspconfig = {
-				filetypes = { 'tex', 'bib', 'plaintex', 'org', 'md' },
+				filetypes = { 'tex', 'bib', 'plaintex', 'org', 'markdown' },
 			},
 		},
 		sumneko_lua = require('lua-dev').setup { -- lua
@@ -207,7 +207,10 @@ lsp_setup.setup {
 		powershell_es = {}, -- Powershell
 		puppet = {}, -- puppet
 		grammarly = { -- prose
-			file_types = { 'tex', 'bib', 'plaintex', 'org', 'md' },
+			filetypes = { 'tex', 'bib', 'plaintex', 'org', 'markdown' },
+			lspconfig = {
+				root_dir = vim.fn.expand('~'),
+			},
 		},
 		pylsp = {}, -- python
 		jedi_language_server = {}, -- python
@@ -276,73 +279,76 @@ end
 
 local diagnostics_code_template = '#{m} [#{c}]'
 
-local null_b = null_ls.builtins
+local cactions = null_ls.builtins.code_actions
+local diag = null_ls.builtins.diagnostics
+local format = null_ls.builtins.formatting
+local hover = null_ls.builtins.hover
 
 local null_sources = {
 	-- Code actions
 	-- null_b.code_actions.refactoring,
-	null_b.code_actions.shellcheck,
-	null_b.code_actions.eslint_d,
-	null_b.code_actions.proselint.with {
+	cactions.shellcheck,
+	cactions.eslint_d,
+	cactions.proselint.with {
 		extra_filetypes = { 'org', 'text' },
 	},
 
-	-- Diagnostics/linters
-	null_b.diagnostics.eslint_d,
-	null_b.diagnostics.chktex,
-	null_b.diagnostics.ansiblelint,
-	null_b.diagnostics.checkmake,
-	null_b.diagnostics.codespell,
-	null_b.diagnostics.curlylint,
-	null_b.diagnostics.gitlint,
-	null_b.diagnostics.golangci_lint,
-	null_b.diagnostics.luacheck,
-	null_b.diagnostics.pylint,
-	null_b.diagnostics.flake8,
-	null_b.diagnostics.mypy,
-	null_b.diagnostics.markdownlint,
-	null_b.diagnostics.proselint.with {
+	-- diag/linters
+	diag.eslint_d,
+	diag.chktex,
+	diag.ansiblelint,
+	diag.checkmake,
+	diag.codespell,
+	diag.curlylint,
+	diag.gitlint,
+	diag.golangci_lint,
+	diag.luacheck,
+	diag.pylint,
+	diag.flake8,
+	diag.mypy,
+	diag.markdownlint,
+	diag.proselint.with {
 		extra_filetypes = { 'tex', 'org' },
 		extra_args = { '--config', vim.fn.expand('~/.config/proselint/config.json') },
 		cwd = function()
 			return vim.fn.expand('~')
 		end,
 	},
-	null_b.diagnostics.write_good.with {
+	diag.write_good.with {
 		extra_filetypes = { 'tex', 'org' },
 	},
-	null_b.diagnostics.shellcheck.with {
-		diagnostics_format = diagnostics_code_template,
+	diag.shellcheck.with {
+		diag_format = diagnostics_code_template,
 	},
-	null_b.diagnostics.sqlfluff.with {
+	diag.sqlfluff.with {
 		extra_args = { '--dialect', 'postgres' },
 	},
-	null_b.diagnostics.stylelint,
-	null_b.diagnostics.tidy,
-	null_b.diagnostics.vale.with {
+	diag.stylelint,
+	diag.tidy,
+	diag.vale.with {
 		extra_filetypes = { 'org', 'text' },
 		extra_args = { '--config', vim.fn.expand('~/.config/vale.ini') },
 		cwd = function()
 			return vim.fn.expand('~')
 		end,
 	},
-	null_b.diagnostics.yamllint,
-	null_b.diagnostics.zsh,
+	diag.yamllint,
+	diag.zsh,
 
-	-- Formatting
-	null_b.formatting.blue,
-	null_b.formatting.clang_format,
-	null_b.formatting.eslint_d,
-	null_b.formatting.gofumpt,
-	null_b.formatting.goimports,
-	null_b.formatting.reorder_python_imports,
-	null_b.formatting.latexindent,
-	null_b.formatting.stylua.with {
+	-- format
+	format.blue,
+	format.clang_format,
+	format.eslint_d,
+	format.gofumpt,
+	format.goimports,
+	format.reorder_python_imports,
+	format.latexindent,
+	format.stylua.with {
 		extra_args = { '--config-path', vim.fn.expand('~/.config/stylua.toml') },
 	},
-	null_b.formatting.prettier,
-	null_b.formatting.puppet_lint,
-	null_b.formatting.rustfmt.with {
+	format.prettier,
+	format.puppet_lint,
+	format.rustfmt.with {
 		extra_args = function(params)
 			local Path = require('plenary.path')
 			local cargo_toml = Path:new(params.root .. '/' .. 'Cargo.toml')
@@ -359,16 +365,16 @@ local null_sources = {
 			return { '--edition=2021' }
 		end,
 	},
-	null_b.formatting.shellharden,
-	null_b.formatting.shfmt,
-	null_b.formatting.sqlfluff,
-	null_b.formatting.taplo,
-	null_b.formatting.terrafmt,
-	null_b.formatting.terraform_fmt,
-	null_b.formatting.tidy,
-	null_b.formatting.beautysh,
+	format.shellharden,
+	format.shfmt,
+	format.sqlfluff,
+	format.taplo,
+	format.terrafmt,
+	format.terraform_fmt,
+	format.tidy,
+	format.beautysh,
 
-	null_b.hover.dictionary,
+	hover.dictionary,
 }
 
 null_ls.setup {
@@ -393,6 +399,7 @@ require('mason-tool-installer').setup {
 		'goimports',
 		'golangci-lint',
 		'gopls',
+		'grammarly-languageserver',
 		'luacheck',
 		'markdownlint',
 		'mypy',
