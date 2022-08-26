@@ -206,12 +206,6 @@ lsp_setup.setup {
 		marksman = {}, -- Markdown
 		powershell_es = {}, -- Powershell
 		puppet = {}, -- puppet
-		grammarly = { -- prose
-			filetypes = { 'tex', 'bib', 'plaintex', 'org', 'markdown' },
-			lspconfig = {
-				root_dir = vim.fn.expand('~'),
-			},
-		},
 		pylsp = {}, -- python
 		jedi_language_server = {}, -- python
 		rust_analyzer = require('lsp-setup.rust-tools').setup { -- Rust
@@ -399,7 +393,6 @@ require('mason-tool-installer').setup {
 		'goimports',
 		'golangci-lint',
 		'gopls',
-		'grammarly-languageserver',
 		'luacheck',
 		'markdownlint',
 		'mypy',
