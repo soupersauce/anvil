@@ -340,7 +340,7 @@ local null_sources = {
 	format.stylua.with {
 		extra_args = { '--config-path', vim.fn.expand('~/.config/stylua.toml') },
 	},
-	format.prettier,
+	format.prettierd,
 	format.puppet_lint,
 	format.rustfmt.with {
 		extra_args = function(params)
@@ -398,7 +398,7 @@ require('mason-tool-installer').setup {
 		'mypy',
 		'node-debug2-adapter',
 		'powershell-editor-services',
-		'prettier',
+		'prettierd',
 		'proselint',
 		'puppet-editor-services',
 		'pylint',
