@@ -6,19 +6,12 @@ local navic_ok, navic = pcall(require, 'nvim-navic')
 local lspsig_ok, lspsignature = pcall(require, 'lsp_signature')
 local trouble_ok, trouble = pcall(require, 'trouble')
 local crates_ok, crates = pcall(require, 'crates')
-local rust_ok, rust = pcall(require, 'rust-tools')
-local textra_ok, textra = pcall(require, 'ltex_extra')
-require('clangd_extensions')
 
 local eslint_disabled_buffers = {}
 
 if not lspsetup_ok then
 	return
 end
-
--- TODO: We may need to do this to modify nvim-lsp-setup functions
--- to use formatting functions that aren't deprecated.
--- local lspsetup_utils = require('nvim-lsp-setup.utils')
 
 if navic_ok then
 	navic.setup {}
@@ -34,20 +27,23 @@ else
 	print('trouble with trouble')
 end
 
-local function show_documentation(bufnr)
-	local filetype = vim.bo.filetype
-	if vim.tbl_contains({ 'vim', 'help' }, filetype) then
-		vim.cmd('h ' .. vim.fn.expand('<cword>'))
-	elseif vim.tbl_contains({ 'man' }, filetype) then
-		vim.cmd('Man ' .. vim.fn.expand('<cword>'))
-	elseif vim.fn.expand('%:t') == 'Cargo.toml' then
-		require('crates').show_popup()
-	elseif vim.tbl_contains({ 'rust' }, filetype) then
-		rust.hover_actions.hover_actions { buffer = bufnr }
-	else
-		vim.lsp.buf.hover()
+vim.keymap.set('n', 'K', function(bufnr)
+	local winid = require('ufo').peekFoldedLinesUnderCursor()
+	if not winid then
+		local filetype = vim.bo.filetype
+		if vim.tbl_contains({ 'vim', 'help' }, filetype) then
+			vim.cmd('h ' .. vim.fn.expand('<cword>'))
+		elseif vim.tbl_contains({ 'man' }, filetype) then
+			vim.cmd('Man ' .. vim.fn.expand('<cword>'))
+		elseif vim.fn.expand('%:t') == 'Cargo.toml' then
+			require('crates').show_popup()
+		elseif vim.tbl_contains({ 'rust' }, filetype) then
+			rust.hover_actions.hover_actions { buffer = bufnr }
+		else
+			vim.lsp.buf.hover()
+		end
 	end
-end
+end, { noremap = true, desc = 'Show Documentation' })
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
 	local client = vim.lsp.get_client_by_id(ctx.client_id)
@@ -65,15 +61,11 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = function(_, result, ctx, c
 	::done::
 	return vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, config)
 end
-
+-- vim.keymap.set('n', 'K', show_documentation(bufnr), { noremap = true, desc = 'Show Documentation' })
 local mappings = {
 
 	-- Add keybindings for LSP integration
 	gD = 'lua vim.lsp.buf.declaration()',
-	-- gd = 'lua vim.lsp.buf.definition()',
-	K = 'lua vim.lsp.buf.hover()',
-	-- gi = 'lua vim.lsp.buf.implementation()',
-	['<Leader>k'] = 'lua show_documentation(bufnr)',
 	gt = 'lua vim.lsp.buf.type_definition()',
 	-- gr = 'lua vim.lsp.buf.references()',
 	['<Leader>s'] = 'lua vim.lsp.buf.document_symbol()',
@@ -135,93 +127,29 @@ lsp_setup.setup {
 				command = 'LspFormatting',
 			})
 		end
+		if
+			client.supports_method('textDocument/documentSymbol')
+			and not client.supports_method('textDocument/SymbolInformation')
+		then
+			navic.attach(client, bufnr)
+		end
 	end,
 	-- Global capabilities
 	capabilities = vim.lsp.protocol.make_client_capabilities(),
 	-- Configuration of LSP servers  -- capabilities = vim.lsp.protocol.make_client_capabilities(),
 	servers = {
-		-- AWK
-		awk_ls = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- Ansible
-		ansiblels = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- Bash
-		bashls = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- C/C++
-		clangd = {
+		awk_ls = {}, -- AWK
+		ansiblels = {}, -- Ansible
+		bashls = {}, -- Bash
+		clangd = { -- C/C++
 			require('nvim-lsp-setup.clangd_extensions').setup {},
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
 		},
-		-- cmake
-		cmake = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- css
-		cssls = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		diagnosticls = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		stylelint_lsp = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- Docker
-		dockerls = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- Golang
-		gopls = {
+		cmake = {}, -- cmake
+		cssls = {}, -- css
+		diagnosticls = {},
+		stylelint_lsp = {},
+		dockerls = {}, -- Docker
+		gopls = { -- Golang
 			settings = {
 				golsp = {
 					gofumpt = true,
@@ -232,54 +160,32 @@ lsp_setup.setup {
 					},
 				},
 			},
-			on_attach = function(client, bufnr)
-				navic.attach(client, bufnr)
-			end,
-			capabilities = capabilities,
 		},
-		-- HTML
-		html = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- JSON
-		jsonls = {
+		html = {}, -- HTML
+		jsonls = { -- JSON
 			settings = {
 				json = {
 					-- schemas = require('schemastore').json.schemas(),
 				},
 			},
+		},
+		ltex = { -- Latex
 			lspconfig = {
 				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
+					require('ltex_extra').setup {
+						load_langs = { 'en-us' },
+						path = vim.fn.expand('~/.config/nvim/dictionaries'),
+						log_level = 'debug',
+					}
 				end,
-				capabilities = capabilities,
 			},
 		},
-		-- Latex
-		ltex = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					textra.setup {}
-				end,
-				capabilities = capabilities,
-			},
-		},
-		texlab = {
+		texlab = { -- Latex
 			lspconfig = {
 				filetypes = { 'tex', 'bib', 'plaintex', 'org', 'md' },
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
 			},
 		},
-		-- lua
-		sumneko_lua = require('lua-dev').setup {
+		sumneko_lua = require('lua-dev').setup { -- lua
 			lspconfig = {
 				settings = {
 					Lua = {
@@ -292,67 +198,20 @@ lsp_setup.setup {
 					-- Avoid LSP formatting conflicts.
 					-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflict
 					-- require('nvim-lsp-setup.utils').disable_formatting(client)
-					navic.attach(client, bufnr)
 				end,
 				capabilities = capabilities,
 				telemetry = { enable = false },
 			},
 		},
-		-- Markdown
-		marksman = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
+		marksman = {}, -- Markdown
+		powershell_es = {}, -- Powershell
+		puppet = {}, -- puppet
+		grammarly = { -- prose
+			file_types = { 'tex', 'bib', 'plaintex', 'org', 'md' },
 		},
-		-- Powershell
-		powershell_es = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- puppet
-		puppet = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- prose
-		grammarly = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- python
-		pylsp = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		jedi_language_server = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- Rust
-		rust_analyzer = require('lsp-setup.rust-tools').setup {
+		pylsp = {}, -- python
+		jedi_language_server = {}, -- python
+		rust_analyzer = require('lsp-setup.rust-tools').setup { -- Rust
 			server = {
 				settings = {
 					['rust-analyzer'] = {
@@ -365,81 +224,15 @@ lsp_setup.setup {
 					},
 				},
 			},
-			on_attach = function(client, bufnr)
-				navic.attach(client, bufnr)
-			end,
-			capabilities = capabilities,
 		},
-		slint_lsp = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- salt
-		salt_ls = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- SQL
-		sqls = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- TOML
-		taplo = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- terrafrom
-		terraformls = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		tflint = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- XML
-		lemminx = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
-		-- YAML
-		yamlls = {
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					navic.attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-			},
-		},
+		slint_lsp = {},
+		salt_ls = {}, -- salt
+		sqls = {}, -- SQL
+		taplo = {}, -- TOML
+		terraformls = {}, -- terrafrom
+		tflint = {}, -- terrafrom
+		lemminx = {}, -- XML
+		yamlls = {}, -- YAML
 	},
 }
 
@@ -510,6 +303,10 @@ local null_sources = {
 	null_b.diagnostics.markdownlint,
 	null_b.diagnostics.proselint.with {
 		extra_filetypes = { 'tex', 'org' },
+		extra_args = { '--config', vim.fn.expand('~/.config/proselint/config.json') },
+		cwd = function()
+			return vim.fn.expand('~')
+		end,
 	},
 	null_b.diagnostics.write_good.with {
 		extra_filetypes = { 'tex', 'org' },
