@@ -85,10 +85,10 @@ lualine.setup {
 		'toggleterm',
 		'fugitive',
 	},
-	-- winbar = {
-	-- 	lualine_c = { 'filename' },
-	-- },
-	-- inactive_winbar = {
-	-- 	lualine_c = { 'filename' },
-	-- },
+	winbar = {
+		lualine_c = { 'filename' },
+	},
+	inactive_winbar = {
+		lualine_c = { 'filename' },
+	},
 }
