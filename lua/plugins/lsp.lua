@@ -311,6 +311,7 @@ local null_sources = {
 	diag.write_good.with {
 		extra_filetypes = { 'tex', 'org' },
 	},
+	diag.selene,
 	diag.shellcheck.with {
 		diag_format = diagnostics_code_template,
 	},
@@ -402,6 +403,7 @@ require('mason-tool-installer').setup {
 		'proselint',
 		'puppet-editor-services',
 		'pylint',
+		'selene',
 		'shellcheck',
 		'shellharden',
 		'shfmt',
