@@ -69,6 +69,7 @@ local on_startup = function(use)
 			'elianiva/icy.nvim',
 			'kaiuri/nvim-juliana',
 			'projekt0n/github-nvim-theme',
+			'kdheepak/monochrome.nvim',
 			'adisen99/codeschool.nvim',
 			{
 				'everblush/everblush.nvim',
