@@ -6,7 +6,7 @@ M.init = function()
 end
 
 -- NVCode colorschemes
--- @param style string available options onedark|aurora|gruvbox|palenight|nord|snazzy|xoria|nvcode
+-- @param style string onedark|aurora|gruvbox|palenight|nord|snazzy|xoria|nvcode
 M.nvcode = function(style)
 	vim.g.nvcode_termguicolors = 256
 	if style == 'onedark' then
@@ -29,7 +29,7 @@ M.nvcode = function(style)
 end
 
 M.zephyr = function()
-	local _, zephyr = pcall(require, 'zephyr')
+	require('zephyr')
 end
 
 M.onebuddy = function()
@@ -54,7 +54,7 @@ M.xresources = function()
 end
 
 -- nightfox colorschemes
--- @param style string available options dawnfox|carbonfox|dayfox|duskfox|nordfox|terafox|nightfox
+-- @param style string dawnfox|carbonfox|dayfox|duskfox|nordfox|terafox|nightfox
 M.nightfox = function(style)
 	if style == 'dawn' then
 		vim.cmd([[colorscheme dawnfox]])
@@ -74,7 +74,7 @@ M.nightfox = function(style)
 end
 
 -- onedark colorschemes
--- @param style string available options dark|darker|cool|deep|warm|warmer
+-- @param style string dark|darker|cool|deep|warm|warmer
 M.onedark = function(style)
 	if style == nil then
 		style = 'dark'
@@ -116,7 +116,7 @@ M.onedark = function(style)
 end
 
 -- neon colorschemes
--- @param style string available options default|doom|dark|light
+-- @param style string default|doom|dark|light
 M.neon = function(style)
 	if style == nil then
 		style = 'default'
@@ -132,7 +132,7 @@ M.neon = function(style)
 end
 
 -- nebulous colorschemes
--- @param style string available options night|twilight|midnight|fullmoon|nova|quasar
+-- @param style string night|twilight|midnight|fullmoon|nova|quasar
 M.nebulous = function(style)
 	if style == nil then
 		style = 'night'
@@ -155,7 +155,7 @@ M.nebulous = function(style)
 end
 
 -- ayu colorschemes
--- @param style string available options dark|mirage|light
+-- @param style string dark|mirage|light
 M.ayu = function(style)
 	require('ayu').setup {
 		overrides = {},
@@ -184,7 +184,7 @@ M.juliana = function()
 end
 
 -- github themes colorschemes
--- @param style string available options dark|dimmed|dark_default|dark_colorblind|light|light_default|light_colorblind
+-- @param style string dark|dimmed|dark_default|dark_colorblind|light|light_default|light_colorblind
 M.github = function(style)
 	if style == nil then
 		style = 'default'
