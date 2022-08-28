@@ -53,7 +53,7 @@ local defined_options = {
 	-- Ignore case when completing in command mode
 	wildignorecase = true,
 
-	-- Donot use popup menu for completions in command mode
+	-- Do not use popup menu for completions in command mode
 	wildoptions = 'pum',
 
 	-- Auto select the first entry but don"t insert
@@ -91,6 +91,7 @@ local defined_options = {
 
 	-- Settings for better diffs
 	diffopt = 'filler,vertical,hiddenoff,foldcolumn:0,algorithm:patience',
+
 	-- Show whitespace characters
 	list = true,
 
@@ -173,6 +174,8 @@ end
 vim.g.vimsyn_embed = 'l'
 -- Use Python 3 for plugins
 vim.g.python3_host_prog = 'python3'
+
+vim.cmd([[set fillchars+=vert:▕,horiz:─]])
 
 -- Set Space as the leader key
 vim.g.mapleader = ' '
