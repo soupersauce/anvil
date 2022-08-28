@@ -1,7 +1,7 @@
 -- PLUGIN SETTINGS
 -- Configure plugins, plugin specific functions and autocommands are to be
 -- written in the corresponding files (makes debugging and trying out plugins easier)
-
+local vim = vim
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local run_sync = false
@@ -215,30 +215,11 @@ local on_startup = function(use)
 				},
 			},
 			'ray-x/lsp_signature.nvim',
-			{
-				'simrat39/rust-tools.nvim',
-				ft = { 'rust' },
-			},
-			{
-				'kosayoda/nvim-lightbulb',
-				requires = {
-					'antoinemadec/FixCursorHold.nvim',
-					config = function()
-						require('FixCursorHold').setup()
-					end,
-				},
-				config = function()
-					require('nvim-lightbulb').setup {
-						autocmd = { enabled = true },
-					}
-				end,
-			},
+			{ 'simrat39/rust-tools.nvim', ft = { 'rust' } },
+			{ 'kosayoda/nvim-lightbulb', requires = 'antoinemadec/FixCursorHold.nvim' },
 			{
 				'weilbith/nvim-code-action-menu',
-				-- cmd = 'CodeActionMenu',
-				config = function()
-					vim.g.code_action_menu_window_border = 'single'
-				end,
+				cmd = 'CodeActionMenu',
 			},
 		},
 		config = function()
@@ -376,7 +357,7 @@ local on_startup = function(use)
 		end,
 	}
 
-	use {
+	use { -- Diffview
 		'sindrets/diffview.nvim',
 		requires = 'nvim-lua/plenary.nvim',
 	}
