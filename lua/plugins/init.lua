@@ -36,8 +36,10 @@ local on_startup = function(use)
 			require('impatient')
 		end,
 	}
-	-- Packer manages itself
-	use { 'wbthomason/packer.nvim' }
+
+	use { -- Packer manages itself
+		'wbthomason/packer.nvim',
+	}
 
 	use { -- Undotree
 		'jiaoshijie/undotree',
@@ -47,8 +49,9 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- Ask for the right file to open when file matching name is not found
-	use('EinfachToll/DidYouMean')
+	use { -- Ask for the right file to open when file matching name is not found
+		'EinfachToll/DidYouMean',
+	}
 
 	use { -- COLORSCHEMES:
 		'tjdevries/colorbuddy.nvim',
@@ -91,7 +94,6 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- Git integration
 	use { -- gitsigns
 		'lewis6991/gitsigns.nvim',
 		config = function()
@@ -231,7 +233,6 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- DEBUGGING: Configuration
 	use { -- DAP:
 		'mfussenegger/nvim-dap',
 		setup = function()
@@ -250,12 +251,11 @@ local on_startup = function(use)
 		end,
 	}
 
-	-- ICONS:
-	use { 'kyazdani42/nvim-web-devicons' }
-
-	use { 'yamatsum/nvim-nonicons', requires = { 'kyazdani42/nvim-web-devicons' } }
-
-	use { 'onsails/lspkind.nvim' }
+	use { -- ICONS:
+		'kyazdani42/nvim-web-devicons',
+		'yamatsum/nvim-nonicons',
+		'onsails/lspkind.nvim',
+	}
 
 	-- COMPLETION:
 	use { -- LUASNIP
@@ -307,7 +307,9 @@ local on_startup = function(use)
 		end,
 	}
 
-	use { 'sqwishy/vim-sqf-syntax' }
+	use { -- SQF for Arma3
+		'sqwishy/vim-sqf-syntax',
+	}
 
 	use { -- TPOPE:
 		'tpope/vim-unimpaired',
@@ -354,7 +356,10 @@ local on_startup = function(use)
 		end,
 	}
 
-	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+	use {
+		'sindrets/diffview.nvim',
+		requires = 'nvim-lua/plenary.nvim',
+	}
 
 	use { -- KNAP
 		'frabjous/knap',
@@ -389,9 +394,14 @@ local on_startup = function(use)
 		end,
 	}
 
-	use { 'dhruvasagar/vim-table-mode' }
+	use { -- Table mode
+		'dhruvasagar/vim-table-mode',
+	}
 
-	use { 'michaelb/sniprun', run = 'bash ./install.sh' }
+	use { --Sniprun
+		'michaelb/sniprun',
+		run = 'bash ./install.sh',
+	}
 
 	-- UI:
 	use { -- FIDGET
@@ -445,7 +455,7 @@ local on_startup = function(use)
 		end,
 	}
 
-	use {
+	use { -- Lastplace: remember last place in file
 		'ethanholz/nvim-lastplace',
 		config = function()
 			require('nvim-lastplace').setup {
