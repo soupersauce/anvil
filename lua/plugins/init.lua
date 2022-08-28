@@ -74,10 +74,8 @@ local on_startup = function(use)
 			'projekt0n/github-nvim-theme',
 			'kdheepak/monochrome.nvim',
 			'adisen99/codeschool.nvim',
-			{
-				'everblush/everblush.nvim',
-				as = 'everblush',
-			},
+			'b4mbus/oxocarbon-lua.nvim',
+			{ 'everblush/everblush.nvim', as = 'everblush' },
 		},
 		config = function()
 			require('plugins.colorscheme').init()
