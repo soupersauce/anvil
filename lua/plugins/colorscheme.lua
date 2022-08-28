@@ -2,7 +2,7 @@ local vim = vim
 local M = {}
 
 M.init = function()
-	M.monochrome()
+	M.nebulous()
 end
 
 -- NVCode colorschemes
@@ -100,10 +100,8 @@ M.ayu = function(style)
 		vim.cmd([[colorscheme ayu-light]])
 	elseif style == 'dark' then
 		vim.cmd([[colorscheme ayu-dark]])
-	elseif style == 'mirage' then
-		vim.cmd([[colorscheme ayu-mirage]])
 	else
-		vim.cmd([[colorscheme ayu-dark]])
+		vim.cmd([[colorscheme ayu-mirage]])
 	end
 end
 
