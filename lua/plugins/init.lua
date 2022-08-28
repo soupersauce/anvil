@@ -344,7 +344,14 @@ local on_startup = function(use)
 		config = vim.cmd([[let g:skeleton_template_dir = "~/.config/nvim/templates"]]),
 	}
 
-	-- use { "luukvbaal/nnn.nvim" }
+	use { -- toggler
+		'nguyenvukhang/nvim-toggler',
+		config = function()
+			require('nvim-toggler').setup {
+				remove_default_keybinds = true,
+			}
+		end,
+	}
 
 	use { -- FZF-LUA
 		'ibhagwan/fzf-lua',
