@@ -405,18 +405,8 @@ local on_startup = function(use)
 		end,
 	}
 
-	use {
+	use { -- Nate Dogg and Warren G had to illuminate
 		'RRethy/vim-illuminate',
-		config = function()
-			require('illuminate').configure {
-				providers = {
-					'lsp',
-					'treesitter',
-					'regex',
-				},
-				under_cursor = false,
-			}
-		end,
 	}
 
 	use { -- BUFFERLINE
