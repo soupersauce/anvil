@@ -135,6 +135,7 @@ local on_startup = function(use)
 		requires = {
 			'joosepalviste/nvim-ts-context-commentstring',
 			'p00f/nvim-ts-rainbow',
+			'nvim-treesitter/nvim-treesitter-textobjects',
 			{
 				'folke/todo-comments.nvim',
 				config = function()
