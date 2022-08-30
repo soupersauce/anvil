@@ -6,6 +6,7 @@ local navic_ok, navic = pcall(require, 'nvim-navic')
 local lspsig_ok, lspsignature = pcall(require, 'lsp_signature')
 local trouble_ok, trouble = pcall(require, 'trouble')
 local crates_ok, crates = pcall(require, 'crates')
+local dtextobjects_ok, dtextobjects = pcall(require, 'textobj-diagnostic')
 
 local eslint_disabled_buffers = {}
 
@@ -70,8 +71,10 @@ local mappings = {
 	-- gr = 'lua vim.lsp.buf.references()',
 	['<Leader>s'] = 'lua vim.lsp.buf.document_symbol()',
 	['<Leader>w'] = 'lua vim.lsp.buf.workspace_symbol()',
-	[']d'] = 'lua vim.diagnostic.goto_next()',
-	['[d'] = 'lua vim.diagnostic.goto_prev()',
+	--  if not dtextobjects_ok then
+	-- ']d' = 'lua vim.diagnostic.goto_next()',
+	-- '[d' = 'lua vim.diagnostic.goto_prev()',
+	--  end,
 	['<leader>rn'] = 'lua vim.lsp.buf.rename()',
 	-- ['<leader>ca'] = 'lua vim.lsp.buf.code_action()',
 	['<leader>f'] = 'lua vim.lsp.buf.format()',
@@ -79,7 +82,7 @@ local mappings = {
 	-- Custom mappings, will overwrite the default mappings for the same key
 	-- Example mappings for telescope pickers:
 	gd = 'lua require("telescope.builtin").lsp_definitions()',
-	gi = 'lua require("telescope.builtin").lsp_implementations()',
+	['<leader>i'] = 'lua require("telescope.builtin").lsp_implementations()',
 	gr = 'lua require("telescope.builtin").lsp_references()',
 
 	['<leader>ca'] = 'CodeActionMenu',
@@ -431,6 +434,7 @@ require('mason-tool-installer').setup {
 		-- 'tidy',
 	},
 }
+
 require('docs-view').setup {}
 
 require('nvim-lightbulb').setup {
@@ -440,40 +444,6 @@ require('nvim-lightbulb').setup {
 		-- Priority of the gutter sign
 		priority = 10,
 	},
-	float = {
-		enabled = false,
-		-- Text to show in the popup float
-		text = '💡',
-		-- Available keys for window options:
-		-- - height     of floating window
-		-- - width      of floating window
-		-- - wrap_at    character to wrap at for computing height
-		-- - max_width  maximal width of floating window
-		-- - max_height maximal height of floating window
-		-- - pad_left   number of columns to pad contents at left
-		-- - pad_right  number of columns to pad contents at right
-		-- - pad_top    number of lines to pad contents at top
-		-- - pad_bottom number of lines to pad contents at bottom
-		-- - offset_x   x-axis offset of the floating window
-		-- - offset_y   y-axis offset of the floating window
-		-- - anchor     corner of float to place at the cursor (NW, NE, SW, SE)
-		-- - winblend   transparency of the window (0-100)
-		win_opts = {},
-	},
-	virtual_text = {
-		enabled = true,
-		-- Text to show at virtual text
-		text = '💡',
-		-- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
-		hl_mode = 'replace',
-	},
-	status_text = {
-		enabled = false,
-		-- Text to provide when code actions are available
-		text = '💡',
-		-- Text to provide when no actions are available
-		text_unavailable = '',
-	},
 	autocmd = {
 		enabled = true,
 		-- see :help autocmd-pattern
@@ -482,6 +452,20 @@ require('nvim-lightbulb').setup {
 		events = { 'CursorHold', 'CursorHoldI' },
 	},
 }
+if dtextobjects_ok then
+	dtextobjects.setup { create_default_keymaps = false }
+	vim.keymap.set({ 'x', 'o', 'n' }, ']d', function()
+		require('textobj-diagnostic').next_diag()
+	end, { silent = true })
+	vim.keymap.set({ 'x', 'o', 'n' }, '[d', function()
+		require('textobj-diagnostic').prev_diag()
+	end, { silent = true })
+	vim.keymap.set({ 'x', 'o', 'n' }, 'id', function()
+		require('textobj-diagnostic').next_diag_inclusive()
+	end, { silent = true })
+else
+	print('No diagnostic text objects')
+end
 
 local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
 vim.o.code_action_menu_window_border = 'single'

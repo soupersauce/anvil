@@ -208,19 +208,12 @@ local on_startup = function(use)
 			'Saecki/crates.nvim',
 			'folke/trouble.nvim',
 			'barreiroleo/ltex-extra.nvim',
-			{
-				'jose-elias-alvarez/null-ls.nvim',
-				requires = {
-					'ThePrimeagen/refactoring.nvim',
-				},
-			},
+			{ 'jose-elias-alvarez/null-ls.nvim', requires = { 'ThePrimeagen/refactoring.nvim' } },
 			'ray-x/lsp_signature.nvim',
 			{ 'simrat39/rust-tools.nvim', ft = { 'rust' } },
 			{ 'kosayoda/nvim-lightbulb', requires = 'antoinemadec/FixCursorHold.nvim' },
-			{
-				'weilbith/nvim-code-action-menu',
-				cmd = 'CodeActionMenu',
-			},
+			{ 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
+			{ 'andrewferrier/textobj-diagnostic.nvim', as = 'textobj-daig' },
 		},
 		config = function()
 			require('plugins.lsp')
