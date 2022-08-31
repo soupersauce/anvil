@@ -152,18 +152,7 @@ lsp_setup.setup {
 		diagnosticls = {},
 		stylelint_lsp = {},
 		dockerls = {}, -- Docker
-		gopls = { -- Golang
-			settings = {
-				golsp = {
-					gofumpt = true,
-					staticcheck = true,
-					useplaceholders = true,
-					codelenses = {
-						gc_details = true,
-					},
-				},
-			},
-		},
+		gopls = {}, --Golang
 		html = {}, -- HTML
 		jsonls = { -- JSON
 			settings = {
@@ -452,6 +441,16 @@ require('nvim-lightbulb').setup {
 		events = { 'CursorHold', 'CursorHoldI' },
 	},
 }
+-- Golang
+require('go').setup {
+	lsp_cfg = {
+		capabilities = capabilities,
+	},
+	lsp_gofumpt = true,
+	trouble = true,
+	comment_useplaceholders = true,
+}
+
 if dtextobjects_ok then
 	dtextobjects.setup { create_default_keymaps = false }
 	vim.keymap.set({ 'x', 'o', 'n' }, ']d', function()
@@ -460,9 +459,9 @@ if dtextobjects_ok then
 	vim.keymap.set({ 'x', 'o', 'n' }, '[d', function()
 		require('textobj-diagnostic').prev_diag()
 	end, { silent = true })
-	vim.keymap.set({ 'x', 'o', 'n' }, 'id', function()
-		require('textobj-diagnostic').next_diag_inclusive()
-	end, { silent = true })
+	-- vim.keymap.set({ 'x', 'o', 'n' }, 'id', function()
+	-- 	require('textobj-diagnostic').next_diag_inclusive()
+	-- end, { silent = true })
 else
 	print('No diagnostic text objects')
 end

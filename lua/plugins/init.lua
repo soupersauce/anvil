@@ -188,7 +188,7 @@ local on_startup = function(use)
 			'lukas-reineke/headlines.nvim',
 			'akinsho/org-bullets.nvim',
 		},
-		wants = { 'cmp', 'treesitter' },
+		-- after = { 'nvim-cmp', 'nvim-treesitter' },
 		config = function()
 			require('plugins.org')
 		end,
@@ -215,6 +215,7 @@ local on_startup = function(use)
 			{ 'kosayoda/nvim-lightbulb', requires = 'antoinemadec/FixCursorHold.nvim' },
 			{ 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
 			{ 'andrewferrier/textobj-diagnostic.nvim', as = 'textobj-daig' },
+			'ray-x/go.nvim',
 		},
 		config = function()
 			require('plugins.lsp')
