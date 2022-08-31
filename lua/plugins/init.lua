@@ -466,14 +466,16 @@ local on_startup = function(use)
 		end,
 	}
 
-	use { -- dressing
-		'stevearc/dressing.nvim',
-		disable = false,
-		requires = 'MunifTanjim/nui.nvim',
-		config = function()
-			require('plugins.dressing')
-		end,
-	}
+	-- use { -- dressing
+	-- 	'stevearc/dressing.nvim',
+	-- 	disable = false,
+	-- 	requires = 'MunifTanjim/nui.nvim',
+	-- 	config = function()
+	-- 		require('plugins.dressing')
+	-- 	end,
+	-- }
+
+	use { 'ray-x/guihua.lua' }
 
 	use { -- LUALINE
 		'nvim-lualine/lualine.nvim',
