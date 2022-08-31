@@ -1,5 +1,6 @@
 -- Auto commands use sparingly, having auto commands that trigger often may
 -- slow down nvim
+local vim = vim
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
