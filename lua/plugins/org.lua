@@ -57,6 +57,7 @@ local templates = {
 
 local todo_keywords = {
 	'TODO',
+	'INCIDENT',
 	'ONHOLD',
 	'|',
 	'DELEGATED',
