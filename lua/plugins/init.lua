@@ -156,7 +156,6 @@ local on_startup = function(use)
 			'andymass/vim-matchup',
 			'nvim-treesitter/playground',
 			'nvim-treesitter/nvim-treesitter-context',
-			'lewis6991/spellsitter.nvim',
 			-- TODO:CONFIGURE:
 			'ziontee113/syntax-tree-surfer',
 			'folke/twilight.nvim',
