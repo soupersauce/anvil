@@ -375,8 +375,6 @@ local on_startup = function(use)
 		'declancm/cinnamon.nvim',
 		config = function()
 			require('cinnamon').setup {
-				extra_keymaps = true,
-				extended_keymaps = true,
 				delay = 0,
 			}
 		end,
