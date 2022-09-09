@@ -161,17 +161,7 @@ lsp_setup.setup {
 				},
 			},
 		},
-		ltex = { -- Latex
-			lspconfig = {
-				on_attach = function(client, bufnr)
-					require('ltex_extra').setup {
-						load_langs = { 'en-us' },
-						path = vim.fn.expand('~/.config/nvim/dictionaries'),
-						log_level = 'debug',
-					}
-				end,
-			},
-		},
+		ltex = {}, -- Latex
 		texlab = { -- Latex
 			lspconfig = {
 				filetypes = { 'tex', 'bib', 'plaintex', 'org', 'markdown' },
@@ -465,6 +455,21 @@ if dtextobjects_ok then
 else
 	print('No diagnostic text objects')
 end
+
+require('lspconfig').ltex.setup {
+	capabilities = capabilities,
+	on_attach = function(client, bufnr)
+		require('ltex_extra').setup {
+			load_langs = { 'en-US' },
+			init_check = true,
+			path = vim.fn.expand('~/.config/nvim/dictionaries'),
+			log_level = 'warn',
+		}
+	end,
+	settings = {
+		ltex = {},
+	},
+}
 
 local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
 vim.o.code_action_menu_window_border = 'single'
