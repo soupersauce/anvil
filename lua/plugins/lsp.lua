@@ -152,7 +152,7 @@ lsp_setup.setup {
 		diagnosticls = {},
 		stylelint_lsp = {},
 		dockerls = {}, -- Docker
-		gopls = {}, --Golang
+		gopls = {},
 		html = {}, -- HTML
 		jsonls = { -- JSON
 			settings = {
@@ -459,9 +459,9 @@ if dtextobjects_ok then
 	vim.keymap.set({ 'x', 'o', 'n' }, '[d', function()
 		require('textobj-diagnostic').prev_diag()
 	end, { silent = true })
-	-- vim.keymap.set({ 'x', 'o', 'n' }, 'id', function()
-	-- 	require('textobj-diagnostic').next_diag_inclusive()
-	-- end, { silent = true })
+-- vim.keymap.set({ 'x', 'o', 'n' }, 'id', function()
+-- 	require('textobj-diagnostic').next_diag_inclusive()
+-- end, { silent = true })
 else
 	print('No diagnostic text objects')
 end
