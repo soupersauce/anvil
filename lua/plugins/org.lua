@@ -44,13 +44,13 @@ local templates = {
 	sc = {
 		description = 'sCatalogTask',
 		template = '** TODO %?%\n %T \n %^{Requested For}\n %^{extension}\n %^{Short Description}\n %^{Description}\n',
-		target = '~/Documents/org/tickets.org',
+		target = '~/Documents/org/YCCD/yccdtodo.org',
 		headline = 'Catalog Tasks',
 	},
 	si = {
 		description = 'INC',
 		template = '** TODO %?\n %T%',
-		target = '~/Documents/org/tickets.org',
+		target = '~/Documents/org/YCCD/yccdtodo.org',
 		headline = 'Incidents',
 	},
 }
