@@ -7,6 +7,7 @@ local lspsig_ok, lspsignature = pcall(require, 'lsp_signature')
 local trouble_ok, trouble = pcall(require, 'trouble')
 local crates_ok, crates = pcall(require, 'crates')
 local dtextobjects_ok, dtextobjects = pcall(require, 'textobj-diagnostic')
+local prettier_ok, prettier = pcall(require, 'prettier')
 
 local eslint_disabled_buffers = {}
 
@@ -357,6 +358,24 @@ local null_sources = {
 null_ls.setup {
 	-- debug = true,
 	sources = null_sources,
+	on_attach = function(client, bufnr)
+		if client.server_capabilities.documentFormattingProvider then
+			vim.keymap.set({ 'n' }, '<leader>f', function()
+				vim.lsp.buf.format()
+			end, { silent = true, noremap = true, desc = 'format from null' })
+			vim.api.nvim_create_autocmd('BufWritePre', {
+				callback = function()
+					vim.lsp.buf.format()
+				end,
+			})
+		end
+
+		if client.server_capabilities.documentRangeFormattingProvider then
+			vim.keymap.set({ 'n' }, '<leader>f', function()
+				vim.lsp.buf.format()
+			end, { silent = true, noremap = true, desc = 'format from null' })
+		end
+	end,
 }
 
 require('mason-tool-installer').setup {
@@ -470,6 +489,27 @@ require('lspconfig').ltex.setup {
 		ltex = {},
 	},
 }
+
+if prettier_ok then
+	prettier.setup {
+		bin = 'prettierd',
+		filetypes = {
+			'css',
+			'graphql',
+			'html',
+			'javascript',
+			'javascriptreact',
+			'json',
+			'less',
+			'markdown',
+			'scss',
+			'typescript',
+			'typescriptreact',
+			'yaml',
+			'org',
+		},
+	}
+end
 
 local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
 vim.o.code_action_menu_window_border = 'single'

@@ -209,6 +209,7 @@ local on_startup = function(use)
 			'folke/trouble.nvim',
 			'barreiroleo/ltex-extra.nvim',
 			{ 'jose-elias-alvarez/null-ls.nvim', requires = { 'ThePrimeagen/refactoring.nvim' } },
+			'muniftanjim/prettier.nvim',
 			'ray-x/lsp_signature.nvim',
 			{ 'simrat39/rust-tools.nvim', ft = { 'rust' } },
 			{ 'kosayoda/nvim-lightbulb', requires = 'antoinemadec/FixCursorHold.nvim' },
