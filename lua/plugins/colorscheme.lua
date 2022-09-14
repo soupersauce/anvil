@@ -2,7 +2,7 @@ local vim = vim
 local M = {}
 
 M.init = function()
-	M.everblush()
+	M.oxocarbon()
 end
 
 -- NVCode colorschemes
