@@ -18,29 +18,6 @@ luasnip.filetype_extend('typescriptreact', { 'html', 'react-ts' })
 luasnip.filetype_extend('vue', { 'html', 'javascript', 'pug' })
 luasnip.filetype_extend('ruby', { 'rails' })
 
--- Expand/Jump forward if a snippet is available
-set_keymap('i', '<Tab>', function()
-	if luasnip.expand_or_jumpable() then
-		return '<Plug>luasnip-expand-or-jump'
-	else
-		return '<Tab>'
-	end
-end, { expr = true, silent = true, noremap = true, desc = 'luasnipexpand' })
-
--- Jump backward
-set_keymap({ 'i', 's' }, '<S-Tab>', function()
-	luasnip.jump(-1)
-end, options)
-
--- Change choices in choiceNodes
-set_keymap({ 'i', 's' }, '<A-Tab>', function()
-	if luasnip.choice_active() then
-		return '<Plug>luasnip-next-choice'
-	else
-		return '<A-Tab>'
-	end
-end, { expr = true, silent = true, noremap = true, desc = 'luasnipnext' })
-
 local to_completion = function(snippet)
 	return {
 		word = snippet.trigger,
