@@ -26,12 +26,13 @@ nvimtree.setup {
 	},
 	view = {
 		side = 'left',
-		width = 25,
+		adaptive_size = true,
 		hide_root_folder = true,
+		signcolumn = 'auto',
 	},
 	git = {
 		enable = true,
-		ignore = true,
+		ignore = false,
 	},
 	actions = {
 		open_file = {
