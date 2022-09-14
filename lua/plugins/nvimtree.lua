@@ -11,6 +11,7 @@ end
 nvimtree.setup {
 	filters = {
 		dotfiles = false,
+		custom = { '.*.org_archive' },
 	},
 	disable_netrw = false,
 	hijack_netrw = false,
