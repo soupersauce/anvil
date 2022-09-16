@@ -139,12 +139,6 @@ local on_startup = function(use)
 			{
 				'folke/todo-comments.nvim',
 				config = function()
-					-- HACK: #104 Invalid in command-line window
-					local hl = require('todo-comments.highlight')
-					local highlight_win = hl.highlight_win
-					hl.highlight_win = function(win, force)
-						pcall(highlight_win, win, force)
-					end
 					require('todo-comments').setup {
 						highlight = {
 							exclude = { 'vim', 'packer', 'NeogitStatus', 'NeogitPopup', 'nofile', 'terminal' },
@@ -190,6 +184,18 @@ local on_startup = function(use)
 		-- after = { 'nvim-cmp', 'nvim-treesitter' },
 		config = function()
 			require('plugins.org')
+		end,
+	}
+
+	use { -- mind.nvim
+		'phaazon/mind.nvim',
+		requires = 'nvim-lua/plenary.nvim',
+		config = function()
+			require('mind').setup {
+				edit = {
+					data_extension = '.org',
+				},
+			}
 		end,
 	}
 
