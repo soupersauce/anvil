@@ -37,6 +37,14 @@ local on_startup = function(use)
 		end,
 	}
 
+	use { -- netmap.nvim
+		'miversen33/netman.nvim',
+		branch = 'issue-28-libuv-shenanigans',
+		config = function()
+			require('netman')
+		end,
+	}
+
 	use { -- Packer manages itself
 		'wbthomason/packer.nvim',
 	}
@@ -139,11 +147,7 @@ local on_startup = function(use)
 			{
 				'folke/todo-comments.nvim',
 				config = function()
-					require('todo-comments').setup {
-						highlight = {
-							exclude = { 'vim', 'packer', 'NeogitStatus', 'NeogitPopup', 'nofile', 'terminal' },
-						},
-					}
+					require('plugins.todo')
 				end,
 			},
 			{ 'kevinhwang91/nvim-bqf', ft = 'qf' },
@@ -174,6 +178,18 @@ local on_startup = function(use)
 		end,
 	}
 
+	use { -- mind.nvim
+		'phaazon/mind.nvim',
+		requires = 'nvim-lua/plenary.nvim',
+		config = function()
+			require('mind').setup {
+				edit = {
+					data_extension = '.org',
+				},
+			}
+		end,
+	}
+
 	use { -- orgmode
 		'nvim-orgmode/orgmode',
 		requires = {
@@ -184,18 +200,6 @@ local on_startup = function(use)
 		-- after = { 'nvim-cmp', 'nvim-treesitter' },
 		config = function()
 			require('plugins.org')
-		end,
-	}
-
-	use { -- mind.nvim
-		'phaazon/mind.nvim',
-		requires = 'nvim-lua/plenary.nvim',
-		config = function()
-			require('mind').setup {
-				edit = {
-					data_extension = '.org',
-				},
-			}
 		end,
 	}
 

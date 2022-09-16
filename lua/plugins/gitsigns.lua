@@ -43,7 +43,7 @@ gitsigns.setup {
 		virt_text = true,
 		virt_text_pos = 'eol',
 		delay = 1000,
-		ignore_whitespace = false,
+		ignore_whitespace = true,
 	},
 	preview_config = {
 		-- Options passed to nvim_open_win
@@ -54,6 +54,6 @@ gitsigns.setup {
 		col = 1,
 	},
 	yadm = {
-		enable = false,
+		enable = true,
 	},
 }
