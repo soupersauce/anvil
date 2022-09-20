@@ -222,7 +222,7 @@ local on_startup = function(use)
 			'muniftanjim/prettier.nvim',
 			'ray-x/lsp_signature.nvim',
 			{ 'simrat39/rust-tools.nvim', ft = { 'rust' } },
-			{ 'kosayoda/nvim-lightbulb', requires = 'antoinemadec/FixCursorHold.nvim' },
+			'kosayoda/nvim-lightbulb',
 			{ 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
 			{ 'andrewferrier/textobj-diagnostic.nvim', as = 'textobj-daig' },
 			'ray-x/go.nvim',
