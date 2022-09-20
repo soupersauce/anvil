@@ -26,7 +26,7 @@ nvimtree.setup {
 	},
 	view = {
 		side = 'left',
-		adaptive_size = true,
+		adaptive_size = false,
 		hide_root_folder = true,
 		signcolumn = 'auto',
 	},

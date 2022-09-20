@@ -124,6 +124,7 @@ local on_startup = function(use)
 
 	use { -- git-conflict
 		'akinsho/git-conflict.nvim',
+    disable = true,
 		tag = '*',
 		config = function()
 			require('git-conflict').setup {
