@@ -78,7 +78,7 @@ local on_startup = function(use)
 			'yagua/nebulous.nvim',
 			'shatur/neovim-ayu',
 			'elianiva/icy.nvim',
-			'kaiuri/nvim-juliana',
+			{'kaiuri/nvim-juliana', branch = 'dev'},
 			'projekt0n/github-nvim-theme',
 			'kdheepak/monochrome.nvim',
 			'adisen99/codeschool.nvim',
