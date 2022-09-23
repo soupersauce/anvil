@@ -244,6 +244,7 @@ local on_startup = function(use)
 
 	use { -- DAP:
 		'mfussenegger/nvim-dap',
+    disable = true,
 		setup = function()
 			require('plugins.dap').pre()
 		end,
@@ -295,7 +296,7 @@ local on_startup = function(use)
 			'hrsh7th/cmp-cmdline',
 			'petertriho/cmp-git',
 			'andersevenrud/cmp-tmux',
-			'rcarriga/cmp-dap',
+			-- 'rcarriga/cmp-dap',
 			'quangnguyen30192/cmp-nvim-tags',
 			'saadparwaiz1/cmp_luasnip',
 			'f3fora/cmp-spell',
