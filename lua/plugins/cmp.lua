@@ -129,7 +129,7 @@ cmp.setup {
 		{ name = 'orgmode' },
 		{ name = 'luasnip' },
 		{ name = 'buffer', keyword_length = 5 },
-		{ name = 'cmdline' },
+		{ name = 'cmdline', keyword_length = 2 },
 		{ name = 'nvim_lua' },
 		{ name = 'crates' },
 		-- { name = 'treesitter' },
