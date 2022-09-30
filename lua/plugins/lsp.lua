@@ -1,7 +1,7 @@
 local vim = vim
 local u = require('configuration.utils')
 local null_ok, null_ls = pcall(require, 'null-ls')
-local lspsetup_ok, lsp_setup = pcall(require, 'nvim-lsp-setup')
+local lspsetup_ok, lsp_setup = pcall(require, 'lsp-setup')
 local navic_ok, navic = pcall(require, 'nvim-navic')
 local lspsig_ok, lspsignature = pcall(require, 'lsp_signature')
 local trouble_ok, trouble = pcall(require, 'trouble')
@@ -146,7 +146,7 @@ lsp_setup.setup {
 		ansiblels = {}, -- Ansible
 		bashls = {}, -- Bash
 		clangd = { -- C/C++
-			require('nvim-lsp-setup.clangd_extensions').setup {},
+			require('lsp-setup.clangd_extensions').setup {},
 		},
 		cmake = {}, -- cmake
 		cssls = {}, -- css

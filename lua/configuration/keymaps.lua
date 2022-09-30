@@ -81,6 +81,7 @@ set_keymap('v', '>', '>gv', { noremap = true })
 -- set_keymap('t', '<Leader><C-[>', '<C-\\><C-n>', { noremap = true, silent = true })
 
 -- For nvim-tree
+set_keymap('n', '<C-n>', '<cmd>NvimTreeToggle<CR>', { noremap = true, desc = 'Toggle NvimTree' })
 
 set_keymap('n', '<leader>ws', '<cmd>w<CR><cmd>source %<CR>', { noremap = true })
 

@@ -45,6 +45,11 @@ local on_startup = function(use)
 		end,
 	}
 
+  use {
+    'AckslD/messages.nvim',
+    config = function() require('messages').setup() end,
+  }
+
 	use { -- Packer manages itself
 		'wbthomason/packer.nvim',
 	}
