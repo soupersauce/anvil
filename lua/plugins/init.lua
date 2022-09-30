@@ -393,14 +393,15 @@ local on_startup = function(use)
 		end,
 	}
 
-	use { -- CINNAMON
-		'declancm/cinnamon.nvim',
-		config = function()
-			require('cinnamon').setup {
-				delay = 0,
-			}
-		end,
-	}
+	-- use { -- CINNAMON
+	-- 	'declancm/cinnamon.nvim',
+ --    disabled = true,
+	-- 	config = function()
+	-- 		require('cinnamon').setup {
+	-- 			delay = 0,
+	-- 		}
+	-- 	end,
+	-- }
 
 	use { -- NUMBERTOGGLE
 		'sitiom/nvim-numbertoggle',

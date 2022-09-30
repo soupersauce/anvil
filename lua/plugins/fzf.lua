@@ -1,4 +1,5 @@
 local fzf_ok, fzf = pcall(require, 'fzf-lua')
+local set_keymap = vim.keymap.set
 
 if not fzf_ok then
 	print('No fzf')
@@ -592,3 +593,38 @@ fzf.setup {
 	-- 'EN SPACE' (U+2002), the below sets it to 'NBSP' (U+00A0) instead
 	-- nbsp = '\xc2\xa0',
 }
+
+-- -- For fzf-lua
+set_keymap({ 'v', 'n' }, '<leader>zb', function()
+	require('fzf-lua').buffers()
+end, { desc = 'Fzf: Buffers' })
+set_keymap({ 'v', 'n' }, '<leader>zf', function()
+	require('fzf-lua').git_files()
+end, { desc = 'Fzf: Files' })
+set_keymap({ 'v', 'n' }, '<leader>zg', function()
+	require('fzf-lua').live_grep()
+end, { desc = 'Fzf: Grep' })
+set_keymap({ 'v', 'n' }, '<leader>zt', function()
+	require('fzf-lua').tags()
+end, { desc = 'Fzf: Tags' })
+set_keymap({ 'v', 'n' }, '<leader>zc', function()
+	require('fzf-lua').git_commits()
+end, { desc = 'Fzf: Commits' })
+set_keymap({ 'v', 'n' }, '<leader>zm', function()
+	require('fzf-lua').man_pages()
+end, { desc = 'Fzf: manpages' })
+set_keymap({ 'v', 'n' }, '<leader>zr', function()
+	require('fzf-lua').lsp_references()
+end, { desc = 'Fzf: References' })
+set_keymap({ 'v', 'n' }, '<leader>zs', function()
+	require('fzf-lua').lsp_definitions()
+end, { desc = 'Fzf: definitions' })
+set_keymap({ 'v', 'n' }, '<leader>zh', function()
+	require('fzf-lua').help_tags()
+end, { desc = 'Fzf: help tags' })
+set_keymap({ 'v', 'n' }, '<leader>zv', function()
+	require('fzf-lua').command_history()
+end, { desc = 'Fzf: cmd history' })
+set_keymap({ 'v', 'n' }, '<C-p>', function()
+	require('fzf-lua').builtin()
+end, { desc = 'Fzf: default' })

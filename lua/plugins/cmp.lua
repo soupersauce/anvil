@@ -66,11 +66,11 @@ cmp.setup {
 
 	cmp.setup.cmdline('/', {
 		view = {
-			entries = { name = 'custom' },
+			entries = { name = 'custom', selection_order = 'near_cursor' },
 		},
 	}),
 	view = {
-		entries = { name = 'custom', selection_order = 'near_cursor' },
+		entries = { name = 'custom' },
 	},
 
 	completion = {
