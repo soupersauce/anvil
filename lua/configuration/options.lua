@@ -56,8 +56,8 @@ local defined_options = {
 	-- Do not use popup menu for completions in command mode
 	wildoptions = 'pum',
 
-	-- Auto select the first entry but don"t insert
-	completeopt = 'noinsert,menuone,preview',
+	-- complete options
+	completeopt = 'menu,menuone,noselect',
 
 	-- Stop popup menu messages
 	shortmess = 'filnxtToOFc',

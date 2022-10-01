@@ -123,17 +123,14 @@ cmp.setup {
 			end
 		end, { 'i', 's' }),
 	},
+
 	sources = cmp.config.sources {
-		{ name = 'path' },
 		{ name = 'nvim_lsp' },
-		{ name = 'orgmode' },
 		{ name = 'luasnip' },
-		{ name = 'buffer', keyword_length = 5 },
-		{ name = 'cmdline', keyword_length = 2 },
-		{ name = 'nvim_lua' },
-		{ name = 'crates' },
-		-- { name = 'treesitter' },
 		{ name = 'cmp_autopairs' },
+		{ name = 'buffer', keyword_length = 5 },
+		{ name = 'path' },
+		-- { name = 'treesitter' },
 		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'dictionary', keyword_length = 2 },
 		{ name = 'spell' },
@@ -182,8 +179,30 @@ cmp.setup {
 			{ name = 'buffer' },
 		}),
 	}),
+
+	cmp.setup.filetype('org', {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources {
+			{ name = 'orgmode' },
+		},
+	}),
+
+	cmp.setup.filetype('rust', {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources {
+			{ name = 'crates' },
+		},
+	}),
+
+	cmp.setup.filetype('lua', {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources {
+			{ name = 'nvim_lua' },
+		},
+	}),
+
 	window = {
-		-- completion = cmp.config.window.bordered(),
+		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 }
