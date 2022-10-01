@@ -162,14 +162,16 @@ local on_startup = function(use)
 		end,
 	}
 
-  use { -- regex explainer
-    'bennypowers/nvim-regexplainer',
-    config = function() require('regexplainer').setup() end,
-    requires = {
-      'nvim-treesitter/nvim-treesitter',
-      'MunifTanjim/nui.nvim',
-    }
-  }
+	use { -- regex explainer
+		'bennypowers/nvim-regexplainer',
+		config = function()
+			require('regexplainer').setup()
+		end,
+		requires = {
+			'nvim-treesitter/nvim-treesitter',
+			'MunifTanjim/nui.nvim',
+		},
+	}
 
 	use { -- UFO
 		'kevinhwang91/nvim-ufo',
