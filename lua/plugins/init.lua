@@ -37,18 +37,20 @@ local on_startup = function(use)
 		end,
 	}
 
-	use { -- netmap.nvim
-		'miversen33/netman.nvim',
-		branch = 'issue-28-libuv-shenanigans',
+	-- use { -- netmap.nvim
+	-- 	'miversen33/netman.nvim',
+	-- 	branch = 'issue-28-libuv-shenanigans',
+	-- 	config = function()
+	-- 		require('netman')
+	-- 	end,
+	-- }
+
+	use {
+		'AckslD/messages.nvim',
 		config = function()
-			require('netman')
+			require('messages').setup()
 		end,
 	}
-
-  use {
-    'AckslD/messages.nvim',
-    config = function() require('messages').setup() end,
-  }
 
 	use { -- Packer manages itself
 		'wbthomason/packer.nvim',
@@ -83,7 +85,7 @@ local on_startup = function(use)
 			'yagua/nebulous.nvim',
 			'shatur/neovim-ayu',
 			'elianiva/icy.nvim',
-			{'kaiuri/nvim-juliana', branch = 'dev'},
+			{ 'kaiuri/nvim-juliana', branch = 'dev' },
 			'projekt0n/github-nvim-theme',
 			'kdheepak/monochrome.nvim',
 			'adisen99/codeschool.nvim',
@@ -125,22 +127,6 @@ local on_startup = function(use)
 			end,
 			requires = 'nvim-lua/plenary.nvim',
 		},
-	}
-
-	use { -- git-conflict
-		'akinsho/git-conflict.nvim',
-    disable = true,
-		tag = '*',
-		config = function()
-			require('git-conflict').setup {
-				default_mappings = true, -- disable buffer local mapping created by this plugin
-				disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
-				highlights = { -- They must have background color, otherwise the default color will be used
-					incoming = 'DiffText',
-					current = 'DiffAdd',
-				},
-			}
-		end,
 	}
 
 	use { -- TREESITTER: integration
@@ -190,18 +176,6 @@ local on_startup = function(use)
 		requires = 'kevinhwang91/promise-async',
 		config = function()
 			require('plugins.ufo')
-		end,
-	}
-
-	use { -- mind.nvim
-		'phaazon/mind.nvim',
-		requires = 'nvim-lua/plenary.nvim',
-		config = function()
-			require('mind').setup {
-				edit = {
-					data_extension = '.org',
-				},
-			}
 		end,
 	}
 
@@ -397,16 +371,6 @@ local on_startup = function(use)
 			require('color-picker').setup {}
 		end,
 	}
-
-	-- use { -- CINNAMON
-	-- 	'declancm/cinnamon.nvim',
- --    disabled = true,
-	-- 	config = function()
-	-- 		require('cinnamon').setup {
-	-- 			delay = 0,
-	-- 		}
-	-- 	end,
-	-- }
 
 	use { -- NUMBERTOGGLE
 		'sitiom/nvim-numbertoggle',

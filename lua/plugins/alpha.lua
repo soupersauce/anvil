@@ -1,5 +1,6 @@
 ---@diagnostic disable: missing-parameter
 -- local alpha_ok, alpha = pcall(require, 'alpha')
+local vim = vim
 local path_ok, plenary_path = pcall(require, 'plenary.path')
 if not path_ok then
 	return
