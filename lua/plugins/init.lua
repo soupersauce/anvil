@@ -298,8 +298,9 @@ local on_startup = function(use)
 		end,
 	}
 
-	use { -- SQF for Arma3
-		'sqwishy/vim-sqf-syntax',
+	use { -- Legacy syntaxes
+		'sqwishy/vim-sqf-syntax', -- Sqf for arma3
+		'tridactyl/vim-tridactyl', -- for tridactyl firefox plugin
 	}
 
 	use { -- TPOPE:
