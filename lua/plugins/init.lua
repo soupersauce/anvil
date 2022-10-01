@@ -223,24 +223,24 @@ local on_startup = function(use)
 		end,
 	}
 
-	use { -- DAP:
-		'mfussenegger/nvim-dap',
-    disable = true,
-		setup = function()
-			require('plugins.dap').pre()
-		end,
-		requires = {
-			'theHamsta/nvim-dap-virtual-text',
-			'rcarriga/nvim-dap-ui',
-			'leoluz/nvim-dap-go',
-			'mfussenegger/nvim-dap-python',
-			'jbyuki/one-small-step-for-vimkind',
-			'nvim-telescope/telescope-dap.nvim',
-		},
-		config = function()
-			require('plugins.dap').post()
-		end,
-	}
+	-- use { -- DAP:
+	-- 	'mfussenegger/nvim-dap',
+	--    disable = true,
+	-- 	setup = function()
+	-- 		require('plugins.dap').pre()
+	-- 	end,
+	-- 	requires = {
+	-- 		'theHamsta/nvim-dap-virtual-text',
+	-- 		'rcarriga/nvim-dap-ui',
+	-- 		'leoluz/nvim-dap-go',
+	-- 		'mfussenegger/nvim-dap-python',
+	-- 		'jbyuki/one-small-step-for-vimkind',
+	-- 		'nvim-telescope/telescope-dap.nvim',
+	-- 	},
+	-- 	config = function()
+	-- 		require('plugins.dap').post()
+	-- 	end,
+	-- }
 
 	use { -- ICONS:
 		'kyazdani42/nvim-web-devicons',
