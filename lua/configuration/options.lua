@@ -60,7 +60,7 @@ local defined_options = {
 	completeopt = 'menu,menuone,noselect',
 
 	-- Stop popup menu messages
-	shortmess = 'filnxtToOFc',
+	shortmess = 'aoOstAc',
 
 	-- Use interactive replace
 	inccommand = 'split',
