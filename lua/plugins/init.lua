@@ -475,6 +475,13 @@ local on_startup = function(use)
 		end,
 	}
 
+	use { -- tint.nvim
+		'levouh/tint.nvim',
+		config = function()
+			require('tint').setup()
+		end,
+	}
+
 	use { -- WHICHKEY
 		'folke/which-key.nvim',
 		config = function()
