@@ -65,7 +65,7 @@ local on_startup = function(use)
 	}
 
 	use { -- Ask for the right file to open when file matching name is not found
-		'EinfachToll/DidYouMean',
+		'mong8se/actually.nvim',
 	}
 
 	use { -- COLORSCHEMES:
