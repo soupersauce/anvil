@@ -21,15 +21,6 @@ autocmd('WinLeave', {
 	group = active_line_highligh,
 })
 
--- Use vertical splits for help windows
-local vertical_help = augroup('VerticalHelp', { clear = true })
-autocmd('FileType', {
-	desc = 'make help split vertical',
-	pattern = 'help',
-	command = 'wincmd L',
-	group = vertical_help,
-})
-
 -- Highlight yanked text
 local highlight_yank = augroup('HighlightYank', { clear = true })
 autocmd('TextYankPost', {
