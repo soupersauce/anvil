@@ -133,6 +133,8 @@ local defined_options = {
 	-- Direction window splits open
 	splitbelow = true,
 	splitright = true,
+
+	splitkeep = 'screen',
 } --defining close for options
 
 -- Enable true colors if supported
