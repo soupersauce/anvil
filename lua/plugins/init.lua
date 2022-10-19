@@ -1,7 +1,7 @@
 -- PLUGIN SETTINGS
 -- Configure plugins, plugin specific functions and autocommands are to be
 -- written in the corresponding files (makes debugging and trying out plugins easier)
-local vim = vim
+-- local vim = vim
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local run_sync = false
@@ -85,7 +85,7 @@ local on_startup = function(use)
 			'yagua/nebulous.nvim',
 			'shatur/neovim-ayu',
 			'elianiva/icy.nvim',
-			{ 'kaiuri/nvim-juliana', branch = 'dev' },
+			'kaiuri/nvim-juliana',
 			'projekt0n/github-nvim-theme',
 			'kdheepak/monochrome.nvim',
 			'adisen99/codeschool.nvim',
@@ -211,7 +211,7 @@ local on_startup = function(use)
 			'williamboman/mason-lspconfig.nvim',
 			'WhoIsSethDaniel/mason-tool-installer.nvim',
 			'neovim/nvim-lspconfig',
-			'folke/lua-dev.nvim',
+			'folke/neodev.nvim',
 			'SmiteshP/nvim-navic',
 			'amrbashir/nvim-docs-view',
 			'p00f/clangd_extensions.nvim',

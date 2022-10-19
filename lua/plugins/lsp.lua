@@ -8,6 +8,7 @@ local trouble_ok, trouble = pcall(require, 'trouble')
 local crates_ok, crates = pcall(require, 'crates')
 local dtextobjects_ok, dtextobjects = pcall(require, 'textobj-diagnostic')
 local prettier_ok, prettier = pcall(require, 'prettier')
+local neodev_ok, neodev = pcall(require, 'neodev')
 
 local eslint_disabled_buffers = {}
 
@@ -27,6 +28,10 @@ if trouble_ok then
 	trouble.setup()
 else
 	print('trouble with trouble')
+end
+
+if neodev_ok then
+	neodev.setup {}
 end
 
 vim.keymap.set('n', 'K', function(bufnr)
@@ -168,12 +173,15 @@ lsp_setup.setup {
 				filetypes = { 'tex', 'bib', 'plaintex', 'org', 'markdown' },
 			},
 		},
-		sumneko_lua = require('lua-dev').setup { -- lua
+		sumneko_lua = { -- lua
 			lspconfig = {
 				settings = {
 					Lua = {
 						format = {
 							enable = true,
+						},
+						completion = {
+							callSnippet = 'Replace',
 						},
 					},
 				},
