@@ -8,12 +8,14 @@ if not org_ok then
 	return
 end
 
-vim.cmd([[highlight Headline1 guibg=#155e96]])
-vim.cmd([[highlight Headline2 guibg=#742f85]])
-vim.cmd([[highlight Headline3 guibg=#156868]])
-vim.cmd([[highlight Headline4 guibg=#317423]])
-vim.cmd([[highlight CodeBlock guibg=#1c1c1c]])
-vim.cmd([[highlight Dash guibg=#D19A66 gui=bold]])
+vim.cmd([[
+highlight Headline1 guibg=#155e96
+highlight Headline2 guibg=#742f85
+highlight Headline3 guibg=#156868
+highlight Headline4 guibg=#317423
+highlight CodeBlock guibg=#1c1c1c
+highlight Dash guibg=#D19A66 gui=bold
+]])
 
 if hl_ok then
 	headlines.setup {
@@ -21,6 +23,7 @@ if hl_ok then
 			headline_highlights = { 'Headline1', 'Headline2', 'Headline3', 'Headline4' },
 			fat_headline_upper_string = '▃',
 			fat_headline_lower_string = 'ﮋ',
+			fat_headlines = false,
 		},
 	}
 end
