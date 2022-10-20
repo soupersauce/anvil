@@ -334,10 +334,19 @@ local on_startup = function(use)
 	}
 
 	use { -- toggler
-		'nguyenvukhang/nvim-toggler',
+		'nat-418/boole.nvim',
 		config = function()
-			require('nvim-toggler').setup {
-				remove_default_keybinds = true,
+			require('boole').setup {
+				mappings = {
+					increment = '<C-a>',
+					decrement = '<C-a>',
+				},
+				addtions = {
+					{ 'Foo', 'Bar' },
+					{ 'foo', 'bar' },
+					{ 'tic', 'tac', 'toe' },
+					{ 'increment', 'decrement' },
+				},
 			}
 		end,
 	}
