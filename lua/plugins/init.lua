@@ -388,9 +388,9 @@ local on_startup = function(use)
 	}
 
 	use { -- COLOR-PICKER
-		'ziontee113/color-picker.nvim',
+		'uga-rosa/ccc.nvim',
 		config = function()
-			require('color-picker').setup {}
+			require('ccc').setup {}
 		end,
 	}
 
@@ -442,13 +442,6 @@ local on_startup = function(use)
 		cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
 		config = function()
 			require('plugins.nvimtree')
-		end,
-	}
-
-	use { -- colorizer
-		'nvchad/nvim-colorizer.lua',
-		config = function()
-			require('colorizer').setup()
 		end,
 	}
 
