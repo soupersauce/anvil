@@ -390,7 +390,7 @@ local on_startup = function(use)
 	use { -- COLOR-PICKER
 		'uga-rosa/ccc.nvim',
 		config = function()
-			require('ccc').setup {}
+			require('plugins.misc').ccc()
 		end,
 	}
 
