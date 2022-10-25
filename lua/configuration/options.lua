@@ -69,7 +69,7 @@ local defined_options = {
 	incsearch = true,
 
 	-- Don"t update screen while macro or command/script is executing
-	lazyredraw = true,
+	lazyredraw = false,
 
 	-- Use global status line
 	laststatus = 3,

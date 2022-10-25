@@ -466,13 +466,26 @@ local on_startup = function(use)
 	use { -- nvim-notify
 		'rcarriga/nvim-notify',
 		config = function()
-			require('notify').setup()
+			require('notify').setup {
+				background_colour = '#000000',
+			}
 		end,
+	}
+
+	use {
+		'folke/noice.nvim',
+		event = 'VimEnter',
+		config = function()
+			require('plugins.noice')
+		end,
+		requires = {
+			'MunifTanjim/nui.nvim',
+			'rcarriga/nvim-notify',
+		},
 	}
 
 	use { -- dressing
 		'stevearc/dressing.nvim',
-		disable = false,
 		requires = 'MunifTanjim/nui.nvim',
 		config = function()
 			require('plugins.dressing')
