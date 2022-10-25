@@ -90,6 +90,7 @@ local on_startup = function(use)
 			'kdheepak/monochrome.nvim',
 			'adisen99/codeschool.nvim',
 			'b4mbus/oxocarbon-lua.nvim',
+			'kvrohit/mellow.nvim',
 			{ 'everblush/everblush.nvim', as = 'everblush' },
 		},
 		config = function()

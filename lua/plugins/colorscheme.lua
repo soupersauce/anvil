@@ -2,7 +2,7 @@ local vim = vim
 local M = {}
 
 M.init = function()
-	M.aurora()
+	M.mellow()
 end
 
 -- NVCode colorschemes
@@ -46,6 +46,10 @@ end
 
 M.monochrome = function()
 	vim.cmd([[colorscheme monochrome]])
+end
+
+M.mellow = function()
+	vim.cmd([[colorscheme mellow]])
 end
 
 M.aurora = function()
