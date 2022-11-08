@@ -1,14 +1,4 @@
-local noice_ok, noice = pcall(require, 'noice')
-
-if not noice_ok then
-	print('No Noice')
-	return
-end
-
-noice.setup {
-	cmdline = {
-		enabled = true, -- enables the Noice cmdline UI
-		view = 'cmdline', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+'cmdline', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
 		opts = {}, -- extra opts for the cmdline view. See section on views
 		---@type table<string, CmdlineFormat>
 		format = {
@@ -38,7 +28,7 @@ noice.setup {
 	popupmenu = {
 		enabled = true, -- enables the Noice popupmenu UI
 		---@type 'nui'|'cmp'
-		backend = 'nui', -- backend to use to show regular cmdline completions
+		backend = 'cmp', -- backend to use to show regular cmdline completions
 		---@type NoicePopupmenuItemKind|false
 		-- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
 		kind_icons = {}, -- set to `false` to disable icons

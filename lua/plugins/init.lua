@@ -37,6 +37,18 @@ local on_startup = function(use)
 		end,
 	}
 
+	-- use {
+	-- 	'folke/noice.nvim',
+	-- 	event = 'VimEnter',
+	-- 	config = function()
+	-- 		require('plugins.noice')
+	-- 	end,
+	-- 	requires = {
+	-- 		'MunifTanjim/nui.nvim',
+	-- 		'rcarriga/nvim-notify',
+	-- 	},
+	-- }
+
 	-- use { -- netmap.nvim
 	-- 	'miversen33/netman.nvim',
 	-- 	branch = 'issue-28-libuv-shenanigans',
@@ -471,18 +483,6 @@ local on_startup = function(use)
 				background_colour = '#000000',
 			}
 		end,
-	}
-
-	use {
-		'folke/noice.nvim',
-		event = 'VimEnter',
-		config = function()
-			require('plugins.noice')
-		end,
-		requires = {
-			'MunifTanjim/nui.nvim',
-			'rcarriga/nvim-notify',
-		},
 	}
 
 	use { -- dressing
