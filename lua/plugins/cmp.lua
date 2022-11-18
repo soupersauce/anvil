@@ -94,7 +94,7 @@ cmp.setup {
 		),
 		['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
 		['<CR>'] = cmp.mapping.confirm {
-			behavior = cmp.ConfirmBehavior.Insert,
+			-- behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
 		},
 		['<C-e'] = cmp.mapping {
@@ -107,8 +107,8 @@ cmp.setup {
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
-			elseif has_words_before() then
-				cmp.complete()
+			-- elseif has_words_before() then
+			-- 	cmp.complete()
 			else
 				fallback()
 			end
