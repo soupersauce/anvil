@@ -2,7 +2,7 @@ local vim = vim
 local M = {}
 
 M.init = function()
-	M.mellow()
+	M.nvcode('snazzy')
 end
 
 -- NVCode colorschemes
