@@ -9,30 +9,15 @@ if not org_ok then
 end
 
 vim.cmd([[
-highlight Headline1 guibg=#155e96
-highlight Headline2 guibg=#742f85
-highlight Headline3 guibg=#156868
-highlight Headline4 guibg=#317423
+highlight Headline1 guibg=#883388
+highlight Headline2 guibg=#725c7b
+highlight Headline3 guibg=#5c846f
+highlight Headline4 guibg=#46ad62
+highlight Headline5 guibg=#30d556
+highlight Headline6 guibg=#1afe49
 highlight CodeBlock guibg=#1c1c1c
 highlight Dash guibg=#D19A66 gui=bold
 ]])
-
-if hl_ok then
-	headlines.setup {
-		org = {
-			headline_highlights = { 'Headline1', 'Headline2', 'Headline3', 'Headline4' },
-			fat_headline_upper_string = '▃',
-			fat_headline_lower_string = 'ﮋ',
-			fat_headlines = false,
-		},
-	}
-end
-
-if bull_ok then
-	bullets.setup {
-		concealcursor = true,
-	}
-end
 
 -- Directories
 local agendas = '~/Documents/org/**/*'
@@ -72,7 +57,40 @@ org.setup {
 	org_default_notes_file = notes,
 	org_capture_templates = templates,
 	org_todo_keywords = todo_keywords,
+	org_hide_emphasis_markers = true,
+	org_indent_mode = 'indent',
+	org_tags_column = 0,
 }
+
+if hl_ok then
+	headlines.setup {
+		org = {
+			headline_highlights = {
+				'Headline1',
+				'Headline2',
+				'Headline3',
+				'Headline4',
+				'Headline5',
+				'Headline6',
+				'Headline5',
+				'Headline4',
+				'Headline3',
+				'Headline2',
+				'Headline1',
+			},
+			fat_headline_upper_string = '▃',
+			fat_headline_lower_string = 'ﮋ',
+			fat_headlines = false,
+		},
+	}
+end
+
+if bull_ok then
+	bullets.setup {
+		concealcursor = true,
+		indent = true,
+	}
+end
 
 if wiki_ok then
 	wiki.setup {
