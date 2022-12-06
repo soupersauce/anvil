@@ -103,6 +103,7 @@ local on_startup = function(use)
 			'adisen99/codeschool.nvim',
 			'b4mbus/oxocarbon-lua.nvim',
 			'kvrohit/mellow.nvim',
+			'kartikp10/noctis.nvim',
 			{ 'everblush/everblush.nvim', as = 'everblush' },
 		},
 		config = function()
