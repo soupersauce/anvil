@@ -219,10 +219,9 @@ local on_startup = function(use)
 	}
 
 	use { -- LSP: integration
-		'junnplus/lsp-setup.nvim',
+		'williamboman/mason-lspconfig.nvim',
 		requires = {
 			'williamboman/mason.nvim',
-			'williamboman/mason-lspconfig.nvim',
 			'WhoIsSethDaniel/mason-tool-installer.nvim',
 			'neovim/nvim-lspconfig',
 			'folke/neodev.nvim',
@@ -243,7 +242,7 @@ local on_startup = function(use)
 			'ray-x/go.nvim',
 		},
 		config = function()
-			require('plugins.lsp')
+			require('plugins.lsp-alt')
 		end,
 	}
 
