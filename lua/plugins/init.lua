@@ -497,7 +497,7 @@ local on_startup = function(use)
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons' },
 		config = function()
-			require('plugins.lualine')
+			require('plugins.lualine').evil()
 		end,
 	}
 
