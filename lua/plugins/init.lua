@@ -257,6 +257,15 @@ local on_startup = function(use)
 		end,
 	}
 
+	use { 'ralismark/vim-recover' }
+
+	use {
+		'chentoast/marks.nvim',
+		config = function()
+			require('marks').setup()
+		end,
+	}
+
 	-- use { -- DAP:
 	-- 	'mfussenegger/nvim-dap',
 	--    disable = true,
