@@ -2,7 +2,6 @@ local vim = vim
 local u = require('configuration.utils')
 local null_ok, null_ls = pcall(require, 'null-ls')
 local navic_ok, navic = pcall(require, 'nvim-navic')
-local lspsig_ok, lspsignature = pcall(require, 'lsp_signature')
 local trouble_ok, trouble = pcall(require, 'trouble')
 local crates_ok, crates = pcall(require, 'crates')
 local dtextobjects_ok, dtextobjects = pcall(require, 'textobj-diagnostic')
@@ -11,6 +10,7 @@ local neodev_ok, neodev = pcall(require, 'neodev')
 local mason_ok, mason = pcall(require, 'mason')
 local masonlspc_ok, masonlspc = pcall(require, 'mason-lspconfig')
 local lspcfg_ok, lspconfig = pcall(require, 'lspconfig')
+local actionpreview_ok, capreview = pcall(require, 'actions-preview')
 
 local eslint_disabled_buffers = {}
 
@@ -19,11 +19,14 @@ if not lspcfg_ok then
 end
 
 if navic_ok then
-	navic.setup {}
+	navic.setup {
+		highlight = true,
+		safe_output = true,
+	}
 end
 
-if lspsig_ok then
-	lspsignature.setup()
+if actionpreview_ok then
+	capreview.setup()
 end
 
 if trouble_ok then
@@ -112,7 +115,7 @@ local def_mappings = function(bufnr)
 		require('telescope.builtin').lsp_references()
 	end, bufopts)
 
-	vim.keymap.set('n', '<leader>ca', '<cmd>CodeActionMenu<CR>', bufopts)
+	vim.keymap.set({ 'v', 'n' }, '<leader>ca', capreview.code_actions, bufopts)
 end
 
 local lsp_formatting = function(bufnr)
