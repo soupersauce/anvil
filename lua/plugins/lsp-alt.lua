@@ -354,9 +354,11 @@ local null_sources = {
 	diag.ansiblelint,
 	diag.checkmake,
 	diag.codespell,
+	diag.commitlint,
 	diag.curlylint,
 	diag.gitlint,
 	diag.golangci_lint,
+	diag.hadolint,
 	diag.luacheck,
 	diag.pylint,
 	diag.flake8,
@@ -369,9 +371,6 @@ local null_sources = {
 			return vim.fn.expand('~')
 		end,
 	},
-	diag.write_good.with {
-		extra_filetypes = { 'tex', 'org' },
-	},
 	diag.selene,
 	diag.shellcheck.with {
 		diag_format = diagnostics_code_template,
@@ -382,28 +381,32 @@ local null_sources = {
 	diag.stylelint,
 	diag.tidy,
 	diag.vale.with {
-		extra_filetypes = { 'org', 'text' },
-		extra_args = { '--config', vim.fn.expand('~/.config/vale.ini') },
-		cwd = function()
-			return vim.fn.expand('~')
-		end,
+		extra_filetypes = { 'org', 'text', 'txt' },
+	},
+	diag.write_good.with {
+		extra_filetypes = { 'tex', 'org' },
 	},
 	diag.yamllint,
 	diag.zsh,
 
 	-- format
 	format.blue,
+	format.cbfmt,
 	format.clang_format,
+	format.codespell,
 	format.eslint_d,
+	format.fnlfmt,
 	format.gofumpt,
 	format.goimports,
-	format.reorder_python_imports,
+	format.jq,
 	format.latexindent,
+	format.markdownlint,
+	format.mdformat,
 	format.stylua.with {
 		extra_args = { '--config-path', vim.fn.expand('~/.config/stylua.toml') },
 	},
 	format.prettierd,
-	format.puppet_lint,
+	format.reorder_python_imports,
 	format.rustfmt.with {
 		extra_args = function(params)
 			local Path = require('plenary.path')
@@ -459,8 +462,11 @@ null_ls.setup {
 require('mason-tool-installer').setup {
 	ensure_installed = {
 		'blue',
+		'beautysh',
+		'cbfmt',
 		'clang-format',
 		'codespell',
+		'commitlint',
 		'curlylint',
 		'debugpy',
 		'delve',
@@ -473,6 +479,7 @@ require('mason-tool-installer').setup {
 		'goimports',
 		'golangci-lint',
 		'gopls',
+		'hadolint',
 		'luacheck',
 		'markdownlint',
 		'mypy',
@@ -491,6 +498,7 @@ require('mason-tool-installer').setup {
 		'stylua',
 		'taplo',
 		'terraform-ls',
+		'tectonic',
 		'texlab',
 		'textlint',
 		'tflint',
@@ -499,14 +507,13 @@ require('mason-tool-installer').setup {
 		'yamllint',
 		-- 'debugpy-adapter',
 		-- 'ansiblelint',
-		-- 'beautysh',
 		-- 'checkmake',
 		-- 'chktex',
 		-- 'dictionary',
 		-- 'latexindent',
 		-- 'puppet_lint',
-		-- 'reorder_python_imports',
-		-- 'rustfmt',
+		'reorder-python-imports',
+		'rustfmt',
 		-- 'tidy',
 	},
 }
