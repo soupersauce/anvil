@@ -176,6 +176,17 @@ local on_startup = function(use)
 		end,
 	}
 
+	use {
+		'ibhagwan/smartyank.nvim',
+		config = function()
+			require('smartyank').setup {
+				highlight = {
+					timeout = 200,
+				},
+			}
+		end,
+	}
+
 	use { -- regex explainer
 		'bennypowers/nvim-regexplainer',
 		config = function()
