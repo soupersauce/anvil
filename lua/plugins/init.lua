@@ -101,7 +101,7 @@ local on_startup = function(use)
 			'projekt0n/github-nvim-theme',
 			'kdheepak/monochrome.nvim',
 			'adisen99/codeschool.nvim',
-			'b4mbus/oxocarbon-lua.nvim',
+			'nyoom-engineering/oxocarbon.nvim',
 			'kvrohit/mellow.nvim',
 			'kartikp10/noctis.nvim',
 			{ 'everblush/everblush.nvim', as = 'everblush' },

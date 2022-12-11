@@ -2,7 +2,7 @@ local vim = vim
 local M = {}
 
 M.init = function()
-	M.noctis()
+	M.oxocarbon()
 end
 
 -- NVCode colorschemes
@@ -45,7 +45,7 @@ M.noctis = function()
 end
 
 M.oxocarbon = function()
-	vim.cmd([[colorscheme oxocarbon-lua]])
+	vim.cmd([[colorscheme oxocarbon]])
 end
 
 M.monochrome = function()
