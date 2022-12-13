@@ -253,7 +253,7 @@ local on_startup = function(use)
 			'ray-x/go.nvim',
 		},
 		config = function()
-			require('plugins.lsp-alt')
+			require('plugins.lsp')
 		end,
 	}
 

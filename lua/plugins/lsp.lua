@@ -1,33 +1,36 @@
 local vim = vim
 local u = require('configuration.utils')
 local null_ok, null_ls = pcall(require, 'null-ls')
-local lspsetup_ok, lsp_setup = pcall(require, 'lsp-setup')
 local navic_ok, navic = pcall(require, 'nvim-navic')
-local lspsig_ok, lspsignature = pcall(require, 'lsp_signature')
 local trouble_ok, trouble = pcall(require, 'trouble')
 local crates_ok, crates = pcall(require, 'crates')
 local dtextobjects_ok, dtextobjects = pcall(require, 'textobj-diagnostic')
 local prettier_ok, prettier = pcall(require, 'prettier')
 local neodev_ok, neodev = pcall(require, 'neodev')
+local mason_ok, mason = pcall(require, 'mason')
+local masonlspc_ok, masonlspc = pcall(require, 'mason-lspconfig')
+local lspcfg_ok, lspconfig = pcall(require, 'lspconfig')
+local actionpreview_ok, capreview = pcall(require, 'actions-preview')
 
 local eslint_disabled_buffers = {}
 
-if not lspsetup_ok then
+if not lspcfg_ok then
 	return
 end
 
 if navic_ok then
-	navic.setup {}
+	navic.setup {
+		highlight = true,
+		safe_output = true,
+	}
 end
 
-if lspsig_ok then
-	lspsignature.setup()
+if actionpreview_ok then
+	capreview.setup()
 end
 
 if trouble_ok then
 	trouble.setup()
-else
-	print('trouble with trouble')
 end
 
 if neodev_ok then
@@ -69,30 +72,51 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = function(_, result, ctx, c
 	return vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, config)
 end
 
-local mappings = {
+local def_mappings = function(bufnr)
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
 	-- Add keybindings for LSP integration
-	gD = 'lua vim.lsp.buf.declaration()',
-	gt = 'lua vim.lsp.buf.type_definition()',
+	vim.keymap.set('n', 'gD', function()
+		vim.lsp.buf.declaration()
+	end, bufopts)
+	vim.keymap.set('n', 'gt', function()
+		vim.lsp.buf.type_definition()
+	end, bufopts)
 	-- gr = 'lua vim.lsp.buf.references()',
-	['<Leader>s'] = 'lua vim.lsp.buf.document_symbol()',
-	['<Leader>w'] = 'lua vim.lsp.buf.workspace_symbol()',
+	vim.keymap.set('n', '<Leader>s', function()
+		vim.lsp.buf.document_symbol()
+	end, bufopts)
+	vim.keymap.set('n', '<Leader>w', function()
+		vim.lsp.buf.workspace_symbol()
+	end, bufopts)
 	--  if not dtextobjects_ok then
 	-- ']d' = 'lua vim.diagnostic.goto_next()',
 	-- '[d' = 'lua vim.diagnostic.goto_prev()',
 	--  end,
-	['<leader>rn'] = 'lua vim.lsp.buf.rename()',
+	vim.keymap.set('n', '<leader>rn', function()
+		vim.lsp.buf.rename()
+	end, bufopts)
 	-- ['<leader>ca'] = 'lua vim.lsp.buf.code_action()',
-	['<leader>f'] = 'lua vim.lsp.buf.format()',
-	['<leader>e'] = 'lua vim.diagnostic.open_float()',
+	vim.keymap.set('n', '<leader>f', function()
+		vim.lsp.buf.format()
+	end, bufopts)
+	vim.keymap.set('n', '<leader>e', function()
+		vim.diagnostic.open_float()
+	end, bufopts)
 	-- Custom mappings, will overwrite the default mappings for the same key
 	-- Example mappings for telescope pickers:
-	gd = 'lua require("telescope.builtin").lsp_definitions()',
-	['<leader>i'] = 'lua require("telescope.builtin").lsp_implementations()',
-	gr = 'lua require("telescope.builtin").lsp_references()',
+	vim.keymap.set('n', 'gd', function()
+		require('telescope.builtin').lsp_definitions()
+	end, bufopts)
+	vim.keymap.set('n', '<leader>i', function()
+		require('telescope.builtin').lsp_implementations()
+	end, bufopts)
+	vim.keymap.set('n', 'gr', function()
+		require('telescope.builtin').lsp_references()
+	end, bufopts)
 
-	['<leader>ca'] = 'CodeActionMenu',
-}
+	vim.keymap.set({ 'v', 'n' }, '<leader>ca', capreview.code_actions, bufopts)
+end
 
 local lsp_formatting = function(bufnr)
 	local clients = vim.lsp.get_active_clients { bufnr = bufnr }
@@ -116,90 +140,70 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
-lsp_setup.setup {
-	installer = {
-		automatic_installation = true,
+mason.setup()
+
+masonlspc.setup {
+	ensure_installed = {
+		'awk_ls', -- AWK
+		'ansiblels', -- Ansible
+		'bashls', -- Bash
+		'cmake', -- cmake
+		'cssls', -- css
+		'diagnosticls',
+		'stylelint_lsp',
+		'dockerls', -- Docker
+		'gopls',
+		'html', -- HTML
+		'ltex', -- Latex
+		'sumneko_lua',
+		'marksman', -- Markdown
+		'powershell_es', -- Powershell
+		'puppet', -- puppet
+		'pylsp', -- python
+		'jedi_language_server', -- python
+		'rust_analyzer',
+		'slint_lsp',
+		'salt_ls', -- salt
+		'sqls', -- SQL
+		'taplo', -- TOML
+		'terraformls', -- terrafrom
+		'tflint', -- terrafrom
+		'lemminx', -- XML
+		'yamlls', -- YAML
 	},
-	-- Default mappings
-	default_mappings = false,
-	mappings = mappings,
-	-- Global on_attach
-	on_attach = function(client, bufnr)
-		if client.supports_method('textDocument/formatting') then
-			u.buf_command(bufnr, 'LspFormatting', function()
-				lsp_formatting(bufnr)
-			end)
-			vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-			vim.api.nvim_create_autocmd('BufWritePre', {
-				group = augroup,
-				buffer = bufnr,
-				command = 'LspFormatting',
-			})
-		end
-		if
-			client.supports_method('textDocument/documentSymbol')
-			and not client.supports_method('textDocument/SymbolInformation')
-		then
-			navic.attach(client, bufnr)
-		end
+}
+
+masonlspc.setup_handlers {
+
+	function(server_name)
+		require('lspconfig')[server_name].setup {
+			on_attach = function(client, bufnr)
+				def_mappings(bufnr)
+				if client.supports_method('textDocument/formatting') then
+					u.buf_command(bufnr, 'LspFormatting', function()
+						lsp_formatting(bufnr)
+					end)
+					vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+					vim.api.nvim_create_autocmd('BufWritePre', {
+						group = augroup,
+						buffer = bufnr,
+						command = 'LspFormatting',
+					})
+				end
+				if
+					client.supports_method('textDocument/documentSymbol')
+					and not client.supports_method('textDocument/SymbolInformation')
+				then
+					navic.attach(client, bufnr)
+				end
+			end,
+			-- Global capabilities
+			capabilities = vim.lsp.protocol.make_client_capabilities(),
+		}
 	end,
-	-- Global capabilities
-	capabilities = vim.lsp.protocol.make_client_capabilities(),
-	-- Configuration of LSP servers  -- capabilities = vim.lsp.protocol.make_client_capabilities(),
-	servers = {
-		awk_ls = {}, -- AWK
-		ansiblels = {}, -- Ansible
-		bashls = {}, -- Bash
-		clangd = { -- C/C++
-			require('lsp-setup.clangd_extensions').setup {},
-		},
-		cmake = {}, -- cmake
-		cssls = {}, -- css
-		diagnosticls = {},
-		stylelint_lsp = {},
-		dockerls = {}, -- Docker
-		gopls = {},
-		html = {}, -- HTML
-		jsonls = { -- JSON
-			settings = {
-				json = {
-					-- schemas = require('schemastore').json.schemas(),
-				},
-			},
-		},
-		ltex = {}, -- Latex
-		texlab = { -- Latex
-			lspconfig = {
-				filetypes = { 'tex', 'bib', 'plaintex', 'org', 'markdown' },
-			},
-		},
-		sumneko_lua = { -- lua
-			lspconfig = {
-				settings = {
-					Lua = {
-						format = {
-							enable = true,
-						},
-						completion = {
-							callSnippet = 'Replace',
-						},
-					},
-				},
-				on_attach = function(client, bufnr)
-					-- Avoid LSP formatting conflicts.
-					-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflict
-					-- require('nvim-lsp-setup.utils').disable_formatting(client)
-				end,
-				capabilities = capabilities,
-				telemetry = { enable = false },
-			},
-		},
-		marksman = {}, -- Markdown
-		powershell_es = {}, -- Powershell
-		puppet = {}, -- puppet
-		pylsp = {}, -- python
-		jedi_language_server = {}, -- python
-		rust_analyzer = require('lsp-setup.rust-tools').setup { -- Rust
+
+	['rust_analyzer'] = function()
+		require('rust-tools').setup {
 			server = {
 				settings = {
 					['rust-analyzer'] = {
@@ -212,16 +216,82 @@ lsp_setup.setup {
 					},
 				},
 			},
-		},
-		slint_lsp = {},
-		salt_ls = {}, -- salt
-		sqls = {}, -- SQL
-		taplo = {}, -- TOML
-		terraformls = {}, -- terrafrom
-		tflint = {}, -- terrafrom
-		lemminx = {}, -- XML
-		yamlls = {}, -- YAML
-	},
+		}
+	end,
+
+	['sumneko_lua'] = function()
+		lspconfig.sumneko_lua.setup {
+			settings = {
+				Lua = {
+					format = {
+						enable = true,
+					},
+					completion = {
+						callSnippet = 'Replace',
+					},
+					diagnostics = {
+						globals = { 'vim' },
+					},
+				},
+			},
+			on_attach = function(client, bufnr)
+				-- Avoid LSP formatting conflicts.
+				-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflict
+				-- require('nvim-lsp-setup.utils').disable_formatting(client)
+			end,
+			capabilities = capabilities,
+			telemetry = { enable = false },
+		}
+	end,
+
+	['clangd'] = function() -- C/C++
+		require('clangd_extensions').setup {}
+	end,
+
+	['gopls'] = function() -- Golang
+		require('go').setup {
+			lsp_cfg = {
+				capabilities = capabilities,
+			},
+			lsp_gofumpt = true,
+			trouble = true,
+			comment_useplaceholders = true,
+		}
+	end,
+
+	['ltex'] = function()
+		lspconfig.ltex.setup {
+			capabilities = capabilities,
+			on_attach = function(client, bufnr)
+				require('ltex_extra').setup {
+					load_langs = { 'en-US' },
+					init_check = true,
+					path = vim.fn.expand('~/.config/nvim/dictionaries'),
+					log_level = 'warn',
+				}
+			end,
+			settings = {
+				ltex = {},
+			},
+		}
+	end,
+
+	['texlab'] = function()
+		lspconfig.texlab.setup {
+			filetypes = { 'tex', 'bib', 'plaintex', 'org', 'markdown' },
+		}
+	end,
+
+	['jsonls'] = function() -- JSON
+		lspconfig.jsonls.setup {
+			settings = {
+				json = {
+					schemas = require('schemastore').json.schemas(),
+					validate = { enable = true },
+				},
+			},
+		}
+	end,
 }
 
 do
@@ -284,9 +354,11 @@ local null_sources = {
 	diag.ansiblelint,
 	diag.checkmake,
 	diag.codespell,
+	diag.commitlint,
 	diag.curlylint,
 	diag.gitlint,
 	diag.golangci_lint,
+	diag.hadolint,
 	diag.luacheck,
 	diag.pylint,
 	diag.flake8,
@@ -299,9 +371,6 @@ local null_sources = {
 			return vim.fn.expand('~')
 		end,
 	},
-	diag.write_good.with {
-		extra_filetypes = { 'tex', 'org' },
-	},
 	diag.selene,
 	diag.shellcheck.with {
 		diag_format = diagnostics_code_template,
@@ -312,28 +381,32 @@ local null_sources = {
 	diag.stylelint,
 	diag.tidy,
 	diag.vale.with {
-		extra_filetypes = { 'org', 'text' },
-		extra_args = { '--config', vim.fn.expand('~/.config/vale.ini') },
-		cwd = function()
-			return vim.fn.expand('~')
-		end,
+		extra_filetypes = { 'org', 'text', 'txt' },
+	},
+	diag.write_good.with {
+		extra_filetypes = { 'tex', 'org' },
 	},
 	diag.yamllint,
 	diag.zsh,
 
 	-- format
 	format.blue,
+	format.cbfmt,
 	format.clang_format,
+	format.codespell,
 	format.eslint_d,
+	format.fnlfmt,
 	format.gofumpt,
 	format.goimports,
-	format.reorder_python_imports,
+	format.jq,
 	format.latexindent,
+	format.markdownlint,
+	format.mdformat,
 	format.stylua.with {
 		extra_args = { '--config-path', vim.fn.expand('~/.config/stylua.toml') },
 	},
 	format.prettierd,
-	format.puppet_lint,
+	format.reorder_python_imports,
 	format.rustfmt.with {
 		extra_args = function(params)
 			local Path = require('plenary.path')
@@ -389,8 +462,11 @@ null_ls.setup {
 require('mason-tool-installer').setup {
 	ensure_installed = {
 		'blue',
+		'beautysh',
+		'cbfmt',
 		'clang-format',
 		'codespell',
+		'commitlint',
 		'curlylint',
 		'debugpy',
 		'delve',
@@ -403,6 +479,7 @@ require('mason-tool-installer').setup {
 		'goimports',
 		'golangci-lint',
 		'gopls',
+		'hadolint',
 		'luacheck',
 		'markdownlint',
 		'mypy',
@@ -421,6 +498,7 @@ require('mason-tool-installer').setup {
 		'stylua',
 		'taplo',
 		'terraform-ls',
+		'tectonic',
 		'texlab',
 		'textlint',
 		'tflint',
@@ -429,14 +507,13 @@ require('mason-tool-installer').setup {
 		'yamllint',
 		-- 'debugpy-adapter',
 		-- 'ansiblelint',
-		-- 'beautysh',
 		-- 'checkmake',
 		-- 'chktex',
 		-- 'dictionary',
 		-- 'latexindent',
 		-- 'puppet_lint',
-		-- 'reorder_python_imports',
-		-- 'rustfmt',
+		'reorder-python-imports',
+		'rustfmt',
 		-- 'tidy',
 	},
 }
@@ -459,15 +536,6 @@ require('nvim-lightbulb').setup {
 	},
 }
 -- Golang
-require('go').setup {
-	lsp_cfg = {
-		capabilities = capabilities,
-	},
-	lsp_gofumpt = true,
-	trouble = true,
-	comment_useplaceholders = true,
-}
-
 if dtextobjects_ok then
 	dtextobjects.setup { create_default_keymaps = false }
 	vim.keymap.set({ 'x', 'o', 'n' }, ']d', function()
@@ -482,21 +550,6 @@ if dtextobjects_ok then
 else
 	print('No diagnostic text objects')
 end
-
-require('lspconfig').ltex.setup {
-	capabilities = capabilities,
-	on_attach = function(client, bufnr)
-		require('ltex_extra').setup {
-			load_langs = { 'en-US' },
-			init_check = true,
-			path = vim.fn.expand('~/.config/nvim/dictionaries'),
-			log_level = 'warn',
-		}
-	end,
-	settings = {
-		ltex = {},
-	},
-}
 
 if prettier_ok then
 	prettier.setup {
