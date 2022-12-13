@@ -201,10 +201,7 @@ local on_startup = function(use)
 	use { -- URLView
 		'axieax/urlview.nvim',
 		config = function()
-			require('urlview').setup {
-				default_action = 'system',
-				sorted = 'false',
-			}
+			require('plugins.urlview')
 		end,
 	}
 
