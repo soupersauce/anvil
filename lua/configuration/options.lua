@@ -56,9 +56,6 @@ local defined_options = {
 	-- Do not use popup menu for completions in command mode
 	wildoptions = 'pum',
 
-	-- complete options
-	-- completeopt = 'menu,menuone,noselect',
-
 	-- Stop popup menu messages
 	shortmess = 'aoOstAc',
 
