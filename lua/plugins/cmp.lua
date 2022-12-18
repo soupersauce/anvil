@@ -1,5 +1,6 @@
 local vim = vim
 local icons = require('icons')
+local lspkind = require('lspkind')
 -- Setup nvim-cmp.
 local cmp_status_ok, cmp = pcall(require, 'cmp')
 if not cmp_status_ok then
@@ -23,40 +24,8 @@ end
 
 local types = require('cmp.types')
 
-local box_icons =
-	{
-		Text = '',
-		Method = '',
-		Function = '',
-		Constructor = '',
-		Field = '',
-		Variable = '',
-		Class = '',
-		Interface = '',
-		Module = '',
-		Property = '',
-		Unit = '',
-		Value = '',
-		Enum = '',
-		Keyword = '',
-		Snippet = '',
-		Color = '',
-		File = '',
-		Reference = '',
-		Folder = '',
-		EnumMember = '',
-		Constant = '',
-		Struct = '',
-		Event = '',
-		Operator = '',
-		TypeParameter = '',
-	}, require('luasnip.loaders.from_vscode').lazy_load()
-
 cmp.setup {
-	-- cmp.event:on(
-	--       'confirm_done',
-	--       cmp_autopairs.on_confirm_done()
-	--     ),
+	cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done()),
 
 	snippet = {
 		expand = function(args)
@@ -64,26 +33,9 @@ cmp.setup {
 		end,
 	},
 
-	cmp.setup.cmdline('/', {
-		view = {
-			entries = { name = 'custom', selection_order = 'near_cursor' },
-		},
-	}),
-	view = {
-		entries = { name = 'custom' },
-	},
-
-	completion = {
-		autocomplete = {
-			types.cmp.TriggerEvent.TextChanged,
-		},
-		winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
-		col_offset = -3,
-		side_padding = 0,
-	},
 	mapping = cmp.mapping.preset.insert {
-		['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
 		['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+		['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
 		['<C-j>'] = cmp.mapping(
 			cmp.mapping.select_next_item { behavior = types.cmp.SelectBehavior.Select },
 			{ 'i', 'c' }
@@ -95,7 +47,7 @@ cmp.setup {
 		['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
 		['<CR>'] = cmp.mapping.confirm {
 			-- behavior = cmp.ConfirmBehavior.Insert,
-			select = true,
+			select = false,
 		},
 		['<C-e'] = cmp.mapping {
 			i = cmp.mapping.abort(),
@@ -107,8 +59,8 @@ cmp.setup {
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
-			-- elseif has_words_before() then
-			-- 	cmp.complete()
+			elseif has_words_before() then
+				cmp.complete()
 			else
 				fallback()
 			end
@@ -124,94 +76,93 @@ cmp.setup {
 		end, { 'i', 's' }),
 	},
 
+	completion = {
+		autocomplete = {
+			types.cmp.TriggerEvent.TextChanged,
+		},
+		completeopt = 'menu,menuone,noselect',
+		keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
+		keyword_length = 1,
+	},
+
 	sources = cmp.config.sources {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+		{ name = 'crates' },
 		{ name = 'cmp_autopairs' },
-		{ name = 'buffer', keyword_length = 5 },
+		{ name = 'buffer', keyword_length = 3 },
 		{ name = 'path' },
 		-- { name = 'treesitter' },
 		{ name = 'nvim_lsp_signature_help' },
-		{ name = 'dictionary', keyword_length = 2 },
-		{ name = 'spell' },
+		{ name = 'dictionary' },
 	},
 
 	formatting = {
-		format = function(entry, vim_item)
-			vim_item.kind = string.format('%s %s', icons.kind_icons[vim_item.kind], vim_item.kind)
-			vim_item.menu = ({
+		format = lspkind.cmp_format {
+			mode = 'symbol_text',
+			menu = {
+				nvim_lua = '[nvim_api]',
 				nvim_lsp = '[lsp]',
 				luasnip = '[snip]',
 				buffer = '[buf]',
 				path = '[path]',
-				nvim_lua = '[nvim_api]',
 				orgmode = '[org]',
 				cmdline = '[:cmd]',
+				cmdline_history = '[:hist]',
 				cmp_git = '[git]',
 				dictionary = '[dict]',
 				spell = '[spell]',
-			})[entry.source.name]
-			return vim_item
-		end,
+			},
+		},
+		-- 	return vim_item
+		-- end,
 	},
-
-	cmp.setup.cmdline('/', {
+	cmp.setup.filetype('gitcommit', {
 		mapping = cmp.mapping.preset.cmdline(),
-		sources = {
+		sources = cmp.config.sources {
+			{ name = 'cmp_git' },
 			{ name = 'buffer' },
+			{ name = 'dictionary' },
 		},
 	}),
 
 	cmp.setup.cmdline(':', {
 		mapping = cmp.mapping.preset.cmdline(),
-		sources = cmp.config.sources({
-			{ name = 'path' },
-		}, {
+		sources = {
 			{ name = 'cmdline' },
-		}),
-	}),
-
-	cmp.setup.filetype('gitcommit', {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = cmp.config.sources({
-			{ name = 'cmp_git' },
-		}, {
+			{ name = 'path' },
+			{ name = 'cmdline_history' },
 			{ name = 'buffer' },
-		}),
-	}),
-
-	cmp.setup.filetype('org', {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = cmp.config.sources {
-			{ name = 'orgmode' },
 		},
-	}),
-
-	cmp.setup.filetype('rust', {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = cmp.config.sources {
-			{ name = 'crates' },
-		},
-	}),
-
-	cmp.setup.filetype('lua', {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = cmp.config.sources {
-			{ name = 'nvim_lua' },
+		view = {
+			entries = { name = 'custom', selection_order = 'near_cursor' },
 		},
 	}),
 
 	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
+		winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
+		col_offset = -3,
+		side_padding = 0,
+		-- completion = cmp.config.window.bordered(),
+		-- documentation = cmp.config.window.bordered(),
 	},
 }
 
 require('cmp_dictionary').setup {
 	dic = {
-		['*'] = { '/usr/share/dict/words' },
-		spelllang = {
-			en = '/usr/share/dict/american-english-large',
-		},
+		['*'] = { '~/.config/nvim/dictionaries/aspell_en' },
 	},
 }
+
+for _, cmd_type in ipairs { '/', '?', '@' } do
+	cmp.setup.cmdline(cmd_type, {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = {
+			{ name = 'cmdline_history' },
+			{ name = 'buffer' },
+		},
+		view = {
+			entries = { name = 'custom' },
+		},
+	})
+end

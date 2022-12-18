@@ -1,5 +1,4 @@
 local dressing_ok, dressing = pcall(require, 'dressing')
--- local code_action_menu = require('code_action_menu')
 
 if not dressing_ok then
 	print('No Dressing')
@@ -8,6 +7,6 @@ end
 
 dressing.setup {
 	select = {
-		backend = { 'fzf_lua', 'nui', 'telescope', 'fzf', 'builtin' },
+		backend = { 'fzf_lua', 'fzf', 'nui', 'telescope', 'builtin' },
 	},
 }

@@ -57,7 +57,7 @@ local defined_options = {
 	wildoptions = 'pum',
 
 	-- complete options
-	completeopt = 'menu,menuone,noselect',
+	-- completeopt = 'menu,menuone,noselect',
 
 	-- Stop popup menu messages
 	shortmess = 'aoOstAc',
@@ -90,7 +90,7 @@ local defined_options = {
 	updatetime = 1000,
 
 	-- Settings for better diffs
-	diffopt = 'filler,vertical,hiddenoff,foldcolumn:0,algorithm:patience',
+	diffopt = 'filler,vertical,hiddenoff,foldcolumn:1,algorithm:patience',
 
 	-- Show whitespace characters
 	list = true,
@@ -125,7 +125,7 @@ local defined_options = {
 	foldlevel = 99,
 	foldlevelstart = 99,
 	foldcolumn = '1',
-	fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
+	fillchars = [[vert:▕,horiz:─,eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
 
 	conceallevel = 2,
 	concealcursor = 'nc',
@@ -172,12 +172,11 @@ for option, value in pairs(defined_options) do
 	global_options[option] = value
 end
 
+vim.o.foldoptions = 'nodigits'
 -- Enable highlighting embedded lua code
 vim.g.vimsyn_embed = 'l'
 -- Use Python 3 for plugins
 vim.g.python3_host_prog = 'python3'
-
-vim.cmd([[set fillchars+=vert:▕,horiz:─]])
 
 -- Set Space as the leader key
 vim.g.mapleader = ' '

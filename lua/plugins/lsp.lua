@@ -1,23 +1,19 @@
 local vim = vim
 local u = require('configuration.utils')
-local null_ok, null_ls = pcall(require, 'null-ls')
-local navic_ok, navic = pcall(require, 'nvim-navic')
-local trouble_ok, trouble = pcall(require, 'trouble')
 local crates_ok, crates = pcall(require, 'crates')
 local dtextobjects_ok, dtextobjects = pcall(require, 'textobj-diagnostic')
 local prettier_ok, prettier = pcall(require, 'prettier')
-local neodev_ok, neodev = pcall(require, 'neodev')
 local mason_ok, mason = pcall(require, 'mason')
 local masonlspc_ok, masonlspc = pcall(require, 'mason-lspconfig')
-local lspcfg_ok, lspconfig = pcall(require, 'lspconfig')
-local actionpreview_ok, capreview = pcall(require, 'actions-preview')
 
 local eslint_disabled_buffers = {}
 
+local lspcfg_ok, lspconfig = pcall(require, 'lspconfig')
 if not lspcfg_ok then
 	return
 end
 
+local navic_ok, navic = pcall(require, 'nvim-navic')
 if navic_ok then
 	navic.setup {
 		highlight = true,
@@ -25,14 +21,22 @@ if navic_ok then
 	}
 end
 
+local actionpreview_ok, capreview = pcall(require, 'actions-preview')
 if actionpreview_ok then
-	capreview.setup()
+	capreview.setup {
+		backend = { 'telescope', 'nui' },
+		-- telescope = function()
+		-- 	require('fzf-lua').builtins()
+		-- end,
+	}
 end
 
+local trouble_ok, trouble = pcall(require, 'trouble')
 if trouble_ok then
 	trouble.setup()
 end
 
+local neodev_ok, neodev = pcall(require, 'neodev')
 if neodev_ok then
 	neodev.setup {}
 end
@@ -97,9 +101,9 @@ local def_mappings = function(bufnr)
 		vim.lsp.buf.rename()
 	end, bufopts)
 	-- ['<leader>ca'] = 'lua vim.lsp.buf.code_action()',
-	vim.keymap.set('n', '<leader>f', function()
-		vim.lsp.buf.format()
-	end, bufopts)
+	-- vim.keymap.set('n', '<leader>f', function()
+	-- 	vim.lsp.buf.format()
+	-- end, bufopts)
 	vim.keymap.set('n', '<leader>e', function()
 		vim.diagnostic.open_float()
 	end, bufopts)
@@ -136,7 +140,8 @@ local lsp_formatting = function(bufnr)
 	}
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
@@ -198,7 +203,7 @@ masonlspc.setup_handlers {
 				end
 			end,
 			-- Global capabilities
-			capabilities = vim.lsp.protocol.make_client_capabilities(),
+			capabilities = capabilities,
 		}
 	end,
 
@@ -234,12 +239,7 @@ masonlspc.setup_handlers {
 					},
 				},
 			},
-			on_attach = function(client, bufnr)
-				-- Avoid LSP formatting conflicts.
-				-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflict
-				-- require('nvim-lsp-setup.utils').disable_formatting(client)
-			end,
-			capabilities = capabilities,
+			on_attach = function(client, bufnr) end,
 			telemetry = { enable = false },
 		}
 	end,
@@ -252,6 +252,20 @@ masonlspc.setup_handlers {
 		require('go').setup {
 			lsp_cfg = {
 				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					gopls = {
+						experimentalPostfixCompletions = true,
+						analyses = {
+							unusedparams = true,
+							shadow = true,
+						},
+					},
+					staticcheck = true,
+				},
+			},
+			init_options = {
+				usePlaceholders = true,
 			},
 			lsp_gofumpt = true,
 			trouble = true,
@@ -278,7 +292,7 @@ masonlspc.setup_handlers {
 
 	['texlab'] = function()
 		lspconfig.texlab.setup {
-			filetypes = { 'tex', 'bib', 'plaintex', 'org', 'markdown' },
+			filetypes = { 'tex', 'bib', 'plaintext', 'markdown' },
 		}
 	end,
 
@@ -311,6 +325,7 @@ vim.diagnostic.config {
 	update_in_insert = false,
 	severity_sort = false,
 }
+
 if crates_ok then
 	crates.setup {
 		null_ls = {
@@ -320,6 +335,7 @@ if crates_ok then
 	}
 end
 
+local null_ok, null_ls = pcall(require, 'null-ls')
 if not null_ok then
 	print('Null not ok')
 	return
@@ -522,8 +538,11 @@ require('docs-view').setup {}
 
 require('nvim-lightbulb').setup {
 	ignore = {},
-	sign = {
+	virtual_text = {
 		enabled = true,
+	},
+	sign = {
+		enabled = false,
 		-- Priority of the gutter sign
 		priority = 10,
 	},
@@ -576,3 +595,7 @@ local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
 vim.o.code_action_menu_window_border = 'single'
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+vim.cmd([[ sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl= ]])
+vim.cmd([[sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=]])
+vim.cmd([[sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=]])
+vim.cmd([[sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=]])

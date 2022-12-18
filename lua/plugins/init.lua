@@ -49,7 +49,7 @@ local on_startup = function(use)
 	-- 	},
 	-- }
 
-	-- use { -- netmap.nvim
+	-- use { -- netman.nvim
 	-- 	'miversen33/netman.nvim',
 	-- 	branch = 'issue-28-libuv-shenanigans',
 	-- 	config = function()
@@ -69,10 +69,9 @@ local on_startup = function(use)
 	}
 
 	use { -- Undotree
-		'jiaoshijie/undotree',
-		requires = 'nvim-lua/plenary.nvim',
+		'mbbill/undotree',
 		config = function()
-			require('plugins.undotree')
+			vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { noremap = true })
 		end,
 	}
 
@@ -90,13 +89,13 @@ local on_startup = function(use)
 			'th3whit3wolf/onebuddy',
 			'th3whit3wolf/one-nvim',
 			'ray-x/aurora',
-			'nekonako/xresources-nvim',
 			'edeneast/nightfox.nvim',
 			'navarasu/onedark.nvim',
 			'rafamadriz/neon',
 			'yagua/nebulous.nvim',
 			'shatur/neovim-ayu',
 			'elianiva/icy.nvim',
+			'ramojus/mellifluous.nvim',
 			'kaiuri/nvim-juliana',
 			'projekt0n/github-nvim-theme',
 			'kdheepak/monochrome.nvim',
@@ -107,7 +106,8 @@ local on_startup = function(use)
 			{ 'everblush/everblush.nvim', as = 'everblush' },
 		},
 		config = function()
-			require('plugins.colorscheme').init()
+			vim.cmd.colorscheme('noctis')
+			-- 	-- require('plugins.colorscheme').init()
 		end,
 	}
 
@@ -226,6 +226,15 @@ local on_startup = function(use)
 		end,
 	}
 
+	-- use {
+	-- 	'chrisgrieser/nvim-recorder',
+	-- 	config = function()
+	-- 		require('recorder').setup {
+	-- 			slots = { 'a', 'b', 'c' },
+	-- 		}
+	-- 	end,
+	-- }
+
 	use { -- LSP: integration
 		'williamboman/mason-lspconfig.nvim',
 		requires = {
@@ -315,6 +324,7 @@ local on_startup = function(use)
 			'hrsh7th/cmp-nvim-lua',
 			'hrsh7th/cmp-buffer',
 			'hrsh7th/cmp-cmdline',
+			'dmitmel/cmp-cmdline-history',
 			'petertriho/cmp-git',
 			'andersevenrud/cmp-tmux',
 			-- 'rcarriga/cmp-dap',
@@ -469,7 +479,6 @@ local on_startup = function(use)
 
 	use { -- nvim-tree
 		'kyazdani42/nvim-tree.lua',
-		cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
 		config = function()
 			require('plugins.nvimtree')
 		end,
