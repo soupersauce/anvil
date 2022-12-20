@@ -105,10 +105,9 @@ local on_startup = function(use)
 			'kartikp10/noctis.nvim',
 			{ 'everblush/everblush.nvim', as = 'everblush' },
 		},
-		config = function()
-			vim.cmd.colorscheme('noctis')
-			-- 	-- require('plugins.colorscheme').init()
-		end,
+		-- config = function()
+		-- 	require('plugins.colorscheme').init()
+		-- end,
 	}
 
 	use { -- toggleterm
@@ -454,7 +453,11 @@ local on_startup = function(use)
 	use { -- FIDGET
 		'j-hui/fidget.nvim',
 		config = function()
-			require('fidget').setup {}
+			require('fidget').setup {
+				window = {
+					blend = 0,
+				},
+			}
 		end,
 	}
 

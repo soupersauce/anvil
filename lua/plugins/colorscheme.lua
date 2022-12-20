@@ -2,7 +2,7 @@ local vim = vim
 local M = {}
 
 M.init = function()
-	M.oxocarbon()
+	M.codeschool()
 end
 
 -- NVCode colorschemes
@@ -104,7 +104,7 @@ M.onedark = function(style)
 
 		-- Change code style ---
 		-- Options are italic, bold, underline, none
-		-- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
+		-- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
 		code_style = {
 			comments = 'italic',
 			keywords = 'none',
@@ -220,53 +220,6 @@ M.github = function(style)
 		transparent = false,
 		variable_style = 'NONE',
 	}
-end
-
-M.codeschool = function()
-	require('lush')(require('codeschool').setup {
-		plugins = {
-			'buftabline',
-			'cmp', -- nvim-cmp
-			'fzf',
-			'gitsigns',
-			'lsp',
-			'lspsaga',
-			'netrw',
-			'nvimtree',
-			'neogit',
-			'packer',
-			'telescope',
-			'treesitter',
-		},
-		langs = {
-			'c',
-			'clojure',
-			'coffeescript',
-			'csharp',
-			'css',
-			'elixir',
-			'golang',
-			'haskell',
-			'html',
-			'java',
-			'js',
-			'json',
-			'jsx',
-			'lua',
-			'markdown',
-			'moonscript',
-			'objc',
-			'ocaml',
-			'purescript',
-			'python',
-			'ruby',
-			'rust',
-			'scala',
-			'typescript',
-			'viml',
-			'xml',
-		},
-	})
 end
 
 return M
