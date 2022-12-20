@@ -251,7 +251,6 @@ local on_startup = function(use)
 			{ 'jose-elias-alvarez/null-ls.nvim', requires = { 'ThePrimeagen/refactoring.nvim' } },
 			'muniftanjim/prettier.nvim',
 			{ 'simrat39/rust-tools.nvim', ft = { 'rust' } },
-			'kosayoda/nvim-lightbulb',
 			'b0o/schemastore.nvim',
 			'aznhe21/actions-preview.nvim',
 			{ 'andrewferrier/textobj-diagnostic.nvim', as = 'textobj-daig' },

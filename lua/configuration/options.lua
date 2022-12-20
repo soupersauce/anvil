@@ -34,6 +34,8 @@ local defined_options = {
 	-- Highlight line containing the cursor
 	cursorline = true,
 
+	colorcolumn = 80,
+
 	-- But only the visual line, not the complete physical line
 	-- cursorlineopt  = "screenline",
 

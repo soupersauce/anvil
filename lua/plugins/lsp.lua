@@ -453,7 +453,7 @@ local null_sources = {
 }
 
 null_ls.setup {
-	-- debug = true,
+	debug = false,
 	sources = null_sources,
 	on_attach = function(client, bufnr)
 		if client.server_capabilities.documentFormattingProvider then
@@ -536,24 +536,6 @@ require('mason-tool-installer').setup {
 
 require('docs-view').setup {}
 
-require('nvim-lightbulb').setup {
-	ignore = {},
-	virtual_text = {
-		enabled = true,
-	},
-	sign = {
-		enabled = false,
-		-- Priority of the gutter sign
-		priority = 10,
-	},
-	autocmd = {
-		enabled = true,
-		-- see :help autocmd-pattern
-		pattern = { '*' },
-		-- see :help autocmd-events
-		events = { 'CursorHold', 'CursorHoldI' },
-	},
-}
 -- Golang
 if dtextobjects_ok then
 	dtextobjects.setup { create_default_keymaps = false }
