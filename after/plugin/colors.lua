@@ -1,5 +1,20 @@
+local vim = vim
 function Colorize(color)
-	color = color or 'codeschool'
+	color = color or 'noctis'
+	vim.cmd.colorscheme(color)
+	vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+	vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+	-- vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })
+	-- vim.api.nvim_set_hl(0, 'FoldColumn', { bg = 'none' })
+	-- vim.api.nvim_set_hl(0, 'Folded', { bg = 'none' })
+	-- vim.api.nvim_set_hl(0, 'ColorColumn', { bg = 'none' })
+	-- vim.api.nvim_set_hl(0, 'FloatShadow', { bg = 'none' })
+	-- vim.api.nvim_set_hl(0, 'FloatShadowThrough', { bg = 'none' })
+	-- vim.api.nvim_set_hl(0, 'ScrollbarHandle', { blend = 50 })
+	-- vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'none' })
+end
+
+codeschool = function()
 	require('lush')(require('codeschool').setup {
 		plugins = {
 			-- 	'buftabline',
@@ -44,7 +59,6 @@ function Colorize(color)
 			'xml',
 		},
 	})
-	vim.cmd.colorscheme(color)
 	vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 	vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 	vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })

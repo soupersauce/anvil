@@ -3,8 +3,6 @@ local u = require('configuration.utils')
 local crates_ok, crates = pcall(require, 'crates')
 local dtextobjects_ok, dtextobjects = pcall(require, 'textobj-diagnostic')
 local prettier_ok, prettier = pcall(require, 'prettier')
-local mason_ok, mason = pcall(require, 'mason')
-local masonlspc_ok, masonlspc = pcall(require, 'mason-lspconfig')
 
 local eslint_disabled_buffers = {}
 
@@ -145,7 +143,16 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
+local mason_ok, mason = pcall(require, 'mason')
+if not mason_ok then
+	return
+end
 mason.setup()
+
+local masonlspc_ok, masonlspc = pcall(require, 'mason-lspconfig')
+if not masonlspc_ok then
+	return
+end
 
 masonlspc.setup {
 	ensure_installed = {
@@ -157,17 +164,17 @@ masonlspc.setup {
 		'diagnosticls',
 		'stylelint_lsp',
 		'dockerls', -- Docker
-		'gopls',
+		'gopls', -- golang
 		'html', -- HTML
 		'ltex', -- Latex
-		'sumneko_lua',
+		'sumneko_lua', -- lua
 		'marksman', -- Markdown
 		'powershell_es', -- Powershell
 		'puppet', -- puppet
 		'pylsp', -- python
 		'jedi_language_server', -- python
-		'rust_analyzer',
-		'slint_lsp',
+		'rust_analyzer', -- rust
+		'slint_lsp', -- rust gui framework
 		'salt_ls', -- salt
 		'sqls', -- SQL
 		'taplo', -- TOML
@@ -184,6 +191,9 @@ masonlspc.setup_handlers {
 		require('lspconfig')[server_name].setup {
 			on_attach = function(client, bufnr)
 				def_mappings(bufnr)
+				if client.supports_method('textDocument/documentSymbol') then
+					navic.attach(client, bufnr)
+				end
 				if client.supports_method('textDocument/formatting') then
 					u.buf_command(bufnr, 'LspFormatting', function()
 						lsp_formatting(bufnr)
@@ -195,12 +205,6 @@ masonlspc.setup_handlers {
 						command = 'LspFormatting',
 					})
 				end
-				if
-					client.supports_method('textDocument/documentSymbol')
-					and not client.supports_method('textDocument/SymbolInformation')
-				then
-					navic.attach(client, bufnr)
-				end
 			end,
 			-- Global capabilities
 			capabilities = capabilities,
@@ -209,18 +213,18 @@ masonlspc.setup_handlers {
 
 	['rust_analyzer'] = function()
 		require('rust-tools').setup {
-			server = {
-				settings = {
-					['rust-analyzer'] = {
-						cargo = {
-							loadOutDirsFromCheck = true,
-						},
-						procMacro = {
-							enable = true,
-						},
-					},
-				},
-			},
+			-- server = {
+			-- 	settings = {
+			-- 		['rust-analyzer'] = {
+			-- 			cargo = {
+			-- 				loadOutDirsFromCheck = true,
+			-- 			},
+			-- 			procMacro = {
+			-- 				enable = true,
+			-- 			},
+			-- 		},
+			-- 	},
+			-- },
 		}
 	end,
 
@@ -238,9 +242,8 @@ masonlspc.setup_handlers {
 						globals = { 'vim' },
 					},
 				},
+				telemetry = { enable = false },
 			},
-			on_attach = function(client, bufnr) end,
-			telemetry = { enable = false },
 		}
 	end,
 
@@ -254,18 +257,16 @@ masonlspc.setup_handlers {
 				capabilities = capabilities,
 				on_attach = on_attach,
 				settings = {
-					gopls = {
-						experimentalPostfixCompletions = true,
-						analyses = {
-							unusedparams = true,
-							shadow = true,
-						},
+					experimentalPostfixCompletions = true,
+					analyses = {
+						unusedparams = true,
+						shadow = true,
 					},
 					staticcheck = true,
 				},
-			},
-			init_options = {
-				usePlaceholders = true,
+				init_options = {
+					usePlaceholders = true,
+				},
 			},
 			lsp_gofumpt = true,
 			trouble = true,
@@ -307,15 +308,6 @@ masonlspc.setup_handlers {
 		}
 	end,
 }
-
-do
-	local method = 'textDocument/publishDiagnostics'
-	local default_handler = vim.lsp.handlers[method]
-	vim.lsp.handlers[method] = function(err, method, result, client_id, bufnr, config)
-		default_handler(err, method, result, client_id, bufnr, config)
-		vim.diagnostic.setqflist { open = false }
-	end
-end
 
 -- Customize how diagnostics are displayed
 vim.diagnostic.config {

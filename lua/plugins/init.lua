@@ -57,7 +57,7 @@ local on_startup = function(use)
 	-- 	end,
 	-- }
 
-	use {
+	use { -- messages
 		'AckslD/messages.nvim',
 		config = function()
 			require('messages').setup()
@@ -105,9 +105,6 @@ local on_startup = function(use)
 			'kartikp10/noctis.nvim',
 			{ 'everblush/everblush.nvim', as = 'everblush' },
 		},
-		-- config = function()
-		-- 	require('plugins.colorscheme').init()
-		-- end,
 	}
 
 	use { -- toggleterm
@@ -523,7 +520,11 @@ local on_startup = function(use)
 
 	use { -- LUALINE
 		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons' },
+		requires = {
+			'kyazdani42/nvim-web-devicons',
+			'SmiteshP/nvim-navic',
+		},
+		-- after = 'nvim-lspconfig',
 		config = function()
 			require('plugins.lualine').evil()
 		end,

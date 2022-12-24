@@ -7,6 +7,96 @@ end
 
 local navic_ok, navic = pcall(require, 'nvim-navic')
 
+if navic_ok then
+end
+
+local custom_fname = require('lualine.components.filename'):extend()
+local highlight = require('lualine.highlight')
+local default_status_colors = { modified = '#c678dd' }
+
+-- Color table for highlights
+local colors = {
+	bg = '#202328',
+	fg = '#bbc2cf',
+	yellow = '#ECBE7B',
+	cyan = '#008080',
+	darkblue = '#081633',
+	green = '#98be65',
+	orange = '#FF8800',
+	violet = '#a9a1e1',
+	magenta = '#c678dd',
+	blue = '#51afef',
+	red = '#ec5f67',
+}
+
+local modecolors = function()
+	-- auto change color according to neovims mode
+	local mode_color = {
+		n = colors.red,
+		i = colors.green,
+		v = colors.blue,
+		[''] = colors.blue,
+		V = colors.blue,
+		c = colors.magenta,
+		no = colors.red,
+		s = colors.orange,
+		S = colors.orange,
+		[''] = colors.orange,
+		ic = colors.yellow,
+		R = colors.violet,
+		Rv = colors.violet,
+		cv = colors.red,
+		ce = colors.red,
+		r = colors.cyan,
+		rm = colors.cyan,
+		['r?'] = colors.cyan,
+		['!'] = colors.red,
+		t = colors.red,
+	}
+	return { fg = mode_color[vim.fn.mode()] }
+end
+
+function custom_fname:init(options)
+	custom_fname.super.init(self, options)
+	self.status_colors = {
+		saved = highlight.create_component_highlight_group(
+			{ bg = default_status_colors.saved },
+			'filename_status_saved',
+			self.options
+		),
+		modified = highlight.create_component_highlight_group(
+			{ bg = default_status_colors.modified },
+			'filename_status_modified',
+			self.options
+		),
+	}
+	if self.options.color == nil then
+		self.options.color = ''
+	end
+end
+
+function custom_fname:update_status()
+	local data = custom_fname.super.update_status(self)
+	data = highlight.component_format_highlight(
+		vim.bo.modified and self.status_colors.modified or self.status_colors.saved
+	) .. data
+	return data
+end
+
+local conditions = {
+	buffer_not_empty = function()
+		return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
+	end,
+	hide_in_width = function()
+		return vim.fn.winwidth(0) > 80
+	end,
+	check_git_workspace = function()
+		local filepath = vim.fn.expand('%:p:h')
+		local gitdir = vim.fn.finddir('.git', filepath .. ';')
+		return gitdir and #gitdir > 0 and #gitdir < #filepath
+	end,
+}
+
 -- Uses gitsigns as the source for diff info
 local function diff_source()
 	local gitsigns = vim.b.gitsigns_status_dict
@@ -20,66 +110,6 @@ local function diff_source()
 end
 
 M.evil = function()
-	local custom_fname = require('lualine.components.filename'):extend()
-	local highlight = require('lualine.highlight')
-	local default_status_colors = { modified = '#C70039' }
-  -- Color table for highlights
-  -- stylua: ignore
-  local colors = {
-    bg       = '#202328',
-    fg       = '#bbc2cf',
-    yellow   = '#ECBE7B',
-    cyan     = '#008080',
-    darkblue = '#081633',
-    green    = '#98be65',
-    orange   = '#FF8800',
-    violet   = '#a9a1e1',
-    magenta  = '#c678dd',
-    blue     = '#51afef',
-    red      = '#ec5f67',
-  }
-
-	function custom_fname:init(options)
-		custom_fname.super.init(self, options)
-		self.status_colors = {
-			saved = highlight.create_component_highlight_group(
-				{ bg = default_status_colors.saved },
-				'filename_status_saved',
-				self.options
-			),
-			modified = highlight.create_component_highlight_group(
-				{ bg = default_status_colors.modified },
-				'filename_status_modified',
-				self.options
-			),
-		}
-		if self.options.color == nil then
-			self.options.color = ''
-		end
-	end
-
-	function custom_fname:update_status()
-		local data = custom_fname.super.update_status(self)
-		data = highlight.component_format_highlight(
-			vim.bo.modified and self.status_colors.modified or self.status_colors.saved
-		) .. data
-		return data
-	end
-
-	local conditions = {
-		buffer_not_empty = function()
-			return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
-		end,
-		hide_in_width = function()
-			return vim.fn.winwidth(0) > 80
-		end,
-		check_git_workspace = function()
-			local filepath = vim.fn.expand('%:p:h')
-			local gitdir = vim.fn.finddir('.git', filepath .. ';')
-			return gitdir and #gitdir > 0 and #gitdir < #filepath
-		end,
-	}
-
 	-- Config
 	local config = {
 		options = {
@@ -98,7 +128,7 @@ M.evil = function()
 			-- these are to remove the defaults
 			lualine_a = {},
 			lualine_b = {},
-			lualine_y = {}, --{ custom_fname, { navic.get_location, cond = navic.is_available } },
+			lualine_y = {}, --{ custom_fname, { navic.get_location(navic_opts), cond = navic.is_available } },
 			lualine_z = {},
 			-- These will be filled later
 			lualine_c = {},
@@ -110,8 +140,8 @@ M.evil = function()
 			lualine_b = {},
 			lualine_y = {},
 			lualine_z = {},
-			lualine_c = {},
-			lualine_x = {},
+			-- lualine_c = {},
+			-- lualine_x = {},
 		},
 	}
 
@@ -129,42 +159,23 @@ M.evil = function()
 		function()
 			return '▊'
 		end,
-		color = { fg = colors.blue }, -- Sets highlighting of component
+		color = modecolors(),
 		padding = { left = 0, right = 1 }, -- We don't need space before this
 	}
 
+	-- ins_left {
+	-- 	-- custom_fname,
+	-- 	-- { navic.get_location(navic_opts), cond = navic.is_available() },
+	-- }
+
 	ins_left {
-		-- mode component
 		function()
-			return ''
+			if navic.is_available then
+				return navic.get_location
+			end
+			return custom_fname
 		end,
-		color = function()
-			-- auto change color according to neovims mode
-			local mode_color = {
-				n = colors.red,
-				i = colors.green,
-				v = colors.blue,
-				[''] = colors.blue,
-				V = colors.blue,
-				c = colors.magenta,
-				no = colors.red,
-				s = colors.orange,
-				S = colors.orange,
-				[''] = colors.orange,
-				ic = colors.yellow,
-				R = colors.violet,
-				Rv = colors.violet,
-				cv = colors.red,
-				ce = colors.red,
-				r = colors.cyan,
-				rm = colors.cyan,
-				['r?'] = colors.cyan,
-				['!'] = colors.red,
-				t = colors.red,
-			}
-			return { fg = mode_color[vim.fn.mode()] }
-		end,
-		padding = { right = 1 },
+		color = { fg = colors.magenta, gui = 'bold' },
 	}
 
 	ins_left {
@@ -173,12 +184,25 @@ M.evil = function()
 		cond = conditions.buffer_not_empty,
 	}
 
-	ins_left {
-		-- 'filename',
-		custom_fname,
-		-- { navic.get_location, cond = navic.is_available },
-		color = { fg = colors.magenta, gui = 'bold' },
-	}
+	-- ins_left {
+	-- 	-- 'filename',
+	-- 	function()
+	-- 		local msg = ''
+	-- 		local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+	-- 		local clients = vim.lsp.get_active_clients()
+	-- 		-- if navic.is_available ~= nil then
+	-- 		-- 	return navic.get_location
+	-- 		-- end
+	-- 		-- for _, client in ipairs(clients) do
+	-- 		-- 	local filetypes = client.config.filetypes
+	-- 		-- 	if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+	-- 		-- 		return navic.get_location
+	-- 		-- 	end
+	-- 		-- end
+	-- 		return custom_fname()
+	-- 	end,
+	-- 	color = { fg = colors.magenta, gui = 'bold' },
+	-- }
 
 	ins_left { 'location' }
 
@@ -225,11 +249,6 @@ M.evil = function()
 	-- }
 
 	ins_left {
-		navic.get_location,
-		cond = navic.is_available,
-	}
-
-	ins_left {
 		-- Lsp server name .
 		function()
 			local msg = ''
@@ -261,7 +280,7 @@ M.evil = function()
 	ins_right {
 		'fileformat',
 		fmt = string.upper,
-		icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+		icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
 		color = { fg = colors.green, gui = 'bold' },
 	}
 
@@ -288,7 +307,7 @@ M.evil = function()
 		function()
 			return '▊'
 		end,
-		color = { fg = colors.blue },
+		color = modecolors(),
 		padding = { left = 1 },
 	}
 
@@ -297,37 +316,6 @@ M.evil = function()
 end
 
 M.default = function()
-	local custom_fname = require('lualine.components.filename'):extend()
-	local highlight = require('lualine.highlight')
-	local default_status_colors = { modified = '#C70039' }
-
-	function custom_fname:init(options)
-		custom_fname.super.init(self, options)
-		self.status_colors = {
-			saved = highlight.create_component_highlight_group(
-				{ bg = default_status_colors.saved },
-				'filename_status_saved',
-				self.options
-			),
-			modified = highlight.create_component_highlight_group(
-				{ bg = default_status_colors.modified },
-				'filename_status_modified',
-				self.options
-			),
-		}
-		if self.options.color == nil then
-			self.options.color = ''
-		end
-	end
-
-	function custom_fname:update_status()
-		local data = custom_fname.super.update_status(self)
-		data = highlight.component_format_highlight(
-			vim.bo.modified and self.status_colors.modified or self.status_colors.saved
-		) .. data
-		return data
-	end
-
 	lualine.setup {
 		options = {
 			icons_enabled = true,
@@ -341,16 +329,17 @@ M.default = function()
 		sections = {
 			lualine_a = { 'mode' },
 			lualine_b = { { 'b:gitsigns_head', icon = '' }, { 'diff', source = diff_source() }, 'diagnostics' },
-			lualine_c = { custom_fname, { navic.get_location, cond = navic.is_available } },
-			lualine_x = { 'encoding', 'fileformat', 'filetype' },
-			lualine_y = { 'progress' },
-			lualine_z = { 'location' },
+			-- lualine_c = { custom_fname, { navic.get_location, cond = navic.is_available } },
+			lualine_c = { { navic.get_location, cond = navic.is_available } },
+			lualine_x = {},
+			lualine_y = {},
+			lualine_z = { 'encoding', 'fileformat', 'filetype', 'progress', 'location' },
 		},
 		inactive_sections = {
 			lualine_a = {},
 			lualine_b = {},
-			lualine_c = { 'filename' },
-			lualine_x = { 'location' },
+			-- lualine_c = { 'filename' },
+			-- lualine_x = { 'location' },
 			lualine_y = {},
 			lualine_z = {},
 		},
