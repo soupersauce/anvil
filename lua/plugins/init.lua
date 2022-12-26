@@ -431,9 +431,6 @@ local on_startup = function(use)
 
 	use { -- NUMBERTOGGLE
 		'sitiom/nvim-numbertoggle',
-		config = function()
-			require('numbertoggle').setup()
-		end,
 	}
 
 	use { -- Table mode
