@@ -79,13 +79,18 @@ local on_startup = function(use)
 		'mong8se/actually.nvim',
 	}
 
-	use { -- COLORSCHEMES:
+	use { -- COLORSCHEMES;
 		'tjdevries/colorbuddy.nvim',
 		requires = {
 			'rktjmp/lush.nvim',
+			'rrethy/nvim-base16',
+			'rebelot/kanagawa.nvim',
 			{ 'nvim-treesitter/nvim-treesitter', opt = true },
 			'christianchiarulli/nvcode-color-schemes.vim',
 			'glepnir/zephyr-nvim',
+			'jesseleite/nvim-noirbuddy',
+			'glepnir/zephyr-nvim',
+			'ali-githb/standardized',
 			'th3whit3wolf/onebuddy',
 			'th3whit3wolf/one-nvim',
 			'ray-x/aurora',
@@ -139,7 +144,7 @@ local on_startup = function(use)
 		},
 	}
 
-	use { -- TREESITTER: integration
+	use { -- TREESITTER; integration
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
 		requires = {

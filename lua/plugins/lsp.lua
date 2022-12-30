@@ -264,9 +264,9 @@ masonlspc.setup_handlers {
 					},
 					staticcheck = true,
 				},
-				init_options = {
-					usePlaceholders = true,
-				},
+				-- init_options = {
+				-- 	usePlaceholders = true,
+				-- },
 			},
 			lsp_gofumpt = true,
 			trouble = true,

@@ -1,6 +1,15 @@
 local vim = vim
+
+local noirbuddy = function(theme)
+	theme = theme or 'miami-nights'
+	require('noirbuddy').setup {
+		preset = theme,
+	}
+end
+
 function Colorize(color)
 	color = color or 'noctis'
+	-- noirbuddy('miami-nights')
 	vim.cmd.colorscheme(color)
 	vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 	vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
@@ -14,7 +23,7 @@ function Colorize(color)
 	-- vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'none' })
 end
 
-codeschool = function()
+local codeschool = function()
 	require('lush')(require('codeschool').setup {
 		plugins = {
 			-- 	'buftabline',
@@ -71,4 +80,4 @@ codeschool = function()
 	vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'none' })
 end
 
-Colorize()
+Colorize('kanagawa')
