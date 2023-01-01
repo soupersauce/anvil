@@ -51,7 +51,6 @@ local M = { -- orgmode
 		dependencies = {
 			'lukas-reineke/headlines.nvim',
 			'akinsho/org-bullets.nvim',
-			'nvim-cmp',
 			'nvim-treesitter',
 		},
 	},

@@ -28,9 +28,9 @@ function M.config()
 			local lspkind = require('lspkind')
 			vim.o.completeopt = 'menuone,noselect'
 			-- Setup nvim-cmp.
-			local _, cmp = pcall(require, 'cmp')
-			local _, luasnip = pcall(require, 'luasnip')
-			local _, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
+			local cmp = require('cmp')
+			local luasnip = require('luasnip')
+			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 			local has_words_before = function()
 				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -40,16 +40,14 @@ function M.config()
 
 			local types = require('cmp.types')
 
-      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 			cmp.setup {
-
 				completion = {
 					autocomplete = {
 						types.cmp.TriggerEvent.InsertEnter,
-						-- types.cmp.TriggerEvent.TextChanged,
+						types.cmp.TriggerEvent.TextChanged,
 					},
 					completeopt = 'menu,menuone,noselect',
-					-- keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
+					keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
 					keyword_length = 0,
 				},
 
@@ -66,14 +64,14 @@ function M.config()
 					['<C-k>'] = cmp.mapping.select_prev_item { behavior = types.cmp.SelectBehavior.Select },
 					['<C-Space>'] = cmp.mapping.complete {},
 					['<CR>'] = cmp.mapping.confirm {
-						-- behavior = cmp.ConfirmBehavior.Insert,
+						behavior = cmp.ConfirmBehavior.Insert,
 						select = true,
 					},
 					['<C-e'] = cmp.mapping.close(),
 					-- Super Tab
 					['<Tab>'] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							cmp.select_next_item()
+							cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Select })
 						elseif luasnip.expand_or_jumpable() then
 							luasnip.expand_or_jump()
 						elseif has_words_before() then
@@ -84,7 +82,7 @@ function M.config()
 					end, { 'i', 's' }),
 					['<S-Tab>'] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							cmp.select_prev_item()
+							cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Select })
 						elseif luasnip.jumpable(-1) then
 							luasnip.jump(-1)
 						else
@@ -150,6 +148,8 @@ function M.config()
 					},
 				},
 			}
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
 			for _, cmd_type in ipairs { '/', '?', '@' } do
 				cmp.setup.cmdline(cmd_type, {
 					mapping = cmp.mapping.preset.cmdline(),
@@ -158,7 +158,7 @@ function M.config()
 						{ name = 'buffer' },
 					},
 					view = {
-						entries = { name = 'custom' },
+            entries = { name = 'custom', selection_order = 'near_cursor' },
 					},
 				})
 			end

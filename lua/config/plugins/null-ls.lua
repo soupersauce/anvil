@@ -2,7 +2,6 @@ local M =  {
     'jose-elias-alvarez/null-ls.nvim',
     dependencies = {
       'neovim/nvim-lspconfig',
-      'hrsh7th/nvim-cmp',
     },
   }
   function M.setup(options)

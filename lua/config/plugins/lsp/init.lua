@@ -5,7 +5,6 @@ local M = { -- LSP: integration
 		'neovim/nvim-lspconfig',
 		'folke/neodev.nvim',
 		'hrsh7th/cmp-nvim-lsp',
-		'hrsh7th/nvim-cmp',
 	},
 }
 

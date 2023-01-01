@@ -1,6 +1,6 @@
 vim = vim
 
-COLORSCHEME = 'noirbuddy'
+COLORSCHEME = 'kanagawa'
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
