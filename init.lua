@@ -1,5 +1,7 @@
 vim = vim
 
+COLORSCHEME = 'noirbuddy'
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 

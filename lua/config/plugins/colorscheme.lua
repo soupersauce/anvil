@@ -1,9 +1,27 @@
 local M = { -- COLORSCHEMES;
 	-- 'rrethy/nvim-base16',
-	'rebelot/kanagawa.nvim',
+	{
+    'rebelot/kanagawa.nvim',
+    cond = (COLORSCHEME == 'kanagawa'),
+    config = function()
+      vim.cmd("colorscheme kanagawa")
+    end,
+    priority = 1000,
+  },
+  -- 'Yazeed1s/oh-lucy.nvim',
 	-- 'christianchiarulli/nvcode-color-schemes.vim',
 	-- 'glepnir/zephyr-nvim',
-	-- 'jesseleite/nvim-noirbuddy',
+	{
+    'jesseleite/nvim-noirbuddy',
+    cond = (COLORSCHEME == 'noirbuddy'),
+    dependencies = 'tjdevries/colorbuddy.nvim',
+    config = function()
+    require('noirbuddy').setup {
+      preset = 'miami-nights'
+    }
+  end,
+    priority = 1000,
+  },
 	-- 'glepnir/zephyr-nvim',
 	-- 'ali-githb/standardized',
 	-- 'th3whit3wolf/onebuddy',
@@ -24,12 +42,11 @@ local M = { -- COLORSCHEMES;
 	-- 'kvrohit/mellow.nvim',
 	-- 'kartikp10/noctis.nvim',
 	-- 'everblush/everblush.nvim',
-	dependencies = {
-		'tjdevries/colorbuddy.nvim',
-		'rktjmp/lush.nvim',
-	},
+	-- dependencies = {
+	-- 	'tjdevries/colorbuddy.nvim',
+	-- 	'rktjmp/lush.nvim',
+	-- },
 
-	priority = 1000,
 }
 
 function M.clearbackgrounds()
