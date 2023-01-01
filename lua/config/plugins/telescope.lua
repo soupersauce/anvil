@@ -1,16 +1,13 @@
 local M = { -- TELESCOPE
-	{
 		'nvim-telescope/telescope.nvim',
+    cmd = { 'Telescope' },
 		dependencies = {
 			'kyazdani42/nvim-web-devicons',
 			'nvim-telescope/telescope-fzf-native.nvim',
 			'yamatsum/nvim-nonicons',
+      'debugloop/telescope-undo.nvim',
 		},
-	},
-	{
-		'nvim-telescope/telescope-fzf-native.nvim',
-		build = 'make',
-	},
+    -- keys = {'<leader>u','lua require("telescope").extensions.undo.undo()', desc = 'Telescope Undo'}
 }
 
 function M.config()
@@ -32,12 +29,17 @@ function M.config()
 				override_file_sorter = true, -- override the file sorter
 				case_mode = 'smart_case', -- other options: 'ignore_case' or 'respect_case'
 			},
+      undo = {
+
+      },
 		},
 	}
 
 	telescope.load_extension('fzf')
+	telescope.load_extension('undo')
 	-- telescope.load_extension('dap')
 
+  -- vim.keymap.set("n", "<leader>u",'lua require("telescope").extensions.undo.undo()', desc = "Telescope Undo")
 	-- vim.keymap.set('<leader>ff', telescope_builtin.find_files)
 	-- vim.keymap.set('<leader>fb', telescope_builtin.buffers)
 	-- vim.keymap.set('<leader>fc', telescope_builtin.commands)
@@ -54,6 +56,10 @@ function M.config()
 	-- vim.keymap.set('<leader>db', dap.list_breakpoints)
 	-- vim.keymap.set('<leader>dv', dap.variables)
 	-- vim.keymap.set('<leader>df', dap.frames)
+end
+
+function M.init()
+  vim.keymap.set("n", "<leader>u",function() require("telescope").extensions.undo.undo() end, {desc = "Telescope Undo"})
 end
 
 return M

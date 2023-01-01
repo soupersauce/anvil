@@ -8,6 +8,7 @@ local M = {
 	'nvim-lua/plenary.nvim',
 	'folke/lazy.nvim',
 	'mong8se/actually.nvim',
+  'debugloop/telescope-undo.nvim',
 	'tjdevries/colorbuddy.nvim',
 	'rktjmp/lush.nvim',
   'neovim/nvim-lspconfig',
@@ -27,6 +28,10 @@ local M = {
 	'f3fora/cmp-spell',
 	'tamago324/cmp-zsh',
   'Dosx001/cmp-commit',
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build = 'make',
+	},
 	{
 		'kyazdani42/nvim-web-devicons',
 		config = { default = true },
