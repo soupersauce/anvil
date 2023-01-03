@@ -41,7 +41,6 @@ local M =  {
         diag.gitlint,
         diag.golangci_lint,
         diag.hadolint,
-        diag.luacheck,
         diag.pylint,
         diag.flake8,
         diag.mypy,
@@ -53,7 +52,9 @@ local M =  {
             return vim.fn.expand('~')
           end,
         },
-        diag.selene,
+        diag.selene.with {
+          conditions = with_root_file('selene.toml')
+        },
         diag.shellcheck.with {
           diag_format = diagnostics_code_template,
         },
