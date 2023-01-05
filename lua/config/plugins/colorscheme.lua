@@ -1,8 +1,9 @@
-local M = { -- COLORSCHEMES;
+local colorscheme = 'noirbuddy'
+local M = { -- colorschemeS;
 	-- 'rrethy/nvim-base16',
 	{
     'rebelot/kanagawa.nvim',
-    lazy = true,
+    cond = (colorscheme == 'kanagawa'),
     config = function()
       vim.cmd("colorscheme kanagawa")
     end,
@@ -10,17 +11,17 @@ local M = { -- COLORSCHEMES;
   },
   {
     'Yazeed1s/oh-lucy.nvim',
-    lazy = true,
+    cond = (colorscheme == 'oh-lucy'),
     config = function()
-      vim.cmd[[ colorscheme oh-lucy ]]
+      vim.cmd( 'colorscheme oh-lucy' )
     end,
     priority = 1000,
   },
   {
     'christianchiarulli/nvcode-color-schemes.vim',
-    lazy = true,
+    cond = (colorscheme == 'nvcode'),
     config = function()
-      vim.cmd[[ colorscheme nvcode ]]
+    vim.cmd( 'colorscheme nvcode' )
       vim.cmd{[[
         if (has("termguicolors"))
           set termguicolors
@@ -32,7 +33,7 @@ local M = { -- COLORSCHEMES;
   },
 	{
     'jesseleite/nvim-noirbuddy',
-    lazy = true,
+    cond = (colorscheme == 'noirbuddy'),
     config = function()
       require('noirbuddy').setup {
         preset = 'miami-nights'
@@ -42,7 +43,7 @@ local M = { -- COLORSCHEMES;
   },
   {
     'glepnir/zephyr-nvim',
-    lazy = true,
+    cond = (colorscheme == 'zephyr'),
     config = function()
       require('zephyr')
     end,
@@ -51,7 +52,7 @@ local M = { -- COLORSCHEMES;
 	-- 'ali-githb/standardized',
   {
     'th3whit3wolf/onebuddy',
-    lazy = true,
+    cond = (colorscheme == 'onebuddy'),
     config = function()
       require('colorbuddy').colorscheme('onebuddy')
     end,
@@ -59,7 +60,7 @@ local M = { -- COLORSCHEMES;
   },
   {
     'th3whit3wolf/one-nvim',
-    lazy = true,
+    cond = (colorscheme == 'one'),
     config = function()
       vim.g.one_nvim_transparent_bg = true,
       vim.cmd[[ colorscheme one-nvim ]]
@@ -68,7 +69,7 @@ local M = { -- COLORSCHEMES;
   },
   {
     'ray-x/aurora',
-    lazy = true,
+    cond = (colorscheme == 'aurora'),
     config = function()
       vim.cmd[[ colorscheme aurora ]]
       vim.api.nvim_set_hl(0, 'Normal', {guibg='NONE', ctermbg='NONE'})
@@ -78,7 +79,7 @@ local M = { -- COLORSCHEMES;
   },
   {
 	'edeneast/nightfox.nvim',
-    lazy = true,
+    cond = (colorscheme == 'nightfox'),
     config = function()
       vim.cmd[[ colorscheme nightfox ]]
     end,
@@ -86,7 +87,7 @@ local M = { -- COLORSCHEMES;
   },
   {
     'navarasu/onedark.nvim',
-    lazy = true,
+    cond = (colorscheme == 'onedark'),
     config = function(style)
       style = style or 'deep'
       require('onedark').setup{
@@ -98,7 +99,7 @@ local M = { -- COLORSCHEMES;
   },
   {
     'rafamadriz/neon',
-    lazy = true,
+    cond = (colorscheme == 'neon'),
     config = function(style)
       style = style or 'dark'
       vim.g.neon_style = style
@@ -111,7 +112,7 @@ local M = { -- COLORSCHEMES;
   -- TODO
   {
     'yagua/nebulous.nvim',
-    lazy = true,
+    cond = (colorscheme == 'nebulous'),
     priority = 1000,
     config = function(style)
       style = style or 'night'
@@ -122,14 +123,14 @@ local M = { -- COLORSCHEMES;
   },
   {
     'shatur/neovim-ayu',
-    lazy = true,
+    cond = (colorscheme == 'ayu'),
     priority = 1000,
     config = { mirage = true },
   },
   {
     'ramojus/mellifluous.nvim',
     dependencies = { 'rktjmp/lush.nvim' },
-    lazy = true,
+    cond = (colorscheme == 'mellifluous'),
     priority = 1000,
     config = function()
       require('mellifluous').setup{}
@@ -138,7 +139,7 @@ local M = { -- COLORSCHEMES;
   },
   {
     'kaiuri/nvim-juliana',
-    lazy = true,
+    cond = (colorscheme == 'juliana'),
     priority = 1000,
     config = function()
       vim.cmd('colorscheme juliana')
@@ -146,7 +147,7 @@ local M = { -- COLORSCHEMES;
   },
   {
     'projekt0n/github-nvim-theme',
-    lazy = true,
+    cond = (colorscheme == 'github'),
     priority = 1000,
     config = function(style)
       style = style or 'dark_default'
@@ -157,7 +158,7 @@ local M = { -- COLORSCHEMES;
   },
   {
     'kdheepak/monochrome.nvim',
-    -- lazy = true,
+    cond = (colorscheme == 'monochrome'),
     priority = 1000,
     config = function()
       vim.cmd('colorscheme monochrome')
@@ -166,7 +167,7 @@ local M = { -- COLORSCHEMES;
   {
     'adisen99/codeschool.nvim',
     dependencies = 'rktjmp/lush.nvim',
-    lazy = true,
+    cond = (colorscheme == 'codeschool'),
     priority = 1000,
     config = function()
       require('lush')(require('codeschool').setup {
@@ -177,7 +178,7 @@ local M = { -- COLORSCHEMES;
   },
   {
     'nyoom-engineering/oxocarbon.nvim',
-    lazy = true,
+    cond = (colorscheme == 'oxocarbon'),
     priority = 1000,
     config = function()
       vim.cmd.colorscheme "oxocarbon"
@@ -185,7 +186,7 @@ local M = { -- COLORSCHEMES;
   },
   {
     'kvrohit/mellow.nvim',
-    lazy = true,
+    cond = (colorscheme == 'mellow'),
     priority = 1000,
     config = function()
       -- Set Options first
@@ -195,15 +196,15 @@ local M = { -- COLORSCHEMES;
   {
     'kartikp10/noctis.nvim',
     dependencies = 'rktjmp/lush.nvim',
-    lazy = true,
+    cond = (colorscheme == 'noctis'),
     priority = 1000,
     config = function()
-      vim.cmd[[ colorscheme noctis ]]
+      vim.cmd.colorscheme 'noctis'
     end,
   },
   {
     'everblush/everblush.nvim',
-    lazy = true,
+    cond = (colorscheme == 'everblush'),
     priority = 1000,
     config = {
       nvim_tree = { contrast = false }

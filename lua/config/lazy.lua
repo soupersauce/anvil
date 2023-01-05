@@ -14,7 +14,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 local lazyopts = {
 	defaults = { lazy = false },
-	install = { colorscheme = { 'kanagawa', 'noctis' } },
+	install = { colorscheme = { 'kanagawa', 'noctis', 'oxocarbon' } },
 	checker = { enabled = true },
 	diff = {
 		cmd = 'diffview.nvim',

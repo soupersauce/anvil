@@ -1,7 +1,5 @@
 vim = vim
 
-COLORSCHEME = 'kanagawa'
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
