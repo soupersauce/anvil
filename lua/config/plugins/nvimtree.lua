@@ -2,14 +2,12 @@ local M = {
 	'kyazdani42/nvim-tree.lua',
 	dependencies = {
 		'kyazdani42/nvim-web-devicons',
-		'yamatsum/nvim-nonicons',
 	},
 }
 
 function M.config()
 	local present, nvimtree = pcall(require, 'nvim-tree')
 	local icons_ok, eicons = pcall(require, 'ui.icons')
-	local nonicons_extensions = require('nvim-nonicons.extentions.nvim-tree')
 	if not icons_ok then
 		eicons = {}
 	end
@@ -60,7 +58,6 @@ function M.config()
 					folder_arrow = true,
 					git = true,
 				},
-				glyphs = nonicons_extensions.glyphs,
 			},
 		},
 	}

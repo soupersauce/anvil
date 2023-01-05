@@ -1,6 +1,5 @@
 local M = {
 	'kevinhwang91/nvim-hlslens',
-	dependencies = 'petertriho/nvim-scrollbar',
 }
 
 function M.config()

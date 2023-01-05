@@ -1,6 +1,5 @@
 local M = { -- Comment.nvim
 	'numToStr/Comment.nvim',
-	dependencies = 'nvim-treesitter/nvim-treesitter',
 }
 
 function M.config()

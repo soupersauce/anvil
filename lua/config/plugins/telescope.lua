@@ -3,9 +3,6 @@ local M = { -- TELESCOPE
     cmd = { 'Telescope' },
 		dependencies = {
 			'kyazdani42/nvim-web-devicons',
-			'nvim-telescope/telescope-fzf-native.nvim',
-			'yamatsum/nvim-nonicons',
-      'debugloop/telescope-undo.nvim',
 		},
     -- keys = {'<leader>u','lua require("telescope").extensions.undo.undo()', desc = 'Telescope Undo'}
 }
@@ -14,14 +11,8 @@ function M.config()
 	-- Telescope configuration
 	local telescope = require('telescope')
 	local telescope_builtin = require('telescope.builtin')
-	local icons = require('nvim-nonicons')
 
 	telescope.setup {
-		defaults = {
-			prompt_prefix = '  ' .. icons.get('telescope') .. '  ',
-			selection_caret = ' ❯ ',
-			entry_prefix = '   ',
-		},
 		extensions = {
 			fzf = {
 				fuzzy = true, -- false will only do exact matching

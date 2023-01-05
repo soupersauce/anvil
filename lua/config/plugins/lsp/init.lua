@@ -1,11 +1,5 @@
 local M = { -- LSP: integration
 	'williamboman/mason-lspconfig.nvim',
-	dependencies = {
-		'williamboman/mason.nvim',
-		'neovim/nvim-lspconfig',
-		'folke/neodev.nvim',
-		'hrsh7th/cmp-nvim-lsp',
-	},
 }
 
 function M.config()
@@ -97,7 +91,11 @@ function M.config()
 		['sumneko_lua'] = function()
 		  require('lspconfig').sumneko_lua.setup {
 		  capabilities = capabilities,
-		  on_attach = on_attach,
+		  on_attach = function(client, bufnr)
+        require('nvim-navic').attach(client, bufnr)
+        require('config.plugins.lsp.formatting').setup(client, bufnr)
+        require('config.plugins.lsp.keys').setup(client, bufnr)
+      end,
 		  settings = {
 		    Lua = {
 		      format = {

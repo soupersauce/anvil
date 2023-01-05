@@ -1,11 +1,6 @@
 local M = {
 	'TimUntersberger/neogit',
 	cmd = 'Neogit',
-	dependencies = {
-		{
-			'sindrets/diffview.nvim',
-		},
-	},
 }
 
 function M.config()

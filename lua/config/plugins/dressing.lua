@@ -1,6 +1,6 @@
 local M = { -- dressing
 	'stevearc/dressing.nvim',
-	dependencies = 'MunifTanjim/nui.nvim',
+  dependencies = ''
 }
 
 function M.config()

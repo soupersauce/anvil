@@ -1,20 +1,11 @@
 local M = { -- LUALINE
   'nvim-lualine/lualine.nvim',
-  dependencies = {
-    'kyazdani42/nvim-web-devicons',
-    'SmiteshP/nvim-navic',
-    'yamatsum/nvim-nonicons',
-  },
-  -- after = 'nvim-lspconfig',
 }
 
 function M.config()
   local vim = vim
-  local lualine_ok, lualine = pcall(require, 'lualine')
-  local navic_ok, navic = pcall(require, 'nvim-navic')
-  local icons = require('nvim-nonicons')
-  local nonicon_extensions = require('nvim-nonicons.extentions.lualine')
-
+  local lualine = require('lualine')
+  local navic = require('nvim-navic')
   local custom_fname = require('lualine.components.filename'):extend()
   local highlight = require('lualine.highlight')
   local default_status_colors = { modified = '#c678dd' }
@@ -70,7 +61,7 @@ function M.config()
         self.options
       ),
       modified = highlight.create_component_highlight_group(
-        { bg = default_status_colors.modified },
+        { bg = colors.fg, fg = colors.bg },
         'filename_status_modified',
         self.options
       ),
@@ -114,6 +105,11 @@ function M.config()
     end
   end
 
+  local function icon_by_ft()
+    local ft = vim.filetype.match{ buf = vim.api.nvim_get_current_buf() }
+    return require("nvim-web-devicons").get_icon_by_filetype(ft)
+  end
+
   local evil = function()
     -- Config
     local config = {
@@ -145,8 +141,8 @@ function M.config()
         lualine_b = {},
         lualine_y = {},
         lualine_z = {},
-        -- lualine_c = {},
-        -- lualine_x = {},
+        lualine_c = {},
+        lualine_x = {},
       },
     }
 
@@ -162,27 +158,12 @@ function M.config()
 
     ins_left {
       function()
-        local icon = nonicons_extensions.mode
-        return icon or '▊'
+        local icon = icon_by_ft()
+        return icon
       end,
       color = modecolors(),
       padding = { left = 0, right = 1 }, -- We don't need space before this
     }
-
-    ins_left {
-      custom_fname,
-      -- { navic.get_location(navic_opts), cond = navic.is_available() },
-    }
-
-    -- ins_left {
-    -- 	function()
-    -- 		if navic.is_available then
-    -- 			return navic.get_location
-    -- 		end
-    -- 		return custom_fname
-    -- 	end,
-    -- 	color = { fg = colors.magenta, gui = 'bold' },
-    -- }
 
     ins_left {
       -- filesize component
@@ -190,31 +171,33 @@ function M.config()
       cond = conditions.buffer_not_empty,
     }
 
-    -- ins_left {
-    -- 	-- 'filename',
-    -- 	function()
-    -- 		local msg = ''
-    -- 		local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    -- 		local clients = vim.lsp.get_active_clients()
-    -- 		-- if navic.is_available ~= nil then
-    -- 		-- 	return navic.get_location
-    -- 		-- end
-    -- 		-- for _, client in ipairs(clients) do
-    -- 		-- 	local filetypes = client.config.filetypes
-    -- 		-- 	if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-    -- 		-- 		return navic.get_location
-    -- 		-- 	end
-    -- 		-- end
-    -- 		return custom_fname()
-    -- 	end,
-    -- 	color = { fg = colors.magenta, gui = 'bold' },
-    -- }
-
     ins_left { 'location' }
 
     ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 
     ins_left {
+      custom_fname,
+      color = { fg = colors.violet, gui = 'bold' }
+    }
+
+      ins_left {
+        function()
+          if navic.is_available then
+            return navic.get_location()
+          end
+        end,
+        -- color = { fg = colors.magenta },
+      }
+
+    -- Insert mid section. You can make any number of sections in neovim :)
+    -- for lualine it's any number greater then 2
+    ins_left {
+      function()
+        return '%='
+      end,
+    }
+
+    ins_right {
       'diagnostics',
       sources = { 'nvim_diagnostic' },
       symbols = { error = ' ', warn = ' ', info = ' ' },
@@ -225,36 +208,7 @@ function M.config()
       },
     }
 
-    -- Insert mid section. You can make any number of sections in neovim :)
-    -- for lualine it's any number greater then 2
-    ins_left {
-      function()
-        return '%='
-      end,
-    }
-
-    -- ins_left {
-    -- 	-- Lsp server name .
-    -- 	function()
-    -- 		local msg = 'No Active Lsp'
-    -- 		local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    -- 		local clients = vim.lsp.get_active_clients()
-    -- 		if next(clients) == nil then
-    -- 			return msg
-    -- 		end
-    -- 		for _, client in ipairs(clients) do
-    -- 			local filetypes = client.config.filetypes
-    -- 			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-    -- 				return client.name
-    -- 			end
-    -- 		end
-    -- 		return msg
-    -- 	end,
-    -- 	icon = ' LSP:',
-    -- 	color = { fg = '#ffffff', gui = 'bold' },
-    -- }
-
-    ins_left {
+    ins_right {
       -- Lsp server name .
       function()
         local msg = ''
@@ -271,8 +225,8 @@ function M.config()
         end
         return msg
       end,
-      icon = ' ',
-      color = { fg = '#ffffff', gui = 'bold' },
+      icon = icon_by_ft(),
+      color = { gui = 'bold' },
     }
 
     -- Add components to right sections
@@ -311,8 +265,7 @@ function M.config()
 
     ins_right {
       function()
-        local icon = nonicons_extensions.mode
-        return icon or '▊'
+        return icon_by_ft()
       end,
       color = modecolors(),
       padding = { left = 1 },

@@ -295,7 +295,6 @@ function M.packer()
 
 		use { -- ICONS:
 			'kyazdani42/nvim-web-devicons',
-			'yamatsum/nvim-nonicons',
 			'onsails/lspkind.nvim',
 		}
 

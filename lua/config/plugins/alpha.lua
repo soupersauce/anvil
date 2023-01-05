@@ -1,13 +1,6 @@
 local M = {
 	'goolord/alpha-nvim',
-  enabled = false,
-	dependencies = {
-		'nvim-lua/plenary.nvim',
-		'kyazdani42/nvim-web-devicons',
-		'ibhagwan/fzf-lua',
-		-- 'yamatsum/nvim-nonicons',
-	},
-	priority = 650,
+  enabled = true,
 }
 
 function M.config()
@@ -15,6 +8,7 @@ function M.config()
 	local cdir = vim.fn.getcwd()
 	local if_nil = vim.F.if_nil
 	local fzf = require('fzf-lua')
+  local nwd = require('nvim-web-devicons')
 
 	local function get_extension(fn)
 		local match = fn:match('^.+(%..+)$')
@@ -26,7 +20,6 @@ function M.config()
 	end
 
 	local function icon(fn)
-		local nwd = require('nvim-web-devicons')
 		local ext = get_extension(fn)
 		return nwd.get_icon(fn, ext, { default = true })
 	end
@@ -36,16 +29,16 @@ function M.config()
 		local ico_txt
 		local fb_hl = {}
 
-		if nvim_web_devicons.enabled then
+		if nwd.enabled then
 			local ico, hl = icon(fn)
-			local hl_option_type = type(nvim_web_devicons.highlight)
+			local hl_option_type = type(nwd.highlight)
 			if hl_option_type == 'boolean' then
-				if hl and nvim_web_devicons.highlight then
+				if hl and nwd.highlight then
 					table.insert(fb_hl, { hl, 0, 3 })
 				end
 			end
 			if hl_option_type == 'string' then
-				table.insert(fb_hl, { nvim_web_devicons.highlight, 0, 3 })
+				table.insert(fb_hl, { nwd.highlight, 0, 3 })
 			end
 			ico_txt = ico .. '  '
 		else
@@ -154,7 +147,7 @@ function M.config()
 			{
 				type = 'group',
 				val = function()
-					return { mru(0, cdir) }
+					return { mru(1, cdir) }
 				end,
 				opts = { shrink_margin = false },
 			},

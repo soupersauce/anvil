@@ -1,8 +1,5 @@
 local M =  {
     'jose-elias-alvarez/null-ls.nvim',
-    dependencies = {
-      'neovim/nvim-lspconfig',
-    },
   }
   function M.setup(options)
       local _, nls = pcall(require, 'null-ls')

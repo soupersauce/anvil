@@ -1,6 +1,6 @@
 local M = { -- BUFFERLINE
 	'akinsho/bufferline.nvim',
-	dependencies = 'nvim-web-devicons',
+	dependencies = 'kyazdani42/nvim-web-devicons',
 	event = 'BufAdd',
 }
 

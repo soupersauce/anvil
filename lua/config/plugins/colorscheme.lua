@@ -2,51 +2,213 @@ local M = { -- COLORSCHEMES;
 	-- 'rrethy/nvim-base16',
 	{
     'rebelot/kanagawa.nvim',
-    cond = (COLORSCHEME == 'kanagawa'),
+    lazy = true,
     config = function()
       vim.cmd("colorscheme kanagawa")
     end,
     priority = 1000,
   },
-  -- 'Yazeed1s/oh-lucy.nvim',
-	-- 'christianchiarulli/nvcode-color-schemes.vim',
-	-- 'glepnir/zephyr-nvim',
-	{
-    'jesseleite/nvim-noirbuddy',
-    cond = (COLORSCHEME == 'noirbuddy'),
-    dependencies = 'tjdevries/colorbuddy.nvim',
+  {
+    'Yazeed1s/oh-lucy.nvim',
+    lazy = true,
     config = function()
-    require('noirbuddy').setup {
-      preset = 'miami-nights'
-    }
-  end,
+      vim.cmd[[ colorscheme oh-lucy ]]
+    end,
     priority = 1000,
   },
-	-- 'glepnir/zephyr-nvim',
+  {
+    'christianchiarulli/nvcode-color-schemes.vim',
+    lazy = true,
+    config = function()
+      vim.cmd[[ colorscheme nvcode ]]
+      vim.cmd{[[
+        if (has("termguicolors"))
+          set termguicolors
+          hi LineNr ctermbg=NONE guibg=NONE
+          endif
+      ]]}
+      end,
+    priority = 1000,
+  },
+	{
+    'jesseleite/nvim-noirbuddy',
+    lazy = true,
+    config = function()
+      require('noirbuddy').setup {
+        preset = 'miami-nights'
+      }
+    end,
+    priority = 1000,
+  },
+  {
+    'glepnir/zephyr-nvim',
+    lazy = true,
+    config = function()
+      require('zephyr')
+    end,
+    priority = 1000,
+  },
 	-- 'ali-githb/standardized',
-	-- 'th3whit3wolf/onebuddy',
-	-- 'th3whit3wolf/one-nvim',
-	-- 'ray-x/aurora',
-	-- 'edeneast/nightfox.nvim',
-	-- 'navarasu/onedark.nvim',
-	-- 'rafamadriz/neon',
-	-- 'yagua/nebulous.nvim',
-	-- 'shatur/neovim-ayu',
-	-- 'elianiva/icy.nvim',
-	-- 'ramojus/mellifluous.nvim',
-	-- 'kaiuri/nvim-juliana',
-	-- 'projekt0n/github-nvim-theme',
-	-- 'kdheepak/monochrome.nvim',
-	-- 'adisen99/codeschool.nvim',
-	-- 'nyoom-engineering/oxocarbon.nvim',
-	-- 'kvrohit/mellow.nvim',
-	-- 'kartikp10/noctis.nvim',
-	-- 'everblush/everblush.nvim',
-	-- dependencies = {
-	-- 	'tjdevries/colorbuddy.nvim',
-	-- 	'rktjmp/lush.nvim',
-	-- },
+  {
+    'th3whit3wolf/onebuddy',
+    lazy = true,
+    config = function()
+      require('colorbuddy').colorscheme('onebuddy')
+    end,
+    priority = 1000,
+  },
+  {
+    'th3whit3wolf/one-nvim',
+    lazy = true,
+    config = function()
+      vim.g.one_nvim_transparent_bg = true,
+      vim.cmd[[ colorscheme one-nvim ]]
+    end,
+    priority = 1000,
+  },
+  {
+    'ray-x/aurora',
+    lazy = true,
+    config = function()
+      vim.cmd[[ colorscheme aurora ]]
+      vim.api.nvim_set_hl(0, 'Normal', {guibg='NONE', ctermbg='NONE'})
+      vim.api.nvim_set_hl(0, 'String', {guibg='=#339922', ctermbg='NONE'})
+    end,
+    priority = 1000,
+  },
+  {
+	'edeneast/nightfox.nvim',
+    lazy = true,
+    config = function()
+      vim.cmd[[ colorscheme nightfox ]]
+    end,
+    priority = 1000,
+  },
+  {
+    'navarasu/onedark.nvim',
+    lazy = true,
+    config = function(style)
+      style = style or 'deep'
+      require('onedark').setup{
+        style = style,
+      }
+      require('onedark').load()
+    end,
+    priority = 1000,
+  },
+  {
+    'rafamadriz/neon',
+    lazy = true,
+    config = function(style)
+      style = style or 'dark'
+      vim.g.neon_style = style
+      vim.g.neon_transparent = true
 
+      vim.cmd[[colorscheme neon]]
+    end,
+    priority = 1000,
+  },
+  -- TODO
+  {
+    'yagua/nebulous.nvim',
+    lazy = true,
+    priority = 1000,
+    config = function(style)
+      style = style or 'night'
+      require("nebulous").setup {
+        variant = style,
+      }
+    end,
+  },
+  {
+    'shatur/neovim-ayu',
+    lazy = true,
+    priority = 1000,
+    config = { mirage = true },
+  },
+  {
+    'ramojus/mellifluous.nvim',
+    dependencies = { 'rktjmp/lush.nvim' },
+    lazy = true,
+    priority = 1000,
+    config = function()
+      require('mellifluous').setup{}
+      vim.cmd('colorscheme mellifluous')
+    end,
+  },
+  {
+    'kaiuri/nvim-juliana',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      vim.cmd('colorscheme juliana')
+    end,
+  },
+  {
+    'projekt0n/github-nvim-theme',
+    lazy = true,
+    priority = 1000,
+    config = function(style)
+      style = style or 'dark_default'
+      require('github-theme').setup {
+        theme_style = style
+      }
+    end,
+  },
+  {
+    'kdheepak/monochrome.nvim',
+    -- lazy = true,
+    priority = 1000,
+    config = function()
+      vim.cmd('colorscheme monochrome')
+    end,
+  },
+  {
+    'adisen99/codeschool.nvim',
+    dependencies = 'rktjmp/lush.nvim',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      require('lush')(require('codeschool').setup {
+
+      })
+      vim.g.codeschool_contrast_dark = 'hard'
+    end,
+  },
+  {
+    'nyoom-engineering/oxocarbon.nvim',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme "oxocarbon"
+    end,
+  },
+  {
+    'kvrohit/mellow.nvim',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      -- Set Options first
+      vim.cmd [[colorscheme mellow]]
+    end,
+  },
+  {
+    'kartikp10/noctis.nvim',
+    dependencies = 'rktjmp/lush.nvim',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      vim.cmd[[ colorscheme noctis ]]
+    end,
+  },
+  {
+    'everblush/everblush.nvim',
+    lazy = true,
+    priority = 1000,
+    config = {
+      nvim_tree = { contrast = false }
+    }
+  },
 }
 
 function M.clearbackgrounds()
@@ -62,12 +224,11 @@ function M.clearbackgrounds()
 	-- vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'none' })
 end
 
-function M.config()
-	vim.cmd([[ colorscheme kanagawa]])
-	-- M.clearbackgrounds()
-end
+-- function M.config()
+-- 	vim.cmd([[ colorscheme kanagawa]])
+-- 	-- M.clearbackgrounds()
+-- end
 
-local vim = vim
 
 -- NVCode colorschemes
 -- @param style string onedark|aurora|gruvbox|palenight|nord|snazzy|xoria|nvcode

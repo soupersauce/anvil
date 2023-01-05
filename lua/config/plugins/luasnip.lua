@@ -1,9 +1,6 @@
 local M = { -- LUASNIP
 	'rafamadriz/friendly-snippets',
-	{
-		'L3MON4D3/LuaSnip',
-		dependencies = 'rafamadriz/friendly-snippets',
-	},
+  'L3MON4D3/LuaSnip',
 }
 function M.config()
 	local vim = vim

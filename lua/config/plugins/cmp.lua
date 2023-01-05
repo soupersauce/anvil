@@ -1,34 +1,16 @@
 local M = { -- CMP
-		'hrsh7th/nvim-cmp',
-		event = 'InsertEnter',
-		dependencies = {
-			-- 'KadoBOT/cmp-plugins',
-			'onsails/lspkind.nvim',
-			'nvim-autopairs',
-			'nvim-web-devicons',
-			'yamatsum/nvim-nonicons',
-			-- 'uga-rosa/cmp-dictionary',
-			-- 'hrsh7th/cmp-nvim-lsp',
-			-- 'hrsh7th/cmp-nvim-lua',
-			-- 'hrsh7th/cmp-buffer',
-			-- 'hrsh7th/cmp-cmdline',
-			-- 'dmitmel/cmp-cmdline-history',
-			-- 'petertriho/cmp-git',
-			-- 'andersevenrud/cmp-tmux',
-			-- 'rcarriga/cmp-dap', dependencies = 'hrsh7th/nvim-cmp',
-			-- 'quangnguyen30192/cmp-nvim-tags',
-			-- 'saadparwaiz1/cmp_luasnip',
-			-- 'f3fora/cmp-spell',
-			-- 'tamago324/cmp-zsh',
-		},
-}
-function M.config()
-			local vim = vim
+  'hrsh7th/nvim-cmp',
+  event = 'InsertEnter',
+  config = function()
+			local cmp_ok, cmp = pcall(require, 'cmp')
+      if not cmp_ok then
+        vim.notify('cmp not loaded')
+        return
+      end
 			local icons = require('ui.icons')
 			local lspkind = require('lspkind')
-			vim.o.completeopt = 'menuone,noselect'
+			vim.o.completeopt = 'menu,menuone,noinsert'
 			-- Setup nvim-cmp.
-			local cmp = require('cmp')
 			local luasnip = require('luasnip')
 			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
@@ -46,17 +28,15 @@ function M.config()
 						types.cmp.TriggerEvent.InsertEnter,
 						types.cmp.TriggerEvent.TextChanged,
 					},
-					completeopt = 'menu,menuone,noselect',
+					completeopt = 'menu,menuone,noinsert,noselect',
 					keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
 					keyword_length = 0,
 				},
-
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body) -- Use LuaSnip.
 					end,
 				},
-
 				mapping = cmp.mapping.preset.insert {
 					['<C-f>'] = cmp.mapping.scroll_docs(4),
 					['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -67,7 +47,7 @@ function M.config()
 						behavior = cmp.ConfirmBehavior.Insert,
 						select = true,
 					},
-					['<C-e'] = cmp.mapping.close(),
+					['<C-e'] = cmp.mapping.abort(),
 					-- Super Tab
 					['<Tab>'] = cmp.mapping(function(fallback)
 						if cmp.visible() then
@@ -92,15 +72,14 @@ function M.config()
 				},
 
 				sources = cmp.config.sources {
-					{ name = 'nvim_lua' },
 					{ name = 'nvim_lsp' },
-					{ name = 'plugins' },
 					{ name = 'luasnip' },
 					{ name = 'crates' },
+					{ name = 'tmux' },
 					{ name = 'cmp_autopairs' },
 					{ name = 'path' },
-					-- { name = 'buffer', keyword_length = 3 },
-					-- { name = 'dictionary', keyword_length = 2 },
+					{ name = 'buffer', keyword_length = 3 },
+					{ name = 'dictionary', keyword_length = 3 },
 				},
 
 				formatting = {
@@ -154,8 +133,8 @@ function M.config()
 				cmp.setup.cmdline(cmd_type, {
 					mapping = cmp.mapping.preset.cmdline(),
 					sources = {
-						{ name = 'cmdline_history' },
 						{ name = 'buffer' },
+						{ name = 'cmdline_history' },
 					},
 					view = {
             entries = { name = 'custom', selection_order = 'near_cursor' },
@@ -167,8 +146,8 @@ function M.config()
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
 					{ name = 'cmdline' },
-					{ name = 'nvim_lua' },
 					{ name = 'cmdline_history' },
+					{ name = 'nvim_lua' },
 					{ name = 'path' },
 					{ name = 'plugins' },
 				},
@@ -200,11 +179,24 @@ function M.config()
 			cmp.setup.filetype('org', {
 				mapping = cmp.mapping.preset.insert(),
 				sources = cmp.config.sources {
-					{ name = 'org' },
+					{ name = 'orgmode' },
 					{ name = 'luasnip' },
 					{ name = 'buffer' },
 					{ name = 'dictionary' },
 				},
 			})
-		end
+
+			cmp.setup.filetype('lua', {
+				mapping = cmp.mapping.preset.insert(),
+				sources = cmp.config.sources {
+					{ name = 'plugins' },
+					{ name = 'luasnip' },
+					{ name = 'nvim_lua' },
+					{ name = 'nvim_lsp' },
+					{ name = 'buffer' },
+				},
+			})
+  end
+}
+
 return M
