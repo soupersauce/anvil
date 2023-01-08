@@ -2,20 +2,6 @@ local M = { -- TREESITTER; integration
 	{
 		'nvim-treesitter/nvim-treesitter',
 		build = ':TSUpdate',
-		dependencies = {
-			'joosepalviste/nvim-ts-context-commentstring',
-			'nvim-treesitter/nvim-treesitter-textobjects',
-			'folke/todo-comments.nvim',
-			'kevinhwang91/nvim-bqf',
-			'andymass/vim-matchup',
-			'nvim-treesitter/playground',
-			'nvim-treesitter/nvim-treesitter-context',
-			-- TODO:CONFIGURE:
-			'ziontee113/syntax-tree-surfer',
-			'folke/twilight.nvim',
-			'mizlan/iswap.nvim',
-			'ThePrimeagen/refactoring.nvim',
-		},
     config = function()
       -- nvim-treesitter configuration
       local config = require('nvim-treesitter.configs')
@@ -158,7 +144,4 @@ local M = { -- TREESITTER; integration
 		config = true,
 	},
 }
-
-function M.config()
-end
 return M
