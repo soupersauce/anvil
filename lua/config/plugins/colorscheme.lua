@@ -62,7 +62,7 @@ local M = { -- colorschemeS;
     'th3whit3wolf/one-nvim',
     cond = (colorscheme == 'one'),
     config = function()
-      vim.g.one_nvim_transparent_bg = true,
+      vim.g.one_nvim_transparent_bg = true
       vim.cmd[[ colorscheme one-nvim ]]
     end,
     priority = 1000,
