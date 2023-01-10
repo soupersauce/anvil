@@ -1,5 +1,3 @@
--- local vim = vim
-
 -- local noirbuddy = function(theme)
 -- 	theme = theme or 'miami-nights'
 -- 	require('noirbuddy').setup {

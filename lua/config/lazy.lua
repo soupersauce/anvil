@@ -27,5 +27,5 @@ local lazyopts = {
 	},
 }
 
-require('lazy').setup('config.plugins', lazyopts)
--- vim.keymap.set('n', '<leader>l', '<cmd>:Lazy<cr>')
+require('lazy').setup('plugins', lazyopts)
+vim.keymap.set('n', '<leader>l', '<cmd>:Lazy<cr>')
