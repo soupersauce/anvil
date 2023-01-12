@@ -2,6 +2,7 @@ local M = {
 	{ -- TELESCOPE:
 		'nvim-telescope/telescope.nvim',
 		cmd = { 'Telescope' },
+		cond = vim.g.started_by_firenvim == nil,
 		dependencies = {
 			'kyazdani42/nvim-web-devicons',
 		},

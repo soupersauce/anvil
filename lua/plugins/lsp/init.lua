@@ -79,7 +79,7 @@ local M = { -- LSP: integration
 					-- }
 				end,
 
-				['jsonls'] = function()
+				['jsonls'] = function(bufnr, client)
 					require('lspconfig').jsonls.setup {
 						on_new_config = function(new_config)
 							new_config.settings.json.schemas = new_config.settings.json.schemas or {}
@@ -98,7 +98,7 @@ local M = { -- LSP: integration
 					}
 				end,
 
-				['rust_analyzer'] = function()
+				['rust_analyzer'] = function(bufnr, client)
 					require('rust-tools').setup {
 						server = {
 							capabilities = capabilities,
@@ -115,33 +115,32 @@ local M = { -- LSP: integration
 					}
 				end,
 
-				['sumneko_lua'] = function()
+				['sumneko_lua'] = function(bufnr, client)
 					require('lspconfig').sumneko_lua.setup {
 						capabilities = capabilities,
 						on_attach = on_attach,
-						settings = {
-							Lua = {
-								format = {
-
-									enable = false,
-								},
-								completion = {
-									callSnippet = 'Replace',
-								},
-								diagnostics = {
-									globals = { 'vim' },
-								},
+						-- settings = {
+						Lua = {
+							format = {
+								enable = false,
 							},
-							telemetry = { enable = false },
+							completion = {
+								callSnippet = 'Replace',
+							},
+							diagnostics = {
+								globals = { 'vim' },
+							},
 						},
+						telemetry = { enable = false },
+						-- },
 					}
 				end,
 
-				['clangd'] = function() -- C/C++
+				['clangd'] = function(bufnr, client) -- C/C++
 					require('clangd_extensions').setup {}
 				end,
 
-				['gopls'] = function() -- Golang
+				['gopls'] = function(bufnr, client) -- Golang
 					require('go').setup {
 						lsp_cfg = {
 							flags = {
@@ -167,7 +166,7 @@ local M = { -- LSP: integration
 					}
 				end,
 
-				['ltex'] = function()
+				['ltex'] = function(bufnr, client)
 					require('lspconfig').ltex.setup {
 						capabilities = capabilities,
 						on_attach = function(client, bufnr)

@@ -4,6 +4,7 @@ local M = {
 		dependencies = {
 			'kyazdani42/nvim-web-devicons',
 		},
+    cond = vim.g.started_by_firenvim == nil,
 		opts = {
 			filters = {
 				dotfiles = false,
@@ -56,6 +57,7 @@ local M = {
 	},
 	{
 		'antosha417/nvim-lsp-file-operations',
+		cmd = 'NvimTreeToggle',
 		config = true,
 	},
 }

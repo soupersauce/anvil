@@ -9,6 +9,7 @@ local M = { -- COLOR-PICKER
 	},
 	{ -- NVIM-RECORDER
 		'chrisgrieser/nvim-recorder',
+    cond = vim.g.started_by_firenvim == nil,
 		config = function()
 			require('recorder').setup {
 				slots = { 'a', 'b', 'c' },
@@ -35,6 +36,7 @@ local M = { -- COLOR-PICKER
 	'ralismark/vim-recover',
 	{ -- toggleterm
 		'akinsho/toggleterm.nvim',
+    cond = vim.g.started_by_firenvim == nil,
 		keys = { '<C-\\>' },
 		opts = {
 			open_mapping = [[<c-\>]],
@@ -50,6 +52,7 @@ local M = { -- COLOR-PICKER
 	},
 	{
 		'cvigilv/esqueleto.nvim',
+    cond = vim.g.started_by_firenvim == nil,
 		opts = {
 			directory = '~/.config/nvim/templates',
 			patterns = { 'org' },
@@ -93,10 +96,12 @@ local M = { -- COLOR-PICKER
 	},
 	{ --Sniprun
 		'michaelb/sniprun',
+    cond = vim.g.started_by_firenvim == nil,
 		build = 'bash ./install.sh',
 	},
 	{ -- Lastplace: remember last place in file
 		'ethanholz/nvim-lastplace',
+    cond = vim.g.started_by_firenvim == nil,
 		opts = {
 			lastplace_ignore_buftype = { 'quickfix', 'nofile', 'help', 'Trouble', 'terminal', 'nvimtree' },
 			lastplace_ignore_filetype = { 'gitcommit', 'gitrebase', 'svn', 'hgcommit' },
@@ -119,6 +124,7 @@ local M = { -- COLOR-PICKER
 	},
 	{
 		'EricDriussi/remember-me.nvim',
+    cond = vim.g.started_by_firenvim == nil,
 		config = true,
 	},
 	{

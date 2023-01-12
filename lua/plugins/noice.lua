@@ -1,6 +1,7 @@
 local M = {
 	'folke/noice.nvim',
 	enabled = false,
+  cond = vim.g.started_by_firenvim == nil,
 	dependencies = {
 		'MunifTanjim/nui.nvim',
 		'rcarriga/nvim-notify',

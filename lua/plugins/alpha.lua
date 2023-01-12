@@ -1,6 +1,7 @@
 local M = {
 	'goolord/alpha-nvim',
 	enabled = true,
+	cond = vim.g.started_by_firenvim == nil,
 	dependencies = 'nvim-lua/plenary.nvim',
 }
 

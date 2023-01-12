@@ -1,5 +1,6 @@
 local M = { -- KNAP
 	'frabjous/knap',
+  cond = vim.g.started_by_firenvim == nil,
 	ft = { 'org', 'markdown', 'tex', 'html' },
 }
 

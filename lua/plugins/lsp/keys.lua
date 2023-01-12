@@ -26,20 +26,28 @@ function M.setup(client, bufnr)
 	vim.keymap.set('n', 'gD', function()
 		vim.lsp.buf.declaration()
 	end, bufopts)
+
 	vim.keymap.set('n', 'gt', function()
 		vim.lsp.buf.type_definition()
 	end, bufopts)
+
 	-- gr = 'lua vim.lsp.buf.references()',
 	vim.keymap.set('n', '<Leader>s', function()
 		vim.lsp.buf.document_symbol()
 	end, bufopts)
+
 	vim.keymap.set('n', '<Leader>w', function()
 		vim.lsp.buf.workspace_symbol()
 	end, bufopts)
-	--  if not dtextobjects_ok then
-	-- ']d' = 'lua vim.diagnostic.goto_next()',
-	-- '[d' = 'lua vim.diagnostic.goto_prev()',
-	--  end,
+
+	vim.keymap.set('n', ']d', function()
+		vim.diagnostic.goto_next()
+	end, bufopts)
+
+	vim.keymap.set('n', '[d', function()
+		vim.diagnostic.goto_prev()
+	end, bufopts)
+
 	vim.keymap.set('n', '<leader>rn', function()
 		vim.lsp.buf.rename()
 	end, bufopts)
@@ -51,7 +59,6 @@ function M.setup(client, bufnr)
 		vim.diagnostic.open_float()
 	end, bufopts)
 	-- Custom mappings, will overwrite the default mappings for the same key
-	-- Example mappings for telescope pickers:
 	vim.keymap.set('n', 'gd', function()
 		require('fzf-lua').lsp_definitions()
 	end, bufopts)

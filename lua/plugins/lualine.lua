@@ -1,5 +1,6 @@
 local M = { -- LUALINE
 	'nvim-lualine/lualine.nvim',
+	cond = vim.g.started_by_firenvim == nil,
 }
 
 function M.config()

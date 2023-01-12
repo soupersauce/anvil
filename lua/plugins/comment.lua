@@ -1,6 +1,7 @@
 local M = { -- Comment.nvim
 	{
 		'numToStr/Comment.nvim',
+		cond = vim.g.started_by_firenvim == nil,
 		dependencies = 'joosepalviste/nvim-ts-context-commentstring',
 		opts = {
 			hook = function()

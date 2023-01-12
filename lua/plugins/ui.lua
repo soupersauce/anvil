@@ -1,6 +1,7 @@
 local M = {
 	{ -- DRESSING:
 		'stevearc/dressing.nvim',
+		cond = vim.g.started_by_firenvim == nil,
 		event = 'VeryLazy',
 		config = function()
 			local dressing = require('dressing')
@@ -54,6 +55,7 @@ local M = {
 	},
 	{ -- NOTIFY:
 		'rcarriga/nvim-notify',
+		cond = vim.g.started_by_firenvim == nil,
 		config = true,
 	},
 	-- floating winbar
@@ -80,6 +82,7 @@ local M = {
 	},
 	{
 		'anuvyklack/windows.nvim',
+		cond = vim.g.started_by_firenvim == nil,
 		event = 'WinNew',
 		dependencies = {
 			{ 'anuvyklack/middleclass' },
@@ -96,6 +99,7 @@ local M = {
 	},
 	{ -- BUFFERLINE:
 		'akinsho/bufferline.nvim',
+		cond = vim.g.started_by_firenvim == nil,
 		dependencies = 'kyazdani42/nvim-web-devicons',
 		event = 'BufAdd',
 		opts = {
@@ -164,6 +168,7 @@ local M = {
 	},
 	{ -- UFO:
 		'kevinhwang91/nvim-ufo',
+		-- cond = vim.g.started_by_firenvim == nil,
 		dependencies = 'kevinhwang91/promise-async',
 		keys = {
 			{

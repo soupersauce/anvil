@@ -7,9 +7,6 @@ vim.o.background = 'dark'
 -- Set default shell
 vim.o.shell = 'zsh'
 
--- Modelines
-vim.o.modeline = true
-
 -- Restrict existing tab to width of 4 spaces
 vim.o.tabstop = 2
 
@@ -69,13 +66,10 @@ vim.o.incsearch = true
 vim.o.lazyredraw = false
 
 -- Use global status line
-vim.o.laststatus = 3
+vim.o.laststatus = 0
 
 -- Don"t show mode as it is already displayrd in status line
 vim.o.showmode = false
-
--- Show sign column inside the number column
-vim.o.signcolumn = 'yes:2'
 
 -- Minimum number of lines to keep before scrolling
 vim.o.scrolloff = 6
@@ -117,16 +111,19 @@ vim.o.sidescroll = 5
 vim.o.sidescrolloff = 5
 
 -- Status area size
-vim.o.cmdheight = 2
 
--- Folds
+vim.o.cmdheight = 2
+-- Modelines
+vim.o.modeline = true
+-- Show sign column inside the number column
+vim.o.signcolumn = 'yes:2'
 -- Opens all folds by default, folding still enabled
 vim.o.foldenable = true
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldcolumn = '1'
 vim.o.fillchars = [[vert:▕,horiz:─,eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-vim.o.statuscolumn = "%=%l%s%C"
+vim.o.statuscolumn = '%=%l%s%C'
 
 vim.o.conceallevel = 2
 vim.o.concealcursor = 'nc'
@@ -155,6 +152,15 @@ if fn.exists('$SUDO_USER') ~= 0 then
 	vim.o.undofile = false
 	vim.o.viminfo = nil
 	vim.o.foldenable = false
+end
+
+if vim.g.started_by_firenvim then
+	vim.o.cmdheight = 0
+	-- Modelines
+	vim.o.modeline = false
+	-- Show sign column inside the number column
+	vim.o.signcolumn = 'no'
+	vim.o.foldcolumn = '0'
 end
 
 -- Use ripgrep as the grep program, if available

@@ -1,6 +1,7 @@
 local M = {
 	{ -- DAP:
 		'mfussenegger/nvim-dap',
+    cond = vim.g.started_by_firenvim == nil,
 		enabled = false,
 		setup = function()
 			require('plugins.dap').pre()

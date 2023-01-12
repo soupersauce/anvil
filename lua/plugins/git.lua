@@ -2,6 +2,7 @@ local M = { -- gitsigns
 	{ -- NEOGIT:
 		'TimUntersberger/neogit',
 		cmd = 'Neogit',
+		cond = vim.g.started_by_firenvim == nil,
 		opts = {
 			disable_signs = false,
 			disable_hint = false,
@@ -39,6 +40,7 @@ local M = { -- gitsigns
 	},
 	{ -- GITSIGNS:
 		'lewis6991/gitsigns.nvim',
+		cond = vim.g.started_by_firenvim == nil,
 		opts = {
 			on_attach = function()
 				local set_keymap = function(lhs, rhs)
@@ -114,6 +116,7 @@ local M = { -- gitsigns
 	},
 	{ -- DIFFVIEW:
 		'sindrets/diffview.nvim',
+		cond = vim.g.started_by_firenvim == nil,
 		config = function(opts)
 			local actions = require('diffview.actions')
 			local diffview = require('diffview')

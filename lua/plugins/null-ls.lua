@@ -62,6 +62,15 @@ function M.setup(options)
 		diag.tidy,
 		diag.vale.with {
 			extra_filetypes = { 'org', 'text', 'txt' },
+			extra_args = function()
+				-- if with_root_file('.vale.ini') then
+				-- 	return { '--config', require('null-ls.utils').get_root() .. '.vale.ini' }
+				if vim.g.started_by_firenvim then
+					return { '--config', vim.fn.expand('~/.vale.ini') }
+				else
+					return nil
+				end
+			end,
 		},
 		diag.write_good.with {
 			extra_filetypes = { 'tex', 'org' },
@@ -117,10 +126,10 @@ function M.setup(options)
 	}
 	nls.setup {
 		debounce = 150,
-		debug = false,
+		debug = true,
 		save_after_format = false,
 		sources = null_sources,
-		on_attach = options.on_attach
+		on_attach = options.on_attach,
 	}
 end
 M.has_formatter = function(ft)
