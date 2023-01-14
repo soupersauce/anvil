@@ -153,25 +153,17 @@ local M = { -- CMP
 				},
 			})
 
-			cmp.setup.filetype('gitcommit', {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources {
-					{ name = 'git' },
-					{ name = 'commit' },
-					{ name = 'buffer' },
-					{ name = 'dictionary' },
-				},
-			})
-
-			cmp.setup.filetype('NeogitCommitMessage', {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources {
-					{ name = 'git' },
-					{ name = 'commit' },
-					{ name = 'buffer' },
-					{ name = 'dictionary' },
-				},
-			})
+			for _, cmd_ft in ipairs { 'gitcommit', 'NeogitCommitMessage' } do
+				cmp.setup.filetype(cmd_ft, {
+					mapping = cmp.mapping.preset.cmdline(),
+					sources = cmp.config.sources {
+						{ name = 'git' },
+						{ name = 'commit' },
+						{ name = 'buffer' },
+						{ name = 'dictionary' },
+					},
+				})
+			end
 
 			cmp.setup.filetype('org', {
 				mapping = cmp.mapping.preset.insert(),
