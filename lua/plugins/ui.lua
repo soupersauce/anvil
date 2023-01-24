@@ -1,4 +1,17 @@
 local M = {
+	{
+		'uga-rosa/ccc.nvim',
+		opts = {
+			highlighter = {
+				auto_enable = true,
+			},
+		},
+	},
+	'sitiom/nvim-numbertoggle',
+	{ -- tint.nvim
+		'levouh/tint.nvim',
+		config = true,
+	},
 	{ -- DRESSING:
 		'stevearc/dressing.nvim',
 		cond = vim.g.started_by_firenvim == nil,
@@ -12,42 +25,6 @@ local M = {
 				},
 			}
 		end,
-	},
-	{ -- BLANKLINE:
-		'lukas-reineke/indent-blankline.nvim',
-		init = function()
-			vim.opt.list = true
-			vim.opt.listchars:append('space:⋅')
-			vim.opt.listchars:append('multispace: ')
-			vim.opt.listchars:append('lead: ')
-			vim.opt.listchars:append('eol:↴')
-		end,
-		opts = {
-			indentLine_enabled = true,
-			char = '▏',
-			filetype_exclude = {
-				'help',
-				'terminal',
-				'alpha',
-				'packer',
-				'lspinfo',
-				'TelescopePrompt',
-				'TelescopeResults',
-				'lsp-installer',
-				'undotree',
-				'NeogitStatus',
-				'NeogitCommitMessage',
-				'NeogitPopup',
-				'lazy',
-				'',
-			},
-			buftype_exclude = { 'terminal' },
-			space_char_blankeline = ' ',
-			show_trailing_blankline_indent = false,
-			show_first_indent_level = false,
-			show_current_context = true,
-			show_current_context_start = true,
-		},
 	},
 	{ -- TRANSPARENT:
 		'xiyaowong/nvim-transparent',
@@ -147,128 +124,6 @@ local M = {
 			},
 		},
 	},
-	{ -- HLSLENS:
-		'kevinhwang91/nvim-hlslens',
-		config = function()
-			local vim = vim
-			require('hlslens').setup {
-				build_position_cb = function(plist, _, _, _)
-					require('scrollbar.handlers.search').handler.show(plist.start_pos)
-				end,
-			}
-			local kopts = { noremap = true, silent = true }
-
-			vim.keymap.set(
-				'n',
-				'n',
-				[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-				kopts
-			)
-			vim.keymap.set(
-				'n',
-				'N',
-				[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-				kopts
-			)
-			vim.keymap.set('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-			vim.keymap.set('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-			vim.keymap.set('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-			vim.keymap.set('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-
-			vim.cmd([[
-            augroup scrollbar_search_hide
-                autocmd!
-                autocmd CmdlineLeave : lua require('scrollbar.handlers.search').handler.hide()
-            augroup END
-        ]])
-		end,
-	},
-	{ -- UFO:
-		'kevinhwang91/nvim-ufo',
-		-- cond = vim.g.started_by_firenvim == nil,
-		dependencies = 'kevinhwang91/promise-async',
-		keys = {
-			{
-				'zR',
-				function()
-					require('ufo').openAllFolds()
-				end,
-				desc = 'UfoOpenAll',
-			},
-			{
-				'zM',
-				function()
-					require('ufo').closeAllFolds()
-				end,
-				desc = 'UfoCloseAll',
-			},
-			{
-				'zr',
-				function()
-					require('ufo').openFoldsExceptKinds()
-				end,
-				desc = 'UfoOpenExcept',
-			},
-			{
-				'zm',
-				function()
-					require('ufo').closeFoldsWith()
-				end,
-				desc = 'UfoCloseWith',
-			}, -- closeAllFolds == closeFoldsWith(0)
-		},
-		config = function()
-			local handler = function(virtText, lnum, endLnum, width, truncate)
-				local newVirtText = {}
-				local suffix = ('  %d '):format(endLnum - lnum)
-				local sufWidth = vim.fn.strdisplaywidth(suffix)
-				local targetWidth = width - sufWidth
-				local curWidth = 0
-				for _, chunk in ipairs(virtText) do
-					local chunkText = chunk[1]
-					local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-					if targetWidth > curWidth + chunkWidth then
-						table.insert(newVirtText, chunk)
-					else
-						chunkText = truncate(chunkText, targetWidth - curWidth)
-						local hlGroup = chunk[2]
-						table.insert(newVirtText, { chunkText, hlGroup })
-						chunkWidth = vim.fn.strdisplaywidth(chunkText)
-						-- str width returned from truncate() may less than 2nd argument, need padding
-						if curWidth + chunkWidth < targetWidth then
-							suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
-						end
-						break
-					end
-					curWidth = curWidth + chunkWidth
-				end
-				table.insert(newVirtText, { suffix, 'MoreMsg' })
-				return newVirtText
-			end
-
-			-- If you disable this autocmd and some folds in org files won't close
-			-- This is why. TODO: see if we can make it work?
-			vim.api.nvim_create_autocmd({ 'FileType' }, {
-				pattern = { 'org' },
-				callback = function()
-					require('ufo').detach()
-				end,
-			})
-
-			require('ufo').setup {
-				provider_selector = function(bufnr, filetype, buftype)
-					return { 'lsp', 'indent' }
-				end,
-				fold_virt_text_handler = handler,
-			}
-		end,
-	},
-	{ -- WEB-DEVICONS:
-		'kyazdani42/nvim-web-devicons',
-		opts = { default = true },
-	},
-	-- LSPKIND:
-	'onsails/lspkind.nvim',
 	-- NUI:
 	'MunifTanjim/nui.nvim',
 }
