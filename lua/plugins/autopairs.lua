@@ -1,22 +1,29 @@
 local M = {
 	{
 		'windwp/nvim-autopairs',
-		opts = {
-			fast_wrap = {},
-			check_ts = true,
-			disable_filetype = { 'alpha', 'vim', 'NvimTree', 'TelescopePrompt' },
-			ts_config = {
-				lua = { 'string' },
-				javascript = { 'template_string' },
-				java = false,
-				rust = {},
-			},
-		},
-		config = function(opts)
+		config = function()
 			local autopairs = require('nvim-autopairs')
 			local Rule = require('nvim-autopairs.rule')
 
-			require('nvim-autopairs').setup(opts)
+			require('nvim-autopairs').setup {
+				fast_wrap = {
+					map = '<M-e>',
+					chars = { '{', '[', '(', '"', "'" },
+					pattern = [=[[%'%"%)%>%]%)%}%,]]=],
+					end_key = '$',
+					keys = 'qwertyuiopzxcvbnmasdfghjkl',
+					check_comma = true,
+					highlight = 'Search',
+					highlight_grey = 'Comment',
+				},
+				check_ts = true,
+				disable_filetype = { 'alpha', 'vim', 'NvimTree', 'TelescopePrompt' },
+				ts_config = {
+					javascript = { 'template_string' },
+					java = false,
+					rust = {},
+				},
+			}
 
 			local ts_conds = require('nvim-autopairs.ts-conds')
 			local cond = require('nvim-autopairs.conds')
@@ -53,19 +60,6 @@ local M = {
 						return opts.prev_char:match('.%]') ~= nil
 					end)
 					:use_key('['),
-				Rule('<', '>', { 'rust' })
-					:with_pair(cond.before_regex('%a+'))
-					:with_pair(cond.not_after_regex('%a'))
-					:with_move(ts_conds.is_ts_node { 'type_arguments', 'type_parameters' }),
-				-- don't add a pair if  the next character is =
-				-- :with_pair(cond.not_before_char("="))
-				-- don't add a pair if the next character is =
-				-- :with_pair(cond.not_after_char("="))
-				-- :with_move(function(opts)
-				--   if ((opts.prev_char:match('.%>') ~= nil) and (opts.prev_char:match('=') == nil)) then
-				--     return true
-				--   end
-				-- end)
 			}
 		end,
 	},
