@@ -1,19 +1,26 @@
-local colorscheme = 'kanagawa'
 local M = { -- colorschemeS;
 	{ 'tjdevries/colorbuddy.nvim', lazy = true },
 	{ 'rktjmp/lush.nvim', lazy = true },
 	-- 'rrethy/nvim-base16',
 	{
 		'rebelot/kanagawa.nvim',
-		cond = (colorscheme == 'kanagawa'),
+		lazy = false,
 		config = function()
 			vim.cmd('colorscheme kanagawa')
 		end,
 		priority = 1000,
 	},
 	{
+		'noorwachid/nvim-nightsky',
+		lazy = true,
+		config = function()
+			vim.cmd('colorscheme nightsky')
+		end,
+		priority = 1000,
+	},
+	{
 		'yonlu/omni.vim',
-		cond = (colorscheme == 'omni'),
+		lazy = true,
 		config = function()
 			vim.cmd('colorscheme omni')
 		end,
@@ -21,7 +28,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'Yazeed1s/oh-lucy.nvim',
-		cond = (colorscheme == 'oh-lucy'),
+		lazy = true,
 		config = function()
 			vim.cmd('colorscheme oh-lucy')
 		end,
@@ -29,7 +36,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'christianchiarulli/nvcode-color-schemes.vim',
-		cond = (colorscheme == 'nvcode'),
+		lazy = true,
 		config = function()
 			vim.cmd('colorscheme nvcode')
 			vim.cmd {
@@ -45,7 +52,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'jesseleite/nvim-noirbuddy',
-		cond = (colorscheme == 'noirbuddy'),
+		lazy = true,
 		config = function()
 			require('noirbuddy').setup {
 				preset = 'miami-nights',
@@ -55,7 +62,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'glepnir/zephyr-nvim',
-		cond = (colorscheme == 'zephyr'),
+		lazy = true,
 		config = function()
 			require('zephyr')
 		end,
@@ -64,7 +71,7 @@ local M = { -- colorschemeS;
 	-- 'ali-githb/standardized',
 	{
 		'th3whit3wolf/onebuddy',
-		cond = (colorscheme == 'onebuddy'),
+		lazy = true,
 		config = function()
 			require('colorbuddy').colorscheme('onebuddy')
 		end,
@@ -72,16 +79,15 @@ local M = { -- colorschemeS;
 	},
 	{
 		'th3whit3wolf/one-nvim',
-		cond = (colorscheme == 'one'),
+		lazy = true,
 		config = function()
-			vim.g.one_nvim_transparent_bg = true
-			vim.cmd([[ colorscheme one-nvim ]])
+			vim.g.one_nvim_transparent_bg = true, vim.cmd([[ colorscheme one-nvim ]])
 		end,
 		priority = 1000,
 	},
 	{
 		'ray-x/aurora',
-		cond = (colorscheme == 'aurora'),
+		lazy = true,
 		config = function()
 			vim.cmd([[ colorscheme aurora ]])
 			vim.api.nvim_set_hl(0, 'Normal', { guibg = 'NONE', ctermbg = 'NONE' })
@@ -91,7 +97,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'edeneast/nightfox.nvim',
-		cond = (colorscheme == 'nightfox'),
+		lazy = true,
 		config = function()
 			vim.cmd([[ colorscheme nightfox ]])
 		end,
@@ -99,7 +105,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'navarasu/onedark.nvim',
-		cond = (colorscheme == 'onedark'),
+		lazy = true,
 		config = function(style)
 			style = style or 'deep'
 			require('onedark').setup {
@@ -111,20 +117,18 @@ local M = { -- colorschemeS;
 	},
 	{
 		'rafamadriz/neon',
-		cond = (colorscheme == 'neon'),
+		lazy = true,
 		config = function(style)
 			style = style or 'dark'
 			vim.g.neon_style = style
-			vim.g.neon_transparent = true
-
-			vim.cmd([[colorscheme neon]])
+			vim.g.neon_transparent = true, vim.cmd([[colorscheme neon]])
 		end,
 		priority = 1000,
 	},
 	-- TODO
 	{
 		'yagua/nebulous.nvim',
-		cond = (colorscheme == 'nebulous'),
+		lazy = true,
 		priority = 1000,
 		config = function(style)
 			style = style or 'night'
@@ -135,14 +139,14 @@ local M = { -- colorschemeS;
 	},
 	{
 		'shatur/neovim-ayu',
-		cond = (colorscheme == 'ayu'),
+		lazy = true,
 		priority = 1000,
 		opts = { mirage = true },
 	},
 	{
 		'ramojus/mellifluous.nvim',
 		dependencies = { 'rktjmp/lush.nvim' },
-		cond = (colorscheme == 'mellifluous'),
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require('mellifluous').setup {}
@@ -151,7 +155,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'kaiuri/nvim-juliana',
-		cond = (colorscheme == 'juliana'),
+		lazy = true,
 		priority = 1000,
 		config = function()
 			vim.cmd('colorscheme juliana')
@@ -159,7 +163,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'projekt0n/github-nvim-theme',
-		cond = (colorscheme == 'github'),
+		lazy = true,
 		priority = 1000,
 		config = function(style)
 			style = style or 'dark_default'
@@ -170,7 +174,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'kdheepak/monochrome.nvim',
-		cond = (colorscheme == 'monochrome'),
+		lazy = true,
 		priority = 1000,
 		config = function()
 			vim.cmd('colorscheme monochrome')
@@ -179,7 +183,7 @@ local M = { -- colorschemeS;
 	{
 		'adisen99/codeschool.nvim',
 		dependencies = 'rktjmp/lush.nvim',
-		cond = (colorscheme == 'codeschool'),
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require('lush')(require('codeschool').setup {})
@@ -188,7 +192,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'nyoom-engineering/oxocarbon.nvim',
-		cond = (colorscheme == 'oxocarbon'),
+		lazy = true,
 		priority = 1000,
 		config = function()
 			vim.cmd.colorscheme('oxocarbon')
@@ -196,7 +200,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'kvrohit/mellow.nvim',
-		cond = (colorscheme == 'mellow'),
+		lazy = true,
 		priority = 1000,
 		config = function()
 			-- Set Options first
@@ -206,7 +210,7 @@ local M = { -- colorschemeS;
 	{
 		'kartikp10/noctis.nvim',
 		dependencies = 'rktjmp/lush.nvim',
-		cond = (colorscheme == 'noctis'),
+		lazy = true,
 		priority = 1000,
 		config = function()
 			vim.cmd.colorscheme('noctis')
@@ -214,7 +218,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'everblush/everblush.nvim',
-		cond = (colorscheme == 'everblush'),
+		lazy = true,
 		priority = 1000,
 		opts = {
 			nvim_tree = { contrast = false },
@@ -329,7 +333,7 @@ end
 -- 	require('onedark').setup {
 -- 		style = style,
 -- 		transparent = false, -- Show/hide background
--- 		term_colors = true, -- Change terminal color as per the selected theme style
+-- 		term_colors = true,, -- Change terminal color as per the selected theme style
 -- 		ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
 -- 		cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
 
@@ -354,9 +358,9 @@ end
 
 -- 		-- Plugins Config --
 -- 		diagnostics = {
--- 			darker = true, -- darker colors for diagnostic
--- 			undercurl = true, -- use undercurl instead of underline for diagnostics
--- 			background = true, -- use background color for virtual text
+-- 			darker = true,, -- darker colors for diagnostic
+-- 			undercurl = true,, -- use undercurl instead of underline for diagnostics
+-- 			background = true,, -- use background color for virtual text
 -- 		},
 -- 	}
 -- 	require('onedark').load()
@@ -369,7 +373,7 @@ end
 -- 		style = 'default'
 -- 	end
 -- 	vim.g.neon_style = style
--- 	vim.g.neon_italic_comment = true
+-- 	vim.g.neon_italic_comment = true,
 -- 	vim.g.neon_italic_keyword = false
 -- 	vim.g.neon_italic_boolean = false
 -- 	vim.g.neon_italic_function = false
@@ -392,7 +396,7 @@ end
 -- 			terminal_colors = false,
 -- 		},
 -- 		italic = {
--- 			comments = true, -- default = true
+-- 			comments = true,, -- default = true,
 -- 			keywords = false,
 -- 			functions = false,
 -- 			variables = false,
@@ -422,7 +426,7 @@ end
 
 -- M.everblush = function()
 -- 	require('everblush').setup {
--- 		nvim_tree = { contrast = true },
+-- 		nvim_tree = { contrast = true, },
 -- 	}
 -- end
 
@@ -441,11 +445,11 @@ end
 -- 		colors = {},
 -- 		comment_style = 'italic',
 -- 		dark_float = false,
--- 		dark_sidebar = true,
+-- 		dark_sidebar = true,,
 -- 		dev = false,
 -- 		function_style = 'NONE',
--- 		hide_end_of_buffer = true,
--- 		hide_inactive_statusline = true,
+-- 		hide_end_of_buffer = true,,
+-- 		hide_inactive_statusline = true,,
 -- 		keyword_style = 'italic',
 -- 		msg_area_style = 'NONE',
 -- 		overrides = function()

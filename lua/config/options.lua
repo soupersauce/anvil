@@ -24,7 +24,7 @@ vim.o.number = true
 -- vim.o.relativenumber = true
 
 -- Set minimum width for line numbers
-vim.o.numberwidth = 2
+vim.o.numberwidth = 3
 
 -- Highlight line containing the cursor
 vim.o.cursorline = true
@@ -54,7 +54,7 @@ vim.o.wildignorecase = true
 vim.o.wildoptions = 'pum'
 
 -- Stop popup menu messages
-vim.o.shortmess = 'aoOstTAIcCqFS'
+vim.o.shortmess = 'aoOsStcIFC'
 
 -- Use interactive replace
 vim.o.inccommand = 'split'
@@ -66,7 +66,7 @@ vim.o.incsearch = true
 vim.o.lazyredraw = false
 
 -- Use global status line
-vim.o.laststatus = 0
+vim.o.laststatus = 3
 
 -- Don"t show mode as it is already displayrd in status line
 vim.o.showmode = false
@@ -116,15 +116,15 @@ vim.o.cmdheight = 2
 -- Modelines
 vim.o.modeline = true
 -- Show sign column inside the number column
-vim.o.signcolumn = 'yes:2'
+vim.o.signcolumn = 'yes:1'
 -- Opens all folds by default, folding still enabled
 vim.o.foldenable = true
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
-vim.o.foldcolumn = '1'
+vim.o.foldcolumn = '2'
 vim.o.fillchars = [[vert:▕,horiz:─,eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-vim.o.statuscolumn = '%=%l%s%C'
-
+-- vim.o.statuscolumn = '%=%l%s%C'
+vim.o.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s%C"
 vim.o.conceallevel = 2
 vim.o.concealcursor = 'nc'
 
@@ -158,6 +158,7 @@ if vim.g.started_by_firenvim then
 	vim.o.cmdheight = 0
 	-- Modelines
 	vim.o.modeline = false
+	vim.o.laststatus = '0'
 	-- Show sign column inside the number column
 	vim.o.signcolumn = 'no'
 	vim.o.foldcolumn = '0'

@@ -68,7 +68,7 @@ function M.config()
 	--- @param items_number number optional number of items to generate, default = 10
 	local function mru(start, cwd, items_number, opts)
 		opts = opts or mru_opts
-		items_number = if_nil(items_number, 10)
+		items_number = if_nil(items_number, 9)
 
 		local oldfiles = {}
 		for _, v in pairs(vim.v.oldfiles) do
@@ -133,6 +133,16 @@ function M.config()
 		},
 	}
 
+	local session = {
+		type = 'group',
+		val = {
+			-- { type = 'text', val = 'Quick links', opts = { hl = 'SpecialComment', position = 'center' } },
+			{ type = 'padding', val = 1 },
+			dashboard.button('0', '  Restore Session', '<cmd>lua require("persistence").load()<CR>'),
+		},
+		position = 'center',
+	}
+
 	local section_mru = {
 		type = 'group',
 		val = {
@@ -162,8 +172,8 @@ function M.config()
 			{ type = 'text', val = 'Quick links', opts = { hl = 'SpecialComment', position = 'center' } },
 			{ type = 'padding', val = 1 },
 			dashboard.button('e', '  New file', '<cmd>ene<CR>'),
-			dashboard.button('SPC f f', '  Find file', '<cmd>FzfLua find_files<CR>'),
-			dashboard.button('SPC f g', '  Live grep', '<cmd>FzfLua live_grep<CR>'),
+			dashboard.button('f', '  Find file', '<cmd>FzfLua files<CR>'),
+			dashboard.button('g', '  Live grep', '<cmd>FzfLua live_grep<CR>'),
 			dashboard.button(
 				'c',
 				'  Configuration',
@@ -179,6 +189,8 @@ function M.config()
 		layout = {
 			{ type = 'padding', val = 2 },
 			default_header,
+			{ type = 'padding', val = 2 },
+			session,
 			{ type = 'padding', val = 2 },
 			section_mru,
 			{ type = 'padding', val = 2 },
