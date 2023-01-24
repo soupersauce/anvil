@@ -11,19 +11,28 @@ local M = {
 	},
 	{
 		'glacambre/firenvim',
+		event = 'BufEnter',
+		after = 'folke/noice.nvim',
 		build = function()
 			vim.fn['firenvim#install'](0)
 		end,
 		config = function()
-			vim.cmd([[
-        let g:firenvim_config = {
-            \ 'globalSettings': {
-                \ 'ignoreKeys': {
-                    \ 'all': ['<C-,'],
-                \ }
-            \ }
-        \ }
-    ]])
+			vim.g.firenvim_config = {
+				globalSettings = {
+					['.*'] = {
+						cmdline = 'neovim',
+					},
+				},
+				localSettings = {
+					['.*'] = {
+						cmdline = 'neovim',
+						content = 'text',
+						priority = 0,
+						selector = 'textarea',
+						-- takeover = 'always',
+					},
+				},
+			}
 		end,
 	},
 

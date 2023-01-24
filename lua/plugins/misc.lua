@@ -9,7 +9,7 @@ local M = { -- COLOR-PICKER
 	},
 	{ -- NVIM-RECORDER
 		'chrisgrieser/nvim-recorder',
-    cond = vim.g.started_by_firenvim == nil,
+		cond = vim.g.started_by_firenvim == nil,
 		config = function()
 			require('recorder').setup {
 				slots = { 'a', 'b', 'c' },
@@ -36,7 +36,7 @@ local M = { -- COLOR-PICKER
 	'ralismark/vim-recover',
 	{ -- toggleterm
 		'akinsho/toggleterm.nvim',
-    cond = vim.g.started_by_firenvim == nil,
+		cond = vim.g.started_by_firenvim == nil,
 		keys = { '<C-\\>' },
 		opts = {
 			open_mapping = [[<c-\>]],
@@ -52,7 +52,7 @@ local M = { -- COLOR-PICKER
 	},
 	{
 		'cvigilv/esqueleto.nvim',
-    cond = vim.g.started_by_firenvim == nil,
+		cond = vim.g.started_by_firenvim == nil,
 		opts = {
 			directory = '~/.config/nvim/templates',
 			patterns = { 'org' },
@@ -71,12 +71,6 @@ local M = { -- COLOR-PICKER
 			},
 		},
 	},
-	-- { -- vim-skeleton
-	--   'noahfrederick/vim-skeleton',
-	--   config = function()
-	--     vim.cmd([[let g:skeleton_template_dir = "~/.config/nvim/templates"]])
-	--   end,
-	-- },
 	{ -- toggler
 		'nat-418/boole.nvim',
 		keys = {
@@ -91,17 +85,18 @@ local M = { -- COLOR-PICKER
 			additions = {
 				{ 'increment', 'decrement' },
 				{ 'previous', 'next' },
+				{ 'up', 'next' },
 			},
 		},
 	},
 	{ --Sniprun
 		'michaelb/sniprun',
-    cond = vim.g.started_by_firenvim == nil,
+		cond = vim.g.started_by_firenvim == nil,
 		build = 'bash ./install.sh',
 	},
 	{ -- Lastplace: remember last place in file
 		'ethanholz/nvim-lastplace',
-    cond = vim.g.started_by_firenvim == nil,
+		cond = vim.g.started_by_firenvim == nil,
 		opts = {
 			lastplace_ignore_buftype = { 'quickfix', 'nofile', 'help', 'Trouble', 'terminal', 'nvimtree' },
 			lastplace_ignore_filetype = { 'gitcommit', 'gitrebase', 'svn', 'hgcommit' },
@@ -110,6 +105,7 @@ local M = { -- COLOR-PICKER
 	},
 	{ -- scrollbar
 		'petertriho/nvim-scrollbar',
+		cond = vim.g.started_by_firenvim == nil,
 		opts = {
 			handlers = {
 				diagnostic = true,
@@ -123,49 +119,11 @@ local M = { -- COLOR-PICKER
 		config = true,
 	},
 	{
-		'EricDriussi/remember-me.nvim',
-    cond = vim.g.started_by_firenvim == nil,
+		'folke/persistence.nvim',
+		cond = vim.g.started_by_firenvim == nil,
+		event = 'BufReadPre', -- this will only start session saving when an actual file was opened
+		-- module = "persistence",
 		config = true,
 	},
-	{
-		'gbprod/yanky.nvim',
-		opts = {
-			highlight = {
-				timer = 200,
-			},
-			preserve_cursor_position = {
-				enabled = true,
-			},
-			ring = {
-				cancel_event = 'move',
-			},
-		},
-
-		config = function(opts)
-			require('yanky').setup(opts)
-		end,
-		keys = {
-			{ 'y', '<Plug>(YankyYank)', desc = 'YankeeYank' },
-			{ 'p', '<Plug>(YankyPutAfter)', desc = 'YankyPutAfter' },
-			{ 'P', '<Plug>(YankyPutBefore)', desc = 'YankyPutBefore' },
-			{ 'gp', '<Plug>(YankyGPutAfter)', desc = 'YankyGPutAfter' },
-			{ 'gP', '<Plug>(YankyGPutBefore)', desc = 'YankyGPutBefore' },
-			{ '<c-j>', '<Plug>(YankyCycleForward)', desc = 'YankyCycleForward' },
-			{ '<c-k>', '<Plug>(YankyCycleBackward)', desc = 'YankyCycleBackward' },
-			{ ']p', '<Plug>(YankyPutIndentAfterLinewise)', desc = 'YankyPutIndentAfterLinewise' },
-			{ '[p', '<Plug>(YankyPutIndentBeforeLinewise)', desc = 'YankyPutIndentBeforeLinewise' },
-			{ ']P', '<Plug>(YankyPutIndentAfterLinewise)', desc = 'YankyPutIndentAfterLinewise' },
-			{ '[P', '<Plug>(YankyPutIndentBeforeLinewise)', desc = 'YankyPutIndentBeforeLinewise' },
-
-			{ '>p', '<Plug>(YankyPutIndentAfterShiftRight)', desc = 'YankyPutIndentAfterShiftRight' },
-			{ '<p', '<Plug>(YankyPutIndentAfterShiftLeft)', desc = 'YankyPutIndentAfterShiftLeft' },
-			{ '>P', '<Plug>(YankyPutIndentBeforeShiftRight)', desc = 'YankyPutIndentBeforeShiftRight' },
-			{ '<P', '<Plug>(YankyPutIndentBeforeShiftLeft)', desc = 'YankyPutIndentBeforeShiftLeft' },
-
-			{ '=p', '<Plug>(YankyPutAfterFilter)', desc = 'YankyPutAfterFilter' },
-			{ '=P', '<Plug>(YankyPutBeforeFilter)', desc = 'YankyPutBeforeFilter' },
-		},
-	},
 }
-
 return M

@@ -9,7 +9,6 @@ function M.config()
 	local dashboard = require('alpha.themes.dashboard')
 	local cdir = vim.fn.getcwd()
 	local if_nil = vim.F.if_nil
-	local fzf = require('fzf-lua')
 	local nwd = require('nvim-web-devicons')
 	local plenary_path = require('plenary.path')
 

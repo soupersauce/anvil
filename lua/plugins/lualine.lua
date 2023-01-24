@@ -159,10 +159,34 @@ function M.config()
 
 		ins_left {
 			function()
-				local icon = icon_by_ft()
-				return icon
+				return icon_by_ft()
 			end,
-			color = modecolors(),
+			color = function()
+				-- auto change color according to neovims mode
+				local mode_color = {
+					n = colors.red,
+					i = colors.green,
+					v = colors.blue,
+					[''] = colors.blue,
+					V = colors.blue,
+					c = colors.magenta,
+					no = colors.red,
+					s = colors.orange,
+					S = colors.orange,
+					[''] = colors.orange,
+					ic = colors.yellow,
+					R = colors.violet,
+					Rv = colors.violet,
+					cv = colors.red,
+					ce = colors.red,
+					r = colors.cyan,
+					rm = colors.cyan,
+					['r?'] = colors.cyan,
+					['!'] = colors.red,
+					t = colors.red,
+				}
+				return { fg = mode_color[vim.fn.mode()] }
+			end,
 			padding = { left = 0, right = 1 }, -- We don't need space before this
 		}
 
@@ -176,10 +200,10 @@ function M.config()
 
 		ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 
-		ins_left {
-			custom_fname,
-			color = { fg = colors.violet, gui = 'bold' },
-		}
+		-- ins_left {
+		-- 	custom_fname,
+		-- 	color = { fg = colors.violet, gui = 'bold' },
+		-- }
 
 		ins_left {
 			function()
@@ -280,7 +304,32 @@ function M.config()
 			function()
 				return icon_by_ft()
 			end,
-			color = modecolors(),
+			color = function()
+				-- auto change color according to neovims mode
+				local mode_color = {
+					n = colors.red,
+					i = colors.green,
+					v = colors.blue,
+					[''] = colors.blue,
+					V = colors.blue,
+					c = colors.magenta,
+					no = colors.red,
+					s = colors.orange,
+					S = colors.orange,
+					[''] = colors.orange,
+					ic = colors.yellow,
+					R = colors.violet,
+					Rv = colors.violet,
+					cv = colors.red,
+					ce = colors.red,
+					r = colors.cyan,
+					rm = colors.cyan,
+					['r?'] = colors.cyan,
+					['!'] = colors.red,
+					t = colors.red,
+				}
+				return { fg = mode_color[vim.fn.mode()] }
+			end,
 			padding = { left = 1 },
 		}
 

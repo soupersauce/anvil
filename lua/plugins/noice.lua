@@ -1,7 +1,7 @@
 local M = {
 	'folke/noice.nvim',
 	enabled = true,
-	cond = vim.g.started_by_firenvim == nil,
+	-- cond = vim.g.started_by_firenvim == nil,
 	dependencies = {
 		'MunifTanjim/nui.nvim',
 		'rcarriga/nvim-notify',
@@ -13,9 +13,9 @@ local function suggested()
 		cmdline = {
 			view = 'cmdline', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
 		},
-		messages = {
-			view = 'cmdline',
-		},
+		-- messages = {
+		-- 	view = 'mini',
+		-- },
 		lsp = {
 			progress = {
 				enabled = false,
@@ -27,11 +27,110 @@ local function suggested()
 				['cmp.entry.get_documentation'] = true,
 			},
 		},
+		routes = {
+			{
+				filter = {
+					kind = 'emsg',
+					find = 'E486',
+				},
+				opts = { skip = true },
+			},
+			{
+				filter = {
+					event = 'msg_show',
+					kind = '',
+					find = '',
+				},
+				opts = {},
+			},
+		},
+		-- {
+		-- 	filter = {
+		-- 		event = 'msg_show',
+		-- 		kind = '',
+		-- 		find = '',
+		-- 	},
+		-- 	opts = { skip = true },
+		-- },
+		-- {
+		-- 	filter = {
+		-- 		event = 'msg_show',
+		-- 		kind = '',
+		-- 		find = 'written',
+		-- 	},
+		-- 	opts = { skip = true },
+		-- },
+		-- },
 		-- you can enable a preset for easier configuration
 		presets = {
 			bottom_search = true, -- use a classic bottom cmdline for search
 			command_palette = false, -- position the cmdline and popupmenu together
-			long_message_to_split = true, -- long messages will be sent to a split
+			-- long_message_to_split = true, -- long messages will be sent to a split
+			inc_rename = false, -- enables an input dialog for inc-rename.nvim
+			lsp_doc_border = false, -- add a border to hover docs and signature help
+		},
+	}
+end
+
+local function firenvim()
+	require('noice').setup {
+		cmdline = {
+			view = 'cmdline_popup', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+		},
+		-- messages = {
+		-- 	view = 'mini',
+		-- },
+		lsp = {
+			progress = {
+				enabled = false,
+			},
+			-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+			override = {
+				['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+				['vim.lsp.util.stylize_markdown'] = true,
+				['cmp.entry.get_documentation'] = true,
+			},
+		},
+		routes = {
+			-- {
+			-- 	filter = {
+			-- 		kind = 'emsg',
+			-- 		find = 'E486',
+			-- 	},
+			-- 	opts = { skip = true },
+			-- },
+			-- {
+			-- 	filter = {
+			-- 		event = 'msg_show',
+			-- 		kind = 'emsg',
+			-- 		find = 'E486',
+			-- 	},
+			-- 	opts = { skip = true },
+			-- },
+			-- {
+			-- 	view = 'notify',
+			-- 	filter = {
+			-- 		event = 'msg_show',
+			-- 		kind = '',
+			-- 		find = '',
+			-- 	},
+			-- 	opts = { skip = true },
+			-- },
+
+			-- {
+			-- 	filter = {
+			-- 		event = 'msg_show',
+			-- 		kind = '',
+			-- 		find = 'written',
+			-- 	},
+			-- 	opts = { skip = true },
+			-- },
+		},
+		-- you can enable a preset for easier configuration
+		presets = {
+			bottom_search = false, -- use a classic bottom cmdline for search
+			command_palette = true, -- position the cmdline and popupmenu together
+			-- long_message_to_split = true, -- long messages will be sent to a split
 			inc_rename = false, -- enables an input dialog for inc-rename.nvim
 			lsp_doc_border = false, -- add a border to hover docs and signature help
 		},
@@ -241,7 +340,11 @@ local function defaults()
 end
 
 function M.config()
-	suggested()
+	if vim.g.started_by_firenvim then
+		firenvim()
+	else
+		suggested()
+	end
 end
 
 return M
