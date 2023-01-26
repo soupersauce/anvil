@@ -32,7 +32,7 @@ local M = {
 	{
 		'EtiamNullam/deferred-clipboard.nvim',
 		opts = {
-			lazy = true,
+			lazy = false,
 			fallback = 'unnamed',
 		},
 	},
