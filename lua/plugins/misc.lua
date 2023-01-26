@@ -1,5 +1,5 @@
-local M = { -- COLOR-PICKER
-	{ -- NVIM-RECORDER
+local M = {
+	{ -- nvim-recorder
 		'chrisgrieser/nvim-recorder',
 		cond = vim.g.started_by_firenvim == nil,
 		config = function()
@@ -35,7 +35,7 @@ local M = { -- COLOR-PICKER
 		'kylechui/nvim-surround',
 		config = true,
 	},
-	{
+	{ -- ssr
 		'cshuaimin/ssr.nvim',
 		keys = {
 			{

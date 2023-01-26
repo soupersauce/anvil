@@ -1,5 +1,5 @@
-local M = { -- gitsigns
-	{ -- NEOGIT:
+local M = {
+	{ -- neogit
 		'TimUntersberger/neogit',
 		cmd = 'Neogit',
 		cond = vim.g.started_by_firenvim == nil,
@@ -38,7 +38,7 @@ local M = { -- gitsigns
 			},
 		},
 	},
-	{ -- GITSIGNS:
+	{ -- gitsigns
 		'lewis6991/gitsigns.nvim',
 		cond = vim.g.started_by_firenvim == nil,
 		opts = {
@@ -87,7 +87,7 @@ local M = { -- gitsigns
 			},
 		},
 	},
-	{ -- DIFFVIEW:
+	{ -- diffview
 		'sindrets/diffview.nvim',
 		cond = vim.g.started_by_firenvim == nil,
 		config = function(opts)

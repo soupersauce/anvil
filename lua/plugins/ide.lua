@@ -1,7 +1,7 @@
 local M = {
-	-- LSPKIND:
+	-- lspkind
 	'onsails/lspkind.nvim',
-	{ -- BLANKLINE:
+	{ -- blankline
 		'lukas-reineke/indent-blankline.nvim',
 		init = function()
 			vim.opt.list = true
@@ -37,7 +37,7 @@ local M = {
 			show_current_context_start = true,
 		},
 	},
-	{ -- UFO:
+	{ -- ufo
 		'kevinhwang91/nvim-ufo',
 		-- cond = vim.g.started_by_firenvim == nil,
 		dependencies = 'kevinhwang91/promise-async',
@@ -117,11 +117,11 @@ local M = {
 			}
 		end,
 	},
-	{ -- WEB-DEVICONS:
+	{ -- web-devicons:
 		'kyazdani42/nvim-web-devicons',
 		opts = { default = true },
 	},
-	{
+	{ -- comment-nvim
 		'numToStr/Comment.nvim',
 		cond = vim.g.started_by_firenvim == nil,
 		dependencies = 'joosepalviste/nvim-ts-context-commentstring',
@@ -134,7 +134,7 @@ local M = {
 			ignore = '^$',
 		},
 	},
-	{
+	{ -- autopairs
 		'windwp/nvim-autopairs',
 		config = function()
 			local autopairs = require('nvim-autopairs')

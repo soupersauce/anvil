@@ -1,5 +1,5 @@
 local M = {
-	{
+	{ -- urlview
 		'axieax/urlview.nvim',
 		cmd = 'UrlView',
 		keys = {
@@ -11,7 +11,7 @@ local M = {
 			sorted = 'false',
 		},
 	},
-	{
+	{ -- which-key
 		'folke/which-key.nvim',
 		cond = vim.g.started_by_firenvim == nil,
 		opts = {
@@ -38,7 +38,7 @@ local M = {
 			},
 		},
 	},
-	{ -- HLSLENS:
+	{ -- hlslens
 		'kevinhwang91/nvim-hlslens',
 		config = function()
 			local vim = vim
@@ -85,15 +85,15 @@ local M = {
 			},
 		},
 	},
-	{
+	{ -- marks
 		'chentoast/marks.nvim',
 		config = true,
 	},
-	{ -- VARIOUS_TEXTOBJS:
+	{ -- various_textobjs
 		'chrisgrieser/nvim-various-textobjs',
 		opts = { useDefaultKeymaps = true },
 	},
-	{
+	{ -- tridactyl
 		'tridactyl/vim-tridactyl', -- for tridactyl firefox plugin
 		event = 'bufReadPre tridactylrc',
 		config = function()

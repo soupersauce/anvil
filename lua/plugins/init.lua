@@ -4,7 +4,7 @@ local M = {
 	'nvim-lua/plenary.nvim',
 	'folke/lazy.nvim',
 
-	{
+	{ -- firenvim
 		'glacambre/firenvim',
 		event = 'BufEnter',
 		build = function()
@@ -29,14 +29,14 @@ local M = {
 			}
 		end,
 	},
-	{
+	{ -- deferred clipboard
 		'EtiamNullam/deferred-clipboard.nvim',
 		opts = {
 			lazy = false,
 			fallback = 'unnamed',
 		},
 	},
-	{
+	{ -- miniyank
 		'bfredl/nvim-miniyank',
 		keys = {
 			{ 'p', '<Plug>(miniyank-autoput)', desc = 'Miniyank put' },
@@ -45,7 +45,7 @@ local M = {
 			{ '<C-k>', '<Plug>(miniyank-cycleback)', desc = 'Miniyank cycleback' },
 		},
 	},
-	{
+	{ -- bufdelete
 		'famiu/bufdelete.nvim',
 		keys = {
 			{

@@ -1,5 +1,5 @@
-local M = { -- CMP
-	{
+local M = {
+	{ -- cmp
 		'hrsh7th/nvim-cmp',
 		event = 'InsertEnter',
 		config = function()
@@ -187,7 +187,7 @@ local M = { -- CMP
 			})
 		end,
 	},
-	{
+	{ -- cmp-dictionary
 		'uga-rosa/cmp-dictionary',
 		opts = {
 			dic = {
@@ -197,14 +197,14 @@ local M = { -- CMP
 			max_items = 10,
 		},
 	},
-	{
+	{ -- cmp-plugins
 		'KadoBOT/cmp-plugins',
 		opts = {
 			files = { '.*\\.lua' }, -- default
 			-- files = { "plugins.lua", "some_path/plugins/" } -
 		},
 	},
-	{
+	{ -- cmp-git
 		'petertriho/cmp-git',
 		config = true,
 	},
@@ -221,7 +221,7 @@ local M = { -- CMP
 	'hrsh7th/cmp-path',
 	-- 'rcarriga/cmp-dap',
 	'rafamadriz/friendly-snippets',
-	{
+	{ -- luasnip
 		'L3MON4D3/LuaSnip',
 		config = function()
 			local augroup = vim.api.nvim_create_augroup
