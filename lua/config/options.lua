@@ -38,7 +38,7 @@ vim.o.colorcolumn = 80
 vim.o.mouse = 'a'
 
 -- Use English dictionary
-vim.o.spell = true
+vim.o.spell = false
 vim.o.spelllang = 'en_us'
 
 -- Hide buffers with unsaved changes without being prompted
@@ -121,7 +121,7 @@ vim.o.signcolumn = 'yes:1'
 vim.o.foldenable = true
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
-vim.o.foldcolumn = '2'
+vim.o.foldcolumn = '1'
 vim.o.fillchars = [[vert:▕,horiz:─,eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 -- vim.o.statuscolumn = '%=%l%s%C'
 vim.o.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s%C"

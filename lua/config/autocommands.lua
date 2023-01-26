@@ -34,6 +34,14 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 	end,
 })
 
+-- set spell for certain filetypes
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+	pattern = { 'markdown', 'org', 'tex', 'text' },
+	callback = function()
+		vim.wo.spell = true
+	end,
+})
+
 -- Fix conceallevel for json & help files
 vim.api.nvim_create_autocmd({ 'FileType' }, {
 	pattern = { 'json', 'jsonc' },
@@ -43,14 +51,14 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 	end,
 })
 -- Highlight yanked text
--- local highlight_yank = augroup('HighlightYank', { clear = true })
--- autocmd('TextYankPost', {
--- 	desc = 'highlight yanked text',
--- 	callback = function()
--- 		vim.highlight.on_yank { higroup = 'IncSearch', timeout = 50 }
--- 	end,
--- 	group = highlight_yank,
--- })
+local highlight_yank = augroup('HighlightYank', { clear = true })
+autocmd('TextYankPost', {
+	desc = 'highlight yanked text',
+	callback = function()
+		vim.highlight.on_yank { higroup = 'IncSearch', timeout = 50 }
+	end,
+	group = highlight_yank,
+})
 -- TODO: This should replace lastplace but I need a way to ignore certain buffers
 -- vim.api.nvim_create_autocmd('BufReadPost', {
 --   callback = function()
@@ -60,10 +68,4 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 --       pcall(vim.api.nvim_win_set_cursor, 0, mark)
 --     end
 --   end,
--- })
--- autocmd('BufWritePost', {
--- 	pattern = '*/plugins/*.lua',
--- 	callback = function()
--- 		vim.cmd([[source ~/.config/nvim/lua/plugins/init.lua | PackerCompile<CR><CR>]])
--- 	end,
 -- })
