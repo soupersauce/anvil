@@ -7,7 +7,6 @@ local M = {
 	{
 		'glacambre/firenvim',
 		event = 'BufEnter',
-		after = 'folke/noice.nvim',
 		build = function()
 			vim.fn['firenvim#install'](0)
 		end,
@@ -24,7 +23,7 @@ local M = {
 						content = 'text',
 						priority = 0,
 						selector = 'textarea',
-						-- takeover = 'always',
+						takeover = 'never',
 					},
 				},
 			}
@@ -34,7 +33,7 @@ local M = {
 		'EtiamNullam/deferred-clipboard.nvim',
 		opts = {
 			lazy = true,
-			fallback = 'unnamedplus',
+			fallback = 'unnamed',
 		},
 	},
 	{

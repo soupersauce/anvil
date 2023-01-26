@@ -132,9 +132,5 @@ function M.setup(options)
 		on_attach = options.on_attach,
 	}
 end
-M.has_formatter = function(ft)
-	local sources = require('null-ls.sources')
-	local available = sources.get_available(ft, 'NULL_LS_FORMATTING')
-	return #available > 0
-end
+
 return M

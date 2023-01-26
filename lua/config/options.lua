@@ -138,6 +138,8 @@ if fn.has('termguicolors') then
 	vim.o.termguicolors = true
 end
 
+vim.o.clipboard = 'unnamed'
+
 -- Undo file settings
 if fn.has('persistent_undo') then
 	vim.o.undodir = fn.stdpath('state') .. '/undodir/'

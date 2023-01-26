@@ -33,7 +33,7 @@ local M = {
 	{ -- NOTIFY:
 		'rcarriga/nvim-notify',
 		cond = vim.g.started_by_firenvim == nil,
-		config = {
+		opts = {
 			render = 'compact',
 		},
 	},
