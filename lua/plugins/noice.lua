@@ -4,7 +4,7 @@ local M = {
 	-- cond = vim.g.started_by_firenvim == nil,
 	dependencies = {
 		'MunifTanjim/nui.nvim',
-		'rcarriga/nvim-notify',
+		-- 'rcarriga/nvim-notify',
 	},
 }
 
@@ -28,21 +28,21 @@ local function suggested()
 			},
 		},
 		routes = {
-			{
-				filter = {
-					kind = 'emsg',
-					find = 'E486',
-				},
-				opts = { skip = true },
-			},
-			{
-				filter = {
-					event = 'msg_show',
-					kind = '',
-					find = '',
-				},
-				opts = {},
-			},
+			-- {
+			-- 	filter = {
+			-- 		kind = 'emsg',
+			-- 		find = 'E486',
+			-- 	},
+			-- 	opts = { skip = true },
+			-- },
+			-- {
+			-- 	filter = {
+			-- 		event = 'msg_show',
+			-- 		kind = '',
+			-- 		find = '',
+			-- 	},
+			-- 	opts = {},
+			-- },
 		},
 		-- {
 		-- 	filter = {

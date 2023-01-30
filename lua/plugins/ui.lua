@@ -30,13 +30,13 @@ local M = {
 		'xiyaowong/nvim-transparent',
 		config = true,
 	},
-	{ -- NOTIFY:
-		'rcarriga/nvim-notify',
-		cond = vim.g.started_by_firenvim == nil,
-		opts = {
-			render = 'compact',
-		},
-	},
+	-- { -- NOTIFY:
+	-- 	'rcarriga/nvim-notify',
+	-- 	cond = vim.g.started_by_firenvim == nil,
+	-- 	opts = {
+	-- 		render = 'compact',
+	-- 	},
+	-- },
 	-- floating winbar
 	{
 		'b0o/incline.nvim',

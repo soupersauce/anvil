@@ -4,7 +4,7 @@ local M = { -- colorschemeS;
 	-- 'rrethy/nvim-base16',
 	{
 		'rebelot/kanagawa.nvim',
-		lazy = false,
+		lazy = true,
 		config = function()
 			vim.cmd('colorscheme kanagawa')
 		end,
@@ -192,7 +192,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'nyoom-engineering/oxocarbon.nvim',
-		lazy = true,
+		lazy = false,
 		priority = 1000,
 		config = function()
 			vim.cmd.colorscheme('oxocarbon')

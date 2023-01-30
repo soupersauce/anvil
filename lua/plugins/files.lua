@@ -34,6 +34,9 @@ local M = {
 		dependencies = {
 			'kyazdani42/nvim-web-devicons',
 		},
+		keys = {
+			{ '<C-n>', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle NvimTree', mode = 'n' },
+		},
 		cond = vim.g.started_by_firenvim == nil,
 		opts = {
 			filters = {

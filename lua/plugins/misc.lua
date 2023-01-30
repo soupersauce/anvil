@@ -22,6 +22,7 @@ local M = {
 	'tpope/vim-fugitive',
 	'tpope/vim-eunuch',
 	'tpope/vim-vinegar',
+	'tpope/vim-abolish',
 
 	{ -- toggleterm
 		'akinsho/toggleterm.nvim',

@@ -29,12 +29,9 @@ local M = {
 			}
 		end,
 	},
-	{ -- deferred clipboard
-		'EtiamNullam/deferred-clipboard.nvim',
-		opts = {
-			lazy = false,
-			fallback = 'unnamed',
-		},
+	{ -- neoclip telescope yank history
+		'AckslD/nvim-neoclip.lua',
+		config = true,
 	},
 	{ -- miniyank
 		'bfredl/nvim-miniyank',

@@ -15,6 +15,21 @@ set_keymap('n', ',y', '"+y', options)
 -- Yank current line to system clipboard
 set_keymap('n', ',yy', '"+yy', options)
 
+-- blackhole delete
+set_keymap('v', ',d', '"_d', options)
+set_keymap('n', ',d', '"_d', options)
+-- blackhole delete current line
+set_keymap('n', ',dd', '"_dd', options)
+
+-- blackhole delete
+set_keymap('v', ',c', '"_c', options)
+set_keymap('n', ',c', '"_c', options)
+-- blackhole celete current line
+set_keymap('n', ',cc', '"_cc', options)
+
+-- blackhole delete
+set_keymap('n', ',x', '"_x', options)
+
 -- Trim trailing whitespace
 set_keymap('n', ',s', ':%s/\\s\\+$//e<CR>')
 -- Delete current buffer, (keep window splits)
@@ -47,7 +62,7 @@ set_keymap('n', ']B', ':bl<CR>', options)
 
 -- Write changes made to open files
 set_keymap('n', ',w', ':w<CR>', { noremap = true })
-set_keymap('n', '<leader>w', ':wa<CR>', { noremap = true })
+set_keymap('n', ',wa', ':wa<CR>', { noremap = true })
 
 -- Use alt modifier for scrolling buffer
 set_keymap('', '<A-j>', '<C-e>', { noremap = true })
@@ -77,11 +92,3 @@ set_keymap('n', 'N', 'Nzz', options)
 -- Keep visual selected after indent
 set_keymap('v', '<', '<gv', { noremap = true })
 set_keymap('v', '>', '>gv', { noremap = true })
-
--- Use <Leader><Esc> to exit insert mode in terminal buffers
--- set_keymap('t', '<Leader><C-[>', '<C-\\><C-n>', { noremap = true, silent = true })
-
--- For nvim-tree
-set_keymap('n', '<C-n>', '<cmd>NvimTreeToggle<CR>', { noremap = true, desc = 'Toggle NvimTree' })
-
-set_keymap('n', '<leader>ws', '<cmd>w<CR><cmd>source %<CR>', { noremap = true })

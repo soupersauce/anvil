@@ -54,7 +54,7 @@ vim.o.wildignorecase = true
 vim.o.wildoptions = 'pum'
 
 -- Stop popup menu messages
-vim.o.shortmess = 'aoOsStcIFC'
+vim.o.shortmess = 'aoOstcIFC'
 
 -- Use interactive replace
 vim.o.inccommand = 'split'
@@ -135,45 +135,45 @@ vim.o.splitright = true
 vim.o.splitkeep = 'screen'
 -- Enable true colors if supported
 if fn.has('termguicolors') then
-	vim.o.termguicolors = true
+  vim.o.termguicolors = true
 end
 
 vim.o.clipboard = 'unnamed'
 
 -- Undo file settings
 if fn.has('persistent_undo') then
-	vim.o.undodir = fn.stdpath('state') .. '/undodir/'
-	vim.o.undofile = true
+  vim.o.undodir = fn.stdpath('state') .. '/undodir/'
+  vim.o.undofile = true
 end
 
 -- Disable some features when running as Root
 if fn.exists('$SUDO_USER') ~= 0 then
-	vim.o.swapfile = false
-	vim.o.backup = false
-	vim.o.writebackup = false
-	vim.o.undofile = false
-	vim.o.viminfo = nil
-	vim.o.foldenable = false
+  vim.o.swapfile = false
+  vim.o.backup = false
+  vim.o.writebackup = false
+  vim.o.undofile = false
+  vim.o.viminfo = nil
+  vim.o.foldenable = false
 end
 
 if vim.g.started_by_firenvim then
-	vim.o.cmdheight = 0
-	-- Modelines
-	vim.o.modeline = false
-	vim.o.laststatus = '0'
-	-- Show sign column inside the number column
-	vim.o.signcolumn = 'no'
-	vim.o.foldcolumn = '0'
+  vim.o.cmdheight = 0
+  -- Modelines
+  vim.o.modeline = false
+  vim.o.laststatus = '0'
+  -- Show sign column inside the number column
+  vim.o.signcolumn = 'no'
+  vim.o.foldcolumn = '0'
 end
 
 -- Use ripgrep as the grep program, if available
 if fn.executable('rg') == 1 then
-	vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
+  vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 end
 
 -- Set zsh as default shell, if available
 if fn.executable('zsh') == 1 then
-	vim.o.shell = 'zsh'
+  vim.o.shell = 'zsh'
 end
 
 vim.o.foldoptions = 'nodigits'

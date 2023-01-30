@@ -274,7 +274,7 @@ local M = { -- LSP: integration
 			safe_output = true,
 			highlight = true,
 			separator = ' » ',
-			depth = 3,
+			depth = 8,
 			depth_limit_indicator = '',
 		},
 	},
