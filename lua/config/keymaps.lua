@@ -10,6 +10,8 @@ set_keymap('n', '<C-j>', '<C-d>', { noremap = true })
 
 -- Paste from & copy to system clipboard
 set_keymap('', ',p', '"+p', options)
+set_keymap('', ',P', 'O<esc>"+pj', options)
+
 set_keymap('v', ',y', '"+y', options)
 set_keymap('n', ',y', '"+y', options)
 -- Yank current line to system clipboard
