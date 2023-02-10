@@ -210,7 +210,7 @@ local M = { -- colorschemeS;
 	{
 		'kartikp10/noctis.nvim',
 		dependencies = 'rktjmp/lush.nvim',
-		lazy = true,
+		lazy = false,
 		priority = 1000,
 		config = function()
 			vim.cmd.colorscheme('noctis')
