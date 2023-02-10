@@ -32,7 +32,9 @@ function M.setup(options)
 		diag.chktex,
 		diag.ansiblelint,
 		diag.checkmake,
-		diag.codespell,
+		diag.codespell.with {
+			extra_args = { '-I', vim.fn.expand('~/.config/codespellignore') },
+		},
 		diag.commitlint,
 		diag.curlylint,
 		diag.gitlint,
