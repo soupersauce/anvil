@@ -4,7 +4,7 @@ local M = { -- TREESITTER; integration
 		'bennypowers/nvim-regexplainer',
 		config = true,
 	},
-	{
+	{ -- TREESITTER
 		'nvim-treesitter/nvim-treesitter',
 		build = ':TSUpdate',
 		config = function()
@@ -128,7 +128,7 @@ local M = { -- TREESITTER; integration
 	'joosepalviste/nvim-ts-context-commentstring',
 	{ url = 'https://gitlab.com/HiPhish/nvim-ts-rainbow2' },
 	'nvim-treesitter/nvim-treesitter-textobjects',
-	{
+	{ -- TODO COMMENTS
 		'folke/todo-comments.nvim',
 		opts = {
 			highlight = {
@@ -140,17 +140,16 @@ local M = { -- TREESITTER; integration
 	'andymass/vim-matchup',
 	'nvim-treesitter/playground',
 	'nvim-treesitter/nvim-treesitter-context',
-	-- TODO:CONFIGURE:
-	{
+	{ -- syntax-tree-surfer
 		'ziontee113/syntax-tree-surfer',
 		config = true,
 	},
-	{
+	{ -- twilight
 		'folke/twilight.nvim',
 		config = true,
 	},
 	'mizlan/iswap.nvim',
-	{
+	{ -- REFACTORING
 		'ThePrimeagen/refactoring.nvim',
 		config = true,
 	},

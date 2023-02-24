@@ -30,7 +30,7 @@ local M = {
 		'xiyaowong/nvim-transparent',
 		config = true,
 	},
-	{
+	{ -- barbecue
 		'utilyre/barbecue.nvim',
 		name = 'barbecue',
 		version = '*',
@@ -42,7 +42,7 @@ local M = {
 			-- configurations go here
 		},
 	},
-	{
+	{ -- STATUSCOL
 		'luukvbaal/statuscol.nvim',
 		config = true,
 		opts = {
@@ -53,7 +53,7 @@ local M = {
 			relculright = true,
 		},
 	},
-	{
+	{ -- WINDOWS
 		'anuvyklack/windows.nvim',
 		cond = vim.g.started_by_firenvim == nil,
 		event = 'WinNew',

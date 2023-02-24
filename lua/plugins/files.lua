@@ -1,11 +1,11 @@
 local M = {
 	'mong8se/actually.nvim',
 	'ralismark/vim-recover',
-	{
+	{ -- OIL
 		'stevearc/oil.nvim',
 		config = true,
 	},
-	{
+	{ -- esqueleto
 		'cvigilv/esqueleto.nvim',
 		cond = vim.g.started_by_firenvim == nil,
 		opts = {
@@ -22,14 +22,14 @@ local M = {
 			lastplace_open_folds = true,
 		},
 	},
-	{
+	{ -- persistence
 		'folke/persistence.nvim',
 		cond = vim.g.started_by_firenvim == nil,
 		event = 'BufReadPre', -- this will only start session saving when an actual file was opened
 		-- module = "persistence",
 		config = true,
 	},
-	{
+	{ -- nvim-tree
 		'nvim-tree/nvim-tree.lua',
 		dependencies = {
 			'nvim-tree/nvim-web-devicons',
@@ -88,7 +88,7 @@ local M = {
 			},
 		},
 	},
-	{
+	{ -- lsp-file-operations
 		'antosha417/nvim-lsp-file-operations',
 		cmd = 'NvimTreeToggle',
 		config = true,

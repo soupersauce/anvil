@@ -117,11 +117,12 @@ local M = { -- colorschemeS;
 	},
 	{
 		'rafamadriz/neon',
-		lazy = true,
+		lazy = false,
 		config = function(style)
-			style = style or 'dark'
+			style = 'dark'
 			vim.g.neon_style = style
-			vim.g.neon_transparent = true, vim.cmd([[colorscheme neon]])
+			vim.g.neon_transparent = true
+			vim.cmd([[colorscheme neon]])
 		end,
 		priority = 1000,
 	},
@@ -192,7 +193,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'nyoom-engineering/oxocarbon.nvim',
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			vim.cmd.colorscheme('oxocarbon')
@@ -210,7 +211,7 @@ local M = { -- colorschemeS;
 	{
 		'kartikp10/noctis.nvim',
 		dependencies = 'rktjmp/lush.nvim',
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			vim.cmd.colorscheme('noctis')
