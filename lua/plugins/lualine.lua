@@ -200,10 +200,10 @@ function M.config()
 
 		ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 
-		-- ins_left {
-		-- 	custom_fname,
-		-- 	color = { fg = colors.violet, gui = 'bold' },
-		-- }
+		ins_left {
+			custom_fname,
+			color = { fg = colors.violet, gui = 'bold' },
+		}
 
 		ins_left {
 			function()
@@ -217,14 +217,14 @@ function M.config()
 			end,
 		}
 
-		ins_left {
-			function()
-				if navic.is_available then
-					return navic.get_location()
-				end
-			end,
-			-- color = { fg = colors.magenta },
-		}
+		-- ins_left {
+		-- 	function()
+		-- 		if navic.is_available then
+		-- 			return navic.get_location()
+		-- 		end
+		-- 	end,
+		-- color = { fg = colors.magenta },
+		-- }
 
 		-- Insert mid section. You can make any number of sections in neovim :)
 		-- for lualine it's any number greater then 2

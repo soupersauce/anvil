@@ -38,41 +38,57 @@ local M = {
 	-- 	},
 	-- },
 	-- floating winbar
+	-- {
+	-- 	'b0o/incline.nvim',
+	-- 	event = 'BufReadPre',
+	-- 	cond = vim.g.started_by_firenvim == nil,
+	-- 	config = function()
+	-- 		require('incline').setup {
+	-- 			-- local colors = require('kanagawa.colors').setup()
+
+	-- 			debounce_threshold = { falling = 500, rising = 250 },
+	-- 			render = function(props)
+	-- 				local bufname = vim.api.nvim_buf_get_name(props.buf)
+	-- 				local filename = vim.fn.fnamemodify(bufname, ':t')
+	-- 				-- local diagnostics = get_diagnostic_label(props)
+	-- 				local modified = vim.api.nvim_buf_get_option(props.buf, 'modified') and 'bold,italic' or 'None'
+	-- 				local filetype_icon, color = require('nvim-web-devicons').get_icon_color(filename)
+	-- 				if vim.api.nvim_buf_get_option(props.buf, 'modified') then
+	-- 					color = 'red'
+	-- 				end
+
+	-- 				local buffer = {
+	-- 					{ filetype_icon, guifg = color },
+	-- 					{ ' ' },
+	-- 					{ filename, gui = modified },
+	-- 				}
+	-- 				return buffer
+	-- 			end,
+	-- 			-- highlight = {
+	-- 			-- 	groups = {
+	-- 			-- 		InclineNormal = { guibg = '#658594', guifg = colors.black },
+	-- 			-- 		InclineNormalNC = { guifg = '#658594', guibg = colors.black },
+	-- 			-- 	},
+	-- 			-- },
+	-- 			window = { margin = { vertical = 0, horizontal = 1 } },
+	-- 		}
+	-- 	end,
+	-- },
 	{
-		'b0o/incline.nvim',
-		event = 'BufReadPre',
-		cond = vim.g.started_by_firenvim == nil,
-		config = function()
-			require('incline').setup {
-				-- local colors = require('kanagawa.colors').setup()
-
-				debounce_threshold = { falling = 500, rising = 250 },
-				render = function(props)
-					local bufname = vim.api.nvim_buf_get_name(props.buf)
-					local filename = vim.fn.fnamemodify(bufname, ':t')
-					-- local diagnostics = get_diagnostic_label(props)
-					local modified = vim.api.nvim_buf_get_option(props.buf, 'modified') and 'bold,italic' or 'None'
-					local filetype_icon, color = require('nvim-web-devicons').get_icon_color(filename)
-					if vim.api.nvim_buf_get_option(props.buf, 'modified') then
-						color = 'red'
-					end
-
-					local buffer = {
-						{ filetype_icon, guifg = color },
-						{ ' ' },
-						{ filename, gui = modified },
-					}
-					return buffer
-				end,
-				-- highlight = {
-				-- 	groups = {
-				-- 		InclineNormal = { guibg = '#658594', guifg = colors.black },
-				-- 		InclineNormalNC = { guifg = '#658594', guibg = colors.black },
-				-- 	},
-				-- },
-				window = { margin = { vertical = 0, horizontal = 1 } },
-			}
-		end,
+		'utilyre/barbecue.nvim',
+		name = 'barbecue',
+		version = '*',
+		dependencies = {
+			'SmiteshP/nvim-navic',
+			'nvim-tree/nvim-web-devicons', -- optional dependency
+		},
+		opts = {
+			-- configurations go here
+		},
+	},
+	{
+		'luukvbaal/statuscol.nvim',
+		config = true,
 	},
 	{
 		'anuvyklack/windows.nvim',
