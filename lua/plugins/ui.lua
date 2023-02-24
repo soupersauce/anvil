@@ -30,50 +30,6 @@ local M = {
 		'xiyaowong/nvim-transparent',
 		config = true,
 	},
-	-- { -- NOTIFY:
-	-- 	'rcarriga/nvim-notify',
-	-- 	cond = vim.g.started_by_firenvim == nil,
-	-- 	opts = {
-	-- 		render = 'compact',
-	-- 	},
-	-- },
-	-- floating winbar
-	-- {
-	-- 	'b0o/incline.nvim',
-	-- 	event = 'BufReadPre',
-	-- 	cond = vim.g.started_by_firenvim == nil,
-	-- 	config = function()
-	-- 		require('incline').setup {
-	-- 			-- local colors = require('kanagawa.colors').setup()
-
-	-- 			debounce_threshold = { falling = 500, rising = 250 },
-	-- 			render = function(props)
-	-- 				local bufname = vim.api.nvim_buf_get_name(props.buf)
-	-- 				local filename = vim.fn.fnamemodify(bufname, ':t')
-	-- 				-- local diagnostics = get_diagnostic_label(props)
-	-- 				local modified = vim.api.nvim_buf_get_option(props.buf, 'modified') and 'bold,italic' or 'None'
-	-- 				local filetype_icon, color = require('nvim-web-devicons').get_icon_color(filename)
-	-- 				if vim.api.nvim_buf_get_option(props.buf, 'modified') then
-	-- 					color = 'red'
-	-- 				end
-
-	-- 				local buffer = {
-	-- 					{ filetype_icon, guifg = color },
-	-- 					{ ' ' },
-	-- 					{ filename, gui = modified },
-	-- 				}
-	-- 				return buffer
-	-- 			end,
-	-- 			-- highlight = {
-	-- 			-- 	groups = {
-	-- 			-- 		InclineNormal = { guibg = '#658594', guifg = colors.black },
-	-- 			-- 		InclineNormalNC = { guifg = '#658594', guibg = colors.black },
-	-- 			-- 	},
-	-- 			-- },
-	-- 			window = { margin = { vertical = 0, horizontal = 1 } },
-	-- 		}
-	-- 	end,
-	-- },
 	{
 		'utilyre/barbecue.nvim',
 		name = 'barbecue',
@@ -89,6 +45,13 @@ local M = {
 	{
 		'luukvbaal/statuscol.nvim',
 		config = true,
+		opts = {
+			foldfunc = 'builtin',
+			thousands = true,
+			setopt = true,
+			order = 'NFS',
+			relculright = true,
+		},
 	},
 	{
 		'anuvyklack/windows.nvim',
@@ -127,16 +90,6 @@ local M = {
 				show_buffer_close_icons = false,
 				separator_style = 'thin',
 				themable = true,
-
-				-- top right buttons in bufferline
-				-- custom_areas = {
-				-- 	right = function()
-				-- 		return {
-				-- 			{ text = '%@Toggle_theme@' .. vim.g.toggle_theme_icon .. '%X' },
-				-- 			{ text = '%@Quit_vim@ %X' },
-				-- 		}
-				-- 	end,
-				-- },
 			},
 		},
 	},
