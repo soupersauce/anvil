@@ -43,6 +43,7 @@ local M = {
 	},
 	{ -- HEADLINES:
 		'lukas-reineke/headlines.nvim',
+		enabled = false,
 		init = function()
 			vim.cmd([[
       highlight Headline1 guibg=#883388
