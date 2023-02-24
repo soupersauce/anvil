@@ -1,4 +1,3 @@
--- PLUGIN SETTINGS
 --
 local M = {
 	'nvim-lua/plenary.nvim',

@@ -117,8 +117,14 @@ local M = {
 			}
 		end,
 	},
+	{
+		's1n7ax/nvim-search-and-replace',
+		config = function()
+			require('nvim-search-and-replace').setup()
+		end,
+	},
 	{ -- web-devicons:
-		'kyazdani42/nvim-web-devicons',
+		'nvim-tree/nvim-web-devicons',
 		opts = { default = true },
 	},
 	{ -- comment-nvim

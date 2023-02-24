@@ -94,7 +94,7 @@ local M = {
 	{ -- BUFFERLINE:
 		'akinsho/bufferline.nvim',
 		cond = vim.g.started_by_firenvim == nil,
-		dependencies = 'kyazdani42/nvim-web-devicons',
+		dependencies = 'nvim-tree/nvim-web-devicons',
 		event = 'BufAdd',
 		opts = {
 			options = {

@@ -30,9 +30,9 @@ local M = {
 		config = true,
 	},
 	{
-		'kyazdani42/nvim-tree.lua',
+		'nvim-tree/nvim-tree.lua',
 		dependencies = {
-			'kyazdani42/nvim-web-devicons',
+			'nvim-tree/nvim-web-devicons',
 		},
 		keys = {
 			{ '<C-n>', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle NvimTree', mode = 'n' },
