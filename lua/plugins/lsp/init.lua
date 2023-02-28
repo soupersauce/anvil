@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local, unused_variable
 local M = { -- LSP: integration
 	{ 'simrat39/rust-tools.nvim', ft = { 'rust' }, event = 'BufRead Cargo.toml' },
 	'neovim/nvim-lspconfig',
@@ -23,7 +24,7 @@ local M = { -- LSP: integration
 					'gopls', -- golang
 					'html', -- HTML
 					'ltex', -- Latex
-					'sumneko_lua', -- lua
+					'lua_ls', -- lua
 					'marksman', -- Markdown
 					'powershell_es', -- Powershell
 					'puppet', -- puppet
@@ -115,24 +116,24 @@ local M = { -- LSP: integration
 					}
 				end,
 
-				['sumneko_lua'] = function(bufnr, client)
-					require('lspconfig').sumneko_lua.setup {
+				['lua_ls'] = function(bufnr, client)
+					require('lspconfig').lua_ls.setup {
 						capabilities = capabilities,
 						on_attach = on_attach,
-						-- settings = {
-						Lua = {
-							format = {
-								enable = false,
+						settings = {
+							Lua = {
+								format = {
+									enable = false,
+								},
+								completion = {
+									callSnippet = 'Replace',
+								},
+								diagnostics = {
+									globals = { 'vim' },
+								},
 							},
-							completion = {
-								callSnippet = 'Replace',
-							},
-							diagnostics = {
-								globals = { 'vim' },
-							},
+							telemetry = { enable = false },
 						},
-						telemetry = { enable = false },
-						-- },
 					}
 				end,
 
@@ -326,7 +327,7 @@ local M = { -- LSP: integration
 	{
 		'aznhe21/actions-preview.nvim',
 		opts = {
-			backend = { 'telescope', 'nui' },
+			backend = { 'nui', 'telescope' },
 		},
 	},
 }
