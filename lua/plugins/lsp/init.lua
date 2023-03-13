@@ -5,7 +5,7 @@ local M = { -- LSP: integration
 	'p00f/clangd_extensions.nvim',
 	'b0o/schemastore.nvim',
 	'ray-x/go.nvim',
-	{
+	{ -- mason-lspconfig
 		'williamboman/mason-lspconfig.nvim',
 		dependencies = 'simrat39/rust-tools.nvim',
 		config = function()
@@ -194,7 +194,7 @@ local M = { -- LSP: integration
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 		end,
 	},
-	{
+	{ -- mason-tool-installer
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
 		opts = {
 			ensure_installed = {
@@ -255,7 +255,7 @@ local M = { -- LSP: integration
 			},
 		},
 	},
-	{
+	{ -- neodev
 		'folke/neodev.nvim',
 		config = true,
 	},
@@ -268,7 +268,7 @@ local M = { -- LSP: integration
 			},
 		},
 	},
-	{
+	{ -- navic
 		'SmiteshP/nvim-navic',
 		opts = {
 			-- highlight = true,
@@ -279,12 +279,12 @@ local M = { -- LSP: integration
 			depth_limit_indicator = '',
 		},
 	},
-	{
+	{ -- nvim-docs-view
 		'amrbashir/nvim-docs-view',
 		config = true,
 		cmd = 'DocsViewToggle',
 	},
-	{
+	{ -- crates
 		'saecki/crates.nvim',
 		event = { 'BufRead Cargo.toml' },
 		opts = {
@@ -294,16 +294,16 @@ local M = { -- LSP: integration
 			},
 		},
 	},
-	{
+	{ -- mason
 		'williamboman/mason.nvim',
 		config = true,
 	},
-	{
+	{ -- trouble
 		'folke/trouble.nvim',
 		config = true,
 	},
 	'barreiroleo/ltex-extra.nvim',
-	{
+	{ -- prettier
 		'muniftanjim/prettier.nvim',
 		opts = {
 			bin = 'prettierd',
@@ -324,7 +324,7 @@ local M = { -- LSP: integration
 			},
 		},
 	},
-	{
+	{ -- actions-preview
 		'aznhe21/actions-preview.nvim',
 		opts = {
 			backend = { 'nui', 'telescope' },

@@ -11,6 +11,21 @@ local M = { -- colorschemeS;
 		priority = 1000,
 	},
 	{
+		'uloco/bluloco.nvim',
+		lazy = true,
+		priority = 1000,
+		dependencies = { 'rktjmp/lush.nvim' },
+		opts = {
+			transparent = true,
+			style = 'dark',
+			-- your optional config goes here, see below.
+		},
+		config = function(opts)
+			require('bluloco').setup(opts)
+			vim.cmd('colorscheme bluloco')
+		end,
+	},
+	{
 		'noorwachid/nvim-nightsky',
 		lazy = true,
 		config = function()
@@ -81,7 +96,8 @@ local M = { -- colorschemeS;
 		'th3whit3wolf/one-nvim',
 		lazy = true,
 		config = function()
-			vim.g.one_nvim_transparent_bg = true, vim.cmd([[ colorscheme one-nvim ]])
+			vim.g.one_nvim_transparent_bg = true
+			vim.cmd([[ colorscheme one-nvim ]])
 		end,
 		priority = 1000,
 	},
@@ -107,7 +123,7 @@ local M = { -- colorschemeS;
 		'navarasu/onedark.nvim',
 		lazy = true,
 		config = function(style)
-			style = style or 'deep'
+			style = 'deep'
 			require('onedark').setup {
 				style = style,
 			}
@@ -117,7 +133,7 @@ local M = { -- colorschemeS;
 	},
 	{
 		'rafamadriz/neon',
-		lazy = false,
+		lazy = true,
 		config = function(style)
 			style = 'dark'
 			vim.g.neon_style = style
@@ -129,10 +145,10 @@ local M = { -- colorschemeS;
 	-- TODO
 	{
 		'yagua/nebulous.nvim',
-		lazy = true,
+		lazy = false,
 		priority = 1000,
 		config = function(style)
-			style = style or 'night'
+			style = 'night'
 			require('nebulous').setup {
 				variant = style,
 			}
