@@ -93,6 +93,10 @@ local M = {
 		cmd = 'NvimTreeToggle',
 		config = true,
 	},
+	{
+		'axkirillov/hbac.nvim',
+		config = true,
+	},
 }
 
 return M
