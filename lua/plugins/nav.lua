@@ -103,5 +103,15 @@ local M = {
 			})
 		end,
 	},
+	{ -- nvim spider w, e ,b motions
+		'chrisgrieser/nvim-spider',
+		lazy = true,
+		keys = {
+			{ 'w', "<cmd>lua require('spider').motion('w')<CR>", { desc = 'Spider-w' } },
+			{ 'e', "<cmd>lua require('spider').motion('e')<CR>", { desc = 'Spider-w' } },
+			{ 'b', "<cmd>lua require('spider').motion('b')<CR>", { desc = 'Spider-w' } },
+			{ 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { desc = 'Spider-w' } },
+		},
+	},
 }
 return M
