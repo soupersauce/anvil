@@ -2,11 +2,33 @@ local M = { -- colorschemeS;
 	{ 'tjdevries/colorbuddy.nvim', lazy = true },
 	{ 'rktjmp/lush.nvim', lazy = true },
 	-- 'rrethy/nvim-base16',
+	{ 'fenetikm/falcon', lazy = true, priority = 1000, config = true },
+	{
+		'Mofiqul/adwaita.nvim',
+		lazy = true,
+		priority = 1000,
+		config = function()
+			vim.g.adwaita_darker = true -- for darker version
+			vim.g.adwaita_disable_cursorline = false -- to disable cursorline
+			vim.g.adwaita_transparent = true -- makes the background transparent
+			vim.cmd('colorscheme adwaita')
+		end,
+	},
+	{
+		'ray-x/starry.nvim',
+		lazy = true,
+		priority = 1000,
+		config = function()
+			vim.g.starry_disable_background = 'true'
+			vim.cmd.colorscheme('starry')
+			require('starry.functions').change_style('moonlight')
+		end,
+	},
 	{
 		'rebelot/kanagawa.nvim',
 		lazy = true,
 		config = function()
-			vim.cmd('colorscheme kanagawa')
+			vim.cmd('colorscheme kanagawa-dragon')
 		end,
 		priority = 1000,
 	},
@@ -28,17 +50,7 @@ local M = { -- colorschemeS;
 	{
 		'noorwachid/nvim-nightsky',
 		lazy = true,
-		config = function()
-			vim.cmd('colorscheme nightsky')
-		end,
-		priority = 1000,
-	},
-	{
-		'yonlu/omni.vim',
-		lazy = true,
-		config = function()
-			vim.cmd('colorscheme omni')
-		end,
+		config = true,
 		priority = 1000,
 	},
 	{
@@ -70,37 +82,12 @@ local M = { -- colorschemeS;
 		lazy = true,
 		config = function()
 			require('noirbuddy').setup {
-				preset = 'miami-nights',
+				preset = 'slate',
 			}
 		end,
 		priority = 1000,
 	},
-	{
-		'glepnir/zephyr-nvim',
-		lazy = true,
-		config = function()
-			require('zephyr')
-		end,
-		priority = 1000,
-	},
 	-- 'ali-githb/standardized',
-	{
-		'th3whit3wolf/onebuddy',
-		lazy = true,
-		config = function()
-			require('colorbuddy').colorscheme('onebuddy')
-		end,
-		priority = 1000,
-	},
-	{
-		'th3whit3wolf/one-nvim',
-		lazy = true,
-		config = function()
-			vim.g.one_nvim_transparent_bg = true
-			vim.cmd([[ colorscheme one-nvim ]])
-		end,
-		priority = 1000,
-	},
 	{
 		'ray-x/aurora',
 		lazy = true,
@@ -115,7 +102,7 @@ local M = { -- colorschemeS;
 		'edeneast/nightfox.nvim',
 		lazy = true,
 		config = function()
-			vim.cmd([[ colorscheme nightfox ]])
+			vim.cmd([[ colorscheme carbonfox ]])
 		end,
 		priority = 1000,
 	},
@@ -123,7 +110,7 @@ local M = { -- colorschemeS;
 		'navarasu/onedark.nvim',
 		lazy = true,
 		config = function(style)
-			style = 'deep'
+			style = 'darker'
 			require('onedark').setup {
 				style = style,
 			}
@@ -145,7 +132,7 @@ local M = { -- colorschemeS;
 	-- TODO
 	{
 		'yagua/nebulous.nvim',
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function(style)
 			style = 'night'
@@ -158,7 +145,12 @@ local M = { -- colorschemeS;
 		'shatur/neovim-ayu',
 		lazy = true,
 		priority = 1000,
-		opts = { mirage = true },
+		config = function()
+			require('ayu').setup {
+				mirage = false,
+			}
+			vim.cmd('colorscheme ayu')
+		end,
 	},
 	{
 		'ramojus/mellifluous.nvim',
@@ -171,22 +163,25 @@ local M = { -- colorschemeS;
 		end,
 	},
 	{
-		'kaiuri/nvim-juliana',
+		'mcchrish/zenbones.nvim',
 		lazy = true,
 		priority = 1000,
+		-- Optionally install Lush. Allows for more configuration or extending the colorscheme
+		-- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+		-- In Vim, compat mode is turned on as Lush only works in Neovim.
+		dependencies = 'rktjmp/lush.nvim',
 		config = function()
-			vim.cmd('colorscheme juliana')
+			vim.o.background = 'dark'
+			vim.cmd('colorscheme zenwritten')
 		end,
 	},
 	{
 		'projekt0n/github-nvim-theme',
+		branch = '0.0.x',
 		lazy = true,
 		priority = 1000,
-		config = function(style)
-			style = style or 'dark_default'
-			require('github-theme').setup {
-				theme_style = style,
-			}
+		config = function()
+			vim.cmd('colorscheme github_dark_default')
 		end,
 	},
 	{
@@ -234,13 +229,19 @@ local M = { -- colorschemeS;
 		end,
 	},
 	{
-		'everblush/everblush.nvim',
-		lazy = true,
+		'everblush/nvim',
+		name = 'everblush',
+		lazy = false,
 		priority = 1000,
-		opts = {
-			nvim_tree = { contrast = false },
-		},
+		config = function()
+			require('everblush').setup {
+				transparent_background = true,
+				nvim_tree = { contrast = false },
+			}
+			vim.cmd('colorscheme everblush')
+		end,
 	},
+	{ 'bluz71/vim-moonfly-colors', name = 'moonfly', lazy = true, priority = 1000 },
 }
 
 function M.clearbackgrounds()
