@@ -108,9 +108,44 @@ local M = {
 		lazy = true,
 		keys = {
 			{ 'w', "<cmd>lua require('spider').motion('w')<CR>", { desc = 'Spider-w' } },
-			{ 'e', "<cmd>lua require('spider').motion('e')<CR>", { desc = 'Spider-w' } },
-			{ 'b', "<cmd>lua require('spider').motion('b')<CR>", { desc = 'Spider-w' } },
-			{ 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { desc = 'Spider-w' } },
+			{ 'e', "<cmd>lua require('spider').motion('e')<CR>", { desc = 'Spider-e' } },
+			{ 'b', "<cmd>lua require('spider').motion('b')<CR>", { desc = 'Spider-b' } },
+			{ 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { desc = 'Spider-ge' } },
+		},
+	},
+	{
+		'mrjones2014/smart-splits.nvim',
+		config = true,
+		keys = {
+			-- moving between splits
+			{
+				'<A-h>',
+				function()
+					require('smart-splits').move_cursor_left()
+				end,
+				desc = 'smart-splits move left',
+			},
+			{
+				'<A-j>',
+				function()
+					require('smart-splits').move_cursor_down()
+				end,
+				desc = 'smart-splits move left',
+			},
+			{
+				'<A-k>',
+				function()
+					require('smart-splits').move_cursor_up()
+				end,
+				desc = 'smart-splits move left',
+			},
+			{
+				'<A-l>',
+				function()
+					require('smart-splits').move_cursor_right()
+				end,
+				desc = 'smart-splits move left',
+			},
 		},
 	},
 	{
