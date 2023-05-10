@@ -125,7 +125,7 @@ vim.o.foldlevelstart = 99
 vim.o.foldcolumn = '1'
 vim.o.fillchars = [[vert:▕,horiz:─,eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 -- vim.o.statuscolumn = '%=%l%s%C'
-vim.o.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s%C"
+-- vim.o.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s%C"
 vim.o.conceallevel = 2
 vim.o.concealcursor = 'nc'
 

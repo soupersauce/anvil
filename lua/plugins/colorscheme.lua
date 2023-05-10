@@ -1,4 +1,4 @@
-local M = { -- colorschemeS;
+local M = { -- colorscheme
 	{ 'tjdevries/colorbuddy.nvim', lazy = true },
 	{ 'rktjmp/lush.nvim', lazy = true },
 	-- 'rrethy/nvim-base16',
