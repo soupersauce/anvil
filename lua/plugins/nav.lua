@@ -113,5 +113,40 @@ local M = {
 			{ 'ge', "<cmd>lua require('spider').motion('ge')<CR>", { desc = 'Spider-w' } },
 		},
 	},
+	{
+		'mrjones2014/smart-splits.nvim',
+		config = true,
+		keys = {
+			-- moving between splits
+			{
+				'<A-h>',
+				function()
+					require('smart-splits').move_cursor_left()
+				end,
+				desc = 'smart-splits move left',
+			},
+			{
+				'<A-j>',
+				function()
+					require('smart-splits').move_cursor_down()
+				end,
+				desc = 'smart-splits move left',
+			},
+			{
+				'<A-k>',
+				function()
+					require('smart-splits').move_cursor_up()
+				end,
+				desc = 'smart-splits move left',
+			},
+			{
+				'<A-l>',
+				function()
+					require('smart-splits').move_cursor_right()
+				end,
+				desc = 'smart-splits move left',
+			},
+		},
+	},
 }
 return M
