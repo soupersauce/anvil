@@ -1,6 +1,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.loader.enable()
+
 -- local _, impatient = pcall(require, 'impatient')
 -- Configure NeoVim
 require('config')
