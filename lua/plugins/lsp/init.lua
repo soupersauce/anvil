@@ -33,7 +33,7 @@ local M = { -- LSP: integration
 					'rust_analyzer', -- rust
 					'slint_lsp', -- rust gui framework
 					'salt_ls', -- salt
-					'sqls', -- SQL
+					'sqlls', -- SQL
 					'taplo', -- TOML
 					'terraformls', -- terrafrom
 					'tflint', -- terrafrom
