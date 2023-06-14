@@ -188,7 +188,7 @@ local M = { -- LSP: integration
 
 			require('plugins.null-ls').setup(options)
 			local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
-			vim.o.code_action_menu_window_border = 'single'
+			-- vim.o.code_action_menu_window_border = 'single'
 			vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
 			vim.lsp.handlers['textDocument/signatureHelp'] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })

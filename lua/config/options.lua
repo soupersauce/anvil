@@ -29,7 +29,7 @@ vim.o.numberwidth = 3
 -- Highlight line containing the cursor
 vim.o.cursorline = true
 
-vim.o.colorcolumn = 80
+vim.o.colorcolumn = '0'
 
 -- But only the visual line, not the complete physical line
 -- vim.o.cursorlineopt  = "screenline"
@@ -177,7 +177,6 @@ if fn.executable('zsh') == 1 then
 	vim.o.shell = 'zsh'
 end
 
-vim.o.foldoptions = 'nodigits'
 -- Enable highlighting embedded lua code
 vim.g.vimsyn_embed = 'l'
 -- Use Python 3 for plugins
