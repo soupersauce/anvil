@@ -262,6 +262,7 @@ local M = { -- LSP: integration
 	{ -- FIDGET
 		enabled = true,
 		'j-hui/fidget.nvim',
+		branch = 'legacy',
 		opts = {
 			window = {
 				blend = 1,
