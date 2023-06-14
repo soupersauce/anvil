@@ -36,7 +36,6 @@ set_keymap('n', ',x', '"_x', options)
 set_keymap('n', ',s', ':%s/\\s\\+$//e<CR>')
 -- Delete current buffer, (keep window splits)
 set_keymap('n', 'bd', ':bd<CR>', options)
-set_keymap('c', 'bd', ':q<CR>', options)
 -- Use ALT + q/l for opening quickfix and loclist
 set_keymap('n', '<A-q>', ':cope<CR>', options)
 set_keymap('n', '<A-l>', ':cope<CR>', options)
