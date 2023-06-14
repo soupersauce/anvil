@@ -12,10 +12,19 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
+if vim.g.started_by_firenvim then
+	checker = false
+else
+	checker = true
+end
+
 local lazyopts = {
 	defaults = { lazy = false },
 	install = { colorscheme = { 'kanagawa', 'noctis', 'oxocarbon' } },
-	checker = { enabled = true },
+	checker = {
+		enabled = checker,
+		notify = true,
+	},
 	diff = {
 		cmd = 'diffview.nvim',
 	},
