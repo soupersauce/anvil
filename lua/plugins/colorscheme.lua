@@ -1,6 +1,14 @@
 local M = { -- colorscheme
 	{ 'tjdevries/colorbuddy.nvim', lazy = true },
 	{ 'rktjmp/lush.nvim', lazy = true },
+	{
+		'dasupradyumna/midnight.nvim',
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme('midnight')
+		end,
+	},
 	-- 'rrethy/nvim-base16',
 	{ 'fenetikm/falcon', lazy = true, priority = 1000, config = true },
 	{
@@ -231,7 +239,7 @@ local M = { -- colorscheme
 	{
 		'everblush/nvim',
 		name = 'everblush',
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require('everblush').setup {
