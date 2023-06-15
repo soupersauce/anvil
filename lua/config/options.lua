@@ -29,7 +29,8 @@ vim.o.numberwidth = 3
 -- Highlight line containing the cursor
 vim.o.cursorline = true
 
-vim.o.colorcolumn = '0'
+vim.o.textwidth = 80
+vim.o.colorcolumn = '+1'
 
 -- But only the visual line, not the complete physical line
 -- vim.o.cursorlineopt  = "screenline"
@@ -161,7 +162,7 @@ if vim.g.started_by_firenvim then
 	vim.o.cmdheight = 0
 	-- Modelines
 	vim.o.modeline = false
-	vim.o.laststatus = '0'
+	vim.o.laststatus = 0
 	-- Show sign column inside the number column
 	vim.o.signcolumn = 'no'
 	vim.o.foldcolumn = '0'
