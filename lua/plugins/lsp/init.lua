@@ -260,8 +260,8 @@ local M = { -- LSP: integration
 		config = true,
 	},
 	{ -- FIDGET
-		enabled = true,
 		'j-hui/fidget.nvim',
+		cond = vim.g.started_by_firenvim == nil,
 		branch = 'legacy',
 		opts = {
 			window = {

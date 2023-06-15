@@ -33,6 +33,7 @@ local M = {
 	{ -- barbecue
 		'utilyre/barbecue.nvim',
 		name = 'barbecue',
+		cond = vim.g.started_by_firenvim == nil,
 		version = '*',
 		dependencies = {
 			'SmiteshP/nvim-navic',

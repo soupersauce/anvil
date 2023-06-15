@@ -40,6 +40,7 @@ local M = {
 	},
 	{ -- hlslens
 		'kevinhwang91/nvim-hlslens',
+		cond = vim.g.started_by_firenvim == nil,
 		config = function()
 			local vim = vim
 			require('hlslens').setup {
@@ -115,41 +116,7 @@ local M = {
 	},
 	{
 		'mrjones2014/smart-splits.nvim',
-		config = true,
-		keys = {
-			-- moving between splits
-			{
-				'<A-h>',
-				function()
-					require('smart-splits').move_cursor_left()
-				end,
-				desc = 'smart-splits move left',
-			},
-			{
-				'<A-j>',
-				function()
-					require('smart-splits').move_cursor_down()
-				end,
-				desc = 'smart-splits move left',
-			},
-			{
-				'<A-k>',
-				function()
-					require('smart-splits').move_cursor_up()
-				end,
-				desc = 'smart-splits move left',
-			},
-			{
-				'<A-l>',
-				function()
-					require('smart-splits').move_cursor_right()
-				end,
-				desc = 'smart-splits move left',
-			},
-		},
-	},
-	{
-		'mrjones2014/smart-splits.nvim',
+		cond = vim.g.started_by_firenvim == nil,
 		config = true,
 		keys = {
 			-- moving between splits
