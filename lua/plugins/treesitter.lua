@@ -144,10 +144,6 @@ local M = { -- TREESITTER; integration
 		'ziontee113/syntax-tree-surfer',
 		config = true,
 	},
-	{ -- twilight
-		'folke/twilight.nvim',
-		config = true,
-	},
 	'mizlan/iswap.nvim',
 	{ -- REFACTORING
 		'ThePrimeagen/refactoring.nvim',
