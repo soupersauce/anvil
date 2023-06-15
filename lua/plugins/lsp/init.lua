@@ -2,7 +2,15 @@
 local M = { -- LSP: integration
 	{ 'simrat39/rust-tools.nvim', ft = { 'rust' }, event = 'BufRead Cargo.toml' },
 	'neovim/nvim-lspconfig',
-	'p00f/clangd_extensions.nvim',
+	{
+		'p00f/clangd_extensions.nvim',
+		ft = {
+			'c',
+			'cpp',
+			'objc',
+			'objcpp',
+		},
+	},
 	'b0o/schemastore.nvim',
 	'ray-x/go.nvim',
 	{ -- mason-lspconfig

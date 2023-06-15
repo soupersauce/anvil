@@ -70,6 +70,7 @@ local M = {
 	{ --Sniprun
 		'michaelb/sniprun',
 		cond = vim.g.started_by_firenvim == nil,
+		cmd = { 'SnipRun', 'SnipInfo' },
 		build = 'bash ./install.sh',
 	},
 }
