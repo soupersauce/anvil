@@ -22,15 +22,15 @@ local M = {
 		cond = vim.g.started_by_firenvim == nil,
 		opts = {
 			on_attach = function()
-				local set_keymap = function(lhs, rhs)
-					vim.keymap.set('n', lhs, rhs, { noremap = true, desc = rhs })
+				local set_keymap = function(lhs, rhs, desc)
+					vim.keymap.set('n', lhs, rhs, { noremap = true, desc = desc })
 				end
 				local gitsigns = require('gitsigns')
-				set_keymap('<leader>gs', gitsigns.stage_hunk)
-				set_keymap('<leader>gu', gitsigns.undo_stage_hunk)
-				set_keymap('[g', gitsigns.prev_hunk)
-				set_keymap(']g', gitsigns.next_hunk)
-				set_keymap('<leader>g', gitsigns.preview_hunk)
+				set_keymap('<leader>gs', gitsigns.stage_hunk, 'gitsigns.stage_hunk')
+				set_keymap('<leader>gu', gitsigns.undo_stage_hunk, 'gitsigns.undo_stage_hunk')
+				set_keymap('[g', gitsigns.prev_hunk, 'gitsigns.prev_hunk')
+				set_keymap(']g', gitsigns.next_hunk, 'gitsigns.next_hunk')
+				set_keymap('<leader>g', gitsigns.preview_hunk, 'gitsigns.preview_hunk')
 			end,
 			sign_priority = 10,
 			update_debounce = 100,
