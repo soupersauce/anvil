@@ -2,39 +2,18 @@ local M = {
 	{ -- neogit
 		'TimUntersberger/neogit',
 		cmd = 'Neogit',
+		dependencies = {
+			'nvim-lua/plenary.nvim', -- required
+			'nvim-telescope/telescope.nvim', -- optional
+			'sindrets/diffview.nvim', -- optional
+			'ibhagwan/fzf-lua', -- optional
+		},
 		cond = vim.g.started_by_firenvim == nil,
 		opts = {
-			disable_signs = false,
-			disable_hint = false,
-			disable_context_highlighting = false,
-			disable_commit_confirmation = true,
-			-- Neogit refreshes its internal state after specific events,
-			-- which can be expensive depending on the repository size.
-			-- Disabling `auto_refresh` will make it so you have to manually
-			-- refresh the status after you open it.
-			auto_refresh = true,
-			disable_builtin_notifications = true,
-			use_magit_keybindings = false,
-			commit_popup = {
-				kind = 'split',
-			},
-			-- Change the default way of opening neogit
-			kind = 'replace',
 			signs = {
 				section = { '▶', '▼' },
 				item = { '┗', '┣' },
 				hunk = { '┃', '━' },
-			},
-			integrations = {
-				diffview = true,
-			},
-			mappings = {
-				-- modify status buffer mappings
-				status = {
-					['X'] = 'Discard',
-					-- Remove default mapping of 'x'
-					['x'] = '',
-				},
 			},
 		},
 	},
