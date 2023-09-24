@@ -1,20 +1,8 @@
 local M = {
-	{ -- nvim-recorder
-		'chrisgrieser/nvim-recorder',
-		cond = vim.g.started_by_firenvim == nil,
-		config = function()
-			require('recorder').setup {
-				slots = { 'a', 'b', 'c' },
-				-- Default Mappings
-				mapping = {
-					startStopRecording = 'q',
-					playMacro = 'Q',
-					editMacro = 'cq',
-					switchSlot = '<C-q>',
-					addBreakPoint = '#',
-				},
-			}
-		end,
+	{
+		'ecthelionvi/NeoComposer.nvim',
+		dependencies = { 'kkharji/sqlite.lua' },
+		opts = {},
 	},
 	-- tim pope
 	'tpope/vim-unimpaired',

@@ -206,25 +206,10 @@ function M.config()
 		}
 
 		ins_left {
-			function()
-				return require('recorder').displaySlots()
-			end,
+			-- function()
+			require('NeoComposer.ui').status_recording,
+			-- end,
 		}
-
-		ins_left {
-			function()
-				return require('recorder').recordingStatus()
-			end,
-		}
-
-		-- ins_left {
-		-- 	function()
-		-- 		if navic.is_available then
-		-- 			return navic.get_location()
-		-- 		end
-		-- 	end,
-		-- color = { fg = colors.magenta },
-		-- }
 
 		-- Insert mid section. You can make any number of sections in neovim :)
 		-- for lualine it's any number greater then 2
