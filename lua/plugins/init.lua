@@ -125,6 +125,7 @@ local M = {
 	-- Syntaxes
 	'sqwishy/vim-sqf-syntax', -- Sqf for arma3
 	'ledger/vim-ledger', -- Ledger filetype
+	'anekos/hledger-vim', -- Ledger filetype
 }
 
 return M

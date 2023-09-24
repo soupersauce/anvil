@@ -77,6 +77,7 @@ local M = {
 					{ name = 'path' },
 					{ name = 'buffer', keyword_length = 3 },
 					{ name = 'dictionary', keyword_length = 3 },
+					{ name = 'hledger' },
 					{ name = 'kitty' },
 				},
 
