@@ -29,6 +29,18 @@ local M = {
 		-- module = "persistence",
 		config = true,
 	},
+	{
+		'kelly-lin/ranger.nvim',
+		keys = {
+			{ '<leader>n', '<cmd>Ranger<CR>', 'ranger.nvim' },
+		},
+		config = function()
+			require('ranger-nvim').setup {
+				replace_netrw = true,
+				enable_cmds = true,
+			}
+		end,
+	},
 	{ -- nvim-tree
 		'nvim-tree/nvim-tree.lua',
 		dependencies = {
