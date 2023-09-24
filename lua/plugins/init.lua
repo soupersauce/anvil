@@ -30,6 +30,40 @@ local M = {
 	},
 	{
 	{
+		'willothy/moveline.nvim',
+		build = 'make',
+		keys = {
+			{
+				'<leader>k',
+				function()
+					require('moveline').up()
+				end,
+				'moveline.up',
+			},
+			{
+				'<leader>j',
+				function()
+					require('moveline').down()
+				end,
+				'moveline.down',
+			},
+			{
+				'<leader>k',
+				function()
+					require('moveline').block_up()
+				end,
+				'moveline.up',
+			},
+			{
+				'<leader>j	-- Insert Dependencies here',
+				function()
+					require('moveline').block_down()
+				end,
+				'moveline.down',
+			},
+		},
+	},
+	{
 		'Bekaboo/deadcolumn.nvim',
 	},
 	{
