@@ -50,6 +50,7 @@ local M = {
 			{ '<C-n>', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle NvimTree', mode = 'n' },
 		},
 		cond = vim.g.started_by_firenvim == nil,
+		lazy = false,
 		opts = {
 			filters = {
 				dotfiles = false,
@@ -57,8 +58,6 @@ local M = {
 			},
 			disable_netrw = false,
 			hijack_netrw = false,
-			open_on_setup = false,
-			ignore_ft_on_setup = { 'alpha' },
 			hijack_cursor = true,
 			hijack_unnamed_buffer_when_opening = false,
 			update_cwd = true,
@@ -69,7 +68,6 @@ local M = {
 			view = {
 				side = 'left',
 				adaptive_size = false,
-				hide_root_folder = true,
 				signcolumn = 'auto',
 			},
 			git = {
