@@ -77,6 +77,7 @@ local M = {
 					{ name = 'path' },
 					{ name = 'buffer', keyword_length = 3 },
 					{ name = 'dictionary', keyword_length = 3 },
+					{ name = 'kitty' },
 				},
 
 				formatting = {
@@ -208,6 +209,14 @@ local M = {
 		'petertriho/cmp-git',
 		config = true,
 	},
+	{ -- cmp_kitty
+		'garyhurtz/cmp_kitty',
+		dependencies = 'hrsh7th/nvim-cmp',
+		init = function()
+			require('cmp_kitty'):setup()
+		end,
+	},
+	'kirasok/cmp-hledger',
 	'saadparwaiz1/cmp_luasnip',
 	'hrsh7th/cmp-nvim-lsp',
 	'hrsh7th/cmp-nvim-lua',
