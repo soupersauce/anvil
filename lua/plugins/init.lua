@@ -29,6 +29,10 @@ local M = {
 		end,
 	},
 	{
+	{
+		'Bekaboo/deadcolumn.nvim',
+	},
+	{
 		'bennypowers/splitjoin.nvim',
 		lazy = true,
 		keys = {
