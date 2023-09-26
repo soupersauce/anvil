@@ -226,7 +226,7 @@ local M = {
 	'dmitmel/cmp-cmdline-history',
 	'andersevenrud/cmp-tmux',
 	'f3fora/cmp-spell',
-	'tamago324/cmp-zsh',
+	'tamago324/cmp-zsh', -- TODO add zsh zsh/zpty module
 	'Dosx001/cmp-commit',
 	'hrsh7th/cmp-path',
 	-- 'rcarriga/cmp-dap',
