@@ -2,7 +2,12 @@ local M = {
 	{
 		'ecthelionvi/NeoComposer.nvim',
 		dependencies = { 'kkharji/sqlite.lua' },
-		opts = {},
+		opts = {
+			keymaps = {
+				cycle_next = '<leader>nq',
+				cycle_prev = '<leader>pq',
+			},
+		},
 	},
 	-- tim pope
 	'tpope/vim-unimpaired',
