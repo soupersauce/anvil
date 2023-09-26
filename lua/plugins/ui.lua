@@ -48,10 +48,10 @@ local M = {
 		config = function()
 			local builtin = require('statuscol.builtin')
 			require('statuscol').setup {
-				foldfunc = 'builtin',
+				-- foldfunc = 'builtin',
 				thousands = true,
 				setopt = true,
-				order = 'NFS',
+				-- order = 'NFS',
 				relculright = true,
 				segments = {
 					{ text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
