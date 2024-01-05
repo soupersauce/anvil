@@ -48,7 +48,6 @@ local M = {
 		config = function()
 			local builtin = require('statuscol.builtin')
 			require('statuscol').setup {
-				-- foldfunc = 'builtin',
 				thousands = true,
 				setopt = true,
 				-- order = 'NFS',
@@ -218,29 +217,29 @@ local M = {
 			}
 		end,
 	},
-	-- { -- BUFFERLINE:
-	-- 	'akinsho/bufferline.nvim',
-	-- 	cond = vim.g.started_by_firenvim == nil,
-	-- 	dependencies = 'nvim-tree/nvim-web-devicons',
-	-- 	event = 'BufAdd',
-	-- 	opts = {
-	-- 		options = {
-	-- 			{ filetype = 'NvimTree', text = '', padding = 1 },
-	-- 			buffer_close_icon = '',
-	-- 			show_close_icon = false,
-	-- 			left_trunc_marker = ' ',
-	-- 			right_trunc_marker = ' ',
-	-- 			max_name_length = 20,
-	-- 			max_prefix_length = 13,
-	-- 			tab_size = 20,
-	-- 			show_tab_indicators = true,
-	-- 			enforce_regular_tabs = false,
-	-- 			show_buffer_close_icons = false,
-	-- 			separator_style = 'thin',
-	-- 			themable = true,
-	-- 		},
-	-- 	},
-	-- },
+	{ -- BUFFERLINE:
+		'akinsho/bufferline.nvim',
+		cond = vim.g.started_by_firenvim == nil,
+		dependencies = 'nvim-tree/nvim-web-devicons',
+		event = 'BufAdd',
+		opts = {
+			options = {
+				{ filetype = 'NvimTree', text = '', padding = 1 },
+				buffer_close_icon = '',
+				show_close_icon = false,
+				left_trunc_marker = ' ',
+				right_trunc_marker = ' ',
+				max_name_length = 20,
+				max_prefix_length = 13,
+				tab_size = 20,
+				show_tab_indicators = true,
+				enforce_regular_tabs = false,
+				show_buffer_close_icons = false,
+				separator_style = 'thin',
+				themable = true,
+			},
+		},
+	},
 	-- NUI:
 	'MunifTanjim/nui.nvim',
 }
