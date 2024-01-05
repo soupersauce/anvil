@@ -3,39 +3,35 @@ local M = {
 	'onsails/lspkind.nvim',
 	{ -- blankline
 		'lukas-reineke/indent-blankline.nvim',
-		init = function()
-			vim.opt.list = true
-			vim.opt.listchars:append('space:⋅')
-			vim.opt.listchars:append('multispace: ')
-			vim.opt.listchars:append('lead: ')
-			vim.opt.listchars:append('eol:↴')
+		main = 'ibl',
+		config = function()
+			local highlight = {
+				'RainbowRed',
+				'RainbowYellow',
+				'RainbowBlue',
+				'RainbowOrange',
+				'RainbowGreen',
+				'RainbowViolet',
+				'RainbowCyan',
+			}
+			local hooks = require('ibl.hooks')
+			-- create the highlight groups in the highlight setup hook, so they are reset
+			-- every time the colorscheme changes
+			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+				vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
+				vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
+				vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
+				vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
+				vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
+				vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
+				vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
+			end)
+
+			vim.g.rainbow_delimiters = { highlight = highlight }
+			require('ibl').setup { scope = { highlight = highlight } }
+
+			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 		end,
-		opts = {
-			indentLine_enabled = true,
-			char = '▏',
-			filetype_exclude = {
-				'help',
-				'terminal',
-				'alpha',
-				'packer',
-				'lspinfo',
-				'TelescopePrompt',
-				'TelescopeResults',
-				'lsp-installer',
-				'undotree',
-				'NeogitStatus',
-				'NeogitCommitMessage',
-				'NeogitPopup',
-				'lazy',
-				'',
-			},
-			buftype_exclude = { 'terminal' },
-			space_char_blankeline = ' ',
-			show_trailing_blankline_indent = false,
-			show_first_indent_level = false,
-			show_current_context = true,
-			show_current_context_start = true,
-		},
 	},
 	{ -- ufo
 		'kevinhwang91/nvim-ufo',
@@ -205,5 +201,4 @@ local M = {
 		end,
 	},
 }
-
 return M

@@ -88,7 +88,7 @@ vim.o.diffopt = 'filler,vertical,hiddenoff,foldcolumn:1,algorithm:patience'
 vim.o.list = true
 
 -- Only show tabs and trailing spaces
-vim.o.listchars = 'tab: ,trail:●,extends:◣,precedes:◢'
+vim.o.listchars = 'tab:▎ ,trail:●,extends:◣,precedes:◢'
 
 -- Default search is not case sensitive
 vim.o.ignorecase = true
