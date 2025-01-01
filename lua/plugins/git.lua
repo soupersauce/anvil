@@ -46,8 +46,8 @@ local M = {
 				local gitsigns = require('gitsigns')
 				set_keymap('<leader>gs', gitsigns.stage_hunk, 'gitsigns.stage_hunk')
 				set_keymap('<leader>gu', gitsigns.undo_stage_hunk, 'gitsigns.undo_stage_hunk')
-				set_keymap('[g', gitsigns.prev_hunk, 'gitsigns.prev_hunk')
-				set_keymap(']g', gitsigns.next_hunk, 'gitsigns.next_hunk')
+				set_keymap('[g', gitsigns.nav_hunk('prev'), 'gitsigns.prev_hunk')
+				set_keymap(']g', gitsigns.nav_hunk('next'), 'gitsigns.next_hunk')
 				set_keymap('<leader>g', gitsigns.preview_hunk, 'gitsigns.preview_hunk')
 			end,
 			sign_priority = 10,
@@ -78,9 +78,6 @@ local M = {
 				relative = 'cursor',
 				row = 0,
 				col = 1,
-			},
-			yadm = {
-				enable = true,
 			},
 		},
 	},

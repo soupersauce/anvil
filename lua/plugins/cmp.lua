@@ -196,7 +196,7 @@ local M = {
 				['*'] = { '~/.config/nvim/dictionaries/aspell_en' },
 			},
 			async = true,
-			max_items = 10,
+			max_number_items = 10,
 		},
 	},
 	{ -- cmp-plugins

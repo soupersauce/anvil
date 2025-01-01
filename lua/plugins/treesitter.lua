@@ -10,7 +10,7 @@ local M = { -- TREESITTER; integration
 		config = function()
 			-- nvim-treesitter configuration
 			local config = require('nvim-treesitter.configs')
-			require('orgmode').setup_ts_grammar()
+			-- require('orgmode').setup_ts_grammar()
 
 			config.setup {
 				ensure_installed = {
@@ -46,10 +46,10 @@ local M = { -- TREESITTER; integration
 						scope_incremental = 'gss',
 					},
 				},
-				context_commentstring = {
-					enable = true,
-					enable_autocmd = false,
-				},
+				-- context_commentstring = {
+				-- 	enable = true,
+				-- 	enable_autocmd = false,
+				-- },
 				indent = {
 					enable = true,
 				},
@@ -119,9 +119,9 @@ local M = { -- TREESITTER; integration
 			-- local hlmap = vim.treesitter.highlighter.hl_map
 			-- hlmap["punctuation.bracket"] = nil
 		end,
-	},
-	'joosepalviste/nvim-ts-context-commentstring',
-	{
+	-- },
+	-- 'joosepalviste/nvim-ts-context-commentstring',
+	-- {
 		'hiphish/rainbow-delimiters.nvim',
 		-- branch = 'use-children',
 		dependencies = 'nvim-treesitter/nvim-treesitter',

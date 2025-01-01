@@ -17,8 +17,8 @@ local M = { -- TREESITTER; integration
 			'ThePrimeagen/refactoring.nvim',
 		},
 	},
-	'joosepalviste/nvim-ts-context-commentstring',
-	{ url = 'https://gitlab.com/HiPhish/nvim-ts-rainbow2'},
+	-- 'joosepalviste/nvim-ts-context-commentstring',
+	{ url = 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim'},
 	'nvim-treesitter/nvim-treesitter-textobjects',
 	'folke/todo-comments.nvim',
 	{ 'kevinhwang91/nvim-bqf', ft = 'qf' },
@@ -44,7 +44,7 @@ local M = { -- TREESITTER; integration
 function M.config()
 	-- nvim-treesitter configuration
 	local config = require('nvim-treesitter.configs')
-	require('orgmode').setup_ts_grammar()
+	-- require('orgmode').setup_ts_grammar()
 
 	config.setup {
 		ensure_installed = {
@@ -85,10 +85,10 @@ function M.config()
 			extended_mode = true, -- Also highlight non-bracket delimiters like html tags
 			max_file_lines = 3000, -- Do not enable for files with more than 3000 lines
 		},
-		context_commentstring = {
-			enable = true,
-			enable_autocmd = false,
-		},
+		-- context_commentstring = {
+		-- 	enable = true,
+		-- 	enable_autocmd = false,
+		-- },
 		indent = {
 			enable = true,
 		},
