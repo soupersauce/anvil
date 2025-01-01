@@ -123,7 +123,7 @@ local M = { -- TREESITTER; integration
 	'joosepalviste/nvim-ts-context-commentstring',
 	{
 		'hiphish/rainbow-delimiters.nvim',
-		branch = 'use-children',
+		-- branch = 'use-children',
 		dependencies = 'nvim-treesitter/nvim-treesitter',
 		config = function()
 			-- This module contains a number of default definitions
